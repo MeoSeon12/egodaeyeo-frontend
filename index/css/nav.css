@@ -4,6 +4,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'GangwonEduPowerExtraBoldA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
@@ -13,29 +14,40 @@
 
 body {
     margin: 0;
+    /* background-color: grey; */
 }
 
 * {
     font-family: 'IBMPlexSansKR-Regular';
 }
 
-
 nav {
     display:flex;
     height: 80px;
     white-space: nowrap;
     justify-content: center;
+}
+
+.nav-wrap {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 80px;
     border-bottom: solid 0.5px rgb(228, 228, 228);
 }
 
-.nav_wrap {
+.nav-container {
+    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
     max-width: 1200px;
     width: 100%;
     height: 80px;
-    /* background-color: red; */
 }
 
 .logo {
@@ -44,8 +56,12 @@ nav {
     font-weight: bold;
     font-family: 'GangwonEduPowerExtraBoldA';
     animation: flicker 3s infinite alternate;
-    color: rgb(88, 211, 125);
+    color: rgb(106, 209, 137);
     cursor: pointer;
+}
+
+.logo:hover {
+    color: rgb(68, 209, 110);
 }
 
 @keyframes flicker {
@@ -108,8 +124,6 @@ nav {
     line-height: 30px;
 }
 
-
-
 .item-upload-btn {
     background-color: rgb(191, 255, 194);
 }
@@ -123,7 +137,7 @@ nav {
     background-color: #ffefc2;
 }
 
-.login-btn, .logout-btn:hover {
+.login-btn:hover, .logout-btn:hover {
     cursor: pointer;
     background-color: #ffe398;
 }
