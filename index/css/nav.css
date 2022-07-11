@@ -19,7 +19,6 @@ body {
     font-family: 'IBMPlexSansKR-Regular';
 }
 
-
 nav {
     display:flex;
     height: 80px;
@@ -35,7 +34,6 @@ nav {
     max-width: 1200px;
     width: 100%;
     height: 80px;
-    /* background-color: red; */
 }
 
 .logo {
@@ -107,8 +105,6 @@ nav {
     height: 40px;
     line-height: 30px;
 }
-
-
 
 .item-upload-btn {
     background-color: rgb(191, 255, 194);
