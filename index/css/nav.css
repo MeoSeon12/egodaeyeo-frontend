@@ -4,6 +4,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'GangwonEduPowerExtraBoldA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
@@ -42,8 +43,12 @@ nav {
     font-weight: bold;
     font-family: 'GangwonEduPowerExtraBoldA';
     animation: flicker 3s infinite alternate;
-    color: rgb(88, 211, 125);
+    color: rgb(106, 209, 137);
     cursor: pointer;
+}
+
+.logo:hover {
+    color: rgb(68, 209, 110);
 }
 
 @keyframes flicker {
@@ -119,7 +124,7 @@ nav {
     background-color: #ffefc2;
 }
 
-.login-btn, .logout-btn:hover {
+.login-btn:hover, .logout-btn:hover {
     cursor: pointer;
     background-color: #ffe398;
 }
