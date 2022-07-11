@@ -1,0 +1,86 @@
+* {
+    font-family: 'Menlo', sans-serif;
+}
+
+nav {
+    display:flex;
+    height: 80px;
+    justify-content: center;
+}
+
+.nav_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    animation: flicker 3s infinite alternate;
+    color: orangered;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow: 0 0 4px rgb(226, 132, 9),
+        0 0 11px #fff,
+        0 0 19px rgb(226, 132, 9),
+        0 0 25px #fff,
+        0 0 40px rgb(226, 132, 9),
+        0 0 67px #fff,
+        0 0 80px rgb(226, 132, 9),
+        0 0 90px #fff,
+        0 0 100px rgb(226, 132, 9),
+        0 0 128px #fff,
+        0 0 150px rgb(226, 132, 9);
+    }
+    20%, 24%, 55%, 78% {
+        text-shadow: none;
+    }
+}
+
+.search {
+    height: 30px;
+    max-width: 250px;
+    width: 100%;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(128, 128, 128, 0.3);
+    padding: 0 10px;
+}
+
+.search:placeholder-shown {
+    font-weight: bold;
+}
+
+.mypage-image {
+    height: 40px;
+    width: 40px;
+    border-radius: 70px;
+    margin: 0 5px;
+}
+
+.nav-btns {
+    display: flex;
+    align-items: center;
+}
+
+.nav-btns > button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 7px;
+}
+
+.item-upload-btn {
+    background-color: #91FDF6;
+}
+
+.login-btn, .logout-btn {
+    background-color: #FFEAA1;
+}
