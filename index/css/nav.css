@@ -1,0 +1,143 @@
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    /* background-color: grey; */
+}
+
+* {
+    font-family: 'IBMPlexSansKR-Regular';
+}
+
+nav {
+    display:flex;
+    height: 80px;
+    white-space: nowrap;
+    justify-content: center;
+}
+
+.nav-wrap {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 80px;
+    border-bottom: solid 0.5px rgb(228, 228, 228);
+}
+
+.nav-container {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    height: 80px;
+}
+
+.logo {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'GangwonEduPowerExtraBoldA';
+    animation: flicker 3s infinite alternate;
+    color: rgb(106, 209, 137);
+    cursor: pointer;
+}
+
+.logo:hover {
+    color: rgb(68, 209, 110);
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 33%, 37%, 60% {
+        text-shadow: 0 0 4px rgb(231, 255, 186),
+        0 0 5px #fff,
+        0 0 9px rgb(156, 228, 22),
+        0 0 15px #fff,
+        0 0 23px rgb(156, 228, 22),
+        0 0 31px #fff,
+        0 0 40px rgb(156, 228, 22),
+        0 0 48px #fff,
+        0 0 52px rgb(156, 228, 22),
+        0 0 55px #fff,
+        0 0 60px rgb(113, 223, 113);
+    }
+    20%, 24%, 35%, 58% {
+        text-shadow: none;
+    }
+}
+
+.search {
+    height: 30px;
+    max-width: 250px;
+    width: 100%;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(187, 187, 187, 0.3);
+    padding: 0 10px;
+}
+
+.search:focus {
+    outline: 2px solid rgb(190, 190, 190);
+}
+
+.search:placeholder-shown {
+    font-weight: bold;
+}
+
+.mypage-image {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 5px 5px 0 5px;
+    cursor: pointer;
+}
+
+.nav-btns {
+    display: flex;
+    align-items: center;
+}
+
+.nav-btns > button {
+    margin: 10px 13px;
+    font-size: 15px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 7px;
+    height: 40px;
+    line-height: 30px;
+}
+
+.item-upload-btn {
+    background-color: rgb(191, 255, 194);
+}
+
+.item-upload-btn:hover {
+    cursor: pointer;
+    background-color: rgb(153, 250, 158);
+}
+
+.login-btn, .logout-btn {
+    background-color: #ffefc2;
+}
+
+.login-btn:hover, .logout-btn:hover {
+    cursor: pointer;
+    background-color: #ffe398;
+}
