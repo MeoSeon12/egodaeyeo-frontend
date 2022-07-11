@@ -5,22 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content=" classth=device- classth, initial-scale=1.0">
     <title>이거대여.</title>
+    <link rel="stylesheet" href="../item/css/item.css">
     <link rel="stylesheet" href="../index/css/nav.css">
 </head>
 <body>
     <nav>
-        <div class="nav_wrap" style="font-family: EarlyFontDiary">
-            <div class="logo">이거대여.</div>
-            <input class="search" placeholder="검색">
-            <div class="nav-btns">
-                <a class="mypage">
-                    <img class="mypage-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
-                </a>
-                <button class="item-upload-btn">물품 등록</button>
-                <!-- <button class="login-btn">로그인</button> -->
-                <button class="logout-btn">로그아웃</button>
+        <div class="nav-wrap">
+            <div class="nav-container">
+                <div class="logo">이거대여.</div>
+                <input class="search" placeholder="검색">
+                <div class="nav-btns">
+                    <a class="mypage">
+                        <img class="mypage-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                    </a>
+                    <button class="item-upload-btn">물품 등록</button>
+                    <!-- <button class="login-btn">로그인</button> -->
+                    <button class="logout-btn">로그아웃</button>
+                </div>
             </div>
         </div>
     </nav>
+    <div class="menu-icon-wrap">
+        <img class="menu-modal-icon" onclick="openModal()" src="https://us.123rf.com/450wm/martialred/martialred1507/martialred150700633/42613197-%EC%95%B1%EA%B3%BC-%EC%9B%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8%EC%97%90-%EB%8C%80%ED%95%9C-%ED%96%84%EB%B2%84%EA%B1%B0-%EB%A9%94%EB%89%B4-%EB%B0%94-%EB%9D%BC%EC%9D%B8-%EC%95%84%ED%8A%B8-%EC%95%84%EC%9D%B4%EC%BD%98.jpg">
+    </div>
+    <div class="item-section-wrap">
+        <button class="item-section-btn">빌려드려요</button>
+        <button class="item-section-btn">빌려요</button>
+    </div>
+    <div class="item-wrap">
+        <a class="item-link">
+            <div class="item-link-box">
+            </div>
+        </a>
+        <a class="item-link">
+            <div class="item-link-box">
+            </div>
+        </a>
+        <a class="item-link">
+            <div class="item-link-box">
+            </div>
+        </a>
+        <a class="item-link">
+            <div class="item-link-box">
+            </div>
+        </a>
+        <a class="item-link">
+            <div class="item-link-box">
+            </div>
+        </a>
+        <a class="item-link">
+            <div class="item-link-box">
+            </div>
+        </a>
+        <a class="item-link">
+            <div class="item-link-box">
+            </div>
+        </a>
+        <a class="item-link">
+            <div class="item-link-box">
+            </div>
+        </a>
+    </div>
+    <div class="modal-wrap">
+        <div class="modal-container">
+            <div class="modal-category-box">
+                <button class="modal-close-btn" onclick="closeModal()">❌</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../item/js/item.js"></script>
+    <script type="text/javascript" src="../item/js/item_api.js"></script>
 </body>
 </html>
