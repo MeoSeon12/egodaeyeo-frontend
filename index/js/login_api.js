@@ -1,5 +1,12 @@
-const backEndBaseUrl = "http://127.0.0.1:8000"
-const frontEndBaseUrl = "http://127.0.0.1:5500"
+loginSubmitBtn.addEventListener("click", (e) => {
+    onLogin()
+}
+)
+
+logoutBtn.addEventListener("click", (e) => {
+    onLogout()
+}
+)
 
 function getCookie(name) {
     var cookieValue = null;
@@ -23,7 +30,7 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 $.ajaxSetup({
-    beforeSend: function(xhr, settings) {
+    beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
@@ -34,15 +41,15 @@ $.ajaxSetup({
 async function onLogin() {
 
     const loginData = {
-        email : document.getElementById("inputEmail").value,
-        password : document.getElementById("inputPassword").value
+        email: document.getElementById("loginEmail").value,
+        password: document.getElementById("loginPassword").value
     }
 
     const response = await fetch(`${backEndBaseUrl}/user/api/farm/token/`, {
         method: 'POST',
         mode: 'cors',
         headers: {
-            Accept:"application/json",
+            Accept: "application/json",
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
         },
@@ -51,7 +58,7 @@ async function onLogin() {
     )
     response_json = await response.json()
 
-    if (response.status == 200){
+    if (response.status == 200) {
         localStorage.setItem("farm_access_token", response_json.access)
         localStorage.setItem("farm_refresh_token", response_json.refresh)
 
@@ -59,18 +66,26 @@ async function onLogin() {
         // accessToken 에서 payload를 가져오는 코드-
         const base64Url = response_json.access.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
         localStorage.setItem("payload", jsonPayload);
 
         alert("로그인 성공!")
-        window.location.replace(`${frontEndBaseUrl}/index/mainpage.html`);
-    }else {
+        window.location.reload()
+    } else {
         //로그인 실패시
         alert(response_json["detail"])
         window.location.reload();
     }
 }
 
+function onLogout() {
+
+    localStorage.removeItem("farm_access_token")
+    localStorage.removeItem("farm_refresh_token")
+    localStorage.removeItem("payload")
+    alert("로그아웃 하셨습니다.")
+    window.location.reload()
+}
