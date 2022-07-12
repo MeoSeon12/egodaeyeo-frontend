@@ -25,7 +25,7 @@
                     </a>
                     <button class="item-upload-btn">물품 등록</button>
                     <button class="login-btn" onclick="loginModalView()">로그인</button>
-                    <button class="logout-btn">로그아웃</button>
+                    <!-- <button class="logout-btn">로그아웃</button> -->
                 </div>
             </div>
         </div>
@@ -42,7 +42,6 @@
             <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
             <img class="kakao-btn" src="../media/kakao-btn.png">
         </div>
-
         <div class="modal-container" id="signup-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
@@ -64,175 +63,37 @@
         <span class="material-symbols-outlined menu-modal-icon" onclick="openModal()">menu</span>
     </div>
     <div class="item-section-wrap">
-        <button class="item-section-btn">빌려드려요</button>
-        <button class="item-section-btn">빌려요</button>
+        <button class="item-section-btn" id="lend-btn" onclick="selectedSectionItems(this)">빌려드려요</button>
+        <button class="item-section-btn" id="borrow-btn" onclick="selectedSectionItems(this)">빌려요</button>
     </div>
     <div class="item-wrap">
-        <a class="item-link">
+        <!-- <a class="item-link">
             <div class="item-link-box">
                 <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
                 <div class="item-desc">
                     <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
+                    <div class="item-price">30,000원 /<span class="price-time-unit">시간</span></div>
                     <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
+                    <div class="item-interest">
                         <div class="item-like">찜<span class="like-count">10</span></div>
                         <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
                     </div>           
                 </div>
             </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
-        <a class="item-link">
-            <div class="item-link-box">
-                <img class="item-image" src="https://c.pxhere.com/photos/a5/11/camera_konica_minolta_old_camera_photo_camera_photograph_flash_light_analog-1210474.jpg!d">
-                <div class="item-desc">
-                    <div class="item-title">사진기 대여중</div>
-                    <div class="item-price"><span class="price-time-unit">시간당</span> 30,000원</div>
-                    <div class="item-location">경기도 파주시 운정구</div>
-                    <div class="item-like-inquiry">
-                        <div class="item-like">찜<span class="like-count">10</span></div>
-                        <div class="item-inquiry">문의<span class="inquiry-count">3</span></div>
-                    </div>           
-                </div>
-            </div>
-        </a>
+        </a> -->
     </div>
         <div class="category-modal-wrap">
             <div class="category-modal-container">
                 <div class="category-modal-close">
                     <button class="category-modal-close-btn" onclick="closeModal()">❌</button>
                 </div>
-                <div class="category-modal-category-box">
-                    <div class="category-btn">전체<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리1<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리2<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리3<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리4<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리5<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리6<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리7<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리8<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리9<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리10<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리11<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
-                    <div class="category-btn">카테고리12<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></div>
+                <div class="category-modal-box">
+                    <!-- 카테고리 -->
                 </div>
             </div>
         </div>
     <script type="text/javascript" src="../index/js/nav.js"></script>
-    <script type="text/javascript" src="../item/js/item.js"></script>
     <script type="text/javascript" src="../item/js/item_api.js"></script>
+    <script type="text/javascript" src="../item/js/item.js"></script>
 </body>
 </html>
