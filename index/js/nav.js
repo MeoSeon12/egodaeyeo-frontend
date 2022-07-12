@@ -30,8 +30,8 @@ function loginContainerView(){
 function modalUnview(){
     body.style.overflow = 'auto'
     modalBody.style.display = 'flex'
-    loginContainer.style.animation = 'scaleUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    signupContainer.style.animation = 'scaleUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    loginContainer.style.animation = 'scaleUp 1.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    signupContainer.style.animation = 'scaleUp 1.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     modalBody.style.animation = 'wrapRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 
 }
