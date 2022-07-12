@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content=" classth=device- classth, initial-scale=1.0">
     <title>이거대여.</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -25,7 +26,7 @@
                     </a>
                     <button class="item-upload-btn">물품 등록</button>
                     <button class="login-btn" onclick="loginModalView()">로그인</button>
-                    <!-- <button class="logout-btn">로그아웃</button> -->
+                    <button class="logout-btn">로그아웃</button>
                 </div>
             </div>
         </div>
@@ -35,24 +36,24 @@
         <div class="modal-container" id="login-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
-                <input placeholder="이메일">
-                <input placeholder="비밀번호">
+                <input id="loginEmail" placeholder="이메일">
+                <input type='password' id="loginPassword" placeholder="비밀번호">
             </div>
-            <button class="login-submit-btn" onclick="onLogin()">로그인</button>
+            <button class="login-submit-btn">로그인</button>
             <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
-            <img class="kakao-btn" src="../media/kakao-btn.png">
+            <a href="javascript:kakaoLogin()"><img class="kakao-btn" src="../media/kakao-btn.png"></a>
         </div>
         <div class="modal-container" id="signup-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
                 <h5>이메일</h5>
-                <input class="email">
+                <input id="inputEmail">
                 <h5>닉네임</h5>
-                <input class="nickname">
+                <input id="inputNickname">
                 <h5>비밀번호</h5>
-                <input class="password">
+                <input type='password' id="inputPassword">
                 <h5>비밀번호 재입력</h5>
-                <input class="password2">
+                <input type='password' id="inputPassword2">
             </div>
             <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
@@ -93,6 +94,10 @@
             </div>
         </div>
     <script type="text/javascript" src="../index/js/nav.js"></script>
+    <script type="text/javascript" src="../index/js/signup_api.js"></script>
+    <script type="text/javascript" src="../index/js/login_api.js"></script>
+    <script type="text/javascript" src="../index/js/signup.js"></script>
+    <script type="text/javascript" src="../index/js/login.js"></script>
     <script type="text/javascript" src="../item/js/item_api.js"></script>
     <script type="text/javascript" src="../item/js/item.js"></script>
 </body>

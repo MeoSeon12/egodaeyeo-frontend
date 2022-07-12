@@ -59,7 +59,7 @@ async function onLogin() {
         password: password
     }
 
-    const response = await fetch(`${backEndBaseUrl}/user/api/farm/token/`, {
+    const response = await fetch(`${backEndBaseUrl}/users/api/token`, {
         method: 'POST',
         mode: 'cors',
         headers: {
