@@ -10,7 +10,6 @@ function loginModalView(){
     loginContainer.style.display = 'flex'
     signupContainer.style.display = 'none'
     modalBody.style.animation = ''
-
     loginContainer.style.animation = 'scaleDown 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
@@ -32,11 +31,10 @@ function modalUnview(){
     modalBody.style.display = 'flex'
     loginContainer.style.animation = 'scaleUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     signupContainer.style.animation = 'scaleUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalBody.style.animation = 'wrapRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-
+    modalBody.style.animation = 'bodyGoOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
-addEventListener('click', (e) => {
+modalBody.addEventListener('click', (e) => {
     if (e.target == modalBody) {
         modalUnview()
     }
