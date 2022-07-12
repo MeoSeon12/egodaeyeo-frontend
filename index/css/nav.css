@@ -254,19 +254,19 @@ nav {
 		opacity: 0.35;
 	}
 	100% {
-		transform: scale(.8) translateY(-1000px);
+		transform: scale(.8) translateY(0);
 		opacity: 0;
 	}
 }
 
 /* 모달 콘텐츠 반동 효과로 숨기기 */
-@keyframes wrapRunnerOut {
+@keyframes bodyGoOut {
 	0% {
 		transform: translateY(0px) skewX(0deg) scaleX(1);
         background: transparent;
 	}
 	30% {
-		transform: translateY(50px) skewX(0deg) scaleX(0.9);
+		transform: translateY(-50px) skewX(0deg) scaleX(0.9);
         background: transparent;
 	}
 	100% {
