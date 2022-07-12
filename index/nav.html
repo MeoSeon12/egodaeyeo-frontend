@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>이거대여.</title>
     <link rel="stylesheet" href="../index/css/nav.css">
 </head>
+
 <body>
     <nav>
         <div class="nav_wrap" style="font-family: EarlyFontDiary">
@@ -17,10 +19,26 @@
                     <img class="mypage-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
                 </a>
                 <button class="item-upload-btn">물품 등록</button>
-                <!-- <button class="login-btn">로그인</button> -->
-                <button class="logout-btn">로그아웃</button>
+                <button class="login-btn" onclick="modalView()">로그인</button>
+                <!-- <button class="logout-btn">로그아웃</button> -->
             </div>
         </div>
     </nav>
+    <!-- 로그인 모달 -->
+    <div class="modal-body" id="loginModal">
+        <div class="modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <input placeholder="이메일">
+                <input placeholder="비밀번호">
+            </div>
+            <button class="login-submit-btn" onclike="onLogin()">로그인</button>
+            <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupModalView()" href="">회원가입</a></div>
+            <img class="kakao-btn" src="../media/kakao-btn.png">
+        </div>
+    </div>
+    <script src="js/nav.js"></script>
+
 </body>
+
 </html>

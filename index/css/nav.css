@@ -123,7 +123,85 @@ nav {
     background-color: #ffefc2;
 }
 
-.login-btn, .logout-btn:hover {
+.login-btn:hover, .logout-btn:hover {
     cursor: pointer;
     background-color: #ffe398;
+}
+
+
+/* modal */
+.modal-body {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: auto;
+    height: 500px;
+    width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    
+}
+
+.modal-inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-inputs input {
+    align-items: center;
+    height: 30px;
+    width: 100%;
+    width: 200px;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(187, 187, 187, 0.3);
+    margin: 5px;
+    padding-left: 15px;
+
+}
+
+.login-submit-btn {
+    height: 30px;
+    max-width: 250px;
+    width: 100%;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(187, 187, 187, 0.3);
+}
+
+.login-submit-btn:hover {
+    cursor: pointer;
+    background-color: #ffe398;
+}
+
+.kakao-btn {
+    height: 45px;
+    width: 45px;
+}
+
+.kakao-btn:hover {
+    cursor: pointer;
+    border-radius: 70%;
+}
+
+
+.ask-sign {
+    font-size: 13px;
 }
