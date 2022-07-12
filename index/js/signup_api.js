@@ -61,7 +61,7 @@ async function onSignUp() {
         return;
     }
     if (password == password2) {
-        const response = await fetch(`${backEndBaseUrl}/user/`, {
+        const response = await fetch(`${backEndBaseUrl}/users/`, {
             method: 'POST',
             mode: 'cors',
             headers: {

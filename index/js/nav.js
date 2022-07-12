@@ -12,7 +12,7 @@ function loginModalView(){
     loginContainer.style.display = 'flex'
     signupContainer.style.display = 'none'
     modalBody.style.animation = ''
-    loginContainer.style.animation = 'scaleDown 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    loginContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 function signupContainerView(){
@@ -31,9 +31,9 @@ function loginContainerView(){
 function modalUnview(){
     body.style.overflow = 'auto'
     modalBody.style.display = 'flex'
-    loginContainer.style.animation = 'scaleUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    signupContainer.style.animation = 'scaleUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalBody.style.animation = 'bodyGoOut 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    loginContainer.style.animation = 'scaleUp 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    signupContainer.style.animation = 'scaleUp 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    modalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 
 }
 
