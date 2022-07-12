@@ -20,7 +20,7 @@
                 </a>
                 <button class="item-upload-btn">물품 등록</button>
                 <button class="login-btn" onclick="loginModalView()">로그인</button>
-                <!-- <button class="logout-btn">로그아웃</button> -->
+                <button class="logout-btn">로그아웃</button>
             </div>
         </div>
     </nav>
@@ -32,7 +32,7 @@
                 <input placeholder="이메일">
                 <input placeholder="비밀번호">
             </div>
-            <button class="login-submit-btn" onclick="loginView()">로그인</button>
+            <button class="login-submit-btn" onclick="onLogin()">로그인</button>
             <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
             <img class="kakao-btn" src="../media/kakao-btn.png">
         </div>
@@ -41,16 +41,15 @@
             <h2>이거대여.</h2>
             <div class="modal-inputs">
                 <h5>이메일</h5>
-                <input>
+                <input class="email">
                 <h5>닉네임</h5>
-                <input>
+                <input class="nickname">
                 <h5>비밀번호</h5>
-                <input>
+                <input class="password">
                 <h5>비밀번호 재입력</h5>
-                <input>
-
+                <input class="password2">
             </div>
-            <button class="signup-submit-btn" onclick="signupView()">회원가입</button>
+            <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
         </div>
     </div>
