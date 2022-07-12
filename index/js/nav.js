@@ -2,7 +2,9 @@ const body = document.getElementsByTagName('body')[0]
 const modalBody = document.querySelector('.modal-body')
 const loginContainer = document.querySelector('#login-modal-container')
 const signupContainer = document.querySelector('#signup-modal-container')
-
+const loginBtn = document.getElementsByClassName('login-btn')[0]
+const logoutBtn = document.getElementsByClassName('logout-btn')[0]
+const loginSubmitBtn = document.querySelector('.login-submit-btn')
 
 function loginModalView(){
     body.style.overflow = 'hidden'
@@ -39,3 +41,17 @@ modalBody.addEventListener('click', (e) => {
         modalUnview()
     }
 })
+
+
+
+if (localStorage.payload !== undefined) {
+    console.log('logged in')
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "block";
+}
+
+else {
+    console.log('logged out')
+    loginBtn.style.display = "block";
+    logoutBtn.style.display = "none";
+}

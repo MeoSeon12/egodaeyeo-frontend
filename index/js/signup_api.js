@@ -80,7 +80,7 @@ async function onSignUp() {
 
         if (response.status == 200){
             alert("회원가입 성공")
-            window.location.replace(`${frontEndBaseUrl}/index.html`);
+            window.location.reload()
         }else {
             //유효하지 않은 이메일 도메인 사용시
             alert(response_json["email"])
