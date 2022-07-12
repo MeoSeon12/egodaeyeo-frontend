@@ -82,7 +82,6 @@ async function onLogin() {
 }
 
 function onLogout() {
-
     localStorage.removeItem("farm_access_token")
     localStorage.removeItem("farm_refresh_token")
     localStorage.removeItem("payload")
