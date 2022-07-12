@@ -129,7 +129,7 @@ nav {
 }
 
 
-/* modal */
+/* login & signup modal */
 .modal-body {
     display: none;
     align-items: center;
@@ -177,7 +177,7 @@ nav {
 
 }
 
-.login-submit-btn {
+.login-submit-btn, .signup-submit-btn{
     height: 30px;
     max-width: 250px;
     width: 100%;
@@ -186,7 +186,7 @@ nav {
     background-color: rgba(187, 187, 187, 0.3);
 }
 
-.login-submit-btn:hover {
+.login-submit-btn:hover, .signup-submit-btn:hover {
     cursor: pointer;
     background-color: #ffe398;
 }
@@ -201,7 +201,18 @@ nav {
     border-radius: 70%;
 }
 
-
 .ask-sign {
     font-size: 13px;
+}
+
+.ask-sign a {
+    color: blue;
+}
+
+.ask-sign a:hover {
+    cursor: pointer;
+}
+
+#signup-modal-container h5 {
+    margin:0 10px;
 }

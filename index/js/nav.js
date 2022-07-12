@@ -1,25 +1,34 @@
-function modalView(){
-
-    console.log('workds')
-
-    const body = document.getElementsByTagName('body')
-    const modal = document.getElementsByClassName('modal-body')
-    body[0].style.overflow = 'hidden'
-    modal[0].style.display = 'flex'
-}
-
-function modalUnView(){
-    const body = document.getElementsByTagName('body')
-    const modal = document.getElementsByClassName('modal-body')
-    
-    modal[0].style.display = 'none'
-    body[0].style.overflow = 'auto'
-}
-
+const body = document.getElementsByTagName('body')[0]
 const modalBody = document.querySelector('.modal-body')
-const modalBtn = document.querySelector('.modal-btn')
-modalBody.addEventListener('click', (e) => {
+const loginContainer = document.querySelector('#login-modal-container')
+const signupContainer = document.querySelector('#signup-modal-container')
+
+
+function loginModalView(){
+    body.style.overflow = 'hidden'
+    modalBody.style.display = 'flex'
+    signupContainer.style.display = 'none'
+    console.log()
+
+}
+
+function signupContainerView(){
+    loginContainer.style.display = 'none'
+    signupContainer.style.display = 'flex'
+}
+
+function loginContainerView(){
+    loginContainer.style.display = 'flex'
+    signupContainer.style.display = 'none'
+}
+
+function modalUnview(){
+    body.style.overflow = 'auto'
+    modalBody.style.display = 'none'
+}
+
+addEventListener('click', (e) => {
     if (e.target == modalBody) {
-        modalUnView()
+        modalUnview()
     }
 })
