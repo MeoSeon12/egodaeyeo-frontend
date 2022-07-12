@@ -39,10 +39,24 @@ $.ajaxSetup({
 
 
 async function onLogin() {
+    const email = document.getElementById("loginEmail").value
+    const password = document.getElementById("loginPassword").value
+
+    if (email === ''){
+        alert('이메일을 입력해주세요')
+        $('#loginEmail').focus()
+        return
+    }
+
+    if (password === ''){
+        alert('비밀번호를 입력해주세요')
+        $('#loginPassword').focus()
+        return
+    }
 
     const loginData = {
-        email: document.getElementById("loginEmail").value,
-        password: document.getElementById("loginPassword").value
+        email: email,
+        password: password
     }
 
     const response = await fetch(`${backEndBaseUrl}/user/api/farm/token/`, {
@@ -75,9 +89,7 @@ async function onLogin() {
         alert("로그인 성공!")
         window.location.reload()
     } else {
-        //로그인 실패시
-        alert(response_json["detail"])
-        window.location.reload();
+        alert('이메일 / 비밀번호가 일치하지 않습니다.')
     }
 }
 

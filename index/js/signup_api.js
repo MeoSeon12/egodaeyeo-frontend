@@ -83,8 +83,11 @@ async function onSignUp() {
             loginModalView()
         }else {
             //유효하지 않은 이메일 도메인 사용시
-            alert(response_json["email"])
-            alert(response_json["nickname"])
+            console.log(response_json)
+            alert(response_json["error"])
+            $('#inputEmail').focus()
+            $('#inputEmail').val('')
+            return;
         }
     }else{
         alert("재입력한 비밀번호가 일치하지 않습니다.")
