@@ -36,7 +36,7 @@
             </div>
             <button class="login-submit-btn">로그인</button>
             <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
-            <img class="kakao-btn" src="../media/kakao-btn.png">
+            <a href="javascript:kakaoLogin()"><img class="kakao-btn" src="../media/kakao-btn.png"></a>
         </div>
 
         <div class="modal-container" id="signup-modal-container">
@@ -56,11 +56,41 @@
         </div>
     </div>
 
+
+
     <script src="js/nav.js"></script>
     <script src="js/signup.js"></script>
     <script src="js/signup_api.js"></script>
     <script src="js/login.js"></script>
     <script src="js/login_api.js"></script>
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+
+    <script>
+        window.Kakao.init("328675de434c7c0bdbf3c0eca65038c0");
+
+        function kakaoLogin() {
+            window.Kakao.Auth.login({
+                scope: 'profile_nickname, account_email',
+                success: function (authObj) {
+                    console.log(authObj);
+                    window.Kakao.API.request({
+                        url: '/v2/user/me',
+                        success: res => {
+                            const kakao_account = res.kakao_account;
+                            console.log(kakao_account['email']);
+                            console.log(kakao_account['profile']['nickname']);
+                        }
+                    });
+                }
+            });
+        }
+
+
+
+    </script>
+
 
 </body>
 

@@ -33,10 +33,11 @@ function modalUnview(){
     modalBody.style.display = 'flex'
     loginContainer.style.animation = 'scaleUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     signupContainer.style.animation = 'scaleUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalBody.style.animation = 'bodyGoOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    modalBody.style.animation = 'bodyGoOut 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+
 }
 
-modalBody.addEventListener('click', (e) => {
+addEventListener('click', (e) => {
     if (e.target == modalBody) {
         modalUnview()
     }
