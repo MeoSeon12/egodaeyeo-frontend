@@ -108,8 +108,6 @@ nav {
     line-height: 30px;
 }
 
-
-
 .item-upload-btn {
     background-color: rgb(191, 255, 194);
 }
@@ -175,6 +173,10 @@ nav {
     margin: 5px;
     padding-left: 15px;
 
+}
+
+.modal-inputs input:focus {
+    outline: 2px solid yellowgreen;
 }
 
 .login-submit-btn, .signup-submit-btn{

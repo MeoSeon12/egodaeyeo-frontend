@@ -7,9 +7,8 @@ const signupContainer = document.querySelector('#signup-modal-container')
 function loginModalView(){
     body.style.overflow = 'hidden'
     modalBody.style.display = 'flex'
+    loginContainer.style.display = 'flex'
     signupContainer.style.display = 'none'
-    console.log()
-
 }
 
 function signupContainerView(){
