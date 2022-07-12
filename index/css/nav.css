@@ -254,7 +254,7 @@ nav {
 		opacity: 0.35;
 	}
 	100% {
-		transform: scale(.8) translateY(0);
+		transform: scale(.8) translateY(-1000px);
 		opacity: 0;
 	}
 }
