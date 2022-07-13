@@ -1,3 +1,7 @@
+.main-body {
+    min-height: 1200px;
+}
+
 .menu-icon-wrap {
     display: flex;
     margin: 8px 0 0 8px;
@@ -41,8 +45,12 @@
     cursor: pointer;
 }
 
-.item-section-btn:hover {
-    background-color: rgb(175, 175, 175);
+#lend-btn:hover {
+    background-color: rgb(191, 255, 194);
+}
+
+#borrow-btn:hover {
+    background-color: #ffefc2;
 }
 
 .item-wrap {
@@ -116,7 +124,7 @@
 }
 
 .category-modal-container {
-    background-color: rgb(212, 212, 212);
+    background-color: rgb(216, 216, 216);
     display: flex;
     flex-direction: column;
     margin-top: 150px;
@@ -157,9 +165,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 8px;
     width: 200px;
     margin: 0 40px;
     cursor: pointer;
+}
+
+.category-btn:hover {
+    background-color: rgb(172, 172, 172);
+}
+
+footer {
+    margin-top: 300px;
 }
 
 @keyframes fadeIn {
