@@ -59,7 +59,7 @@
 ## ⚙ DB 설계 ERD
 <a href="https://docs.google.com/spreadsheets/d/1ZLFdnhCmHF1gWQ0VjzHNtW1nglS0MMpMtOdWKkzBeQo/edit?usp=sharing">구글 시트 바로가기</a>  
 <br>
-![image](https://user-images.githubusercontent.com/104349901/178716048-12792461-7df9-4786-9b90-58800f0f356a.png)
+![image](https://user-images.githubusercontent.com/104349901/178717977-f30f75a8-139b-4b89-b4ec-9c8d5d49af26.png)
 
 
 <br><br><br>
