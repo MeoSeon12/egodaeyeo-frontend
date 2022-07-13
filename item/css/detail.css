@@ -28,7 +28,7 @@
     /* background-color: green; */
 }
 
-.user-container > img {
+.user-container > #post-user-image {
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -43,12 +43,12 @@
     margin: 5px 20px;
 }
 
-.user-box > p:nth-child(1) {
+.user-box > #post-nickname {
     font-size: 20px;
     font-weight: bold;
 }
 
-.user-box > p:nth-child(2) {
+.user-box > #address {
     font-size: 15px;
 }
 
@@ -68,15 +68,9 @@
     padding: 20px 0;
 }
 
-.item-box-status > span:nth-child(1) {
-    background-color: #D8D8D8;
+.item-box-status > #status {
     border-radius: 10px;
     padding: 0 20px;
-}
-
-.item-box-status > span:nth-child(2) {
-    margin: 0 20px;
-    color: gray;
 }
 
 .item-box-title {
@@ -84,7 +78,7 @@
     display: flex;
 }
 
-.item-box-title > span:nth-child(1) {
+.item-box-title > #title {
     font-size: 30px;
     font-weight: bold;
     flex-grow: 1;
@@ -99,7 +93,7 @@
     margin: 8px 0;
 }
 
-.item-container > p:nth-of-type(1) {
+.item-container > #category {
     color: gray;
 }
 
@@ -108,7 +102,7 @@
     font-size: 20px;
 }
 
-.item-container > p:nth-of-type(2) {
+.item-container > #post-content {
     margin: 50px 0;
 }
 
@@ -138,23 +132,22 @@
     font-size: 20px;
     padding: 5px 30px;
     margin: 20px 30px;
+    cursor: pointer;
 }
 
 .communication-container > button:nth-child(1):hover {
-    cursor: pointer;
-    background-color: rgb(191, 255, 194);
+    background-color: #ffe398;
 }
 
 .communication-container > button:nth-child(2):hover {
-    cursor: pointer;
-    background-color: #ffe398;
+    background-color: rgb(191, 255, 194);
 }
 
 /* 리뷰 섹션 */
 .review-section {
     max-width: 500px;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 100px;
 }
 
 .review-section > p {

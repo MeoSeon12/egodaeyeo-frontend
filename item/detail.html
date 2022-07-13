@@ -7,6 +7,8 @@
     <title>이거대여.</title>
     <link rel="stylesheet" href="../index/css/nav.css">
     <link rel="stylesheet" href="css/detail.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 </head>
 <body>
@@ -20,93 +22,85 @@
                         <img class="mypage-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
                     </a>
                     <button class="item-upload-btn">물품 등록</button>
-                    <!-- <button class="login-btn">로그인</button> -->
+                    <button class="login-btn" onclick="loginModalView()">로그인</button>
                     <button class="logout-btn">로그아웃</button>
                 </div>
             </div>
         </div>
     </nav>
+    <!-- 로그인 / 회원가입 모달 -->
+    <div class="modal-body">
+        <div class="modal-container" id="login-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <input id="loginEmail" placeholder="이메일">
+                <input type='password' id="loginPassword" placeholder="비밀번호">
+            </div>
+            <button class="login-submit-btn">로그인</button>
+            <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
+            <img class="kakao-btn" src="../media/kakao-btn.png">
+
+        </div>
+
+        <div class="modal-container" id="signup-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <h5>이메일</h5>
+                <input id="inputEmail">
+                <h5>닉네임</h5>
+                <input id="inputNickname">
+                <h5>비밀번호</h5>
+                <input type='password' id="inputPassword">
+                <h5>비밀번호 재입력</h5>
+                <input type='password' id="inputPassword2">
+            </div>
+            <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
+            <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
+        </div>
+    </div>
     <div class="item-wrap">
         <!-- 아이템 섹션 -->
         <div class="post-section">
             <!-- 아이템 사진 -->
-            <img class="post-section-picture" src="https://dnvefa72aowie.cloudfront.net/origin/article/202207/3dd58880e4aafd70ad9eed846d7eeff4a7d96ae4640cbd2c6b9d688d0c833bcb.webp?q=95&s=1440x1440&t=inside">
+            <img class="post-section-picture">
             <!-- 유저 정보 -->
             <div class="user-container">
-                <img
-                    src="https://obj.thewiki.kr/thecloud/temp/ec8aa4ed8c8cec9db4ed8ca8ebb080eba6ac5fec9a94eba5b45fed9484eba19ced95842e706e67.png">
+                <img id="post-user-image">
                 <div class="user-box">
-                    <p>요르 포저</p>
-                    <p>서울특별시 영등포구 여의도동 롯데캐슬</p>
+                    <p id="post-nickname"></p>
+                    <p id="address"></p>
                 </div>
-                <span class="user-container-score">100</span>
+                <span class="user-container-score"></span>
             </div>
             <!-- 아이템 정보 -->
             <div class="item-container">
                 <div class="item-box-status">
-                    <span>대여중</span>
-                    <span>7일 남음</span>
+                    <span id="status"></span>
                 </div>
                 <div class="item-box-title">
-                    <span>완전 새거같은 제습기 빌려드려요</span>
-                    <span>3시간전</span>
+                    <span id="title"></span>
+                    <span id="created-at"></span>
                 </div>
-                <p>생활가전</p>
+                <p id="category"></p>
                 <div class="item-box-price">
-                    <span>100,000</span>
-                    <span>원 /</span>
-                    <span>일</span>
+                    <span id="price"></span>
+                    <span id="time-unit"></span>
                 </div>
-                <p>거의 새거랑 마찬가지인 제습기 빌려드립니다<br>주기적으로 청소하고있습니다<br>집까지 찾아오실 수 있으신분만 연락주세요<br><br>흥정 사절 !!</p>
+                <p id="post-content"></p>
                 <div class="item-box-contact">
-                    <p><span>찜</span><span>2</span></p>
-                    <p><span>문의</span><span>1</span></p>
+                    <p><span>찜</span><span id="bookmarks"></span></p>
+                    <p><span>문의</span><span id="inquiries"></span></p>
                 </div>
             </div>
             <!-- 커뮤니케이션 버튼 -->
             <div class="communication-container">
-                <button>문의하기</button>
                 <button>찜하기</button>
+                <button>문의하기</button>
             </div>
         </div>
         <!-- 리뷰 섹션 -->
         <div class="review-section">
             <p>리뷰</p>
-            <div class="review-container">
-                <div class="review-user-box">
-                    <img src="https://pbs.twimg.com/profile_images/1524574615372193795/0_81oGFW_400x400.jpg">
-                    <span>아냐 포저</span>
-                </div>
-                <div class="review-content-box">
-                    <span>완전 별루네여...;;</span>
-                    <span>방금 전</span>
-                </div>
-                <p>1일 대여</p>
-            </div>
-            <div class="review-container">
-                <div class="review-user-box">
-                    <img
-                        src="https://obj.thewiki.kr/thecloud/temp/ec8aa4ed8c8cec9db4ed8ca8ebb080eba6ac5feba19cec9db4eb939c5fed9484eba19ced95842e706e67.png">
-                    <span>로이드 포저</span>
-                </div>
-                <div class="review-content-box">
-                    <span>괜찮은데 가끔씩 멈춰요</span>
-                    <span>1일 전</span>
-                </div>
-                <p>1일 대여</p>
-            </div>
-            <div class="review-container">
-                <div class="review-user-box">
-                    <img
-                        src="https://w.namu.la/s/e39023be180a64c3740c85d12fa22b38dfdaa974ae63314670db18b007480598bec71adc7bde6bfdc6011e828d616e3924849ed5a31507fedf4ccc4c124911d57f2d216baf83e2d3691af856f3bc9280">
-                    <span>본드 포저</span>
-                </div>
-                <div class="review-content-box">
-                    <span>쓸만하네요</span>
-                    <span>4일 전</span>
-                </div>
-                <p>2일 대여</p>
-            </div>
         </div>
     </div>
 </body>
@@ -115,7 +109,8 @@
 <script type="text/javascript" src="../index/js/nav_api.js"></script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="../index/js/kakao_api.js"></script>
-<script src="js/detail.js"></script>
-<script src="js/detail_api.js"></script>
+
+<script type="text/javascript" src="js/detail_api.js"></script>
+<script type="text/javascript" src="js/detail.js"></script>
 
 </html>
