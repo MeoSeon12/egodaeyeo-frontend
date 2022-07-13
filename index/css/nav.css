@@ -135,6 +135,7 @@ nav {
     border-radius: 7px;
     height: 40px;
     line-height: 30px;
+    width: 70px;
 }
 
 .item-upload-btn {
@@ -148,8 +149,6 @@ nav {
 
 .login-btn, .logout-btn {
     background-color: #ffefc2;
-    max-width: 70px;
-    width: 100%;
 }
 
 .login-btn:hover, .logout-btn:hover {
