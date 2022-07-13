@@ -17,7 +17,8 @@
 //     });
 // }
 
-
-// function kakaoLogin() {
-   
-// }
+const kakaoBtn = document.getElementsByClassName('kakao-btn')[0]
+kakaoBtn.addEventListener("click", (e) => {
+    window.location.href = `${backEndBaseUrl}/users/kakao/login`
+}
+)
