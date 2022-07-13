@@ -7,6 +7,8 @@
     <meta name="viewport" content=" classth=device-classth, initial-scale=1.0">
     <title>이거대여.</title>
     <link rel="stylesheet" href="../index/css/nav.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -31,32 +33,35 @@
         <div class="modal-container" id="login-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
-                <input placeholder="이메일">
-                <input placeholder="비밀번호">
+                <input id="loginEmail" placeholder="이메일">
+                <input type='password' id="loginPassword" placeholder="비밀번호">
             </div>
-            <button class="login-submit-btn" onclick="onLogin()">로그인</button>
+            <button class="login-submit-btn">로그인</button>
             <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
-            <img class="kakao-btn" src="../media/kakao-btn.png">
+            <a href="javascript:kakaoLogin()"><img class="kakao-btn" src="../media/kakao-btn.png"></a>
         </div>
 
         <div class="modal-container" id="signup-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
                 <h5>이메일</h5>
-                <input class="email">
+                <input id="inputEmail">
                 <h5>닉네임</h5>
-                <input class="nickname">
+                <input id="inputNickname">
                 <h5>비밀번호</h5>
-                <input class="password">
+                <input type='password' id="inputPassword">
                 <h5>비밀번호 재입력</h5>
-                <input class="password2">
+                <input type='password' id="inputPassword2">
             </div>
             <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
         </div>
     </div>
 
-    <script src="js/nav.js"></script>
+    <script type="text/javascript" src="../index/js/nav.js"></script>
+    <script type="text/javascript" src="../index/js/nav_api.js"></script>
+    <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript" src="../index/js/kakao_api.js"></script>
 
 </body>
 

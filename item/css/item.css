@@ -91,7 +91,7 @@
     margin: 2px 0;
 }
 
-.item-like-inquiry {
+.item-interest {
     display: flex;
     flex-direction: row;
     font-size: 13px;
@@ -144,7 +144,7 @@
     cursor: pointer;
 }
 
-.category-modal-category-box {
+.category-modal-box {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
