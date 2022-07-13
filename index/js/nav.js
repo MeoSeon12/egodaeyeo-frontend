@@ -43,8 +43,6 @@ addEventListener('click', (e) => {
     }
 })
 
-
-
 if (localStorage.payload !== undefined) {
     console.log('logged in')
     loginBtn.style.display = "none";
