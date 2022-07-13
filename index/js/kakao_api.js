@@ -18,6 +18,6 @@
 // }
 
 
-// function kakaoLogin() {
-   
-// }
+function kakaoLogin() {
+   location.href = `${backEndBaseUrl}/users/kakao/login`
+}
