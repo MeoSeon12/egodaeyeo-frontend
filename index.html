@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="./index/css/nav.css">
+    <link rel="stylesheet" href="./index/css/index.css">
+    <link rel="stylesheet" href="./index/css/footer.css">
+    <link rel="stylesheet" href="./item/css/item.css">
+    <title>중고물품 필요할때 이거대여.</title>
+
+</head>
+
+<body>
+    <!-- nav -->
+    <nav>
+        <div class="nav-wrap">
+            <div class="nav-container">
+                <div class="logo">이거대여.</div>
+                <input class="search" placeholder="검색">
+                <div class="nav-btns">
+                    <a class="mypage">
+                        <img class="mypage-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                    </a>
+                    <button class="item-upload-btn">물품 등록</button>
+                    <button class="login-btn" onclick="loginModalView()">로그인</button>
+                    <button class="logout-btn">로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- 인덱스 메인섹션 -->
+    <section class="index-main">
+        <div class="index-main__item background-beige">
+            <div class="item-box top--box">
+                <article class="item-box__text">
+                    <h1>중고물품 필요할 때 <br />이거대여.</h1>
+                    <p>안쓰는 물건을 서로 나누면서 이웃과 함께해요.</p>
+                    <p>사고 싶었던 물건을 빌려서 사용해 보세요.</p>
+                </article>
+                <div class="item-box__img top--img">
+                    <img src="./media/phono-image-1.png" alt="phone-image-1" class="desktop" />
+                    <img src="./media/phono-image-1.png" alt="phone-image-1" class="mobile" />
+                </div>
+            </div>
+        </div>
+        <div class="index-main__item">
+            <div class="item-box">
+                <div class="item-box__img">
+                    <img src="./media/phono-image-2.png" alt="phono-image-2" />
+                </div>
+                <div class="item-box__container">
+                    <article class="item-box__text">
+                        <h2>우리 동네<br />물품 대여 플랫폼</h2>
+                        <p>회원들과의 실시간 채팅으로 거래를 지금 바로 경험해보세요.</p>
+                    </article>
+                    <div class="item-box__button">
+                        <button>대여 물품 보러가기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="index-main__item background-green">
+            <div class="item-box">
+                <div>
+                    <article class="item-box__text">
+                        <h2>이웃과 함께 하는<br />물품 리뷰</h2>
+                        <p>동네 주민이 남긴 진짜 후기를 확인 해 보세요!</p>
+                    </article>
+                    <div class="item-box__list">
+                        <div class="item-box__item">
+                            <img src="./media/내역이모티콘.png" alt="icon-story-1" />
+                            <h3>거래 내역</h3>
+                            <p>자신이 거래한 내역을<br />직접 확인해 보세요!</p>
+                        </div>
+                        <div class="item-box__item">
+                            <img src="./media/후기이모티콘.png" alt="icon-story-2" />
+                            <h3>후기 작성</h3>
+                            <p>물품의 후기가 궁금할땐,<br />찾아 볼 수 있어요!</p>
+                        </div>
+                        <div class="item-box__item">
+                            <img src="./media/평점이모티콘.png" alt="icon-story-2" />
+                            <h3>평점</h3>
+                            <p>신뢰도를 확인 하고 싶을땐,<br />평점을 확인 하세요!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-box__img">
+                    <img src="./media/phono-image-3.png" alt="phono-image-3" />
+                </div>
+            </div>
+        </div>
+        <div class="index-main__item">
+            <div class="item-box">
+                <div class="item-box__img">
+                    <img src="./media/phono-image-4.png" alt="phono-image-4" />
+                </div>
+                <div class="item-box__container">
+                    <article class="item-box__text">
+                        <h2>내 근처에서 찾는<br />대여물품</h2>
+                        <p>위치를 등록해서 내 근처에</p>
+                        <p>대여할 물품을 찾을 수 있어요!</p>
+                    </article>
+                    <div class="item-box__button">
+                        <button>개인정보처리방침</button>
+                        <button>위치기반서비스 이용약관</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 인덱스 인기검색어 섹션 -->
+    <section class="index-search">
+        <div class="index-search__title bold-text">인기 검색어 추천</div>
+        <ul class="index-search__list">
+            <li class="index-search__item">에어컨</li>
+            <li class="index-search__item">자전거</li>
+            <li class="index-search__item">의자</li>
+            <li class="index-search__item">냉장고</li>
+            <li class="index-search__item">캠핑</li>
+            <li class="index-search__item">아이패드</li>
+            <li class="index-search__item">아이폰</li>
+            <li class="index-search__item">노트북</li>
+            <li class="index-search__item">알바</li>
+            <li class="index-search__item">오토바이</li>
+        </ul>
+    </section>
+    <!-- footer -->
+    <footer class="footer background-dark-gray">
+
+        <div class="footer-nav">
+            <div class="footer-nav__img">
+                <img src="" alt="logo-basic" />
+            </div>
+            <ul class="footer-nav__item">
+                <li class="bold-text white-text not-end">믿을 수 있는 거래</li>
+                <li class="bold-text white-text">자주 묻는 질문</li>
+            </ul>
+            <ul class="footer-nav__item">
+                <li class="bold-text white-text not-end">광고</li>
+                <li class="not-end">대여페이</li>
+                <li>동네가게</li>
+            </ul>
+            <ul class="footer-nav__item">
+                <li class="not-end">회사 소개</li>
+                <li>채용</li>
+            </ul>
+            <ul class="footer-nav__item">
+                <li class="not-end">이용약관</li>
+                <li class="not-end">개인정보처리방침</li>
+                <li>위치기반서비스 이용약관</li>
+            </ul>
+        </div>
+        <div class="footer-info">
+            <hr class="footer-info__line" />
+            <div class="footer-info__item">
+                <p>최재완 <span>@gmail.com</span></p>
+                <p>김성호 <span>@gmail.com</span></p>
+                <p>김규민 <span>@gmail.com</span></p>
+                <p>김철현 <span>@gmail.com</span></p>
+            </div>
+            <div class="footer-info__item--description">
+                <p>서울특별시 구로구 디지털로 30길 28, 609호(머선12조)</p>
+                <p>사업자 등록번호 : 375-87-00088</p>
+                <p>직업정보제공사업 신고번호 : J1200020200016</p>
+            </div>
+            <div class="footer-info__item--description">
+                <p>©Egodaeyeo Inc.</p>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="../index/js/nav.js"></script>
+</body>
+
+
+</html>
