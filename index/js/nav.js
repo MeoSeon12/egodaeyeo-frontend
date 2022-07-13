@@ -44,13 +44,11 @@ addEventListener('click', (e) => {
 })
 
 if (localStorage.payload !== undefined) {
-    console.log('logged in')
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
 }
 
 else {
-    console.log('logged out')
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
 }
