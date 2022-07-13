@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .background-dark-gray {
     background-color: #495057;
 }
@@ -28,6 +42,15 @@
 
 .footer-nav__item li:hover {
     text-decoration: underline;
+}
+
+.footer-nav__logo {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'GangwonEduPowerExtraBoldA';
+    color: white;
+    cursor: pointer;
 }
 
 @media all and (max-width: 992px) {

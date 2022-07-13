@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- Font Awesome -->
@@ -35,6 +36,35 @@
             </div>
         </div>
     </nav>
+    <!-- 로그인 회원가입 모달 -->
+    <div class="modal-body">
+        <div class="modal-container" id="login-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <input id="loginEmail" placeholder="이메일">
+                <input type='password' id="loginPassword" placeholder="비밀번호">
+            </div>
+            <button class="login-submit-btn">로그인</button>
+            <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
+            <a href="javascript:kakaoLogin()"><img class="kakao-btn" src="../media/kakao-btn.png"></a>
+        </div>
+
+        <div class="modal-container" id="signup-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <h5>이메일</h5>
+                <input id="inputEmail">
+                <h5>닉네임</h5>
+                <input id="inputNickname">
+                <h5>비밀번호</h5>
+                <input type='password' id="inputPassword">
+                <h5>비밀번호 재입력</h5>
+                <input type='password' id="inputPassword2">
+            </div>
+            <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
+            <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
+        </div>
+    </div>
     <!-- 인덱스 메인섹션 -->
     <section class="index-main">
         <div class="index-main__item background-beige">
@@ -42,7 +72,7 @@
                 <article class="item-box__text">
                     <h1>중고물품 필요할 때 <br />이거대여.</h1>
                     <p>안쓰는 물건을 서로 나누면서 이웃과 함께해요.</p>
-                    <p>사고 싶었던 물건을 빌려서 사용해 보세요.</p>
+                    <p>사고 싶었던 물건을 빌려서 사용해 보세요!</p>
                 </article>
                 <div class="item-box__img top--img">
                     <img src="./media/phono-image-1.png" alt="phone-image-1" class="desktop" />
@@ -58,7 +88,7 @@
                 <div class="item-box__container">
                     <article class="item-box__text">
                         <h2>우리 동네<br />물품 대여 플랫폼</h2>
-                        <p>회원들과의 실시간 채팅으로 거래를 지금 바로 경험해보세요.</p>
+                        <p>회원들과의 실시간 채팅으로 거래를 지금 바로 경험해보세요!</p>
                     </article>
                     <div class="item-box__button">
                         <button>대여 물품 보러가기</button>
@@ -103,13 +133,11 @@
                 </div>
                 <div class="item-box__container">
                     <article class="item-box__text">
-                        <h2>내 근처에서 찾는<br />대여물품</h2>
-                        <p>위치를 등록해서 내 근처에</p>
-                        <p>대여할 물품을 찾을 수 있어요!</p>
+                        <h2>안전거래 및<br />사후관리 가이드</h2>
+                        <p></p>
                     </article>
                     <div class="item-box__button">
-                        <button>개인정보처리방침</button>
-                        <button>위치기반서비스 이용약관</button>
+                        <button>확인하기</button>
                     </div>
                 </div>
             </div>
@@ -131,19 +159,18 @@
             <li class="index-search__item">오토바이</li>
         </ul>
     </section>
-    <!-- footer -->
     <footer class="footer background-dark-gray">
 
         <div class="footer-nav">
-            <div class="footer-nav__img">
-                <img src="" alt="logo-basic" />
-            </div>
+
+            <div class="footer-nav__logo">이거대여.</div>
+
             <ul class="footer-nav__item">
-                <li class="bold-text white-text not-end">믿을 수 있는 거래</li>
-                <li class="bold-text white-text">자주 묻는 질문</li>
+                <li class="not-end">믿을 수 있는 거래</li>
+                <li class="not-end">자주 묻는 질문</li>
             </ul>
             <ul class="footer-nav__item">
-                <li class="bold-text white-text not-end">광고</li>
+                <li class="not-end">광고</li>
                 <li class="not-end">대여페이</li>
                 <li>동네가게</li>
             </ul>
@@ -175,11 +202,11 @@
             </div>
         </div>
     </footer>
-    <script type="text/javascript" src="../index/js/nav.js"></script>
-    <script type="text/javascript" src="../index/js/nav_api.js"></script>
+    <script type="text/javascript" src="./index/js/nav.js"></script>
+    <script type="text/javascript" src="./index/js/nav_api.js"></script>
     <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script type="text/javascript" src="../index/js/kakao_api.js"></script>
-</body>
+    <script type="text/javascript" src="./index/js/kakao_api.js"></script>
 
+</body>
 
 </html>
