@@ -17,6 +17,18 @@ body {
     /* background-color: grey; */
 }
 
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(70, 70, 70);
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgb(175, 175, 175);
+}
+
 * {
     font-family: 'IBMPlexSansKR-Regular';
 }
@@ -58,6 +70,7 @@ nav {
     animation: flicker 3s infinite alternate;
     color: rgb(106, 209, 137);
     cursor: pointer;
+    text-decoration: none;
 }
 
 .logo:hover {
@@ -65,18 +78,18 @@ nav {
 }
 
 @keyframes flicker {
-    0%, 18%, 22%, 25%, 33%, 37%, 60% {
+    0%, 8%, 15%, 21%, 27%, 35%, 42% {
         text-shadow: 0 0 4px rgb(231, 255, 186),
-        0 0 5px #fff,
+        0 0 1px #fff,
         0 0 9px rgb(156, 228, 22),
-        0 0 15px #fff,
-        0 0 23px rgb(156, 228, 22),
-        0 0 31px #fff,
-        0 0 40px rgb(156, 228, 22),
-        0 0 48px #fff,
-        0 0 52px rgb(156, 228, 22),
-        0 0 55px #fff,
-        0 0 60px rgb(113, 223, 113);
+        0 0 13px #fff,
+        0 0 17px rgb(156, 228, 22),
+        0 0 21px #fff,
+        0 0 25px rgb(156, 228, 22),
+        0 0 29px #fff,
+        0 0 33px rgb(156, 228, 22),
+        0 0 37px #fff,
+        0 0 41px rgb(113, 223, 113);
     }
     20%, 24%, 35%, 58% {
         text-shadow: none;
@@ -122,6 +135,7 @@ nav {
     border-radius: 7px;
     height: 40px;
     line-height: 30px;
+    width: 70px;
 }
 
 .item-upload-btn {
@@ -163,7 +177,7 @@ nav {
     align-items: center;
     justify-content: space-evenly;
     width: auto;
-    height: 500px;
+    height: 600px;
     width: 400px;
     padding: 20px;
     background-color: white;
@@ -171,6 +185,7 @@ nav {
     overflow: hidden;
     
 }
+
 
 .modal-inputs {
     display: flex;
@@ -202,6 +217,7 @@ nav {
     border-radius: 20px;
     border: 0;
     background-color: rgba(187, 187, 187, 0.3);
+    margin-bottom: none;
 }
 
 .login-submit-btn:hover, .signup-submit-btn:hover {
@@ -209,9 +225,20 @@ nav {
     background-color: #ffe398;
 }
 
+#login-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 160px;
+    min-width: 250px;
+    margin-bottom: 50px;
+}
+
 .kakao-btn {
     height: 45px;
     width: 45px;
+    margin-bottom: 10px;
 }
 
 .kakao-btn:hover {
@@ -229,6 +256,12 @@ nav {
 
 .ask-sign a:hover {
     cursor: pointer;
+}
+
+.modal-container h2 {
+    font-weight: bold;
+    font-family: 'GangwonEduPowerExtraBoldA';
+    font-size: 30px;
 }
 
 #signup-modal-container h5 {

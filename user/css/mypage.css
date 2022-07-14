@@ -1,0 +1,154 @@
+.main-body {
+    display: flex;
+    justify-content: center;
+    min-height: 900px;
+}
+
+.main-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 1300px;
+    width: 100%;
+    min-height: 900px;
+    margin-top: 80px;
+}
+
+.main-left-container {
+    max-width: 330px;
+    width: 100%;
+    margin: 0 20px;
+}
+
+.profile-info-box {
+    max-width: 330px;
+    width: 100%;
+    height: 90px;
+    line-height: 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-info-image {
+    max-width: 80px;
+    width: 100%;
+    height: 80px;
+}
+
+.profile-info-text {
+    white-space: nowrap;
+    margin: 5px 20px;
+}
+
+.info-text-nickname {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.info-text-score {
+
+}
+
+.mypage-category-box {
+    max-width: 330px;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+}
+
+.mypage-category-box > button {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    width: 150px;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.main-right-container {
+    background-color: aliceblue;
+    max-width: 750px;
+    width: 100%;
+    margin: 0 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.history-wrap {
+    background-color: red;
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-container {
+    max-width: 700px;
+    width: 100%;
+    height: 180px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.history-info-box {
+    max-width: 680px;
+    width: 100%;
+    height: 165px;
+    background-color: rgb(81, 190, 154);
+    margin: 5px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.history-box-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.history-info-image {
+    max-width: 150px;
+    width: 100%;
+    height: 150px;
+    margin: 8px 0 9px 8px;
+    object-fit: cover;
+}
+
+.history-info-text {
+    width: 110px;
+    height: 80px;
+    line-height: 40px;
+    margin: 0 10px;
+}
+
+.info-text-section {
+    background-color: rgb(145, 255, 145);
+    text-align: center;
+    width: 110px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 30px;
+}
+
+.info-text-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.info-rent-date {
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: rgb(121, 121, 121);
+}
+

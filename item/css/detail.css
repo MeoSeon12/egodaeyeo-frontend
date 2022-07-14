@@ -1,0 +1,266 @@
+.item-wrap {
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.post-section {
+    max-width: 700px;
+    width: 100%;
+}
+
+/* 아이템 사진 */
+.post-section-picture {
+    margin: 50px 0 10px 0;
+    object-fit: cover;
+    border-radius: 10px;
+    height: 500px;
+    max-width: 700px;
+    width: 100%;
+}
+
+/* 유저 정보 */
+.user-container {
+    display: flex;
+    align-items: center;
+    /* background-color: green; */
+}
+
+.user-container > #post-user-image {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.user-box {
+    flex-grow: 1;
+}
+
+.user-box > p {
+    margin: 5px 20px;
+}
+
+.user-box > #post-nickname {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.user-box > #address {
+    font-size: 15px;
+}
+
+.user-container > span {
+    padding: 20px;
+    font-size: 20px;
+    color: #F28686;
+}
+
+/* 아이템 정보 */
+.item-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    border-top : 0.5px solid rgb(228, 228, 228);
+    border-bottom : 0.5px solid rgb(228, 228, 228);
+    padding: 20px 0;
+}
+
+.item-box-status > #status {
+    border-radius: 10px;
+    padding: 0 20px;
+}
+
+.item-box-title {
+    margin: 10px 0;
+    display: flex;
+}
+
+.item-box-title > #title {
+    font-size: 30px;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.item-box-title > span:nth-child(2) {
+    color: gray;
+    margin: 0 10px;
+}
+
+.item-container > p {
+    margin: 8px 0;
+}
+
+.item-container > #category {
+    color: gray;
+}
+
+.item-box-price {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.item-container > #post-content {
+    margin: 50px 0;
+}
+
+.item-box-contact {
+    color: gray;
+    display: flex;
+}
+
+.item-box-contact > p {
+    margin-right: 20px;
+}
+
+.item-box-contact > p > span {
+    margin-right: 10px;
+}
+
+/* 커뮤니케이션 버튼 */
+.communication-container {
+    display: flex;
+    justify-content: center;
+}
+
+.communication-container > button {
+    border: 0;
+    border-radius: 30px;
+    background-color: rgb(196, 196, 196);
+    font-size: 20px;
+    padding: 5px 0;
+    margin: 20px 30px;
+    cursor: pointer;
+    width: 140px;
+    font-weight: bold;
+}
+
+.communication-container > button:nth-child(1):hover {
+    background-color: #ffe398;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    transform: scale(1.2)
+}
+
+.communication-container > button:nth-child(2):hover {
+    background-color: rgb(191, 255, 194);
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    transform: scale(1.2)
+}
+
+/* 리뷰 섹션 */
+.review-section {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.review-section > p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.review-user-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-user-box > img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.review-user-box > span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.review-content-box {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgb(228, 228, 228);
+    padding-top: 10px;
+}
+
+.review-content-box > span:nth-child(1) {
+    flex-grow: 1;
+}
+
+.review-content-box > span:nth-child(2) {
+    margin-right: 50px;
+    color: gray;
+}
+
+.review-container > p {
+    font-weight: bold;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+}
+
+
+/* 문의하기 모달 */
+.inquiry-modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.inquiry-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.inquiry-modal-container > p {
+    margin: 0;
+    text-align: center;
+}
+
+.inquiry-modal-btn-box {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.inquiry-modal-btn-box > button {
+    border: 0;
+    border-radius: 20px;
+    padding: 5px 20px;
+    background-color: rgb(228, 228, 228);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.inquiry-modal-btn-box > button:nth-child(1):hover {
+    background-color: rgb(191, 255, 194);
+    transition: all 0.5s ease;
+    transform: scale(1.2);
+}
+
+.inquiry-modal-btn-box > button:nth-child(2):hover {
+    background-color: #ffe398;
+    transition: all 0.5s ease;
+    transform: scale(1.2);
+}

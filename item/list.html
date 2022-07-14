@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content=" classth=device- classth, initial-scale=1.0">
     <title>이거대여.</title>
-    <link rel="stylesheet" href="../index/css/nav.css">
-    <link rel="stylesheet" href="css/detail.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- css-->
+    <link rel="stylesheet" href="../index/css/nav.css">
+    <link rel="stylesheet" href="../index/css/footer.css">
+    <link rel="stylesheet" href="../item/css/list.css">
 
 </head>
+
 <body>
     <nav>
         <div class="nav-wrap">
@@ -18,7 +27,7 @@
                 <div class="logo">이거대여.</div>
                 <input class="search" placeholder="검색">
                 <div class="nav-btns">
-                    <a class="mypage">
+                    <a class="mypage" href="../user/mypage.html">
                         <img class="mypage-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
                     </a>
                     <button class="item-upload-btn">물품 등록</button>
@@ -60,60 +69,42 @@
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
         </div>
     </div>
-    <div class="item-wrap">
-        <!-- 아이템 섹션 -->
-        <div class="post-section">
-            <!-- 아이템 사진 -->
-            <img class="post-section-picture">
-            <!-- 유저 정보 -->
-            <div class="user-container">
-                <img id="post-user-image">
-                <div class="user-box">
-                    <p id="post-nickname"></p>
-                    <p id="address"></p>
-                </div>
-                <span class="user-container-score"></span>
-            </div>
-            <!-- 아이템 정보 -->
-            <div class="item-container">
-                <div class="item-box-status">
-                    <span id="status"></span>
-                </div>
-                <div class="item-box-title">
-                    <span id="title"></span>
-                    <span id="created-at"></span>
-                </div>
-                <p id="category"></p>
-                <div class="item-box-price">
-                    <span id="price"></span>
-                    <span id="time-unit"></span>
-                </div>
-                <p id="post-content"></p>
-                <div class="item-box-contact">
-                    <p><span>찜</span><span id="bookmarks"></span></p>
-                    <p><span>문의</span><span id="inquiries"></span></p>
-                </div>
-            </div>
-            <!-- 커뮤니케이션 버튼 -->
-            <div class="communication-container">
-                <button class="bookmark-btn" onclick="bookmark()"></button>
-                <button onclick="inquiry()">문의하기</button>
+    <div class="menu-icon-wrap">
+        <span class="material-symbols-outlined menu-modal-icon" onmouseover="openModal()">menu</span>
+    </div>
+    <div class="main-body">
+        <div class="item-section-wrap">
+            <div class="item-section-container">
+                <button class="item-section-btn" id="lend-btn" onclick="selectedSectionItems(this)">빌려드려요</button>
+                <button class="item-section-btn" id="borrow-btn" onclick="selectedSectionItems(this)">빌려요</button>
             </div>
         </div>
-        <!-- 리뷰 섹션 -->
-        <div class="review-section">
-            <p>리뷰</p>
+        <div class="item-list-category">
+            <p class="list-category"></p>
+            <p class="list-section"></p>
+        </div>
+        <div class="item-wrap">
+            <!-- 아이템 붙는곳 -->
+        </div>
+        <div class="category-modal-wrap">
+            <div class="category-modal-container">
+                <div class="category-modal-close">
+                    <button class="category-modal-close-btn" onclick="closeModal()">❌</button>
+                </div>
+                <div class="category-modal-box">
+                    <!-- 카테고리 -->
+                </div>
+            </div>
         </div>
     </div>
+    <script type="text/javascript" src="../index/js/nav.js"></script>
+    <script type="text/javascript" src="../index/js/nav_api.js"></script>
+    <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript" src="../index/js/kakao_api.js"></script>
+    <script type="text/javascript" src="../item/js/list_api.js"></script>
+    <script type="text/javascript" src="../item/js/list.js"></script>
+    <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </body>
-
-<script type="text/javascript" src="../index/js/nav.js"></script>
-<script type="text/javascript" src="../index/js/nav_api.js"></script>
-<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript" src="../index/js/kakao_api.js"></script>
-<script type="text/javascript" src="js/detail_api.js"></script>
-<script type="text/javascript" src="js/detail.js"></script>
-<script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 
 </html>
