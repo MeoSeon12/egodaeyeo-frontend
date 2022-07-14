@@ -1,10 +1,10 @@
 // const backEndBaseUrl = "http://127.0.0.1:8000"
 // const frontEndBaseUrl = "http://127.0.0.1:5500"
-// const token = localStorage.getItem("access_token");
 
 
 async function itemView() {
-
+    
+    // const token = localStorage.getItem("access_token");
     const response = await fetch(`${backEndBaseUrl}/items`, {
         method: 'GET',
         mode: 'cors',

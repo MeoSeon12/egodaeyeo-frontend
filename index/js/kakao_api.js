@@ -61,3 +61,6 @@ kakaoBtn.addEventListener("click", (e) => {
     kakaoLogin();
 }
 )
+
+
+//어드레스 모달이 열리면 거기서 주소입력 --->  usermodel --> save 회원가입.
