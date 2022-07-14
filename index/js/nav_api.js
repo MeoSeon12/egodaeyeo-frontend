@@ -41,6 +41,8 @@ async function onSignUp() {
     const password = document.getElementById('inputPassword').value;
     const password2 = document.getElementById('inputPassword2').value;
     const nickname = document.getElementById('inputNickname').value;
+    const address = document.getElementById('address_kakao').value;
+    const address_detail = document.getElementById('address_detail').value;
 
     //정규표현식 비밀번호 8자리 대소문자, 특수문자포함
     const regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -60,6 +62,18 @@ async function onSignUp() {
         $('#inputPassword2').val('')
         return;
     }
+    if (address === '') {
+        alert('주소를 입력해주세요.')
+        $('#address_kakao').focus()
+        return;
+    }
+
+    if (address_detail === '') {
+        alert('상세주소를 입력해주세요.')
+        $('#address_detail').focus()
+        return;
+    }
+
     if (password == password2) {
         const response = await fetch(`${backEndBaseUrl}/users/`, {
             method: 'POST',
@@ -73,6 +87,8 @@ async function onSignUp() {
                 "email": email,
                 "password": password,
                 "nickname": nickname,
+                "address": address,
+                "address_detail": address_detail
             })
         }
         )
@@ -82,12 +98,18 @@ async function onSignUp() {
             alert("회원가입 성공")
             loginModalView()
         }else {
-            //유효하지 않은 이메일 도메인 사용시
-            console.log(response_json)
+            // 이메일 체크 / 이메일 중복 체크 / 닉네임 중복 체크
+            if (response_json["email"]){
+                alert("이미 사용되고 있는 이메일입니다.")
+                $('#inputEmail').focus()
+                $('#inputEmail').val('')
+            }
+            if (response_json["nickname"]){
+                alert("이미 사용되고 있는 닉네임입니다.")
+                $('#inputNickname').focus()
+                $('#inputNickname').val('')
+            }
             alert(response_json["error"])
-            $('#inputEmail').focus()
-            $('#inputEmail').val('')
-            return;
         }
     }else{
         alert("재입력한 비밀번호가 일치하지 않습니다.")
@@ -157,6 +179,19 @@ async function onLogin() {
     } else {
         alert('이메일 / 비밀번호가 일치하지 않습니다.')
     }
+}
+
+
+// 카카오 주소 API
+window.onload = function(){
+    document.getElementById("address_kakao").addEventListener("click", function(){
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address_kakao").value = data.address;
+                document.querySelector("#address_kakao").focus(); 
+            }
+        }).open();
+    });
 }
 
 // 페이지를 다시 로딩 하면 벌어지는 일들!

@@ -16,7 +16,6 @@ function kakaoLogin() {
     });
 }
 
-
 async function kakaoLoginApi(access_token) {
 
     const response = await fetch(`${backEndBaseUrl}/users/api/kakao/`, {
