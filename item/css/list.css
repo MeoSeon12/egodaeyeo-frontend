@@ -1,13 +1,9 @@
-.main-body {
-    min-height: 1200px;
-}
-
 .menu-icon-wrap {
     display: flex;
-    margin: 8px 0 0 8px;
+    margin: 10px 0 0 10px;
     top: 0;
-    height: 40px;
-    max-width: 40px;
+    height: 58px;
+    max-width: 58px;
     width: 100%;
 }
 
@@ -23,16 +19,25 @@
     cursor: pointer;
 }
 
+.main-body {
+    min-height: 1200px;
+    max-width: 920px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
 .item-section-wrap {
     display: flex;
     justify-content: left;
     white-space: nowrap;
-    max-width: 900px;
+    max-width: 920px;
     min-width: 300px;
     width: 100%;
     height: 50px;
-    margin: auto;
-    margin-top: 10px;
+    margin: 0 10px;
+    margin-top: 25px;
 }
 
 .item-section-container {
@@ -74,28 +79,53 @@
     background-color: #ffefc2;
 }
 
+.item-list-category {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    justify-content: left;
+    max-width: 920px;
+    width: 100%;
+    height: 70px;
+    margin: 0 10px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.list-section {
+    margin-left: 12px;
+}
+
 .item-wrap {
     display: flex;
     flex-flow: row wrap;
     max-width: 920px;
     width: 100%;
-    margin: auto;
     justify-content: flex-start;
 }
 
 .item-link-box {
     height: 321px;
-    width: 200px;
+    max-width: 200px;
+    width: 100%;
     margin: 20px 15px;
     cursor: pointer;
+    overflow: hidden;
 }
+
 
 .item-image {
     height: 200px;
     max-width: 200px;
     width: 100%;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 10px;
+    transform: scale(1);
+    transition: all 0.3s linear;
+}
+
+.item-link-box:hover > img{
+    transform: scale(1.02);
 }
 
 .item-desc {
@@ -132,23 +162,6 @@
     margin: 0 5px;
 }
 
-.item-list-category {
-    display: flex;
-    flex-direction: row;
-    white-space: nowrap;
-    justify-content: left;
-    max-width: 900px;
-    width: 100%;
-    font-weight: bold;
-    font-size: 30px;
-    margin: auto;
-    margin-top: 15px;
-    margin-bottom: -40px;
-}
-
-.list-section {
-    margin-left: 12px;
-}
 
 /* 모달 */
 .category-modal-wrap {
@@ -166,10 +179,10 @@
     background-color: rgb(216, 216, 216);
     display: flex;
     flex-direction: column;
-    margin-top: 150px;
+    margin-top: 80px;
     max-width: 300px;
     width: 100%;
-    height: 700px;
+    height: 880px;
     padding: 10px;
     border-radius: 10px;
     overflow: hidden;
@@ -194,17 +207,17 @@
 .category-modal-box {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     max-width: 300px;
     width: 100%;
-    height: 700px;
+    height: 900px;
+    margin: 10px 0;
 }
 
 .category-btn {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 8px;
+    padding: 10px;
     width: 200px;
     margin: 0 40px;
     cursor: pointer;
@@ -213,6 +226,80 @@
 .category-btn:hover {
     background-color: rgb(172, 172, 172);
 }
+
+@media screen and (max-width: 770px) {
+    .item-wrap {
+        flex-grow: inherit;
+    }
+    .item-link-box {
+        max-width: 226px;
+    }
+
+    .item-image {
+        max-width: 226px;
+    }
+    
+    .item-desc {
+        font-size: 14px;
+    }
+    
+    .item-title {
+        font-size: 16px;
+    }
+   
+    .item-interest {
+        font-size: 12px;
+    }
+
+    .category-modal-container {
+        height: 740px;
+    }
+    
+}
+
+@media screen and (max-width: 430px) {
+    .item-link-box {
+        max-width: 182px;
+    }
+
+    .item-image {
+        max-width: 182px;
+    }
+    
+    .item-desc {
+        font-size: 13px;
+    }
+    
+    .item-title {
+        font-size: 15px;
+    }
+   
+    .item-interest {
+        font-size: 12px;
+    }
+    
+}
+
+@media screen and (max-width: 376px) {
+    .item-link-box {
+        max-width: 156px;
+    }
+
+    .item-image {
+        max-width: 156px;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .item-link-box {
+        max-width: 130px;
+    }
+
+    .item-image {
+        max-width: 130px;
+    }
+}
+
 
 @keyframes fadeIn {
 	0% {
@@ -226,7 +313,7 @@
 /* 모달 콘텐츠 반동 효과로 나타나기 */
 @keyframes roadRunnerIn {
 	0% {
-		transform: translateX(-1500px) skewX(30deg) scaleX(1.3);
+		transform: translateX(-10px) skewX(5deg) scaleX(1.1);
 	}
 	70% {
 		transform: translateX(0px) skewX(0deg) scaleX(1);

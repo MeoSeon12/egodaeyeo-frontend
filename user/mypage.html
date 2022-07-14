@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content=" classth=device- classth, initial-scale=1.0">
+    <title>이거대여.</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- css-->
+    <link rel="stylesheet" href="../index/css/nav.css">
+    <link rel="stylesheet" href="../index/css/footer.css">
+    <link rel="stylesheet" href="../user/css/mypage.css">
+
+</head>
+<body>
+    <nav>
+        <div class="nav-wrap">
+            <div class="nav-container">
+                <a class="logo" href="../index.html">이거대여.</a>
+                <input class="search" placeholder="검색">
+                <div class="nav-btns">
+                    <a class="mypage" href="../user/mypage.html">
+                        <img class="mypage-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                    </a>
+                    <button class="item-upload-btn">물품 등록</button>
+                    <button class="login-btn" onclick="loginModalView()">로그인</button>
+                    <button class="logout-btn">로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="main-body">
+        <div class="main-wrap">
+            <div class="main-left-container">
+                <div class="profile-info-box">
+                    <img class="profile-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                    <div class="profile-info-text">
+                        <div class="info-text-nickname">철순</div>
+                        <div class="info-text-score">유저 점수</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="mypage-category-box">
+                    <button>📒 대여중인 내역</button>
+                    <button>📃 대여종료 내역</button>
+                    <button>💚 찜 목록</button>
+                    <button>📖 내가 올린 글</button>
+                    <button>📸 프로필 정보 변경</button>
+                    <button>💌 피드백 작성하기</button>
+                </div>
+            </div>
+            <div class="main-right-container">
+                <div class="history-wrap">
+                    <!-- 내역정보 붙는곳-->
+                    <div class="history-container">
+                        <div class="history-info-box">
+                            <div class="history-box-inner">
+                                <img class="history-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                                <div class="history-info-text">
+                                    <div class="info-text-section">
+                                        <!-- 섹션 붙는곳 -->
+                                        빌려드려요
+                                    </div>
+                                    <div class="info-text-title">
+                                        <!-- 물품 이름 붙는곳 -->
+                                        물품 이름
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-rent-date">
+                                <!-- 날짜 붙는곳 -->
+                                22.06.08 ~ 22.07.08
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-container">
+                        <div class="history-info-box">
+                            <div class="history-box-inner">
+                                <img class="history-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                                <div class="history-info-text">
+                                    <div class="info-text-section">
+                                        빌려드려요
+                                    </div>
+                                    <div class="info-text-title">
+                                        물품 이름
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-rent-date">
+                                22.06.08 ~ 22.07.08
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="../index/js/nav.js"></script>
+    <script type="text/javascript" src="../index/js/nav_api.js"></script>
+    <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript" src="../index/js/kakao_api.js"></script>
+
+</body>
+
+</html>

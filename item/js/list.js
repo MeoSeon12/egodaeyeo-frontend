@@ -1,7 +1,7 @@
 function openModal(){
     const modalWrap = document.getElementsByClassName('category-modal-wrap')[0]
     const modalContainer = document.getElementsByClassName('category-modal-container')[0]
-    modalContainer.style.animation = 'roadRunnerIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    modalContainer.style.animation = 'roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     modalWrap.style.animation = 'fadeIn 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     modalWrap.style.display = 'flex'
 }
@@ -12,9 +12,9 @@ function closeModal(){
     modalContainer.style.animation = 'scaleLeft 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     modalWrap.style.animation = 'wrapRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
-
+const closeModalBody = document.getElementsByTagName('body')[0]
 const categoryModalBody = document.querySelector('.category-modal-wrap')
-categoryModalBody.addEventListener('click', (e) => {
+categoryModalBody.addEventListener('mouseover', (e) => {
     if (e.target == categoryModalBody) {
         closeModal()
     }
@@ -196,9 +196,12 @@ async function showSelectedItems() {
     if (selectedCategory == "") {
         categoryText.innerText = "#전체" + selectedCategory 
         sectionText.innerText = "#" + selectedSection
-    }else{
-        sectionText.innerText = "#" + selectedSection
+    }else if (selectedSection == ""){
         categoryText.innerText = "#" + selectedCategory
+        sectionText.innerText = ""
+    }else{
+        categoryText.innerText = "#" + selectedCategory
+        sectionText.innerText = "#" + selectedSection
     }
 
     itemWrap.replaceChildren();
