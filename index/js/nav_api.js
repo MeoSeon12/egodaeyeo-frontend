@@ -42,7 +42,6 @@ async function onSignUp() {
     const password2 = document.getElementById('inputPassword2').value;
     const nickname = document.getElementById('inputNickname').value;
     const address = document.getElementById('address_kakao').value;
-    const address_detail = document.getElementById('address_detail').value;
 
     //정규표현식 비밀번호 8자리 대소문자, 특수문자포함
     const regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -68,12 +67,6 @@ async function onSignUp() {
         return;
     }
 
-    if (address_detail === '') {
-        alert('상세주소를 입력해주세요.')
-        $('#address_detail').focus()
-        return;
-    }
-
     if (password == password2) {
         const response = await fetch(`${backEndBaseUrl}/users/`, {
             method: 'POST',
@@ -88,7 +81,6 @@ async function onSignUp() {
                 "password": password,
                 "nickname": nickname,
                 "address": address,
-                "address_detail": address_detail
             })
         }
         )
