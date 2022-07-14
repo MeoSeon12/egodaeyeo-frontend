@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../item/css/list.css">
 
 </head>
+
 <body>
     <nav>
         <div class="nav-wrap">
@@ -66,10 +67,10 @@
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
         </div>
     </div>
+    <div class="menu-icon-wrap">
+        <span class="material-symbols-outlined menu-modal-icon" onmouseover="openModal()">menu</span>
+    </div>
     <div class="main-body">
-        <div class="menu-icon-wrap">
-            <span class="material-symbols-outlined menu-modal-icon" onclick="openModal()">menu</span>
-        </div>
         <div class="item-section-wrap">
             <div class="item-section-container">
                 <button class="item-section-btn" id="lend-btn" onclick="selectedSectionItems(this)">빌려드려요</button>
@@ -94,7 +95,7 @@
             </div>
         </div>
     </div>
-    
+
     <script type="text/javascript" src="../index/js/nav.js"></script>
     <script type="text/javascript" src="../index/js/nav_api.js"></script>
     <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
