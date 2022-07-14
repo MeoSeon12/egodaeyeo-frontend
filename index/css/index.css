@@ -96,6 +96,7 @@ body input {
     padding: 15px 20px;
     background-color: #ecedee;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .index-main__item .item-box__button button:hover {
