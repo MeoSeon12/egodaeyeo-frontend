@@ -16,7 +16,6 @@ function kakaoLogin() {
     });
 }
 
-
 async function kakaoLoginApi(access_token) {
 
     const response = await fetch(`${backEndBaseUrl}/users/api/kakao/`, {
@@ -62,5 +61,3 @@ kakaoBtn.addEventListener("click", (e) => {
 }
 )
 
-
-//어드레스 모달이 열리면 거기서 주소입력 --->  usermodel --> save 회원가입.
