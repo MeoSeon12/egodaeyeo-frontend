@@ -23,7 +23,7 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 $.ajaxSetup({
-    beforeSend: function(xhr, settings) {
+    beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
@@ -79,7 +79,7 @@ async function onSignUp() {
             method: 'POST',
             mode: 'cors',
             headers: {
-                Accept:"application/json",
+                Accept: "application/json",
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
             },
@@ -94,24 +94,24 @@ async function onSignUp() {
         )
         response_json = await response.json()
 
-        if (response.status == 200){
+        if (response.status == 200) {
             alert("회원가입 성공")
             loginModalView()
-        }else {
+        } else {
             // 이메일 체크 / 이메일 중복 체크 / 닉네임 중복 체크
-            if (response_json["email"]){
+            if (response_json["email"]) {
                 alert("이미 사용되고 있는 이메일입니다.")
                 $('#inputEmail').focus()
                 $('#inputEmail').val('')
             }
-            if (response_json["nickname"]){
+            if (response_json["nickname"]) {
                 alert("이미 사용되고 있는 닉네임입니다.")
                 $('#inputNickname').focus()
                 $('#inputNickname').val('')
             }
             alert(response_json["error"])
         }
-    }else{
+    } else {
         alert("재입력한 비밀번호가 일치하지 않습니다.")
     }
 }
@@ -130,13 +130,13 @@ async function onLogin() {
     const email = document.getElementById("loginEmail").value
     const password = document.getElementById("loginPassword").value
 
-    if (email === ''){
+    if (email === '') {
         alert('이메일을 입력해주세요')
         $('#loginEmail').focus()
         return
     }
 
-    if (password === ''){
+    if (password === '') {
         alert('비밀번호를 입력해주세요')
         $('#loginPassword').focus()
         return
@@ -183,16 +183,15 @@ async function onLogin() {
 
 
 // 카카오 주소 API
-window.onload = function(){
-    document.getElementById("address_kakao").addEventListener("click", function(){
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address;
-                document.querySelector("#address_kakao").focus(); 
-            }
-        }).open();
-    });
-}
+document.getElementById("address_kakao").addEventListener("click", function () {
+    new daum.Postcode({
+        oncomplete: function (data) { //선택시 입력값 세팅
+            document.getElementById("address_kakao").value = data.address;
+            document.querySelector("#address_kakao").focus();
+        }
+    }).open();
+});
+
 
 // 페이지를 다시 로딩 하면 벌어지는 일들!
 window.onload = () => {
