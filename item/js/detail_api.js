@@ -11,8 +11,7 @@ async function DetailViewGetApi() {
         method: 'GET',
         mode: 'cors',
         headers: {
-            'X-CSRFToken': csrftoken,
-            'Authorization': 'Bearer ' + token
+            'X-CSRFToken': csrftoken
         }
     })
 
@@ -44,7 +43,7 @@ async function DetailViewPostApi() {
     })
 
     //  요청 성공 (아이템 DB 존재함)
-    if (response.status == 200) {
+    if (response.status == 200 | 201) {
         bookmarkData = await response.json()
         return bookmarkData
     }
