@@ -258,6 +258,12 @@ nav {
     cursor: pointer;
 }
 
+.modal-container h2 {
+    font-weight: bold;
+    font-family: 'GangwonEduPowerExtraBoldA';
+    font-size: 30px;
+}
+
 #signup-modal-container h5 {
     margin:0 10px;
 }
