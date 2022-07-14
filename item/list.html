@@ -59,6 +59,8 @@
                 <input type='password' id="inputPassword">
                 <h5>비밀번호 재입력</h5>
                 <input type='password' id="inputPassword2">
+                <h5>주소</h5>
+                <input id="address_kakao" name="address" readonly />
             </div>
             <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
@@ -93,6 +95,8 @@
     <script type="text/javascript" src="../index/js/kakao_api.js"></script>
     <script type="text/javascript" src="../item/js/list_api.js"></script>
     <script type="text/javascript" src="../item/js/list.js"></script>
+    <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </body>
 
 </html>
