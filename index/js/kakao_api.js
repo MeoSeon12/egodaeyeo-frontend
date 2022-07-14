@@ -34,8 +34,10 @@ async function kakaoLoginApi(access_token) {
     if (response.status == 200) {
         alert(response_json['msg'])
         console.log(response_json)
-        let access_token = response_json['access_token']
+        let access_token = response_json['access']
+        let refresh_token = response_json['refresh']
         localStorage.setItem("access_token", access_token)
+        localStorage.setItem("refresh_token", refresh_token)
 
         // 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
         // accessToken 에서 payload를 가져오는 코드-
