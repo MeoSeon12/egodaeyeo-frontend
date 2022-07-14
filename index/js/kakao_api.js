@@ -32,7 +32,6 @@ async function kakaoLoginApi(access_token) {
     
     if (response.status == 200) {
         alert(response_json['msg'])
-        console.log(response_json)
         let access_token = response_json['access']
         let refresh_token = response_json['refresh']
         localStorage.setItem("access_token", access_token)
@@ -49,9 +48,10 @@ async function kakaoLoginApi(access_token) {
         localStorage.setItem("payload", jsonPayload);
 
         window.location.reload()
-    }else {
-        console.log(response_json['error'])
-        return response.status
+
+    }else if (response.status == 201) {
+        alert("원활한 서비스 이용을 위해 주소를 입력해주세요.")
+        addressModal();
     }
 }
 
