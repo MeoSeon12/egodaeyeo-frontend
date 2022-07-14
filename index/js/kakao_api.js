@@ -51,7 +51,7 @@ async function kakaoLoginApi(access_token) {
 
     }else if (response.status == 201) {
         alert("원활한 서비스 이용을 위해 주소를 입력해주세요.")
-        addressModal();
+        addressModalView();
     }
 }
 
