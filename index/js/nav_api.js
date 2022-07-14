@@ -16,7 +16,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-var csrftoken = getCookie('csrftoken');
+const csrftoken = getCookie('csrftoken');
 
 function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
@@ -139,8 +139,8 @@ async function onLogin() {
     response_json = await response.json()
 
     if (response.status == 200) {
-        localStorage.setItem("farm_access_token", response_json.access)
-        localStorage.setItem("farm_refresh_token", response_json.refresh)
+        localStorage.setItem("access_token", response_json.access)
+        localStorage.setItem("refresh_token", response_json.refresh)
 
         // 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
         // accessToken 에서 payload를 가져오는 코드-
@@ -160,8 +160,8 @@ async function onLogin() {
 }
 
 function onLogout() {
-    localStorage.removeItem("farm_access_token")
-    localStorage.removeItem("farm_refresh_token")
+    localStorage.removeItem("access_token")
+    localStorage.removeItem("refresh_token")
     localStorage.removeItem("payload")
     alert("로그아웃 하셨습니다.")
     window.location.reload()

@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="./index/css/nav.css">
     <link rel="stylesheet" href="./index/css/index.css">
     <link rel="stylesheet" href="./index/css/footer.css">
-    <link rel="stylesheet" href="./item/css/item.css">
     <title>중고물품 필요할때 이거대여.</title>
 
 </head>
@@ -23,7 +22,7 @@
     <nav>
         <div class="nav-wrap">
             <div class="nav-container">
-                <div class="logo">이거대여.</div>
+                <a class="logo" href="../index.html">이거대여.</a>
                 <input class="search" placeholder="검색">
                 <div class="nav-btns">
                     <a class="mypage">
@@ -46,7 +45,8 @@
             </div>
             <button class="login-submit-btn">로그인</button>
             <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
-            <a href="javascript:kakaoLogin()"><img class="kakao-btn" src="../media/kakao-btn.png"></a>
+
+            <img class="kakao-btn" src="../media/kakao-btn.png">
         </div>
 
         <div class="modal-container" id="signup-modal-container">
@@ -91,7 +91,7 @@
                         <p>회원들과의 실시간 채팅으로 거래를 지금 바로 경험해보세요!</p>
                     </article>
                     <div class="item-box__button">
-                        <button>대여 물품 보러가기</button>
+                        <a href="item/list.html"><button>대여 물품 보러가기</button></a>
                     </div>
                 </div>
             </div>
