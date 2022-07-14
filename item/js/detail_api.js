@@ -1,11 +1,12 @@
 const frontendBaseUrl = "http://127.0.0.1:5500"
 const backendBaseUrl = "http://127.0.0.1:8000"
 
+
 // 백엔드로 아이템, 리뷰 데이터 요청
 async function DetailViewGetApi() {
 
     const token = localStorage.getItem('access_token')
-
+    
     const response = await fetch(`${backendBaseUrl}/items/details/${itemId}`, {
         method: 'GET',
         mode: 'cors',

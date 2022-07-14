@@ -25,9 +25,9 @@
 
 .item-section-wrap {
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
     white-space: nowrap;
-    max-width: 550px;
+    max-width: 900px;
     min-width: 300px;
     width: 100%;
     height: 50px;
@@ -35,14 +35,35 @@
     margin-top: 10px;
 }
 
+.item-section-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(236, 236, 236);
+    max-width: 244px;
+    min-width: 160px;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+}
+
 .item-section-btn {
-    max-width: 150px;
+    max-width: 120px;
     min-width: 80px;
     width: 100%;
-    max-height: 50px;
+    height: 44px;
     border: none;
-    border-radius: 20px;
+    border-radius: 8px;
     cursor: pointer;
+}
+
+#lend-btn {
+    background-color: rgb(236, 236, 236);
+}
+
+#borrow-btn {
+    background-color: rgb(236, 236, 236);
 }
 
 #lend-btn:hover {
@@ -59,7 +80,7 @@
     max-width: 920px;
     width: 100%;
     margin: auto;
-    margin-top: 20px;
+    justify-content: flex-start;
 }
 
 .item-link-box {
@@ -109,6 +130,24 @@
 
 .like-count, .inquiry-count {
     margin: 0 5px;
+}
+
+.item-list-category {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    justify-content: left;
+    max-width: 900px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 30px;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: -40px;
+}
+
+.list-section {
+    margin-left: 12px;
 }
 
 /* 모달 */
@@ -173,10 +212,6 @@
 
 .category-btn:hover {
     background-color: rgb(172, 172, 172);
-}
-
-footer {
-    margin-top: 300px;
 }
 
 @keyframes fadeIn {
