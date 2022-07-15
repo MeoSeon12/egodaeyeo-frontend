@@ -1,9 +1,12 @@
 const body = document.getElementsByTagName('body')[0]
 const modalBody = document.querySelector('.modal-body')
 const addressModalBody = document.querySelector('.address-modal-body')
+const reviewModalBody = document.querySelector('.review-modal-body')
 const loginContainer = document.querySelector('#login-modal-container')
 const signupContainer = document.querySelector('#signup-modal-container')
 const addressContainer = document.querySelector('#address-modal-container')
+const reviewContainer = document.querySelector('#review-modal-container')
+
 const loginBtn = document.getElementsByClassName('login-btn')[0]
 const logoutBtn = document.getElementsByClassName('logout-btn')[0]
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
@@ -23,6 +26,14 @@ function addressModalView(){
     addressModalBody.style.display = 'flex'
     addressModalBody.style.animation = ''
     addressContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
+function reviewModalView(){
+    body.style.overflow = 'hidden'
+    modalBody.style.display = 'none'
+    reviewModalBody.style.display = 'flex'
+    reviewModalBody.style.animation = ''
+    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 function signupContainerView(){
@@ -51,6 +62,12 @@ function addressModalUnview(){
     addressModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
+function reviewModalUnview(){
+    body.style.overflow = 'auto'
+    reviewModalBody.style.display = 'none'
+    // reviewModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
 addEventListener('click', (e) => {
     if (e.target == modalBody) {
         modalUnview()
@@ -61,6 +78,12 @@ addEventListener('click', (e) => {
 addEventListener('click', (e) => {
     if (e.target == addressModalBody) {
         alert("주소를 입력해주세요.")
+    }
+})
+
+addEventListener('click', (e) => {
+    if (e.target == reviewModalBody) {
+        reviewModalUnview()
     }
 })
 
@@ -81,3 +104,20 @@ else {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
 }
+
+
+$(document).ready(function(){
+    // Check Radio-box
+    $(".rating input:radio").attr("checked", false);
+
+    $('.rating input').click(function () {
+        $(".rating span").removeClass('checked');
+        $(this).parent().addClass('checked');
+    });
+
+    $('input:radio').change(
+      function(){
+        var userRating = this.value;
+        alert(userRating);
+    }); 
+});
