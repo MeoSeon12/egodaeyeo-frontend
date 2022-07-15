@@ -4,10 +4,7 @@ const itemId = location.href.split('?')[1]
 const UserId = localStorage.getItem('payload')
 
 
-// 아이템 사진 슬라이드
-$(document).ready(function () {
-    $('.slider').bxSlider()
-});
+
 
 
 // 아이템, 리뷰 데이터 레이아웃 생성 & 입력
@@ -16,14 +13,30 @@ async function getDetailView() {
     // API 기능 호출
     let data = await DetailViewGetApi()
 
+    if (data.error_msg) {
+        const itemWrap = document.getElementsByClassName('item-wrap')[0]
+        itemWrap.style.display = 'none'
+        return
+    }
+
     // 아이템 섹션
     // 아이템 사진
-    const slider = document.getElementsByClassName('slider')[0]
-    let sliderLi = document.createElement('li')
-    slider.append(sliderLi)
-    let sliderPicture = document.createElement('img')
-    sliderPicture.setAttribute('src', 'https://t1.daumcdn.net/cfile/tistory/998CCA4A5D1EF94112')
-    sliderLi.append(sliderPicture)
+    for (i = 0; i < data.images.length; i++) {
+
+        const slider = document.getElementsByClassName('slider')[0]
+        let sliderLi = document.createElement('li')
+        slider.append(sliderLi)
+        let sliderPicture = document.createElement('img')
+        sliderPicture.setAttribute('src', `${data.images[i]}`)
+        sliderLi.append(sliderPicture)
+    }
+
+    // 아이템 사진 슬라이드
+    $(document).ready(function () {
+        $('.slider').bxSlider({
+            touchEnabled: false
+        })
+    });
     
 
     // 포스트 유저 프로필이미지
