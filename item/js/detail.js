@@ -1,7 +1,7 @@
 // 아이템 ID 정보 가져옴 (없으면 이전 페이지로)
 const itemId = location.href.split('?')[1]
 // 유저 ID 정보 가져옴 (비로그인은 null)
-const UserId = localStorage.getItem('payload')
+const userId = localStorage.getItem('payload')
 
 
 // 아이템, 리뷰 데이터 레이아웃 생성 & 입력
