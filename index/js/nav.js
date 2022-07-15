@@ -28,14 +28,12 @@ function addressModalView(){
 function signupContainerView(){
     loginContainer.style.display = 'none'
     signupContainer.style.display = 'flex'
-    addressContainer.style.display = 'none'
     signupContainer.style.animation = ''
 }
 
 function loginContainerView(){
     loginContainer.style.display = 'flex'
     signupContainer.style.display = 'none'
-    addressContainer.style.display = 'none'
     loginContainer.style.animation = ''
 }
 
