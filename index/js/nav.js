@@ -57,12 +57,21 @@ addEventListener('click', (e) => {
     }
 })
 
+// 소셜유저 회원가입시 주소 입력을 안한 상태에서는 모달에서 나가는 것을 방지
 addEventListener('click', (e) => {
     if (e.target == addressModalBody) {
         alert("주소를 입력해주세요.")
     }
 })
 
+// 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
+$("#loginPassword").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $(".login-submit-btn").click();
+    }
+});
+
+// 로그인해서 로컬 스토리지에 json payload가 있을시
 if (localStorage.payload !== undefined) {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";

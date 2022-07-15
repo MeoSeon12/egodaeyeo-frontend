@@ -1,6 +1,7 @@
 const backEndBaseUrl = "http://127.0.0.1:8000"
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -32,7 +33,8 @@ $.ajaxSetup({
 
 //닉네임 형식 함수
 function checkId(asValue) {
-    const regid = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+    const regid = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+
     return regid.test(asValue);
 }
 
@@ -86,13 +88,24 @@ async function onSignUp() {
         )
         response_json = await response.json()
 
-        if (response.status == 200) {
+        if (response.status == 200) { //회원가입 성공시
+            $('#inputEmail').val('')
+            $('#inputNickname').val('')
+            $('#inputPassword').val('')
+            $('#inputPassword2').val('')
+            $('#address-kakao').val('')
             alert("회원가입 성공")
             loginModalView()
         } else {
-            // 이메일 체크 / 이메일 중복 체크 / 닉네임 중복 체크
-            if (response_json["email"]) {
+            // 이메일 형식 체크 / 이메일 중복 체크 / 닉네임 중복 체크
+            if (response_json["email"] == 'user의 이메일은/는 이미 존재합니다.') {
                 alert("이미 사용되고 있는 이메일입니다.")
+                $('#inputEmail').focus()
+                $('#inputEmail').val('')
+            }
+            
+            if (response_json["email"] == '유효한 이메일 주소를 입력하십시오.') {
+                alert(response_json["email"])
                 $('#inputEmail').focus()
                 $('#inputEmail').val('')
             }
@@ -101,7 +114,6 @@ async function onSignUp() {
                 $('#inputNickname').focus()
                 $('#inputNickname').val('')
             }
-            alert(response_json["error"])
         }
     } else {
         alert("재입력한 비밀번호가 일치하지 않습니다.")
@@ -241,3 +253,27 @@ function onLogout() {
     window.location.reload()
 }
 
+async function getUserView() {
+
+    const mypageImage = document.getElementsByClassName('mypage-image')[0]
+
+    try {
+        userId = JSON.parse(localStorage.getItem('payload')).user_id
+
+        const response = await fetch(`${backEndBaseUrl}/users/${userId}/`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+        })
+        profileImage = await response.json()
+    
+        mypageImage.setAttribute('src', profileImage)
+    }
+    catch {
+        mypageImage.style.display = 'none'
+    }
+
+}
+getUserView()

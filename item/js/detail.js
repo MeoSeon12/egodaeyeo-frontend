@@ -1,7 +1,7 @@
 // 아이템 ID 정보 가져옴 (없으면 이전 페이지로)
 const itemId = location.href.split('?')[1]
 // 유저 ID 정보 가져옴 (비로그인은 null)
-const UserId = localStorage.getItem('payload')
+const userId = localStorage.getItem('payload')
 
 
 // 아이템, 리뷰 데이터 레이아웃 생성 & 입력
@@ -49,13 +49,13 @@ async function getDetailView() {
     address.innerText = data.user.address
 
     // 포스트 유저 스코어
-    const score = document.getElementsByClassName('user-container-score')
+    const score = document.getElementsByClassName('user-container-score')[0]
     
     if (data.user.score == null) {
-        score[0].innerText = '유저점수 없음'
+        score.innerText = '유저점수 없음'
     }
     else {
-        score[0].innerText = data.user.score
+        score.innerText = data.user.score
     }
 
     // 대여 상태
@@ -66,8 +66,8 @@ async function getDetailView() {
         const remainTime = document.createElement('span')
         remainTime.style.cssText = `margin: 0 20px; color: gray;`
         remainTime.innerText = data.remain_time
-        const itemBoxStatus = document.getElementsByClassName('item-box-status')
-        itemBoxStatus[0].append(remainTime)
+        const itemBoxStatus = document.getElementsByClassName('item-box-status')[0]
+        itemBoxStatus.append(remainTime)
     }
     else if (data.status == '대여 가능') {
         status.style.backgroundColor = 'rgb(191, 255, 194)'
@@ -107,14 +107,14 @@ async function getDetailView() {
     inquiries.innerText = data.inquiry_length
 
     // 찜 버튼
-    const bookmarkBtn = document.getElementsByClassName('bookmark-btn')
+    const bookmarkBtn = document.getElementsByClassName('bookmark-btn')[0]
     if (data.is_bookmark == true) {
-        bookmarkBtn[0].style.backgroundColor = '#ffe398'
-        bookmarkBtn[0].innerText = '찜 취소하기'
+        bookmarkBtn.style.backgroundColor = '#ffe398'
+        bookmarkBtn.innerText = '찜 취소하기'
     }
     else if (data.is_bookmark == false) {
-        bookmarkBtn[0].style.backgroundColor = '#c4c4c4'
-        bookmarkBtn[0].innerText = '찜 하기'
+        bookmarkBtn.style.backgroundColor = '#c4c4c4'
+        bookmarkBtn.innerText = '찜 하기'
     }
 
 
@@ -124,8 +124,8 @@ async function getDetailView() {
     // 리뷰가 없을 시
     if (data.reviews.length == 0) {
         const reviewContainer = document.createElement('div')
-        reviewContainer.setAttribute('class', 'review-container')
-        reviewSection[0].append(reviewContainer)
+        reviewContainer.setAttribute('class', 'review-container')[0]
+        reviewSection.append(reviewContainer)
 
         const noReview = document.createElement('p')
         noReview.innerText = '아직 리뷰가 없습니다'
@@ -138,8 +138,8 @@ async function getDetailView() {
         for (i = data.reviews.length - 1; i >= 0; i--) {
 
             const reviewContainer = document.createElement('div')
-            reviewContainer.setAttribute('class', 'review-container')
-            reviewSection[0].append(reviewContainer)
+            reviewContainer.setAttribute('class', 'review-container')[0]
+            reviewSection.append(reviewContainer)
 
             const reviewUserBox = document.createElement('div')
             reviewUserBox.setAttribute('class', 'review-user-box')
@@ -187,14 +187,14 @@ async function bookmark() {
         // API 기능 호출
         let bookmarkData = await DetailViewPostApi()
         
-        const bookmarkBtn = document.getElementsByClassName('bookmark-btn')
+        const bookmarkBtn = document.getElementsByClassName('bookmark-btn')[0]
         if (bookmarkData.is_bookmark == true) {
-            bookmarkBtn[0].style.backgroundColor = '#ffe398'
-            bookmarkBtn[0].innerText = '찜 취소하기'
+            bookmarkBtn.style.backgroundColor = '#ffe398'
+            bookmarkBtn.innerText = '찜 취소하기'
         }
         else if (bookmarkData.is_bookmark == false) {
-            bookmarkBtn[0].style.backgroundColor = '#c4c4c4'
-            bookmarkBtn[0].innerText = '찜 하기'
+            bookmarkBtn.style.backgroundColor = '#c4c4c4'
+            bookmarkBtn.innerText = '찜 하기'
         }
 
         const bookmarks = document.getElementById('bookmarks')
@@ -207,12 +207,12 @@ async function bookmark() {
 async function inquiry() {
 
     // 모달 바디 추가
-    const body = document.getElementsByTagName('body')
-    body[0].style.overflow = 'hidden' // 스크롤 히든
+    const body = document.getElementsByTagName('body')[0]
+    body.style.overflow = 'hidden' // 스크롤 히든
 
     const inquiryModalBody = document.createElement('div')
     inquiryModalBody.setAttribute('class', 'inquiry-modal-body')
-    body[0].append(inquiryModalBody)
+    body.append(inquiryModalBody)
 
     // 모달 컨테이너 추가
     const inquiryModalContainer = document.createElement('div')
@@ -240,20 +240,20 @@ async function inquiry() {
 
     // 모달 확인 버튼 클릭시
     inquiryModalEnterBtn.addEventListener('click', function() {
-        body[0].style.overflow = 'auto'
+        body.style.overflow = 'auto'
         inquiryModalBody.style.display = 'none'
     })
 
     // 모달 취소 버튼 클릭시
     inquiryModalCancelBtn.addEventListener('click', function() {
-        body[0].style.overflow = 'auto'
+        body.style.overflow = 'auto'
         inquiryModalBody.style.display = 'none'
     })
 
     // 모달 박스 바깥 클릭시
     inquiryModalBody.addEventListener('click', function(e) {
         if (e.target == inquiryModalBody) {
-            body[0].style.overflow = 'auto'
+            body.style.overflow = 'auto'
             inquiryModalBody.style.display = 'none'
         }
     })
