@@ -51,9 +51,11 @@ async function getDetailView() {
     
     if (data.user.score == null) {
         score.innerText = '유저점수 없음'
+        score.style.color = 'gray'
     }
     else {
         score.innerText = `유저점수 ${data.user.score}`
+        score.style.fontWeight = 'bold'
     }
 
     // 대여 상태
@@ -86,12 +88,11 @@ async function getDetailView() {
     const category = document.getElementById('category')
     category.innerText = data.category
 
-    // 시간 당 대여료 (가격 설정이 되어있지않으면 가격협의)
+    // 시간 당 대여료 (가격 설정이 되어있지않으면 숨김)
     const price = document.getElementById('price')
     const timeUnit = document.getElementById('time-unit')
     if (data.price == null) {
-        price.innerText = '가격협의'
-        price.style.color = 'gray'
+        price.style.display = 'none'
     }
     else {
         price.innerText = `${data.price.toLocaleString('ko-KR')}원 /`
