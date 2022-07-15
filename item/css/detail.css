@@ -32,16 +32,6 @@
     border-radius: 50% !important;
 }
 
-.bx-prev {
-    background: url('https://static.cdninstagram.com/rsrc.php/v3/y5/r/bve3a0HeZc8.png') !important;
-    background-position: -130px -98px !important;
-}
-
-.bx-next {
-    background: url('https://static.cdninstagram.com/rsrc.php/v3/y5/r/bve3a0HeZc8.png') !important;
-    background-position: -162px -98px !important;
-}
-
 .bx-wrapper .bx-pager {
     bottom: 20px !important;
 }
