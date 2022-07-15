@@ -86,13 +86,18 @@ async function onSignUp() {
         )
         response_json = await response.json()
 
-        if (response.status == 200) {
+        if (response.status == 200) { //회원가입 성공시
+            $('#inputEmail').val('')
+            $('#inputNickname').val('')
+            $('#inputPassword').val('')
+            $('#inputPassword2').val('')
+            $('#address-kakao').val('')
             alert("회원가입 성공")
             loginModalView()
         } else {
-            // 이메일 체크 / 이메일 중복 체크 / 닉네임 중복 체크
+            // 이메일 형식 체크 / 이메일 중복 체크 / 닉네임 중복 체크
             if (response_json["email"]) {
-                alert("이미 사용되고 있는 이메일입니다.")
+                alert("이메일 형식이 올바르지 않습니다.")
                 $('#inputEmail').focus()
                 $('#inputEmail').val('')
             }
