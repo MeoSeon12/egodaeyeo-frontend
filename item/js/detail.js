@@ -1,12 +1,11 @@
-// 아이템 ID 정보 가져옴 (없으면 이전 페이지로)
+// 아이템 & 유저 ID 정보 가져오기
 const itemId = location.href.split('?')[1]
-// 유저 ID 정보 가져옴 (비로그인은 null)
-const userId = localStorage.getItem('payload')
+const userId = JSON.parse(localStorage.getItem('payload'))
 
 
 // 아이템, 리뷰 데이터 레이아웃 생성 & 입력
 async function getDetailView() {
-    
+
     // API 기능 호출
     let data = await DetailViewGetApi()
 
@@ -34,7 +33,6 @@ async function getDetailView() {
             touchEnabled: false
         })
     });
-    
 
     // 포스트 유저 프로필이미지
     const postUserImage = document.getElementById('post-user-image')
@@ -48,14 +46,14 @@ async function getDetailView() {
     const address = document.getElementById('address')
     address.innerText = data.user.address
 
-    // 포스트 유저 스코어
+    // 포스트 유저 점수
     const score = document.getElementsByClassName('user-container-score')[0]
     
     if (data.user.score == null) {
         score.innerText = '유저점수 없음'
     }
     else {
-        score.innerText = data.user.score
+        score.innerText = `유저점수 ${data.user.score}`
     }
 
     // 대여 상태
@@ -88,11 +86,17 @@ async function getDetailView() {
     const category = document.getElementById('category')
     category.innerText = data.category
 
-    // 시간 당 대여료
+    // 시간 당 대여료 (가격 설정이 되어있지않으면 가격협의)
     const price = document.getElementById('price')
     const timeUnit = document.getElementById('time-unit')
-    price.innerText = `${data.price.toLocaleString('ko-KR')}원 /`
-    timeUnit.innerText = data.time_unit
+    if (data.price == null) {
+        price.innerText = '가격협의'
+        price.style.color = 'gray'
+    }
+    else {
+        price.innerText = `${data.price.toLocaleString('ko-KR')}원 /`
+        timeUnit.innerText = data.time_unit
+    }
 
     // 내용
     const postContent = document.getElementById('post-content')
@@ -119,12 +123,12 @@ async function getDetailView() {
 
 
     // 리뷰 섹션
-    const reviewSection = document.getElementsByClassName('review-section')
+    const reviewSection = document.getElementsByClassName('review-section')[0]
     
     // 리뷰가 없을 시
     if (data.reviews.length == 0) {
         const reviewContainer = document.createElement('div')
-        reviewContainer.setAttribute('class', 'review-container')[0]
+        reviewContainer.setAttribute('class', 'review-container')
         reviewSection.append(reviewContainer)
 
         const noReview = document.createElement('p')
