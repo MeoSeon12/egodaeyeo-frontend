@@ -24,7 +24,7 @@ function kakaoLogin() {
     });
 }
 
-// 카카오 유저 정보(이메일, 닉네임) 백엔드로 보내주기
+// 소셜 유저 회원가입위해 카카오 유저 정보(이메일, 닉네임) 백엔드로 보내주기
 async function kakaoLoginApi(kakaoUserData) {
 
     const response = await fetch(`${backEndBaseUrl}/users/api/kakao/`, {
