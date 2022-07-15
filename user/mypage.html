@@ -36,6 +36,36 @@
             </div>
         </div>
     </nav>
+    <!-- 로그인 / 회원가입 모달 -->
+    <div class="modal-body">
+        <div class="modal-container" id="login-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <input id="loginEmail" placeholder="이메일">
+                <input type='password' id="loginPassword" placeholder="비밀번호">
+            </div>
+            <button class="login-submit-btn">로그인</button>
+            <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
+            <img class="kakao-btn" src="../media/kakao-btn.png">
+        </div>
+        <div class="modal-container" id="signup-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <h5>이메일</h5>
+                <input id="inputEmail">
+                <h5>닉네임</h5>
+                <input id="inputNickname">
+                <h5>비밀번호</h5>
+                <input type='password' id="inputPassword">
+                <h5>비밀번호 재입력</h5>
+                <input type='password' id="inputPassword2">
+                <h5>주소</h5>
+                <input id="address_kakao" name="address" readonly />
+            </div>
+            <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
+            <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
+        </div>
+    </div>
     <div class="main-body">
         <div class="main-wrap">
             <div class="main-left-container">
@@ -57,45 +87,48 @@
                 </div>
             </div>
             <div class="main-right-container">
-                <div class="history-wrap">
+                <div class="mypage-tap-wrap">
                     <!-- 내역정보 붙는곳-->
-                    <div class="history-container">
-                        <div class="history-info-box">
-                            <div class="history-box-inner">
-                                <img class="history-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
-                                <div class="history-info-text">
+                    <!-- <div class="tab-info-container">
+                        <div class="tab-info-box">
+                            <div class="tab-inner-box">
+                                <img class="tab-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                                <div class="tab-info-text">
                                     <div class="info-text-section">
-                                        <!-- 섹션 붙는곳 -->
                                         빌려드려요
                                     </div>
                                     <div class="info-text-title">
-                                        <!-- 물품 이름 붙는곳 -->
                                         물품 이름
                                     </div>
                                 </div>
                             </div>
-                            <div class="info-rent-date">
-                                <!-- 날짜 붙는곳 -->
+                            <div class="info-data">
                                 22.06.08 ~ 22.07.08
                             </div>
                         </div>
-                    </div>
-                    <div class="history-container">
-                        <div class="history-info-box">
-                            <div class="history-box-inner">
-                                <img class="history-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
-                                <div class="history-info-text">
-                                    <div class="info-text-section">
-                                        빌려드려요
-                                    </div>
-                                    <div class="info-text-title">
-                                        물품 이름
+                    </div> -->
+                    <div class="myprofile-container">
+                        <div class="myprofile-top-box">
+                            <div class="myprofile-image-box">
+                                <img class="tab-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                            </div>
+                            <div class="myprofile-info-box">
+                                <div class="myprofile-nickname-password">
+                                    <p>철순</p>
+                                    <div class="myprofile-nickname-pw-btn">
+                                        <button>닉네임 변경</button>
+                                        <button>비밀번호 변경</button>
                                     </div>
                                 </div>
+                                <div class="myprofile-address">
+                                    <p>경기도 파주시 운정구</p>
+                                    <button>주소 변경</button>
+                                </div>
                             </div>
-                            <div class="info-rent-date">
-                                22.06.08 ~ 22.07.08
-                            </div>
+                        </div>
+                        <div class="myprofile-bottom-box">
+                            <button class="delete-user-btn">회원 탈퇴</button>
+
                         </div>
                     </div>
                 </div>
