@@ -33,7 +33,8 @@ $.ajaxSetup({
 
 //닉네임 형식 함수
 function checkId(asValue) {
-    const regid = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+    const regid = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+
     return regid.test(asValue);
 }
 
