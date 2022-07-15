@@ -98,7 +98,13 @@ async function onSignUp() {
             loginModalView()
         } else {
             // 이메일 형식 체크 / 이메일 중복 체크 / 닉네임 중복 체크
-            if (response_json["email"]) {
+            if (response_json["email"] == 'user의 이메일은/는 이미 존재합니다.') {
+                alert("이미 사용되고 있는 이메일입니다.")
+                $('#inputEmail').focus()
+                $('#inputEmail').val('')
+            }
+            
+            if (response_json["email"] == '유효한 이메일 주소를 입력하십시오.') {
                 alert(response_json["email"])
                 $('#inputEmail').focus()
                 $('#inputEmail').val('')
