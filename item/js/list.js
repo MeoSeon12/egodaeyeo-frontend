@@ -190,7 +190,7 @@ async function showSelectedItems() {
     const itemsInfo = items['items']['results']
     const itemWrap = document.getElementsByClassName("item-wrap")[0];
     const categoryText = document.getElementsByClassName("list-category")[0];
-    const sectionText = document.getElementsByClassName("list-section")[0];
+    const sectionText = document.getElementsByClassName("list-fsection")[0];
 
     //선택한 카테고리 섹션 보여주는 부분 
     if (selectedCategory == "") {
