@@ -6,19 +6,46 @@
     padding: 20px;
 }
 
-.post-section {
+.item-section {
     max-width: 700px;
     width: 100%;
 }
 
-/* 아이템 사진 */
-.post-section-picture {
-    margin: 50px 0 10px 0;
+/* 아이템 사진 슬라이드*/
+.slider > li {
+    float: left;
+    list-style: none;
+    position: relative;
+    width: 700px;
+}
+
+.slider > li > img {
     object-fit: cover;
-    border-radius: 10px;
     height: 500px;
     max-width: 700px;
     width: 100%;
+}
+
+.bx-wrapper {
+    margin-bottom: 20px !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+}
+
+.bx-wrapper .bx-pager {
+    bottom: 20px !important;
+}
+
+.bx-viewport {
+    border-radius: 50px !important;
+}
+
+.bx-pager-link {
+    background: rgb(228, 228, 228) !important;
+}
+
+.active {
+    background: rgb(153, 250, 158) !important;
 }
 
 /* 유저 정보 */

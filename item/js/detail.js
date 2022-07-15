@@ -4,6 +4,12 @@ const itemId = location.href.split('?')[1]
 const UserId = localStorage.getItem('payload')
 
 
+// 아이템 사진 슬라이드
+$(document).ready(function () {
+    $('.slider').bxSlider()
+});
+
+
 // 아이템, 리뷰 데이터 레이아웃 생성 & 입력
 async function getDetailView() {
     
@@ -12,8 +18,13 @@ async function getDetailView() {
 
     // 아이템 섹션
     // 아이템 사진
-    const picture = document.getElementsByClassName('post-section-picture')
-    picture[0].setAttribute('src', data.images)
+    const slider = document.getElementsByClassName('slider')[0]
+    let sliderLi = document.createElement('li')
+    slider.append(sliderLi)
+    let sliderPicture = document.createElement('img')
+    sliderPicture.setAttribute('src', 'https://t1.daumcdn.net/cfile/tistory/998CCA4A5D1EF94112')
+    sliderLi.append(sliderPicture)
+    
 
     // 포스트 유저 프로필이미지
     const postUserImage = document.getElementById('post-user-image')
@@ -159,23 +170,26 @@ async function getDetailView() {
 
 // 찜 버튼 클릭
 async function bookmark() {
-
-    // API 기능 호출
-    let bookmarkData = await DetailViewPostApi()
-    console.log(bookmarkData)
-    
-    const bookmarkBtn = document.getElementsByClassName('bookmark-btn')
-    if (bookmarkData.is_bookmark == true) {
-        bookmarkBtn[0].style.backgroundColor = '#ffe398'
-        bookmarkBtn[0].innerText = '찜 취소하기'
+    if (UserId == null) {
+        alert('로그인 후 이용가능합니다')
     }
-    else if (bookmarkData.is_bookmark == false) {
-        bookmarkBtn[0].style.backgroundColor = '#c4c4c4'
-        bookmarkBtn[0].innerText = '찜 하기'
-    }
+    else {
+        // API 기능 호출
+        let bookmarkData = await DetailViewPostApi()
+        
+        const bookmarkBtn = document.getElementsByClassName('bookmark-btn')
+        if (bookmarkData.is_bookmark == true) {
+            bookmarkBtn[0].style.backgroundColor = '#ffe398'
+            bookmarkBtn[0].innerText = '찜 취소하기'
+        }
+        else if (bookmarkData.is_bookmark == false) {
+            bookmarkBtn[0].style.backgroundColor = '#c4c4c4'
+            bookmarkBtn[0].innerText = '찜 하기'
+        }
 
-    const bookmarks = document.getElementById('bookmarks')
-    bookmarks.innerText = bookmarkData.bookmark_length
+        const bookmarks = document.getElementById('bookmarks')
+        bookmarks.innerText = bookmarkData.bookmark_length
+    }
 }
 
 

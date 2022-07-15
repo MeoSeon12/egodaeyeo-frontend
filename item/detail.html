@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="../index/css/nav.css">
     <link rel="stylesheet" href="css/detail.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <!-- bxslider -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 </head>
 <body>
@@ -60,11 +63,12 @@
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
         </div>
     </div>
+    <!-- 본문 -->
     <div class="item-wrap">
         <!-- 아이템 섹션 -->
-        <div class="post-section">
+        <div class="item-section">
             <!-- 아이템 사진 -->
-            <img class="post-section-picture">
+            <div class="slider"></div>
             <!-- 유저 정보 -->
             <div class="user-container">
                 <img id="post-user-image">
