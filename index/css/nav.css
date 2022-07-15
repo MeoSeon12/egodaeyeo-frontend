@@ -210,7 +210,7 @@ nav {
     outline: 2px solid yellowgreen;
 }
 
-.login-submit-btn, .signup-submit-btn{
+.login-submit-btn, .signup-submit-btn, .address-submit-btn{
     height: 30px;
     max-width: 250px;
     width: 100%;
@@ -220,7 +220,7 @@ nav {
     margin-bottom: none;
 }
 
-.login-submit-btn:hover, .signup-submit-btn:hover {
+.login-submit-btn:hover, .signup-submit-btn:hover, .address-submit-btn:hover {
     cursor: pointer;
     background-color: #ffe398;
 }

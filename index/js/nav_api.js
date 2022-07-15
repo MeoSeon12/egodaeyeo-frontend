@@ -62,7 +62,7 @@ async function onSignUp() {
         return;
     }
     if (address === '') {
-        alert('주소를 입력해주세요.')
+        alert('원활한 서비스 이용을 위해 주소를 입력해주세요.')
         $('#address_kakao').focus()
         return;
     }
@@ -180,6 +180,15 @@ document.getElementById("address_kakao").addEventListener("click", function () {
         oncomplete: function (data) { //선택시 입력값 세팅
             document.getElementById("address_kakao").value = data.address;
             document.querySelector("#address_kakao").focus();
+        }
+    }).open();
+});
+
+document.getElementById("address_kakao2").addEventListener("click", function () {
+    new daum.Postcode({
+        oncomplete: function (data) { //선택시 입력값 세팅
+            document.getElementById("address_kakao2").value = data.address;
+            document.querySelector("#address_kakao2").focus();
         }
     }).open();
 });

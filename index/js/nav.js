@@ -2,6 +2,7 @@ const body = document.getElementsByTagName('body')[0]
 const modalBody = document.querySelector('.modal-body')
 const loginContainer = document.querySelector('#login-modal-container')
 const signupContainer = document.querySelector('#signup-modal-container')
+const addressContainer = document.querySelector('#address-modal-container')
 const loginBtn = document.getElementsByClassName('login-btn')[0]
 const logoutBtn = document.getElementsByClassName('logout-btn')[0]
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
@@ -11,6 +12,7 @@ function loginModalView(){
     modalBody.style.display = 'flex'
     loginContainer.style.display = 'flex'
     signupContainer.style.display = 'none'
+    addressContainer.style.display = 'none'
     modalBody.style.animation = ''
     loginContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
@@ -18,6 +20,7 @@ function loginModalView(){
 function signupContainerView(){
     loginContainer.style.display = 'none'
     signupContainer.style.display = 'flex'
+    addressContainer.style.display = 'none'
     signupContainer.style.animation = ''
 
 }
@@ -25,7 +28,15 @@ function signupContainerView(){
 function loginContainerView(){
     loginContainer.style.display = 'flex'
     signupContainer.style.display = 'none'
+    addressContainer.style.display = 'none'
     loginContainer.style.animation = ''
+}
+
+function addressContainerView(){
+    loginContainer.style.display = 'none'
+    signupContainer.style.display = 'none'
+    addressContainer.style.display = 'flex'
+    addressContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 function modalUnview(){
