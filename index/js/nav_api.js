@@ -41,7 +41,7 @@ async function onSignUp() {
     const password = document.getElementById('inputPassword').value;
     const password2 = document.getElementById('inputPassword2').value;
     const nickname = document.getElementById('inputNickname').value;
-    const address = document.getElementById('address_kakao').value;
+    const address = document.getElementById('address-kakao').value;
 
     //정규표현식 비밀번호 8자리 대소문자, 특수문자포함
     const regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -63,7 +63,7 @@ async function onSignUp() {
     }
     if (address === '') {
         alert('원활한 서비스 이용을 위해 주소를 입력해주세요.')
-        $('#address_kakao').focus()
+        $('#address-kakao').focus()
         return;
     }
 
@@ -153,20 +153,8 @@ async function onLogin() {
     response_json = await response.json()
 
     if (response.status == 200) {
-        localStorage.setItem("access_token", response_json.access)
-        localStorage.setItem("refresh_token", response_json.refresh)
-
-        // 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
-        // accessToken 에서 payload를 가져오는 코드-
-        const base64Url = response_json.access.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-
-        localStorage.setItem("payload", jsonPayload);
-
         alert("로그인 성공!")
+        setLocalStorageItems()
         window.location.reload()
     } else {
         alert('이메일 / 비밀번호가 일치하지 않습니다.')
@@ -174,21 +162,22 @@ async function onLogin() {
 }
 
 
-// 카카오 주소 API
-document.getElementById("address_kakao").addEventListener("click", function () {
+// 카카오 주소 API(일반유저)
+document.getElementById("address-kakao").addEventListener("click", function () {
     new daum.Postcode({
         oncomplete: function (data) { //선택시 입력값 세팅
-            document.getElementById("address_kakao").value = data.address;
-            document.querySelector("#address_kakao").focus();
+            document.getElementById("address-kakao").value = data.address;
+            document.querySelector("#address-kakao").focus();
         }
     }).open();
 });
 
-document.getElementById("address_kakao2").addEventListener("click", function () {
+// 카카오 주소 API(소셜유저)
+document.getElementById("address-kakao2").addEventListener("click", function () {
     new daum.Postcode({
         oncomplete: function (data) { //선택시 입력값 세팅
-            document.getElementById("address_kakao2").value = data.address;
-            document.querySelector("#address_kakao2").focus();
+            document.getElementById("address-kakao2").value = data.address;
+            document.querySelector("#address-kakao2").focus();
         }
     }).open();
 });
@@ -226,6 +215,22 @@ window.onload = () => {
     }
 };
 
+// 로컬 스트로지에 토근값들과 페이로드 정보 담아주기
+function setLocalStorageItems() {
+    localStorage.setItem("access_token", response_json.access)
+    localStorage.setItem("refresh_token", response_json.refresh)
+
+    // 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
+    // accessToken 에서 payload를 가져오는 코드-
+    const base64Url = response_json.access.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    localStorage.setItem("payload", jsonPayload);
+}
+
 function onLogout() {
     localStorage.removeItem("access_token")
     localStorage.removeItem("refresh_token")
@@ -233,3 +238,4 @@ function onLogout() {
     alert("로그아웃 하셨습니다.")
     window.location.reload()
 }
+

@@ -54,16 +54,17 @@
                 <h5>비밀번호 재입력</h5>
                 <input type='password' id="inputPassword2">
                 <h5>주소</h5>
-                <input id="address_kakao" name="address" placeholder="주소 검색" readonly />
+                <input id="address-kakao" name="address" placeholder="주소 검색" readonly />
             </div>
             <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
         </div>
-        <div class="modal-container" id="address-modal-container">
+    </div>
+    <div class="address-modal-body">
+        <div class="address-modal-container" id="address-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
-                <h5>주소</h5>
-                <input id="address_kakao2" name="address" placeholder="주소 검색" readonly />
+                <input id="address-kakao2" name="address" placeholder="주소 검색" readonly />
                 <button class="address-submit-btn" onclick="onAddressEnter()">주소 등록</button>
             </div>
         </div>
