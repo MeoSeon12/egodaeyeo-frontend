@@ -185,7 +185,7 @@ async function getDetailView() {
 
 // 찜 버튼 클릭
 async function bookmark() {
-    if (UserId == null) {
+    if (userId == null) {
         alert('로그인 후 이용가능합니다')
     }
     else {
