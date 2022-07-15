@@ -1,7 +1,3 @@
-const frontendBaseUrl = "https://egodaeyeo.netlify.app"
-const backendBaseUrl = "http://127.0.0.1:8000"
-
-
 // 백엔드로 아이템, 리뷰 데이터 요청
 async function DetailViewGetApi() {
     
