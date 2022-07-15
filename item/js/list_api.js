@@ -1,7 +1,3 @@
-const frontEndBaseUrl = "https://egodaeyeo.netlify.app"
-const backEndBaseUrl = "http://127.0.0.1:8000"
-
-
 async function itemView() {
     
     // const token = localStorage.getItem("access_token");
