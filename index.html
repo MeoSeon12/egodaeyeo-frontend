@@ -18,11 +18,10 @@
 </head>
 
 <body>
-    <!-- nav -->
     <nav>
         <div class="nav-wrap">
             <div class="nav-container">
-                <a class="logo" href="../index.html">이거대여.</a>
+                <div class="logo">이거대여.</div>
                 <input class="search" placeholder="검색">
                 <div class="nav-btns">
                     <a class="mypage">
@@ -35,7 +34,7 @@
             </div>
         </div>
     </nav>
-    <!-- 로그인 회원가입 모달 -->
+    <!-- 로그인 / 회원가입 모달 -->
     <div class="modal-body">
         <div class="modal-container" id="login-modal-container">
             <h2>이거대여.</h2>
@@ -43,12 +42,12 @@
                 <input id="loginEmail" placeholder="이메일">
                 <input type='password' id="loginPassword" placeholder="비밀번호">
             </div>
-            <button class="login-submit-btn">로그인</button>
-            <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
-
-            <img class="kakao-btn" src="../media/kakao-btn.png">
+            <div class="wrap" id="login-wrap">
+                <button class="login-submit-btn">로그인</button>
+                <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
+                <img class="kakao-btn" src="../media/kakao-btn.png">
+            </div>
         </div>
-
         <div class="modal-container" id="signup-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
@@ -61,7 +60,7 @@
                 <h5>비밀번호 재입력</h5>
                 <input type='password' id="inputPassword2">
                 <h5>주소</h5>
-                <input id="address_kakao" name="address" readonly />
+                <input id="address_kakao" name="address" placeholder="주소 검색" readonly />
             </div>
             <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
