@@ -104,6 +104,7 @@ async function showSelectedItems() {
     const itemsInfo = items['items']['results']
     pageUrl = items['items']['next']
 
+
     //선택한 카테고리 섹션 보여주는 부분 
     if (selectedCategory == "") {
         categoryText.innerText = "#전체" + selectedCategory 
