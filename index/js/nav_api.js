@@ -33,7 +33,8 @@ $.ajaxSetup({
 
 //닉네임 형식 함수
 function checkId(asValue) {
-    const regid = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+    const regid = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+
     return regid.test(asValue);
 }
 
@@ -98,7 +99,7 @@ async function onSignUp() {
         } else {
             // 이메일 형식 체크 / 이메일 중복 체크 / 닉네임 중복 체크
             if (response_json["email"]) {
-                alert("이메일 형식이 올바르지 않습니다.")
+                alert(response_json["email"])
                 $('#inputEmail').focus()
                 $('#inputEmail').val('')
             }
@@ -107,7 +108,6 @@ async function onSignUp() {
                 $('#inputNickname').focus()
                 $('#inputNickname').val('')
             }
-            alert(response_json["error"])
         }
     } else {
         alert("재입력한 비밀번호가 일치하지 않습니다.")
