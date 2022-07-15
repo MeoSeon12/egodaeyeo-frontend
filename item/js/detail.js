@@ -4,9 +4,6 @@ const itemId = location.href.split('?')[1]
 const UserId = localStorage.getItem('payload')
 
 
-
-
-
 // 아이템, 리뷰 데이터 레이아웃 생성 & 입력
 async function getDetailView() {
     
