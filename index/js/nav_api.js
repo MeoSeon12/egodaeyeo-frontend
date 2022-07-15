@@ -1,6 +1,7 @@
 const backEndBaseUrl = "http://127.0.0.1:8000"
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -241,3 +242,27 @@ function onLogout() {
     window.location.reload()
 }
 
+async function getUserView() {
+
+    const mypageImage = document.getElementsByClassName('mypage-image')[0]
+
+    try {
+        userId = JSON.parse(localStorage.getItem('payload')).user_id
+
+        const response = await fetch(`${backEndBaseUrl}/users/${userId}/`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+        })
+        profileImage = await response.json()
+    
+        mypageImage.setAttribute('src', profileImage)
+    }
+    catch {
+        mypageImage.style.display = 'none'
+    }
+
+}
+getUserView()
