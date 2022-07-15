@@ -13,26 +13,25 @@ function kakaoLogin() {
                 url: '/v2/user/me',
                 success: res => {
                     kakaoAccount = res.kakao_account;
-                    accessToken = authObj['access_token'];
                     kakaoUserData = {
                         'email': kakaoAccount['email'], 
                         'nickname': kakaoAccount['profile']['nickname']
                     }
-                    kakaoLoginApi(accessToken, kakaoUserData)
+                    kakaoLoginApi(kakaoUserData)
                 }
             });
         }
     });
 }
 
-async function kakaoLoginApi(accessToken, kakaoUserData) {
+// 카카오 유저 정보(이메일, 닉네임) 백엔드로 보내주기
+async function kakaoLoginApi(kakaoUserData) {
 
     const response = await fetch(`${backEndBaseUrl}/users/api/kakao/`, {
         method: 'POST',
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': accessToken,
             'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify(kakaoUserData),
