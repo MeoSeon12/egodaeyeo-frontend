@@ -1,7 +1,7 @@
 // 백엔드로 아이템, 리뷰 데이터 요청
 async function DetailViewGetApi() {
     
-    const response = await fetch(`${backendBaseUrl}/items/details/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
         method: 'GET',
         mode: 'cors',
         headers: {
@@ -26,7 +26,7 @@ async function DetailViewGetApi() {
 async function DetailViewPostApi() {
 
     const token = localStorage.getItem('access_token')
-    const response = await fetch(`${backendBaseUrl}/items/details/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
         method: 'POST',
         mode: 'cors',
         headers: {
