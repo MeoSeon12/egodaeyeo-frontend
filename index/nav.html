@@ -21,7 +21,7 @@
                     <a class="mypage">
                         <img class="mypage-image">
                     </a>
-                    <button class="item-upload-btn" onclick="reviewModalView()">물품 등록</button>
+                    <button class="item-upload-btn" onclick="rentalDateModalView()">물품 등록</button>
                     <button class="login-btn" onclick="loginModalView()">로그인</button>
                     <button class="logout-btn">로그아웃</button>
                 </div>
@@ -29,7 +29,7 @@
         </div>
     </nav>
     <!-- 로그인 / 회원가입 모달 -->
-    <div class="modal-body">
+    <div class="login-modal-body">
         <div class="modal-container" id="login-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
@@ -82,6 +82,17 @@
                     <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
                     <button class="review-submit-btn" onclick="onReviewSubmit()">작성하기</button>
             <div class="ask-sign"> <a class="skip-review" onclick="">건너 뛰기</a></div>
+        </div>
+    </div>
+    <div class="rental-date-modal-body">
+        <div class="rental-date-modal-container" id="rental-date-modal-container">
+            <h2 class="rental-apply">대여신청</h2>
+                <h5>대여 시작일</h5>
+                <input type="datetime-local" id="rental-start-time" name="rental-start-time">
+                <h5>대여 종료일</h5>
+                <input type="datetime-local" id="rental-end-time" name="rental-end-time"  min="timezoneNow">              
+                <button class="rental-date-submit-btn">신청하기</button>
+            <div class="ask-sign"> <a class="cancel-rental" onclick="reviewModalUnview()">취소</a></div>
         </div>
     </div>
 

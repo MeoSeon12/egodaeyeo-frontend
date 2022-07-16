@@ -171,9 +171,7 @@ nav {
     background-color: #ffe398;
 }
 
-
-/* login & signup modal */
-.modal-body,
+.login-modal-body,
 .address-modal-body {
     display: none;
     align-items: center;
@@ -187,8 +185,9 @@ nav {
     height: 100%;
 }
 
-.review-modal-body {
-    display: flex;
+.review-modal-body,
+.rental-date-modal-body {
+    display: none;
     align-items: center;
     justify-content: center;
     position: fixed;
@@ -198,7 +197,6 @@ nav {
     background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100%;
-    
 }
 
 .modal-container {
@@ -215,7 +213,8 @@ nav {
     overflow: hidden;
 }
 
-.address-modal-container{
+.address-modal-container, 
+.rental-date-modal-container{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -229,7 +228,8 @@ nav {
     overflow: hidden;
 }
 
-.review-modal-container {
+.review-modal-container, 
+.rental-date-modal-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -245,6 +245,18 @@ nav {
 
 .address-modal-container h5 {
     margin: 0 15px;
+}
+
+.rental-date-modal-container h5 {
+    margin: 0
+}
+
+.rental-apply {
+    margin: 4px;
+}
+
+.rental-apply h5 {
+    margin: 0;
 }
 
 .modal-inputs {
@@ -272,7 +284,8 @@ nav {
 .login-submit-btn,
 .signup-submit-btn,
 .address-submit-btn,
-.review-submit-btn {
+.review-submit-btn,
+.rental-date-submit-btn {
     height: 30px;
     max-width: 250px;
     width: 100%;
@@ -290,7 +303,8 @@ nav {
 .login-submit-btn:hover,
 .signup-submit-btn:hover,
 .address-submit-btn:hover,
-.review-submit-btn:hover {
+.review-submit-btn:hover,
+.rental-date-submit-btn:hover {
     cursor: pointer;
     background-color: #ffe398;
 }
@@ -333,12 +347,6 @@ nav {
 }
 
 .modal-container h2 {
-    font-weight: bold;
-    font-family: 'GangwonEduPowerExtraBoldA';
-    font-size: 30px;
-}
-
-.address-modal-container h2 {
     font-weight: bold;
     font-family: 'GangwonEduPowerExtraBoldA';
     font-size: 30px;
