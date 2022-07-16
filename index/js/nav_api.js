@@ -31,11 +31,16 @@ $.ajaxSetup({
     }
 });
 
-//닉네임 형식 함수
-function checkId(asValue) {
+//정규표현식 아이디 한글, 영문, 숫자
+function checkID(asValue) {
     const regid = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
-
     return regid.test(asValue);
+}
+
+//정규표현식 비밀번호 8자리 대소문자, 특수문자포함
+function checkPW(asValue) {
+    const regPW= /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    return regPW.test(asValue);
 }
 
 async function onSignUp() {
@@ -45,19 +50,23 @@ async function onSignUp() {
     const nickname = document.getElementById('inputNickname').value;
     const address = document.getElementById('address-kakao').value;
 
-    //정규표현식 비밀번호 8자리 대소문자, 특수문자포함
-    const regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const signUpData = {
+        "email": email,
+        "password": password,
+        "nickname": nickname,
+        "address": address,
+    }
 
     //닉네임 형식 체크
-    if (!checkId(nickname)) {
-        alert("닉네임은 2~10자사이 영문, 숫자, 특수문자(._-)만 사용가능합니다.")
+    if (!checkID(nickname)) {
+        alert("닉네임은 2~10자사이 한글, 영문, 숫자만 사용가능합니다.")
         $('#inputNickname').focus()
         $('#inputNickname').val('')
         return;
     }
     //비밀번호 형식 체크
-    if (!password.match(regExp)) {
-        alert('비밀번호는 최소8자리 대소문자,특수문자 포함 입력해주세요.')
+    if (!checkPW(password)) {
+        alert('비밀번호는 최소 8자리 대소문자, 특수문자 포함 입력해주세요.')
         $('#inputPassword').focus()
         $('#inputPassword').val('')
         $('#inputPassword2').val('')
@@ -78,12 +87,7 @@ async function onSignUp() {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
             },
-            body: JSON.stringify({
-                "email": email,
-                "password": password,
-                "nickname": nickname,
-                "address": address,
-            })
+            body: JSON.stringify(signUpData)
         }
         )
         response_json = await response.json()
@@ -99,18 +103,17 @@ async function onSignUp() {
         } else {
             // 이메일 형식 체크 / 이메일 중복 체크 / 닉네임 중복 체크
             if (response_json["email"] == 'user의 이메일은/는 이미 존재합니다.') {
-                alert("이미 사용되고 있는 이메일입니다.")
+                alert("이미 사용중인 이메일입니다.")
                 $('#inputEmail').focus()
                 $('#inputEmail').val('')
             }
-            
             if (response_json["email"] == '유효한 이메일 주소를 입력하십시오.') {
                 alert(response_json["email"])
                 $('#inputEmail').focus()
                 $('#inputEmail').val('')
             }
             if (response_json["nickname"]) {
-                alert("이미 사용되고 있는 닉네임입니다.")
+                alert("이미 사용중인 닉네임입니다.")
                 $('#inputNickname').focus()
                 $('#inputNickname').val('')
             }
@@ -129,6 +132,18 @@ logoutBtn.addEventListener("click", (e) => {
     onLogout()
 }
 )
+
+rentalDateSubmitBtn.addEventListener("click", (e) => {
+    onRentalSubmit()
+}
+)
+
+async function onRentalSubmit() {
+    console.log(document.getElementById('rental-start-time').value)    
+    console.log(document.getElementById('rental-end-time').value)
+    
+}
+
 
 async function onLogin() {
     const email = document.getElementById("loginEmail").value
@@ -229,7 +244,7 @@ window.onload = () => {
     }
 };
 
-// 로컬 스트로지에 토근값들과 페이로드 정보 담아주기
+// 로컬 스트로지에 토근값들과 페이로드에 정보 담아주기
 function setLocalStorageItems() {
     localStorage.setItem("access_token", response_json.access)
     localStorage.setItem("refresh_token", response_json.refresh)
