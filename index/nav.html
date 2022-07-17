@@ -56,7 +56,7 @@
                 <h5>주소</h5>
                 <input id="address-kakao" name="address" placeholder="주소 검색" readonly />
             </div>
-            <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
+            <button class="signup-submit-btn">회원가입</button>
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
         </div>
     </div>
@@ -65,7 +65,7 @@
             <h2>이거대여.</h2>
             <div class="modal-inputs">
                 <input id="address-kakao2" name="address" placeholder="주소 검색" readonly />
-                <button class="address-submit-btn" onclick="onAddressEnter()">주소 등록</button>
+                <button class="address-submit-btn">주소 등록</button>
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
                     <span><input type="radio" name="rating" id="str1" value="1"><label for="str1">★</label></span>
                 </div>
                     <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
-                    <button class="review-submit-btn" onclick="onReviewSubmit()">작성하기</button>
+                    <button class="review-submit-btn">작성하기</button>
             <div class="ask-sign"> <a class="skip-review" onclick="">건너 뛰기</a></div>
         </div>
     </div>
@@ -92,7 +92,7 @@
                 <h5>대여 종료일</h5>
                 <input type="datetime-local" id="rental-end-time" name="rental-end-time"  min="timezoneNow">              
                 <button class="rental-date-submit-btn">신청하기</button>
-            <div class="ask-sign"> <a class="cancel-rental" onclick="reviewModalUnview()">취소</a></div>
+            <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
         </div>
     </div>
 

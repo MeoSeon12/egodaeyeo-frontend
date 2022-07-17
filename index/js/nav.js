@@ -10,11 +10,15 @@ const addressContainer = document.querySelector('#address-modal-container')
 const reviewContainer = document.querySelector('#review-modal-container')
 const rentalDateContainer = document.querySelector('#rental-date-modal-container')
 
+const signUpBtn = document.querySelector('.signup-submit-btn')
 const loginBtn = document.querySelector('.login-btn')
 const logoutBtn = document.querySelector('.logout-btn')
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
 const reviewSubmitBtn = document.querySelector('.review-submit-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
+
+const rentalStartTime = document.getElementById('rental-start-time')
+const rentalEndTime = document.getElementById('rental-end-time')
 
 function loginModalView(){
     body.style.overflow = 'hidden'
@@ -77,7 +81,7 @@ function addressModalUnview(){
 
 function reviewModalUnview(){
     body.style.overflow = 'auto'
-    rentalDateModalBody.style.display = 'none'
+    reviewModalBody.style.display = 'none'
     // reviewModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
@@ -104,7 +108,7 @@ addEventListener('click', (e) => {
     }
 })
 
-// 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
+// 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
 $("#loginPassword").keyup(function(event) {
     if (event.keyCode === 13) {
         $(".login-submit-btn").click();
@@ -125,17 +129,16 @@ else {
 
 // 리뷰 평점 별점 핸들링
 $(document).ready(function(){
-    $(".rating input:radio").attr("checked", false);
 
     $('.rating input').click(function () {
         $(".rating span").removeClass('checked');
         $(this).parent().addClass('checked');
     });
 
+    //별점 인풋을 누르면 값을 유저평점 변수에 저장
     $('input:radio').change(
       function(){
         var userRating = this.value;
-        alert(userRating);
     }); 
 });
 
@@ -144,7 +147,8 @@ $(document).ready(function(){
 // 대여 시작일과 종료일은 오늘 이후로만 설정 가능
 var now = new Date();
 var timezoneNow = now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-document.getElementById('rental-start-time').value = now.toISOString().slice(0,16);
-document.getElementById('rental-end-time').value = now.toISOString().slice(0,16);
-document.getElementById('rental-start-time').min = now.toISOString().slice(0,16);
-document.getElementById('rental-end-time').min = now.toISOString().slice(0,16);
+
+rentalStartTime.value = now.toISOString().slice(0,16);
+rentalEndTime.value = now.toISOString().slice(0,16);
+rentalStartTime.min = now.toISOString().slice(0,16);
+rentalEndTime.min = now.toISOString().slice(0,16);
