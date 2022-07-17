@@ -2,6 +2,24 @@ const backEndBaseUrl = "http://127.0.0.1:8000"
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 
 
+addEventListener('click', (e) => {
+    if (e.target == signUpBtn) {
+        onSignUp()
+    }
+    if (e.target == loginSubmitBtn) {
+        onLogin()
+    }
+    if (e.target == logoutBtn) {
+        onLogout()    
+    }
+    if (e.target == reviewSubmitBtn) {
+        onReviewSubmit()
+    }
+    if (e.target == rentalDateSubmitBtn) {
+        onRentalSubmit()
+    }
+})
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -123,28 +141,6 @@ async function onSignUp() {
     }
 }
 
-loginSubmitBtn.addEventListener("click", (e) => {
-    onLogin()
-}
-)
-
-logoutBtn.addEventListener("click", (e) => {
-    onLogout()
-}
-)
-
-rentalDateSubmitBtn.addEventListener("click", (e) => {
-    onRentalSubmit()
-}
-)
-
-async function onRentalSubmit() {
-    console.log(document.getElementById('rental-start-time').value)    
-    console.log(document.getElementById('rental-end-time').value)
-    
-}
-
-
 async function onLogin() {
     const email = document.getElementById("loginEmail").value
     const password = document.getElementById("loginPassword").value
@@ -188,6 +184,20 @@ async function onLogin() {
     }
 }
 
+async function onReviewSubmit() {
+    const reviewContent = document.querySelector('#review').value
+    const starRating = document.querySelector('input[name="rating"]:checked').value
+}
+
+async function onRentalSubmit() {
+    if (rentalStartTime.value > rentalEndTime.value) {
+        console.log('대여 종료일을 대여 시작일 이전으로 설정할 수 없습니다.')
+    }
+    else {
+        console.log(rentalStartTime.value, rentalEndTime.value)
+    }
+
+}
 
 // 카카오 주소 API(일반유저)
 document.getElementById("address-kakao").addEventListener("click", function () {
@@ -208,7 +218,6 @@ document.getElementById("address-kakao2").addEventListener("click", function () 
         }
     }).open();
 });
-
 
 // 페이지를 다시 로딩 하면 벌어지는 일들!
 window.onload = () => {
