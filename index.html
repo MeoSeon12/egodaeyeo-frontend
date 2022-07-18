@@ -27,7 +27,7 @@
                     <a class="mypage">
                         <img class="mypage-image">
                     </a>
-                    <button class="item-upload-btn">물품 등록</button>
+                    <button class="item-upload-btn" onclick="rentalDateModalView()">물품 등록</button>
                     <button class="login-btn" onclick="loginModalView()">로그인</button>
                     <button class="logout-btn">로그아웃</button>
                 </div>
@@ -35,7 +35,7 @@
         </div>
     </nav>
     <!-- 로그인 / 회원가입 모달 -->
-    <div class="modal-body">
+    <div class="login-modal-body">
         <div class="modal-container" id="login-modal-container">
             <h2>이거대여.</h2>
             <div class="modal-inputs">
@@ -62,7 +62,7 @@
                 <h5>주소</h5>
                 <input id="address-kakao" name="address" placeholder="주소 검색" readonly />
             </div>
-            <button class="signup-submit-btn" onclick="onSignUp()">회원가입</button>
+            <button class="signup-submit-btn">회원가입</button>
             <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
         </div>
     </div>
@@ -71,8 +71,34 @@
             <h2>이거대여.</h2>
             <div class="modal-inputs">
                 <input id="address-kakao2" name="address" placeholder="주소 검색" readonly />
-                <button class="address-submit-btn" onclick="onAddressEnter()">주소 등록</button>
+                <button class="address-submit-btn">주소 등록</button>
             </div>
+        </div>
+    </div>
+    <div class="review-modal-body">
+        <div class="review-modal-container" id="review-modal-container">
+            <h2 class="review-write">리뷰작성</h2>
+                <div class="rating">
+                    <span><input type="radio" name="rating" id="str5" value="5"><label for="str5">★</label></span>
+                    <span><input type="radio" name="rating" id="str4" value="4"><label for="str4">★</label></span>
+                    <span><input type="radio" name="rating" id="str3" value="3"><label for="str3">★</label></span>
+                    <span><input type="radio" name="rating" id="str2" value="2"><label for="str2">★</label></span>
+                    <span><input type="radio" name="rating" id="str1" value="1"><label for="str1">★</label></span>
+                </div>
+                    <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
+                    <button class="review-submit-btn">작성하기</button>
+            <div class="ask-sign"> <a class="skip-review" onclick="">건너 뛰기</a></div>
+        </div>
+    </div>
+    <div class="rental-date-modal-body">
+        <div class="rental-date-modal-container" id="rental-date-modal-container">
+            <h2 class="rental-apply">대여신청</h2>
+                <h5>대여 시작일</h5>
+                <input type="datetime-local" id="rental-start-time" name="rental-start-time">
+                <h5>대여 종료일</h5>
+                <input type="datetime-local" id="rental-end-time" name="rental-end-time"  min="timezoneNow">              
+                <button class="rental-date-submit-btn">신청하기</button>
+            <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
         </div>
     </div>
     <!-- 인덱스 메인섹션 -->

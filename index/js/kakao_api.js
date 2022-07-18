@@ -1,8 +1,15 @@
 window.Kakao.init("328675de434c7c0bdbf3c0eca65038c0");
 
-const kakaoBtn = document.getElementsByClassName('kakao-btn')[0]
-kakaoBtn.addEventListener("click", (e) => {
-    kakaoLogin();
+const kakaoBtn = document.querySelector('.kakao-btn')
+const addressSubmitBtn = document.querySelector('.address-submit-btn')
+
+addEventListener('click', (e) => {
+    if (e.target == kakaoBtn) {
+        kakaoLogin();
+    }
+    if (e.target == addressSubmitBtn) {
+        onAddressEnter();
+    }
 })
 
 function kakaoLogin() {

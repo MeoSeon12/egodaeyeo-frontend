@@ -1,28 +1,56 @@
 const body = document.getElementsByTagName('body')[0]
-const modalBody = document.querySelector('.modal-body')
+const loginModalBody = document.querySelector('.login-modal-body')
 const addressModalBody = document.querySelector('.address-modal-body')
+const reviewModalBody = document.querySelector('.review-modal-body')
+const rentalDateModalBody = document.querySelector('.rental-date-modal-body')
+
 const loginContainer = document.querySelector('#login-modal-container')
 const signupContainer = document.querySelector('#signup-modal-container')
 const addressContainer = document.querySelector('#address-modal-container')
-const loginBtn = document.getElementsByClassName('login-btn')[0]
-const logoutBtn = document.getElementsByClassName('logout-btn')[0]
+const reviewContainer = document.querySelector('#review-modal-container')
+const rentalDateContainer = document.querySelector('#rental-date-modal-container')
+
+const signUpBtn = document.querySelector('.signup-submit-btn')
+const loginBtn = document.querySelector('.login-btn')
+const logoutBtn = document.querySelector('.logout-btn')
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
+const reviewSubmitBtn = document.querySelector('.review-submit-btn')
+const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
+
+const rentalStartTime = document.getElementById('rental-start-time')
+const rentalEndTime = document.getElementById('rental-end-time')
 
 function loginModalView(){
     body.style.overflow = 'hidden'
-    modalBody.style.display = 'flex'
+    loginModalBody.style.display = 'flex'
     loginContainer.style.display = 'flex'
     signupContainer.style.display = 'none'
-    modalBody.style.animation = ''
+    loginModalBody.style.animation = ''
     loginContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 function addressModalView(){
     body.style.overflow = 'hidden'
-    modalBody.style.display = 'none'
+    loginModalBody.style.display = 'none'
     addressModalBody.style.display = 'flex'
     addressModalBody.style.animation = ''
     addressContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
+function reviewModalView(){
+    body.style.overflow = 'hidden'
+    loginModalBody.style.display = 'none'
+    reviewModalBody.style.display = 'flex'
+    reviewModalBody.style.animation = ''
+    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
+function rentalDateModalView(){
+    body.style.overflow = 'hidden'
+    loginModalBody.style.display = 'none'
+    rentalDateModalBody.style.display = 'flex'
+    rentalDateModalBody.style.animation = ''
+    rentalDateContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 function signupContainerView(){
@@ -37,12 +65,12 @@ function loginContainerView(){
     loginContainer.style.animation = ''
 }
 
-function modalUnview(){
+function loginModalUnview(){
     body.style.overflow = 'auto'
-    modalBody.style.display = 'flex'
+    loginModalBody.style.display = 'flex'
     loginContainer.style.animation = 'scaleUp 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     signupContainer.style.animation = 'scaleUp 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    loginModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 function addressModalUnview(){
@@ -51,20 +79,36 @@ function addressModalUnview(){
     addressModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
-addEventListener('click', (e) => {
-    if (e.target == modalBody) {
-        modalUnview()
-    }
-})
+function reviewModalUnview(){
+    body.style.overflow = 'auto'
+    reviewModalBody.style.display = 'none'
+    // reviewModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
 
-// 소셜유저 회원가입시 주소 입력을 안한 상태에서는 모달에서 나가는 것을 방지
+function rentalDateModalUnview(){
+    body.style.overflow = 'auto'
+    rentalDateModalBody.style.display = 'none'
+    rentalDateModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
+// modalUnviews
 addEventListener('click', (e) => {
+    if (e.target == loginModalBody) {
+        loginModalUnview()
+    }
+    // 소셜유저 회원가입시 주소 입력을 안한 상태에서는 모달에서 나가는 것을 방지
     if (e.target == addressModalBody) {
         alert("주소를 입력해주세요.")
     }
+    if (e.target == reviewModalBody) {
+        reviewModalUnview()
+    }
+    if (e.target == rentalDateModalBody) {
+        rentalDateModalUnview()
+    }
 })
 
-// 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
+// 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
 $("#loginPassword").keyup(function(event) {
     if (event.keyCode === 13) {
         $(".login-submit-btn").click();
@@ -81,3 +125,30 @@ else {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
 }
+
+
+// 리뷰 평점 별점 핸들링
+$(document).ready(function(){
+
+    $('.rating input').click(function () {
+        $(".rating span").removeClass('checked');
+        $(this).parent().addClass('checked');
+    });
+
+    //별점 인풋을 누르면 값을 유저평점 변수에 저장
+    $('input:radio').change(
+      function(){
+        var userRating = this.value;
+    }); 
+});
+
+
+// 대여 시작일과 종료일 default값 현재 시간으로 지정
+// 대여 시작일과 종료일은 오늘 이후로만 설정 가능
+var now = new Date();
+var timezoneNow = now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+rentalStartTime.value = now.toISOString().slice(0,16);
+rentalEndTime.value = now.toISOString().slice(0,16);
+rentalStartTime.min = now.toISOString().slice(0,16);
+rentalEndTime.min = now.toISOString().slice(0,16);
