@@ -1,3 +1,17 @@
+h2 {
+    font-size: 30px;
+}
+
+.no-content {
+    max-width: 500px;
+    width: 100%;
+    white-space: nowrap;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .main-body {
     display: flex;
     justify-content: center;

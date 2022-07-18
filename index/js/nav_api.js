@@ -291,9 +291,12 @@ async function getUserView() {
                 'X-CSRFToken': csrftoken,
             },
         })
-        profileImage = await response.json()
+        userData = await response.json()
+        profileImage = userData['user_image']
     
         mypageImage.setAttribute('src', profileImage)
+
+        return userData
     }
     catch {
         mypageImage.style.display = 'none'

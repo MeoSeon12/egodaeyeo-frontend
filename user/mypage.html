@@ -112,12 +112,12 @@
                 </div>
                 <hr>
                 <div class="mypage-category-box">
-                    <button onclick="rentalContinue();">📒 대여중인 내역</button>
-                    <button onclick="rentalHistory();">📃 대여종료 내역</button>
-                    <button onclick="bookmarkItem();">💚 찜 목록</button>
-                    <button onclick="myUploadItem();">📖 내가 올린 아이템</button>
-                    <button onclick="Profilecheck();">📸 프로필 정보 변경</button>
-                    <button onclick="siteFeedback();">💌 피드백 작성하기</button>
+                    <button id="ongoing" onclick="myPageTabInfo(this);">📒 대여중인 내역</button>
+                    <button id="closed" onclick="myPageTabInfo(this);">📃 대여종료 내역</button>
+                    <button id="bookmarks" onclick="myPageTabInfo(this);">💚 찜 목록</button>
+                    <button id="myitems" onclick="myPageTabInfo(this);">📖 내가 올린 아이템</button>
+                    <button id="profile" onclick="myInfo();">📸 프로필 정보 변경</button>
+                    <button id="feedback" onclick="siteFeedback();">💌 피드백 작성하기</button>
                 </div>
             </div>
             <div class="main-right-container">

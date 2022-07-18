@@ -2,12 +2,14 @@ const profileInfoBox = document.getElementsByClassName('profile-info-box')[0];
 const mypageTapWrap = document.getElementsByClassName('mypage-tap-wrap')[0]
 
 async function myInfo() {
+    const userData = await getUserView();
+
     profileInfoBox.replaceChildren();
 
     //프로필 이미지
     const newProfileImage = document.createElement('img')
     newProfileImage.setAttribute('class', 'profile-info-image')
-    newProfileImage.setAttribute('src', 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/cbdef037365169.573db7853cebb.jpg')
+    newProfileImage.setAttribute('src', userData['user_image'])
     profileInfoBox.append(newProfileImage)
 
     const newProfileInfoText = document.createElement('div')
@@ -17,78 +19,91 @@ async function myInfo() {
     //닉네임
     const newMyNickname = document.createElement('div')
     newMyNickname.setAttribute('class', 'info-text-nickname')
-    newMyNickname.innerText = "철순"
+    newMyNickname.innerText = userData['user_nickname']
     newProfileInfoText.append(newMyNickname)
 
     //유저 점수
     const newMyScore = document.createElement('div')
     newMyScore.setAttribute('class', 'info-text-score')
-    newMyScore.innerText = "유저점수 " + "50"
-    newProfileInfoText.append(newMyScore)
+
+    if(userData['user_score'] == null) {
+        newMyScore.innerText = "유저점수 없음"
+        newProfileInfoText.append(newMyScore)
+    }else{
+        newMyScore.innerText = "유저점수 " + userData['user_score']
+        newProfileInfoText.append(newMyScore)
+    }
+    //페이지 로딩시 유저정보
+    Profilecheck(userData)
 }
 
 
-async function rentalContinue() {
-    const data = await rentalApiView() //data 전부다 
+async function myPageTabInfo(tab) {
+    let param = tab.id
+    const data = await myPageApiView(param) //data 전부다 
+    console.log(data)
 
     mypageTapWrap.replaceChildren();
+    if (data == "") {
+        const noContent = document.createElement('div')
+        noContent.setAttribute('class', 'no-content')
+        mypageTapWrap.append(noContent)
 
-    const newTabContainer = document.createElement('div')
-    newTabContainer.setAttribute('class', 'tab-info-container')
-    mypageTapWrap.append(newTabContainer)
+        const noContentText = document.createElement('h2')
+        noContentText.innerText = "해당하는 내역이 없습니다."
+        noContent.append(noContentText)
 
-    const newTabBox = document.createElement('div')
-    newTabBox.setAttribute('class', 'tab-info-box')
-    newTabContainer.append(newTabBox)
-
-    const newTabInner = document.createElement('div')
-    newTabInner.setAttribute('class', 'tab-inner-box')
-    newTabBox.append(newTabInner)
-
-    //이미지
-    const newTabImage = document.createElement('img')
-    newTabImage.setAttribute('class', 'tab-info-image')
-    newTabImage.setAttribute('src', 'https://static.hubzum.zumst.com/hubzum/2019/01/08/11/f6bd70a51fda4aafbf9563dadf2d82fd.jpg')
-    newTabInner.append(newTabImage)
-
-    const newTabTextBox = document.createElement('div')
-    newTabTextBox.setAttribute('class', 'tab-info-text')
-    newTabInner.append(newTabTextBox)
+    }else {
+        for (let i = 0; i < data.length; i++) {
+            const item = data[i]['item']
+            console.log(item)
     
-    // 섹션 if 문 걸어서 빌려드려요, 빌려요 ?
-    const newTextSection = document.createElement('div')
-    newTextSection.setAttribute('class', 'info-text-section')
-    newTextSection.innerText = "빌려드려요"
-    newTabTextBox.append(newTextSection)
+            const newTabContainer = document.createElement('div')
+            newTabContainer.setAttribute('class', 'tab-info-container')
+            mypageTapWrap.append(newTabContainer)
+        
+            const newTabBox = document.createElement('div')
+            newTabBox.setAttribute('class', 'tab-info-box')
+            newTabContainer.append(newTabBox)
+        
+            const newTabInner = document.createElement('div')
+            newTabInner.setAttribute('class', 'tab-inner-box')
+            newTabBox.append(newTabInner)
+        
+            //이미지
+            const newTabImage = document.createElement('img')
+            newTabImage.setAttribute('class', 'tab-info-image')
+            newTabImage.setAttribute('src', item['image'])
+            newTabInner.append(newTabImage)
+        
+            const newTabTextBox = document.createElement('div')
+            newTabTextBox.setAttribute('class', 'tab-info-text')
+            newTabInner.append(newTabTextBox)
+            
+            //섹션
+            const newTextSection = document.createElement('div')
+            newTextSection.setAttribute('class', 'info-text-section')
+            newTextSection.innerText = item['section']
+            newTabTextBox.append(newTextSection)
+        
+            //아이템 제목
+            const newTextTitle = document.createElement('div')
+            newTextTitle.setAttribute('class', 'info-text-title')
+            newTextTitle.innerText = item['section']
+            newTabTextBox.append(newTextTitle)
+        
+            //시간, 스테이터스
+            const newInfoData = document.createElement('div')
+            newInfoData.setAttribute('class', 'info-data')
+            newInfoData.innerText = item['status']
+            newTabBox.append(newInfoData)    
+        }
+    }
 
-    //아이템 제목
-    const newTextTitle = document.createElement('div')
-    newTextTitle.setAttribute('class', 'info-text-title')
-    newTextTitle.innerText = "제목"
-    newTabTextBox.append(newTextTitle)
-
-    //시간, 스테이터스
-    const newInfoData = document.createElement('div')
-    newInfoData.setAttribute('class', 'info-data')
-    newInfoData.innerText = "22.06.08 ~ 22.07.08"
-    newTabBox.append(newInfoData)    
 }
 
 
-async function rentalHistory() {
-    const data = await historyApiView()
-
-}
-async function bookmarkItem() {
-    const data = await bookmarkApiView()
-
-}
-async function myUploadItem() {
-    const data = await uploadedApiView()
-
-}
-async function Profilecheck() {
-    // const data = await profileApiView()
+function Profilecheck(userData) {
 
     mypageTapWrap.replaceChildren();
 
@@ -107,7 +122,7 @@ async function Profilecheck() {
     //프로필 이미지
     const newTabImage = document.createElement('img')
     newTabImage.setAttribute('class', 'tab-info-image')
-    newTabImage.setAttribute('src', 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/cbdef037365169.573db7853cebb.jpg')
+    newTabImage.setAttribute('src', userData['user_image'])
     newImageBox.append(newTabImage)
 
     const newImageText = document.createElement('p')
@@ -125,7 +140,7 @@ async function Profilecheck() {
     //인풋창 value 수정 닉네임
     const newNicknameInput = document.createElement('input')
     newNicknameInput.setAttribute('class', 'profile-input')
-    newNicknameInput.value = "철순"
+    newNicknameInput.value = userData['user_nickname']
     newNicknameBox.append(newNicknameInput)
 
     const newPutNickname = document.createElement('div')
@@ -143,7 +158,7 @@ async function Profilecheck() {
     //인풋창 value 수정 주소
     const newAddressInput = document.createElement('input')
     newAddressInput.setAttribute('class', 'profile-input')
-    newAddressInput.value = "경기도 파주시"
+    newAddressInput.value = userData['user_address']
     newPutAddress.append(newAddressInput)
 
     const newAddressText = document.createElement('p')
@@ -235,4 +250,3 @@ async function siteFeedback() {
 }
 
 myInfo();
-Profilecheck();
