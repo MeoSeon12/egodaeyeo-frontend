@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content=" classth=device- classth, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>이거대여.</title>
 
     <!-- jQuery -->
@@ -107,121 +107,32 @@
         <div class="main-wrap">
             <div class="main-left-container">
                 <div class="profile-info-box">
-                    <img class="profile-info-image" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/cbdef037365169.573db7853cebb.jpg">
+                    <!-- 프로필 정보 -->
                     <!-- https://t1.daumcdn.net/cfile/tistory/996750475F0941E836 -->
-                    <div class="profile-info-text">
-                        <div class="info-text-nickname">철순</div>
-                        <div class="info-text-score">유저 점수</div>
-                    </div>
                 </div>
                 <hr>
                 <div class="mypage-category-box">
-                    <button>📒 대여중인 내역</button>
-                    <button>📃 대여종료 내역</button>
-                    <button>💚 찜 목록</button>
-                    <button>📖 내가 올린 아이템</button>
-                    <button>📸 프로필 정보 변경</button>
-                    <button>💌 피드백 작성하기</button>
+                    <button onclick="rentalContinue();">📒 대여중인 내역</button>
+                    <button onclick="rentalHistory();">📃 대여종료 내역</button>
+                    <button onclick="bookmarkItem();">💚 찜 목록</button>
+                    <button onclick="myUploadItem();">📖 내가 올린 아이템</button>
+                    <button onclick="Profilecheck();">📸 프로필 정보 변경</button>
+                    <button onclick="siteFeedback();">💌 피드백 작성하기</button>
                 </div>
             </div>
             <div class="main-right-container">
                 <div class="mypage-tap-wrap">
-                    <!-- 내역정보 붙는곳-->
-                    <div class="tab-info-container">
-                        <div class="tab-info-box">
-                            <div class="tab-inner-box">
-                                <img class="tab-info-image" src="https://static.hubzum.zumst.com/hubzum/2019/01/08/11/f6bd70a51fda4aafbf9563dadf2d82fd.jpg">
-                                <div class="tab-info-text">
-                                    <div class="info-text-section">
-                                        빌려드려요
-                                    </div>
-                                    <div class="info-text-title">
-                                        물품 이름
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="info-data">
-                                22.06.08 ~ 22.07.08, status
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-info-container">
-                        <div class="tab-info-box" style="background-color: rgb(255, 221, 157);">
-                            <div class="tab-inner-box">
-                                <img class="tab-info-image" src="https://static.hubzum.zumst.com/hubzum/2019/01/08/11/f6bd70a51fda4aafbf9563dadf2d82fd.jpg">
-                                <div class="tab-info-text">
-                                    <div class="info-text-section" style="background-color: rgb(255, 193, 77);">
-                                        빌려요
-                                    </div>
-                                    <div class="info-text-title">
-                                        물품 이름
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="info-data">
-                                22.06.08 ~ 22.07.08, status
-                            </div>
-                        </div>
-                    </div>
-                    <div class="myprofile-container">
-                        <div class="myprofile-top-box">
-                            <div class="myprofile-image-box">
-                                <img class="tab-info-image" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/cbdef037365169.573db7853cebb.jpg">
-                                <p>프로필 이미지 변경</p>
-                            </div>
-                            <div class="myprofile-info-box">
-                                <div class="myprofile-nickname-password">
-                                    <input class="profile-input" placeholder="철순">
-                                    <div class="myprofile-nickname-btn">
-                                        <p>닉네임 변경</p>
-                                    </div>
-                                </div>
-                                <div class="myprofile-address">
-                                    <input class="profile-input" placeholder="경기도 파주시 운정구">
-                                    <p>주소 변경</p>
-                                </div>
-                                <div class="myprofile-password">
-                                    <div class="password-input">
-                                        <input class="profile-input" placeholder="현재 비밀번호">
-                                        <input class="profile-input" placeholder="새 비밀번호">
-                                        <input class="profile-input" placeholder="새 비밀번호 재입력">
-                                    </div>
-                                    <p>비밀번호 변경</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="myprofile-bottom-box">
-                            <div class="myprofile-submit-btn">
-                                <button class="submit-user-btn">회원 수정</button>
-                                <button class="delete-user-btn">회원 탈퇴</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feedback-body">
-                        <div>
-                            <input class="feedback-title" placeholder="제목">
-                        </div>
-                        <div>
-                            <textarea class="feedback-textarea" placeholder="내용"></textarea>
-                        </div>
-                        <div class="thanks-for-feedback">
-                            소중한 의견 감사합니다
-                        </div>
-                        <div class="submit-btn">
-                            <button>전달하기</button>
-                        </div>
-                    </div>
+                    <!-- 내역 및 탭 정보 붙는곳-->
                 </div>
             </div>
         </div>
     </div>
-
-
-
     <script type="text/javascript" src="../index/js/nav.js"></script>
     <script type="text/javascript" src="../index/js/nav_api.js"></script>
     <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script type="text/javascript" src="../index/js/kakao_api.js"></script>
+    <script type="text/javascript" src="../user/js/mypage_api.js"></script>
+    <script type="text/javascript" src="../user/js/mypage.js"></script>
 
 </body>
 
