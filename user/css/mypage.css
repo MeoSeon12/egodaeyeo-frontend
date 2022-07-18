@@ -69,18 +69,20 @@
     cursor: pointer;
 }
 
+.mypage-category-box > button:hover {
+    transform: scale(1.1);
+}
+
 .main-right-container {
-    /* background-color: aliceblue; */
     max-width: 750px;
     width: 100%;
-    margin: 0 20px;
+    margin: 0 15px 0 0;
     padding: 10px;
     display: flex;
     justify-content: center;
 }
 
 .mypage-tap-wrap {
-    /* background-color: red; */
     max-width: 700px;
     width: 100%;
     display: flex;
@@ -97,8 +99,8 @@
 }
 
 .tab-info-box {
-    max-width: 680px;
-    width: 100%;
+    max-width: 700px;
+    width: 90%;
     height: 165px;
     background-color: rgb(81, 190, 154);
     margin: 5px 0;
@@ -121,6 +123,7 @@
     height: 150px;
     margin: 8px 0 9px 8px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .tab-info-text {
@@ -153,44 +156,117 @@
 }
 
 .myprofile-container {
-    background-color: red;
     max-width: 700px;
+    width: 100%;
     height: 500px;
 }
 
 .myprofile-top-box {
-    background-color: orange;
     max-width: 700px;
     height: 200px;
     display: flex;
     flex-direction: row;
 }
 
-.myprofile-bottom-box {
-    background-color: aqua;
-    max-width: 700px;
-    height: 100px;
+.myprofile-image-box {
+    max-width: 165px;
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myprofile-image-box > p {
+    margin: -5px 0 0 0;
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.delete-user-btn {
+    margin: 17px 0 0 0;
+    border: none;
+    background-color: rgb(255, 155, 172);
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1);
+}
+
+.delete-user-btn:hover {
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+    background-color: rgb(255, 121, 143);
 }
 
 .myprofile-info-box {
-    background-color: aliceblue;
     max-width: 520px;
     width: 100%;
     height: 200px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    white-space: nowrap;
 }
 
 .myprofile-nickname-password, .myprofile-address {
-    background-color: red;
-    max-width: 520px;
-    width: 100%;
-    height: 80px;
+    max-width: 500px;
+    width: 90%;
+    height: 70px;
     display: flex;
     flex-direction: row;
-    margin: 10px 10px;
+    margin: 0 50px 0 10px;
     justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
 }
+
+.myprofile-nickname-password > p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.myprofile-nickname-pw-btn > button {
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
+}
+
+.myprofile-address > button {
+    border: none;
+    background: transparent;
+    max-width: 75px;
+    white-space: nowrap;
+    width: 100%;
+    height: 30px;
+    font-size: 13px;
+    cursor: pointer;
+
+}
+
+.myprofile-address > button:hover, .myprofile-nickname-pw-btn > button:hover {
+    background-color: rgb(223, 223, 223);
+}
+
+.myprofile-address > p {
+    font-size: 24px;
+}
+
+.myprofile-bottom-box {
+    max-width: 700px;
+    height: 500px;
+    margin-top: 26px;
+}
+
+
 
 
 

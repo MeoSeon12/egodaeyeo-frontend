@@ -167,7 +167,7 @@ function itemDataAppend(itemsInfo) {
         //이미지
         const newItemImage = document.createElement('img')
         newItemImage.setAttribute("class", "item-image")
-        newItemImage.setAttribute("src", item['images'])
+        newItemImage.setAttribute("src", item['image'])
         // 추후 [0]달아야 함
         newItemBox.append(newItemImage)
 
