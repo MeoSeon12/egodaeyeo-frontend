@@ -1,5 +1,5 @@
+const frontEndBaseUrl = "https://egodaeyeo.netlify.app"
 const backEndBaseUrl = "http://127.0.0.1:8000"
-const frontEndBaseUrl = "http://127.0.0.1:5500"
 
 
 addEventListener('click', (e) => {
