@@ -143,7 +143,7 @@ async function getDetailView() {
         for (i = data.reviews.length - 1; i >= 0; i--) {
 
             const reviewContainer = document.createElement('div')
-            reviewContainer.setAttribute('class', 'review-container')[0]
+            reviewContainer.setAttribute('class', 'review-container')
             reviewSection.append(reviewContainer)
 
             const reviewUserBox = document.createElement('div')
