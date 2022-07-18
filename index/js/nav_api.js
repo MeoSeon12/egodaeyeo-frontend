@@ -10,7 +10,7 @@ addEventListener('click', (e) => {
         onLogin()
     }
     if (e.target == logoutBtn) {
-        onLogout()    
+        onLogout()
     }
     if (e.target == reviewSubmitBtn) {
         onReviewSubmit()
@@ -57,7 +57,7 @@ function checkID(asValue) {
 
 //정규표현식 비밀번호 8자리 대소문자, 특수문자포함
 function checkPW(asValue) {
-    const regPW= /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const regPW = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     return regPW.test(asValue);
 }
 
@@ -187,14 +187,75 @@ async function onLogin() {
 async function onReviewSubmit() {
     const reviewContent = document.querySelector('#review').value
     const starRating = document.querySelector('input[name="rating"]:checked').value
+    const token = localStorage.getItem("access_token");
+
+    const reviewData = {
+        content: reviewContent,
+        rating: starRating
+    }
+    const response = await fetch(`${backEndBaseUrl}/items/reviews/1`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(reviewData)
+    }
+    )
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        alert("리뷰 작성 완료!")
+        window.location.reload()
+    } else {
+        console.log(response_json)
+    }
+}
+
+function dhm(ms) {
+    const days = Math.floor(ms / (24 * 60 * 60 * 1000));
+    const daysms = ms % (24 * 60 * 60 * 1000);
+    const hours = Math.floor(daysms / (60 * 60 * 1000));
+    const hoursms = ms % (60 * 60 * 1000);
+    const minutes = Math.floor(hoursms / (60 * 1000));
+    return days + "days: " + hours + "hr: " + minutes + "min"
 }
 
 async function onRentalSubmit() {
+    const token = localStorage.getItem("access_token");
+
     if (rentalStartTime.value > rentalEndTime.value) {
-        console.log('대여 종료일을 대여 시작일 이전으로 설정할 수 없습니다.')
+        alert('대여 종료일을 대여 시작일 이전으로 설정할 수 없습니다.')
     }
     else {
-        console.log(rentalStartTime.value, rentalEndTime.value)
+        const rentalSubmitData = {
+            rentalStartTime: rentalStartTime.value,
+            rentalEndTime: rentalEndTime.value
+        }
+
+        const response = await fetch(`${backEndBaseUrl}/items/contracts/start/1`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                Accept: "application/json",
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify(rentalSubmitData)
+        }
+        )
+        response_json = await response.json()
+
+        if (response.status == 200) {
+            alert("리뷰 작성 완료!")
+            window.location.reload()
+        } else {
+            console.log(response_json)
+        }
     }
 
 }
@@ -225,7 +286,7 @@ window.onload = () => {
     if (payload != null) {
         // 아직 access 토큰의 인가 유효시간이 남은 경우
         if (payload.exp > (Date.now() / 1000)) {
-    
+
         } else {
             // 인증 시간이 지났기 때문에 다시 refreshToken으로 다시 요청을 해야 한다.
             const requestRefreshToken = async (url) => {
@@ -242,7 +303,7 @@ window.onload = () => {
                 );
                 return response.json();
             };
-    
+
             // 다시 인증 받은 accessToken을 localStorage에 저장하자.
             requestRefreshToken(`${backEndBaseUrl}/users/api/token/refresh`).then((data) => {
                 // 새롭게 발급 받은 accessToken을 localStorage에 저장
@@ -293,7 +354,7 @@ async function getUserView() {
         })
         userData = await response.json()
         profileImage = userData['user_image']
-    
+
         mypageImage.setAttribute('src', profileImage)
 
         return userData
