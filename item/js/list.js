@@ -1,46 +1,58 @@
+const closeModalBody = document.getElementsByTagName('body')[0]
+const categoryModalBody = document.querySelector('.category-modal-wrap')
+const modalWrap = document.getElementsByClassName('category-modal-wrap')[0]
+const modalContainer = document.getElementsByClassName('category-modal-container')[0]
+
+const itemWrap = document.getElementsByClassName("item-wrap")[0];
+const categoryBox = document.getElementsByClassName("category-modal-box")[0];
+const categoryText = document.getElementsByClassName("list-category")[0];
+const sectionText = document.getElementsByClassName("list-section")[0];
+const addressText = document.getElementsByClassName("list-address")[0];
+let pageUrl = ""
+let selectedCategory = ""
+let selectedSection = ""
+
 function openModal(){
-    const modalWrap = document.getElementsByClassName('category-modal-wrap')[0]
-    const modalContainer = document.getElementsByClassName('category-modal-container')[0]
     modalContainer.style.animation = 'roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     modalWrap.style.animation = 'fadeIn 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     modalWrap.style.display = 'flex'
 }
 
 function closeModal(){
-    const modalWrap = document.getElementsByClassName('category-modal-wrap')[0]
-    const modalContainer = document.getElementsByClassName('category-modal-container')[0]
     modalContainer.style.animation = 'scaleLeft 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     modalWrap.style.animation = 'wrapRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
-const closeModalBody = document.getElementsByTagName('body')[0]
-const categoryModalBody = document.querySelector('.category-modal-wrap')
+
 categoryModalBody.addEventListener('mouseover', (e) => {
     if (e.target == categoryModalBody) {
         closeModal()
     }
 })
 
-let pageUrl = ""
-
 async function showAllItems(selectedSection) {
-
     //api에서 return한 json데이터
-    const items = await itemView();
-
+    const items = await itemApiView();
     const categories = items['categories']
     const itemsInfo = items['items']['results']
+    const userAddress = itemsInfo[0]['user_address']
     pageUrl = items['items']['next']
 
-    const categoryBox = document.getElementsByClassName("category-modal-box")[0];
-    const itemWrap = document.getElementsByClassName("item-wrap")[0];
-    const categoryText = document.getElementsByClassName("list-category")[0];
-    const sectionText = document.getElementsByClassName("list-section")[0];
-
     categoryText.innerText = "#전체";
+
+    if (userAddress == null) {
+        addressText.innerText = "";
+    }else {
+        addressText.innerText = "#" + userAddress
+    }
+    
     if (selectedSection == "undefined" || selectedSection == "") {
         sectionText.innerText = "";
-    }else {
+    }else if (selectedSection == "빌려드려요") {
         sectionText.innerText = "#" + selectedSection;
+        sectionText.style.color = '#85ff8a';
+    }else if (selectedSection == "빌려요") {
+        sectionText.innerText = "#" + selectedSection;
+        sectionText.style.color = '#ffe18a';
     }
 
     categoryBox.replaceChildren();
@@ -54,7 +66,6 @@ async function showAllItems(selectedSection) {
     
     //json category 데이터 뽑기
     for (let i = 0; i < categories.length; i++) {
-
         const category = categories[i]['name']
         const newCategory = document.createElement("div")
         newCategory.setAttribute("class", "category-btn")
@@ -62,7 +73,6 @@ async function showAllItems(selectedSection) {
         newCategory.innerHTML += category + '<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'
         categoryBox.append(newCategory)
     }
-
     if (items['items']['count'] == 0) {
         itemWrap.innerText = "등록된 아이템이 없습니다."
         itemWrap.style.justifyContent = "center";
@@ -71,88 +81,9 @@ async function showAllItems(selectedSection) {
     }else{
         itemWrap.style.justifyContent = "flex-start";
         itemWrap.style.marginTop = "20px";
-
-        //json item 데이터 뽑기
-        for (let i = 0; i < itemsInfo.length; i++) {
-            const item = itemsInfo[i]
-            const itemId = item['id']
-    
-            const newItemLink = document.createElement('a')
-            newItemLink.setAttribute("class", "item-link")
-            newItemLink.addEventListener('click', () => {
-                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
-            })
-            itemWrap.append(newItemLink)
-    
-            const newItemBox = document.createElement('div')
-            newItemBox.setAttribute("class", "item-link-box")
-            newItemLink.append(newItemBox)
-    
-            //이미지
-            const newItemImage = document.createElement('img')
-            newItemImage.setAttribute("class", "item-image")
-            newItemImage.setAttribute("src", item['images'])
-            // 추후 [0]달아야 함
-            newItemBox.append(newItemImage)
-            
-            const newItemDesc = document.createElement('div')
-            newItemDesc.setAttribute("class", "item-desc")
-            newItemBox.append(newItemDesc)
-            
-            //제목
-            const newItemTitle = document.createElement('div')
-            newItemTitle.setAttribute("class", "item-title")
-            newItemTitle.innerText = item['title']
-            newItemDesc.append(newItemTitle)
-            
-            //가격
-            const newItemPrice = document.createElement('div')
-            newItemPrice.setAttribute("class", "item-price")
-            newItemPrice.innerText = item['price'].toLocaleString() + "원 /"
-            newItemDesc.append(newItemPrice)
-            
-            //가격단위
-            const newPriceUnit = document.createElement('span')
-            newPriceUnit.setAttribute("class", "price-time-unit")
-            newPriceUnit.innerText = item['time_unit']
-            newItemPrice.append(newPriceUnit)
-            
-            //주소
-            const newItemLocation = document.createElement('div')
-            newItemLocation.setAttribute("class", "item-location")
-            newItemLocation.innerText = item['user_address']
-            newItemDesc.append(newItemLocation)
-            
-            const newItemInterest = document.createElement('div')
-            newItemInterest.setAttribute("class", "item-interest")
-            newItemDesc.append(newItemInterest)
-            
-            const newItemLike = document.createElement('div')
-            newItemLike.setAttribute("class", "item-like")
-            newItemLike.innerText = "찜"
-            newItemInterest.append(newItemLike)
-            
-            const newLikeCount = document.createElement('span')
-            newLikeCount.setAttribute("class", "like-count")
-            newLikeCount.innerText = item['item_bookmarks']
-            newItemLike.append(newLikeCount)
-            
-            const newItemInquiry = document.createElement('div')
-            newItemInquiry.setAttribute("class", "item-inquiry")
-            newItemInquiry.innerText = "문의"
-            newItemInterest.append(newItemInquiry)
-            
-            const newInquiryCount = document.createElement('span')
-            newInquiryCount.setAttribute("class", "inquiry-count")
-            newInquiryCount.innerText = item['item_inquiries']
-            newItemInquiry.append(newInquiryCount)
-        }
+        itemDataAppend(itemsInfo)
     }
 }
-
-
-let selectedSection = ""
-let selectedCategory = ""
 
 //파라미터 저장을 위한 함수들
 function selectedAllItems() {
@@ -182,26 +113,31 @@ function selectedSectionItems(e) {
 }
 
 async function showSelectedItems() {
-
-
-    const items = await selectedItemView(selectedCategory, selectedSection)
-    
-    pageUrl = items['items']['next']
+    const items = await selectedItemApiView(selectedCategory, selectedSection)
     const itemsInfo = items['items']['results']
-    const itemWrap = document.getElementsByClassName("item-wrap")[0];
-    const categoryText = document.getElementsByClassName("list-category")[0];
-    const sectionText = document.getElementsByClassName("list-section")[0];
+    pageUrl = items['items']['next']
+    
 
     //선택한 카테고리 섹션 보여주는 부분 
-    if (selectedCategory == "") {
-        categoryText.innerText = "#전체" + selectedCategory 
+    if (selectedCategory == "" && selectedSection == "빌려드려요") {
+        categoryText.innerText = "#전체" + selectedCategory
         sectionText.innerText = "#" + selectedSection
+        sectionText.style.color = '#85ff8a';
+    }else if (selectedCategory == "" && selectedSection == "빌려요"){
+        categoryText.innerText = "#전체" + selectedCategory
+        sectionText.innerText = "#" + selectedSection
+        sectionText.style.color = '#ffe18a';
+    }else if (selectedSection == "빌려드려요") {
+        categoryText.innerText = "#" + selectedCategory
+        sectionText.innerText = "#" + selectedSection;
+        sectionText.style.color = '#85ff8a';
+    }else if (selectedSection == "빌려요") {
+        categoryText.innerText = "#" + selectedCategory
+        sectionText.innerText = "#" + selectedSection;
+        sectionText.style.color = '#ffe18a';
     }else if (selectedSection == ""){
         categoryText.innerText = "#" + selectedCategory
         sectionText.innerText = ""
-    }else{
-        categoryText.innerText = "#" + selectedCategory
-        sectionText.innerText = "#" + selectedSection
     }
 
     itemWrap.replaceChildren();
@@ -214,82 +150,7 @@ async function showSelectedItems() {
     }else{
         itemWrap.style.justifyContent = "flex-start";
         itemWrap.style.marginTop = "20px";
-
-        //json item 데이터 뽑기
-        for (let i = 0; i < itemsInfo.length; i++) {
-            const item = itemsInfo[i]
-            const itemId = item['id']
-            const newItemLink = document.createElement('a')
-            newItemLink.setAttribute("class", "item-link")
-            newItemLink.addEventListener('click', () => {
-                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
-            })
-            itemWrap.append(newItemLink)
-    
-            const newItemBox = document.createElement('div')
-            newItemBox.setAttribute("class", "item-link-box")
-            newItemLink.append(newItemBox)
-    
-            //이미지
-            const newItemImage = document.createElement('img')
-            newItemImage.setAttribute("class", "item-image")
-            newItemImage.setAttribute("src", item['images'])
-            // 추후 [0]달아야 함
-            newItemBox.append(newItemImage)
-    
-            const newItemDesc = document.createElement('div')
-            newItemDesc.setAttribute("class", "item-desc")
-            newItemBox.append(newItemDesc)
-    
-            //제목
-            const newItemTitle = document.createElement('div')
-            newItemTitle.setAttribute("class", "item-title")
-            newItemTitle.innerText = item['title']
-            newItemDesc.append(newItemTitle)
-    
-            //가격
-            const newItemPrice = document.createElement('div')
-            newItemPrice.setAttribute("class", "item-price")
-            newItemPrice.innerText = item['price'] + " /"
-            newItemDesc.append(newItemPrice)
-    
-            //가격단위
-            const newPriceUnit = document.createElement('span')
-            newPriceUnit.setAttribute("class", "price-time-unit")
-            newPriceUnit.innerText = item['time_unit']
-            newItemPrice.append(newPriceUnit)
-    
-            //주소
-            const newItemLocation = document.createElement('div')
-            newItemLocation.setAttribute("class", "item-location")
-            newItemLocation.innerText = item['user_address']
-            newItemDesc.append(newItemLocation)
-    
-            const newItemInterest = document.createElement('div')
-            newItemInterest.setAttribute("class", "item-interest")
-            newItemDesc.append(newItemInterest)
-    
-            const newItemLike = document.createElement('div')
-            newItemLike.setAttribute("class", "item-like")
-            newItemLike.innerText = "찜"
-            newItemInterest.append(newItemLike)
-    
-            const newLikeCount = document.createElement('span')
-            newLikeCount.setAttribute("class", "like-count")
-            newLikeCount.innerText = item['item_bookmarks']
-            newItemLike.append(newLikeCount)
-    
-            const newItemInquiry = document.createElement('div')
-            newItemInquiry.setAttribute("class", "item-inquiry")
-            newItemInquiry.innerText = "문의"
-            newItemInterest.append(newItemInquiry)
-    
-            const newInquiryCount = document.createElement('span')
-            newInquiryCount.setAttribute("class", "inquiry-count")
-            newInquiryCount.innerText = item['item_inquiries']
-            newItemInquiry.append(newInquiryCount)
-        }
-
+        itemDataAppend(itemsInfo)
     }
 }
 
@@ -303,90 +164,96 @@ window.onscroll = function () {
 
 async function showScrollItems() {
     if (pageUrl != null) {
-        const items = await scrollItemView(pageUrl)
-        
+        const items = await scrollItemApiView(pageUrl)
         const itemsInfo = items['items']['results']
         pageUrl = items['items']['next']
-        const itemWrap = document.getElementsByClassName("item-wrap")[0];
-    
-        //json item 데이터 뽑기
-        for (let i = 0; i < itemsInfo.length; i++) {
-            const item = itemsInfo[i]
-            const itemId = item['id']
-            const newItemLink = document.createElement('a')
-            newItemLink.setAttribute("class", "item-link")
-            newItemLink.addEventListener('click', () => {
-                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
-            })
-            itemWrap.append(newItemLink)
-    
-            const newItemBox = document.createElement('div')
-            newItemBox.setAttribute("class", "item-link-box")
-            newItemLink.append(newItemBox)
-    
-            //이미지
-            const newItemImage = document.createElement('img')
-            newItemImage.setAttribute("class", "item-image")
-            newItemImage.setAttribute("src", item['images'])
-            // 추후 [0]달아야 함
-            newItemBox.append(newItemImage)
-    
-            const newItemDesc = document.createElement('div')
-            newItemDesc.setAttribute("class", "item-desc")
-            newItemBox.append(newItemDesc)
-    
-            //제목
-            const newItemTitle = document.createElement('div')
-            newItemTitle.setAttribute("class", "item-title")
-            newItemTitle.innerText = item['title']
-            newItemDesc.append(newItemTitle)
-    
-            //가격
-            const newItemPrice = document.createElement('div')
-            newItemPrice.setAttribute("class", "item-price")
+        itemDataAppend(itemsInfo)
+    }
+}
+
+function itemDataAppend(itemsInfo) {
+    //json item 데이터 뽑기
+    for (let i = 0; i < itemsInfo.length; i++) {
+        const item = itemsInfo[i]
+        const itemId = item['id']
+        const newItemLink = document.createElement('a')
+        newItemLink.setAttribute("class", "item-link")
+        newItemLink.addEventListener('click', () => {
+            location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+        })
+        itemWrap.append(newItemLink)
+
+        const newItemBox = document.createElement('div')
+        newItemBox.setAttribute("class", "item-link-box")
+        newItemLink.append(newItemBox)
+
+        //이미지
+        const newItemImage = document.createElement('img')
+        newItemImage.setAttribute("class", "item-image")
+        newItemImage.setAttribute("src", item['image'])
+        // 추후 [0]달아야 함
+        newItemBox.append(newItemImage)
+
+        const newItemDesc = document.createElement('div')
+        newItemDesc.setAttribute("class", "item-desc")
+        newItemBox.append(newItemDesc)
+
+        //제목
+        const newItemTitle = document.createElement('div')
+        newItemTitle.setAttribute("class", "item-title")
+        newItemTitle.innerText = item['title']
+        newItemDesc.append(newItemTitle)
+
+        //가격
+        const newItemPrice = document.createElement('div')
+        newItemPrice.setAttribute("class", "item-price")
+        if (item['price'] == null) {
+            newItemPrice.innerText = "가격 협의"
+            newItemDesc.append(newItemPrice)
+        }else {
             newItemPrice.innerText = item['price'] + " /"
             newItemDesc.append(newItemPrice)
-    
-            //가격단위
-            const newPriceUnit = document.createElement('span')
-            newPriceUnit.setAttribute("class", "price-time-unit")
-            newPriceUnit.innerText = item['time_unit']
-            newItemPrice.append(newPriceUnit)
-    
-            //주소
-            const newItemLocation = document.createElement('div')
-            newItemLocation.setAttribute("class", "item-location")
-            newItemLocation.innerText = item['user_address']
-            newItemDesc.append(newItemLocation)
-    
-            const newItemInterest = document.createElement('div')
-            newItemInterest.setAttribute("class", "item-interest")
-            newItemDesc.append(newItemInterest)
-    
-            const newItemLike = document.createElement('div')
-            newItemLike.setAttribute("class", "item-like")
-            newItemLike.innerText = "찜"
-            newItemInterest.append(newItemLike)
-    
-            const newLikeCount = document.createElement('span')
-            newLikeCount.setAttribute("class", "like-count")
-            newLikeCount.innerText = item['item_bookmarks']
-            newItemLike.append(newLikeCount)
-    
-            const newItemInquiry = document.createElement('div')
-            newItemInquiry.setAttribute("class", "item-inquiry")
-            newItemInquiry.innerText = "문의"
-            newItemInterest.append(newItemInquiry)
-    
-            const newInquiryCount = document.createElement('span')
-            newInquiryCount.setAttribute("class", "inquiry-count")
-            newInquiryCount.innerText = item['item_inquiries']
-            newItemInquiry.append(newInquiryCount)
         }
 
-    }else{
-        console.log("컨텐츠 더이상 없음")
-    }
+        //가격단위
+        const newPriceUnit = document.createElement('span')
+        newPriceUnit.setAttribute("class", "price-time-unit")
+        newPriceUnit.innerText = item['time_unit']
+        newItemPrice.append(newPriceUnit)
 
+        // //주소
+        // const newItemLocation = document.createElement('div')
+        // newItemLocation.setAttribute("class", "item-location")
+        // newItemLocation.innerText = item['user_address']
+        // newItemDesc.append(newItemLocation)
+
+        const newItemInterest = document.createElement('div')
+        newItemInterest.setAttribute("class", "item-interest")
+        newItemDesc.append(newItemInterest)
+
+        const newItemLike = document.createElement('div')
+        newItemLike.setAttribute("class", "item-like")
+        newItemLike.innerText = "찜"
+        newItemInterest.append(newItemLike)
+        //찜 카운트
+        const newLikeCount = document.createElement('span')
+        newLikeCount.setAttribute("class", "like-count")
+        newLikeCount.innerText = item['item_bookmarks']
+        newItemLike.append(newLikeCount)
+        //문의 카운트
+        const newItemInquiry = document.createElement('div')
+        newItemInquiry.setAttribute("class", "item-inquiry")
+        newItemInquiry.innerText = "문의"
+        newItemInterest.append(newItemInquiry)
+
+        const newInquiryCount = document.createElement('span')
+        newInquiryCount.setAttribute("class", "inquiry-count")
+        newInquiryCount.innerText = item['item_inquiries']
+        newItemInquiry.append(newInquiryCount)
+    }
 }
+
 showAllItems(selectedSection);
+
+
+

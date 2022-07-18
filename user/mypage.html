@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content=" classth=device- classth, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>이거대여.</title>
 
     <!-- jQuery -->
@@ -23,92 +23,116 @@
     <nav>
         <div class="nav-wrap">
             <div class="nav-container">
-                <a class="logo" href="../index.html">이거대여.</a>
+                <div class="logo">이거대여.</div>
                 <input class="search" placeholder="검색">
                 <div class="nav-btns">
-                    <a class="mypage" href="../user/mypage.html">
-                        <img class="mypage-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
+                    <a class="mypage">
+                        <img class="mypage-image">
                     </a>
-                    <button class="item-upload-btn">물품 등록</button>
+                    <button class="item-upload-btn" onclick="rentalDateModalView()">물품 등록</button>
                     <button class="login-btn" onclick="loginModalView()">로그인</button>
                     <button class="logout-btn">로그아웃</button>
                 </div>
             </div>
         </div>
     </nav>
+    <!-- 로그인 / 회원가입 모달 -->
+    <div class="login-modal-body">
+        <div class="modal-container" id="login-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <input id="loginEmail" placeholder="이메일">
+                <input type='password' id="loginPassword" placeholder="비밀번호">
+            </div>
+            <div class="wrap" id="login-wrap">
+                <button class="login-submit-btn">로그인</button>
+                <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
+                <img class="kakao-btn" src="../media/kakao-btn.png">
+            </div>
+        </div>
+        <div class="modal-container" id="signup-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <h5>이메일</h5>
+                <input id="inputEmail">
+                <h5>닉네임</h5>
+                <input id="inputNickname">
+                <h5>비밀번호</h5>
+                <input type='password' id="inputPassword">
+                <h5>비밀번호 재입력</h5>
+                <input type='password' id="inputPassword2">
+                <h5>주소</h5>
+                <input id="address-kakao" name="address" placeholder="주소 검색" readonly />
+            </div>
+            <button class="signup-submit-btn">회원가입</button>
+            <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
+        </div>
+    </div>
+    <div class="address-modal-body">
+        <div class="address-modal-container" id="address-modal-container">
+            <h2>이거대여.</h2>
+            <div class="modal-inputs">
+                <input id="address-kakao2" name="address" placeholder="주소 검색" readonly />
+                <button class="address-submit-btn">주소 등록</button>
+            </div>
+        </div>
+    </div>
+    <div class="review-modal-body">
+        <div class="review-modal-container" id="review-modal-container">
+            <h2 class="review-write">리뷰작성</h2>
+                <div class="rating">
+                    <span><input type="radio" name="rating" id="str5" value="5"><label for="str5">★</label></span>
+                    <span><input type="radio" name="rating" id="str4" value="4"><label for="str4">★</label></span>
+                    <span><input type="radio" name="rating" id="str3" value="3"><label for="str3">★</label></span>
+                    <span><input type="radio" name="rating" id="str2" value="2"><label for="str2">★</label></span>
+                    <span><input type="radio" name="rating" id="str1" value="1"><label for="str1">★</label></span>
+                </div>
+                    <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
+                    <button class="review-submit-btn">작성하기</button>
+            <div class="ask-sign"> <a class="skip-review" onclick="">건너 뛰기</a></div>
+        </div>
+    </div>
+    <div class="rental-date-modal-body">
+        <div class="rental-date-modal-container" id="rental-date-modal-container">
+            <h2 class="rental-apply">대여신청</h2>
+                <h5>대여 시작일</h5>
+                <input type="datetime-local" id="rental-start-time" name="rental-start-time">
+                <h5>대여 종료일</h5>
+                <input type="datetime-local" id="rental-end-time" name="rental-end-time"  min="timezoneNow">              
+                <button class="rental-date-submit-btn">신청하기</button>
+            <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
+        </div>
+    </div>
     <div class="main-body">
         <div class="main-wrap">
             <div class="main-left-container">
                 <div class="profile-info-box">
-                    <img class="profile-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
-                    <div class="profile-info-text">
-                        <div class="info-text-nickname">철순</div>
-                        <div class="info-text-score">유저 점수</div>
-                    </div>
+                    <!-- 프로필 정보 -->
+                    <!-- https://t1.daumcdn.net/cfile/tistory/996750475F0941E836 -->
                 </div>
                 <hr>
                 <div class="mypage-category-box">
-                    <button>📒 대여중인 내역</button>
-                    <button>📃 대여종료 내역</button>
-                    <button>💚 찜 목록</button>
-                    <button>📖 내가 올린 글</button>
-                    <button>📸 프로필 정보 변경</button>
-                    <button>💌 피드백 작성하기</button>
+                    <button id="ongoing" onclick="myPageTabInfo(this);">📒 대여중인 내역</button>
+                    <button id="closed" onclick="myPageTabInfo(this);">📃 대여종료 내역</button>
+                    <button id="bookmarks" onclick="myPageTabInfo(this);">💚 찜 목록</button>
+                    <button id="myitems" onclick="myPageTabInfo(this);">📖 내가 올린 아이템</button>
+                    <button id="profile" onclick="myInfo();">📸 프로필 정보 변경</button>
+                    <button id="feedback" onclick="siteFeedback();">💌 피드백 작성하기</button>
                 </div>
             </div>
             <div class="main-right-container">
-                <div class="history-wrap">
-                    <!-- 내역정보 붙는곳-->
-                    <div class="history-container">
-                        <div class="history-info-box">
-                            <div class="history-box-inner">
-                                <img class="history-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
-                                <div class="history-info-text">
-                                    <div class="info-text-section">
-                                        <!-- 섹션 붙는곳 -->
-                                        빌려드려요
-                                    </div>
-                                    <div class="info-text-title">
-                                        <!-- 물품 이름 붙는곳 -->
-                                        물품 이름
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="info-rent-date">
-                                <!-- 날짜 붙는곳 -->
-                                22.06.08 ~ 22.07.08
-                            </div>
-                        </div>
-                    </div>
-                    <div class="history-container">
-                        <div class="history-info-box">
-                            <div class="history-box-inner">
-                                <img class="history-info-image" src="https://t1.daumcdn.net/cfile/tistory/996750475F0941E836">
-                                <div class="history-info-text">
-                                    <div class="info-text-section">
-                                        빌려드려요
-                                    </div>
-                                    <div class="info-text-title">
-                                        물품 이름
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="info-rent-date">
-                                22.06.08 ~ 22.07.08
-                            </div>
-                        </div>
-                    </div>
+                <div class="mypage-tap-wrap">
+                    <!-- 내역 및 탭 정보 붙는곳-->
                 </div>
             </div>
         </div>
     </div>
-
-
-
     <script type="text/javascript" src="../index/js/nav.js"></script>
     <script type="text/javascript" src="../index/js/nav_api.js"></script>
     <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script type="text/javascript" src="../index/js/kakao_api.js"></script>
+    <script type="text/javascript" src="../user/js/mypage_api.js"></script>
+    <script type="text/javascript" src="../user/js/mypage.js"></script>
 
 </body>
 
