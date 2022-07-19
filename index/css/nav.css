@@ -481,7 +481,13 @@ nav {
     font-family: 'IBMPlexSansKR-Regular';
 }
 
+.chat-btn:hover {
+    cursor: pointer;
+    background-color: #ffe398;
+}
+
 .chat-modal-body {
+    display: none;
     position: absolute;
     background: gainsboro;
     border-radius: 20px;
@@ -489,7 +495,6 @@ nav {
     width: 500px;
     right: 100px;
     bottom: 150px;
-    display: flex;
 }
 
 .chat-modal-body:after {
@@ -529,6 +534,11 @@ nav {
     cursor: pointer;
 }
 
+.chat-open-btn:hover {
+    cursor: pointer;
+}
+
+
 .chat-room span {
     margin: 5px;
     max-width: 60px;
@@ -540,7 +550,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color:lightslategray;
+    background-color: lightslategray;
 
 }
 
@@ -632,7 +642,7 @@ nav {
 }
 
 
-.my-chat-wrap{
+.my-chat-wrap {
     display: flex;
     justify-content: flex-start;
 }
@@ -669,7 +679,7 @@ nav {
     margin: 10px 6px;
 }
 
-.contract-request span{
+.contract-request span {
     padding: 3px;
     margin: 10px 6px;
 }
@@ -683,6 +693,6 @@ nav {
     margin: 10px 6px;
 }
 
-.contract-look span{
+.contract-look span {
     margin: 10px 6px;
 }
