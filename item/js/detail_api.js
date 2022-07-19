@@ -6,7 +6,7 @@ async function DetailViewApi(itemId) {
     const response = await fetch(`${backendBaseUrl}/items/details/${itemId}`, {
         method: 'GET',
         mode: 'cors',
-        header: {
+        headers: {
             'X-CSRFToken': csrftoken
         }
     })
@@ -16,7 +16,7 @@ async function DetailViewApi(itemId) {
         data = await response.json()
         return data
     }
-    
+
     // 요청 실패 (아이템 DB 없음)
     else if (response.status == 404) {
         return alert('아이템 정보가 존재하지 않습니다')
