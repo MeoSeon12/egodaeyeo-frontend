@@ -14,7 +14,7 @@ async function DetailViewGetApi() {
         data = await response.json()
         return data
     }
-    
+
     // 요청 실패 (아이템 DB 없음)
     else if (response.status == 404) {
         return alert('아이템 정보가 없습니다')
