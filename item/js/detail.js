@@ -1,6 +1,6 @@
 // 아이템 & 유저 ID 정보 가져오기
 const itemId = location.href.split('?')[1]
-const userId = JSON.parse(localStorage.getItem('payload'))
+const payload = JSON.parse(localStorage.getItem('payload'))
 
 
 // 아이템, 리뷰 데이터 레이아웃 생성 & 입력
@@ -143,7 +143,7 @@ async function getDetailView() {
         for (i = data.reviews.length - 1; i >= 0; i--) {
 
             const reviewContainer = document.createElement('div')
-            reviewContainer.setAttribute('class', 'review-container')[0]
+            reviewContainer.setAttribute('class', 'review-container')
             reviewSection.append(reviewContainer)
 
             const reviewUserBox = document.createElement('div')
@@ -185,7 +185,7 @@ async function getDetailView() {
 
 // 찜 버튼 클릭
 async function bookmark() {
-    if (userId == null) {
+    if (payload == null) {
         alert('로그인 후 이용가능합니다')
     }
     else {
