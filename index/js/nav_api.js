@@ -353,7 +353,7 @@ async function getUserView() {
             },
         })
         userData = await response.json()
-        profileImage = userData['user_image']
+        profileImage = userData['image']
 
         mypageImage.setAttribute('src', profileImage)
 
