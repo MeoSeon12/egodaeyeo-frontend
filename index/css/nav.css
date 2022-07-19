@@ -147,15 +147,21 @@ nav {
     border: 0;
     border-radius: 7px;
     height: 40px;
-    line-height: 30px;
-    width: 70px;
+    width: 80px;
 }
 
-.item-upload-btn {
+.upload-btn {
+    margin: 10px 13px;
+    font-size: 15px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 7px;
+    height: 40px;
+    width: 80px;
     background-color: rgb(191, 255, 194);
 }
 
-.item-upload-btn:hover {
+.upload-btn:hover {
     cursor: pointer;
     background-color: rgb(153, 250, 158);
 }

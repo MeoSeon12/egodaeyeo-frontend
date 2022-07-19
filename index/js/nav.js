@@ -45,14 +45,6 @@ function reviewModalView(){
     reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
-function rentalDateModalView(){
-    body.style.overflow = 'hidden'
-    loginModalBody.style.display = 'none'
-    rentalDateModalBody.style.display = 'flex'
-    rentalDateModalBody.style.animation = ''
-    rentalDateContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-}
-
 function signupContainerView(){
     loginContainer.style.display = 'none'
     signupContainer.style.display = 'flex'
@@ -89,6 +81,20 @@ function rentalDateModalUnview(){
     body.style.overflow = 'auto'
     rentalDateModalBody.style.display = 'none'
     rentalDateModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
+// 아이템 등록 버튼
+function goUploadPage() {
+
+    // 비 로그인 유저일 경우
+    if (localStorage.payload == undefined) {
+        alert('로그인 후 이용 가능합니다')
+    }
+    
+    // 로그인 유저일 경우
+    else {
+        location.href = '../item/upload.html'
+    }
 }
 
 // modalUnviews
@@ -136,8 +142,7 @@ $(document).ready(function(){
     });
 
     //별점 인풋을 누르면 값을 유저평점 변수에 저장
-    $('input:radio').change(
-      function(){
+    $('input:radio').change(function() {
         var userRating = this.value;
     }); 
 });
