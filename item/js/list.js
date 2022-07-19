@@ -7,6 +7,7 @@ const itemWrap = document.getElementsByClassName("item-wrap")[0];
 const categoryBox = document.getElementsByClassName("category-modal-box")[0];
 const categoryText = document.getElementsByClassName("list-category")[0];
 const sectionText = document.getElementsByClassName("list-section")[0];
+const addressText = document.getElementsByClassName("list-address")[0];
 let pageUrl = ""
 let selectedCategory = ""
 let selectedSection = ""
@@ -33,13 +34,25 @@ async function showAllItems(selectedSection) {
     const items = await itemApiView();
     const categories = items['categories']
     const itemsInfo = items['items']['results']
+    const userAddress = itemsInfo[0]['user_address']
     pageUrl = items['items']['next']
 
     categoryText.innerText = "#전체";
+
+    if (userAddress == null) {
+        addressText.innerText = "";
+    }else {
+        addressText.innerText = "#" + userAddress
+    }
+    
     if (selectedSection == "undefined" || selectedSection == "") {
         sectionText.innerText = "";
-    }else {
+    }else if (selectedSection == "빌려드려요") {
         sectionText.innerText = "#" + selectedSection;
+        sectionText.style.color = '#85ff8a';
+    }else if (selectedSection == "빌려요") {
+        sectionText.innerText = "#" + selectedSection;
+        sectionText.style.color = '#ffe18a';
     }
 
     categoryBox.replaceChildren();
@@ -103,18 +116,28 @@ async function showSelectedItems() {
     const items = await selectedItemApiView(selectedCategory, selectedSection)
     const itemsInfo = items['items']['results']
     pageUrl = items['items']['next']
-
+    
 
     //선택한 카테고리 섹션 보여주는 부분 
-    if (selectedCategory == "") {
-        categoryText.innerText = "#전체" + selectedCategory 
+    if (selectedCategory == "" && selectedSection == "빌려드려요") {
+        categoryText.innerText = "#전체" + selectedCategory
         sectionText.innerText = "#" + selectedSection
+        sectionText.style.color = '#85ff8a';
+    }else if (selectedCategory == "" && selectedSection == "빌려요"){
+        categoryText.innerText = "#전체" + selectedCategory
+        sectionText.innerText = "#" + selectedSection
+        sectionText.style.color = '#ffe18a';
+    }else if (selectedSection == "빌려드려요") {
+        categoryText.innerText = "#" + selectedCategory
+        sectionText.innerText = "#" + selectedSection;
+        sectionText.style.color = '#85ff8a';
+    }else if (selectedSection == "빌려요") {
+        categoryText.innerText = "#" + selectedCategory
+        sectionText.innerText = "#" + selectedSection;
+        sectionText.style.color = '#ffe18a';
     }else if (selectedSection == ""){
         categoryText.innerText = "#" + selectedCategory
         sectionText.innerText = ""
-    }else{
-        categoryText.innerText = "#" + selectedCategory
-        sectionText.innerText = "#" + selectedSection
     }
 
     itemWrap.replaceChildren();
@@ -184,8 +207,13 @@ function itemDataAppend(itemsInfo) {
         //가격
         const newItemPrice = document.createElement('div')
         newItemPrice.setAttribute("class", "item-price")
-        newItemPrice.innerText = item['price'] + " /"
-        newItemDesc.append(newItemPrice)
+        if (item['price'] == null) {
+            newItemPrice.innerText = "가격 협의"
+            newItemDesc.append(newItemPrice)
+        }else {
+            newItemPrice.innerText = item['price'].toLocaleString() + " /"
+            newItemDesc.append(newItemPrice)
+        }
 
         //가격단위
         const newPriceUnit = document.createElement('span')
@@ -193,11 +221,11 @@ function itemDataAppend(itemsInfo) {
         newPriceUnit.innerText = item['time_unit']
         newItemPrice.append(newPriceUnit)
 
-        //주소
-        const newItemLocation = document.createElement('div')
-        newItemLocation.setAttribute("class", "item-location")
-        newItemLocation.innerText = item['user_address']
-        newItemDesc.append(newItemLocation)
+        // //주소
+        // const newItemLocation = document.createElement('div')
+        // newItemLocation.setAttribute("class", "item-location")
+        // newItemLocation.innerText = item['user_address']
+        // newItemDesc.append(newItemLocation)
 
         const newItemInterest = document.createElement('div')
         newItemInterest.setAttribute("class", "item-interest")

@@ -3,6 +3,7 @@ const loginModalBody = document.querySelector('.login-modal-body')
 const addressModalBody = document.querySelector('.address-modal-body')
 const reviewModalBody = document.querySelector('.review-modal-body')
 const rentalDateModalBody = document.querySelector('.rental-date-modal-body')
+const chatModalBody = document.querySelector('.chat-modal-body')
 
 const loginContainer = document.querySelector('#login-modal-container')
 const signupContainer = document.querySelector('#signup-modal-container')
@@ -16,6 +17,7 @@ const logoutBtn = document.querySelector('.logout-btn')
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
 const reviewSubmitBtn = document.querySelector('.review-submit-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
+const chatBtn = document.querySelector('.chat-btn')
 
 const rentalStartTime = document.getElementById('rental-start-time')
 const rentalEndTime = document.getElementById('rental-end-time')
@@ -55,6 +57,18 @@ function loginContainerView(){
     loginContainer.style.display = 'flex'
     signupContainer.style.display = 'none'
     loginContainer.style.animation = ''
+}
+
+let chatBtnCount = 0
+function chatModalView(){
+    if (chatBtnCount % 2 === 0){
+        chatModalBody.style.display = 'flex'
+        chatBtnCount ++;
+    }
+    else {
+        chatModalBody.style.display = 'none'
+        chatBtnCount ++;
+    }
 }
 
 function loginModalUnview(){
