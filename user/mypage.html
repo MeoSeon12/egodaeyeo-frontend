@@ -23,13 +23,13 @@
     <nav>
         <div class="nav-wrap">
             <div class="nav-container">
-                <div class="logo">이거대여.</div>
+                <a href="../index.html"><div class="logo">이거대여.</div></a>
                 <input class="search" placeholder="검색">
                 <div class="nav-btns">
-                    <a class="mypage">
+                    <a class="mypage" href="../user/mypage.html">
                         <img class="mypage-image">
                     </a>
-                    <button class="item-upload-btn" onclick="rentalDateModalView()">물품 등록</button>
+                    <a class="item-upload-btn" onclick="rentalDateModalView()">아이템 등록</a>
                     <button class="login-btn" onclick="loginModalView()">로그인</button>
                     <button class="logout-btn">로그아웃</button>
                 </div>
@@ -108,7 +108,6 @@
             <div class="main-left-container">
                 <div class="profile-info-box">
                     <!-- 프로필 정보 -->
-                    <!-- https://t1.daumcdn.net/cfile/tistory/996750475F0941E836 -->
                 </div>
                 <hr>
                 <div class="mypage-category-box">
@@ -133,7 +132,7 @@
     <script type="text/javascript" src="../index/js/kakao_api.js"></script>
     <script type="text/javascript" src="../user/js/mypage_api.js"></script>
     <script type="text/javascript" src="../user/js/mypage.js"></script>
-
+    <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 
 </html>
