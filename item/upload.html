@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이거대여.</title>
     <link rel="stylesheet" href="../index/css/nav.css">
-    <link rel="stylesheet" href="css/detail.css">
+    <link rel="stylesheet" href="css/upload.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- bxslider -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 </head>
+
 <body>
     <nav>
         <div class="nav-wrap">
             <div class="nav-container">
-                <a href="../index.html"><div class="logo">이거대여.</div></a>
+                <div class="logo">이거대여.</div>
                 <input class="search" placeholder="검색">
                 <div class="nav-btns">
-                    <a class="mypage" href="../user/mypage.html">
+                    <a class="mypage">
                         <img class="mypage-image">
                     </a>
                     <button class="upload-btn" onclick="goUploadPage()">아이템 등록</button>
@@ -75,84 +73,59 @@
     <div class="review-modal-body">
         <div class="review-modal-container" id="review-modal-container">
             <h2 class="review-write">리뷰작성</h2>
-                <div class="rating">
-                    <span><input type="radio" name="rating" id="str5" value="5"><label for="str5">★</label></span>
-                    <span><input type="radio" name="rating" id="str4" value="4"><label for="str4">★</label></span>
-                    <span><input type="radio" name="rating" id="str3" value="3"><label for="str3">★</label></span>
-                    <span><input type="radio" name="rating" id="str2" value="2"><label for="str2">★</label></span>
-                    <span><input type="radio" name="rating" id="str1" value="1"><label for="str1">★</label></span>
-                </div>
-                    <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
-                    <button class="review-submit-btn">작성하기</button>
+            <div class="rating">
+                <span><input type="radio" name="rating" id="str5" value="5"><label for="str5">★</label></span>
+                <span><input type="radio" name="rating" id="str4" value="4"><label for="str4">★</label></span>
+                <span><input type="radio" name="rating" id="str3" value="3"><label for="str3">★</label></span>
+                <span><input type="radio" name="rating" id="str2" value="2"><label for="str2">★</label></span>
+                <span><input type="radio" name="rating" id="str1" value="1"><label for="str1">★</label></span>
+            </div>
+            <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
+            <button class="review-submit-btn">작성하기</button>
             <div class="ask-sign"> <a class="skip-review" onclick="">건너 뛰기</a></div>
         </div>
     </div>
     <div class="rental-date-modal-body">
         <div class="rental-date-modal-container" id="rental-date-modal-container">
             <h2 class="rental-apply">대여신청</h2>
-                <h5>대여 시작일</h5>
-                <input type="datetime-local" id="rental-start-time" name="rental-start-time">
-                <h5>대여 종료일</h5>
-                <input type="datetime-local" id="rental-end-time" name="rental-end-time"  min="timezoneNow">              
-                <button class="rental-date-submit-btn">신청하기</button>
+            <h5>대여 시작일</h5>
+            <input type="datetime-local" id="rental-start-time" name="rental-start-time">
+            <h5>대여 종료일</h5>
+            <input type="datetime-local" id="rental-end-time" name="rental-end-time" min="timezoneNow">
+            <button class="rental-date-submit-btn">신청하기</button>
             <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
         </div>
     </div>
+
     <!-- 본문 -->
-    <div class="item-wrap">
-        <!-- 아이템 섹션 -->
-        <div class="item-section">
-            <!-- 아이템 사진 -->
-            <div class="slider"></div>
-            <!-- 유저 정보 -->
-            <div class="user-container">
-                <img id="post-user-image">
-                <div class="user-box">
-                    <p id="post-nickname"></p>
-                    <p id="address"></p>
-                </div>
-                <span class="user-container-score"></span>
+    <div class="form-section">
+        <form id="form">
+            <div id="pr-img">
+                <label class="file-input-custom">
+                    <input type="file" id="file-input" accept="image/*" onchange="imgUpload(this)" multiple />
+                    <div>
+                        <p>✖️</p>
+                        <p>이미지 첨부하기</p>
+                    </div>
+                </label>
             </div>
-            <!-- 아이템 정보 -->
-            <div class="item-container">
-                <div class="item-box-status">
-                    <span id="status"></span>
-                </div>
-                <div class="item-box-title">
-                    <span id="title"></span>
-                    <span id="created-at"></span>
-                </div>
-                <p id="category"></p>
-                <div class="item-box-price">
-                    <span id="price"></span>
-                    <span id="time-unit"></span>
-                </div>
-                <p id="post-content"></p>
-                <div class="item-box-contact">
-                    <p><span>찜</span><span id="bookmarks"></span></p>
-                    <p><span>문의</span><span id="inquiries"></span></p>
-                </div>
+            <div class="file-list"></div>
+            <div class="text-cotainer">
+                <input type="text" id="title" placeholder="제목을 입력해주세요">
+                <textarea type="text" id="desc" placeholder="내용을 입력해주세요"></textarea>
             </div>
-            <!-- 커뮤니케이션 버튼 -->
-            <div class="communication-container">
-                <button class="bookmark-btn" onclick="bookmark()"></button>
-                <button onclick="inquiry()">문의하기</button>
-            </div>
-        </div>
-        <!-- 리뷰 섹션 -->
-        <div class="review-section">
-            <p>리뷰</p>
-        </div>
+            <button id="submit" type="button" onclick="submitForm()">등록하기</button>
+        </form>
     </div>
+    
 </body>
 
 <script type="text/javascript" src="../index/js/nav.js"></script>
 <script type="text/javascript" src="../index/js/nav_api.js"></script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="../index/js/kakao_api.js"></script>
-<script type="text/javascript" src="js/detail_api.js"></script>
-<script type="text/javascript" src="js/detail.js"></script>
+<script type="text/javascript" src="js/upload_api.js"></script>
+<script type="text/javascript" src="js/upload.js"></script>
 <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 
 </html>

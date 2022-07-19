@@ -1,13 +1,19 @@
 // 백엔드로 아이템, 리뷰 데이터 요청
 async function DetailViewGetApi() {
     
-    const response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-            'X-CSRFToken': csrftoken
-        }
-    })
+    // 비로그인 유저일 경우
+    if (payload == null) {
+        var response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
+        method: 'GET'
+        })
+    }
+    
+    // 로그인 유저일 경우
+    else {
+        var response = await fetch(`${backEndBaseUrl}/items/details/${itemId}?user_id=${payload['user_id']}`, {
+        method: 'GET'
+        })
+    }
 
     //  요청 성공 (아이템 DB 존재함)
     if (response.status == 200) {
@@ -28,9 +34,7 @@ async function DetailViewPostApi() {
     const token = localStorage.getItem('access_token')
     const response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
-            'X-CSRFToken': csrftoken,
             'Authorization': 'Bearer ' + token
         }
     })
