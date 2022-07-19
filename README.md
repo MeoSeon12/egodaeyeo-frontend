@@ -30,8 +30,8 @@
 <br><br><br>
 
 ## 🤷🏻‍♂️🤷🏻‍♀️ 머선12조 팀원 및 역할분담
-<b>김규민</b><br>아이템 페이지<br> 2<br><br>
-<b>김철현</b><br>회원가입/로그인<br>2<br><br>
+<b>김규민</b><br>아이템 페이지<br> 마이페이지<br> 소셜로그인<br><br>
+<b>김철현</b><br>회원가입/로그인<br>소셜로그인<br><br>
 <b>김성호</b><br>메인 페이지<br>2<br><br>
 <b>최재완</b><br>아이템 상세페이지<br>2<br>
 <br><br><br>
@@ -59,7 +59,7 @@
 ## ⚙ DB 설계 ERD
 <a href="https://docs.google.com/spreadsheets/d/1ZLFdnhCmHF1gWQ0VjzHNtW1nglS0MMpMtOdWKkzBeQo/edit?usp=sharing">구글 시트 바로가기</a>  
 <br>
-![image](https://user-images.githubusercontent.com/104349901/178025790-d7de8185-a7d8-4dcf-9db8-727a9354247c.png)
+![image](https://user-images.githubusercontent.com/104349901/178717977-f30f75a8-139b-4b89-b4ec-9c8d5d49af26.png)
 
 
 <br><br><br>
