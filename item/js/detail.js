@@ -1,6 +1,6 @@
 // 아이템 & 유저 ID 정보 가져오기
 const itemId = location.href.split('?')[1]
-const payload = JSON.parse(localStorage.getItem('payload'))
+const userId = JSON.parse(localStorage.getItem('payload'))
 
 
 // 아이템, 리뷰 데이터 레이아웃 생성 & 입력
@@ -185,7 +185,7 @@ async function getDetailView() {
 
 // 찜 버튼 클릭
 async function bookmark() {
-    if (payload == null) {
+    if (userId == null) {
         alert('로그인 후 이용가능합니다')
     }
     else {

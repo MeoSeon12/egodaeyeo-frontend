@@ -113,7 +113,7 @@ h2 {
     max-width: 700px;
     width: 95%;
     height: 165px;
-    background-color: rgb(191, 255, 194);
+    background-color: rgb(69, 199, 123);
     margin: 5px 0;
     display: flex;
     flex-direction: row;
@@ -126,6 +126,16 @@ h2 {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.tab-info-image {
+    max-width: 150px;
+    width: 100%;
+    height: 150px;
+    margin: 8px 0 9px 8px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 40px;
 }
 
 .tab-info-text {
@@ -180,34 +190,11 @@ h2 {
     align-items: center;
 }
 
-.tab-info-image {
-    max-width: 150px;
-    width: 100%;
-    height: 150px;
-    margin: 8px 0 9px 8px;
-    object-fit: cover;
-    border-radius: 40px;
-}
-
-.myprofile-image-box > input {
-    display: none;
-}
-
-.profile-upload-btn {
-    background-color:#dddddd;
-    margin: 5px 0 0 5px;
-    border-radius: 4px;
-    width: 110px;
-    height: 30px;
-    line-height: 30px;
+.myprofile-image-box > p {
+    margin: -5px 0 0 0;
     font-size: 14px;
     white-space: nowrap;
-    text-align: center;
     cursor: pointer;
-}
-
-.profile-upload-btn:hover {
-    background-color: #c5c5c5;
 }
 
 .myprofile-info-box {

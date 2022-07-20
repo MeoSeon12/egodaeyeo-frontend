@@ -211,7 +211,7 @@ function itemDataAppend(itemsInfo) {
             newItemPrice.innerText = "가격 협의"
             newItemDesc.append(newItemPrice)
         }else {
-            newItemPrice.innerText = item['price'].toLocaleString() + " /"
+            newItemPrice.innerText = item['price'] + " /"
             newItemDesc.append(newItemPrice)
         }
 

@@ -3,7 +3,6 @@ const loginModalBody = document.querySelector('.login-modal-body')
 const addressModalBody = document.querySelector('.address-modal-body')
 const reviewModalBody = document.querySelector('.review-modal-body')
 const rentalDateModalBody = document.querySelector('.rental-date-modal-body')
-const chatModalBody = document.querySelector('.chat-modal-body')
 
 const loginContainer = document.querySelector('#login-modal-container')
 const signupContainer = document.querySelector('#signup-modal-container')
@@ -16,10 +15,7 @@ const loginBtn = document.querySelector('.login-btn')
 const logoutBtn = document.querySelector('.logout-btn')
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
 const reviewSubmitBtn = document.querySelector('.review-submit-btn')
-const requestContractBtn = document.querySelector('.request-contract-btn')
-const endContractBtn = document.querySelector('.request-contract-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
-const chatBtn = document.querySelector('.chat-btn')
 
 const rentalStartTime = document.getElementById('rental-start-time')
 const rentalEndTime = document.getElementById('rental-end-time')
@@ -41,17 +37,20 @@ function addressModalView(){
     addressContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
-function rentalDateModalView(){
-    body.style.overflow = 'hidden'
-    rentalDateModalBody.style.display = 'flex'
-}
-
 function reviewModalView(){
     body.style.overflow = 'hidden'
     loginModalBody.style.display = 'none'
     reviewModalBody.style.display = 'flex'
     reviewModalBody.style.animation = ''
     reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
+function rentalDateModalView(){
+    body.style.overflow = 'hidden'
+    loginModalBody.style.display = 'none'
+    rentalDateModalBody.style.display = 'flex'
+    rentalDateModalBody.style.animation = ''
+    rentalDateContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 function signupContainerView(){
@@ -65,24 +64,6 @@ function loginContainerView(){
     signupContainer.style.display = 'none'
     loginContainer.style.animation = ''
 }
-
-let chatBtnCount = 0
-function chatModalView(){
-    if (chatBtnCount % 2 === 0){
-        body.style.overflow = 'hidden'
-        chatModalBody.style.display = 'flex'
-        chatBtnCount ++;
-    }
-    else {
-        body.style.overflow = 'auto'
-        chatModalBody.style.display = 'none'
-        chatBtnCount ++;
-    }
-}
-
-requestContractBtn.addEventListener('click', (e) => {
-    rentalDateModalView()
-})
 
 function loginModalUnview(){
     body.style.overflow = 'auto'
@@ -107,20 +88,7 @@ function reviewModalUnview(){
 function rentalDateModalUnview(){
     body.style.overflow = 'auto'
     rentalDateModalBody.style.display = 'none'
-}
-
-// 아이템 등록 버튼
-function goUploadPage() {
-
-    // 비 로그인 유저일 경우
-    if (localStorage.payload == undefined) {
-        alert('로그인 후 이용 가능합니다')
-    }
-    
-    // 로그인 유저일 경우
-    else {
-        location.href = '../item/upload.html'
-    }
+    rentalDateModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 // modalUnviews
@@ -168,7 +136,8 @@ $(document).ready(function(){
     });
 
     //별점 인풋을 누르면 값을 유저평점 변수에 저장
-    $('input:radio').change(function() {
+    $('input:radio').change(
+      function(){
         var userRating = this.value;
     }); 
 });
