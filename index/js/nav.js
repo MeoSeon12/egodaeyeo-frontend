@@ -16,6 +16,8 @@ const loginBtn = document.querySelector('.login-btn')
 const logoutBtn = document.querySelector('.logout-btn')
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
 const reviewSubmitBtn = document.querySelector('.review-submit-btn')
+const requestContractBtn = document.querySelector('.request-contract-btn')
+const endContractBtn = document.querySelector('.request-contract-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
 const chatBtn = document.querySelector('.chat-btn')
 
@@ -37,6 +39,11 @@ function addressModalView(){
     addressModalBody.style.display = 'flex'
     addressModalBody.style.animation = ''
     addressContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
+function rentalDateModalView(){
+    body.style.overflow = 'hidden'
+    rentalDateModalBody.style.display = 'flex'
 }
 
 function reviewModalView(){
@@ -62,14 +69,20 @@ function loginContainerView(){
 let chatBtnCount = 0
 function chatModalView(){
     if (chatBtnCount % 2 === 0){
+        body.style.overflow = 'hidden'
         chatModalBody.style.display = 'flex'
         chatBtnCount ++;
     }
     else {
+        body.style.overflow = 'auto'
         chatModalBody.style.display = 'none'
         chatBtnCount ++;
     }
 }
+
+requestContractBtn.addEventListener('click', (e) => {
+    rentalDateModalView()
+})
 
 function loginModalUnview(){
     body.style.overflow = 'auto'
@@ -94,7 +107,6 @@ function reviewModalUnview(){
 function rentalDateModalUnview(){
     body.style.overflow = 'auto'
     rentalDateModalBody.style.display = 'none'
-    rentalDateModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 // 아이템 등록 버튼
