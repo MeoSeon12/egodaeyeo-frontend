@@ -639,11 +639,13 @@ nav {
 
 .chat-text {
     width: 100%;
-    min-height: 30px;
-    max-height: 104px;
-    background-color: #F5F5F5;
     border: none;
     resize: none;
+    font-size: 16px;
+    background-color: rgb(255, 255, 255);
+    min-height: 32px;
+    padding: 10px 5px 0 5px;
+    overflow-y: hidden;
 }
 
 .chat-send-btn {
