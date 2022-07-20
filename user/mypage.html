@@ -23,24 +23,16 @@
     <nav>
         <div class="nav-wrap">
             <div class="nav-container">
-<<<<<<< HEAD
-                <div class="logo">이거대여.</div>
-=======
                 <div class="logo">
                     <a href="../index.html">이거대여.</a>
                 </div>
->>>>>>> 38f0219ee6e09fa0f3cd38294e76a124f9a01fa0
                 <input class="search" placeholder="검색">
                 <div class="nav-btns">
-                    <a class="mypage">
+                    <a class="mypage" href="../user/mypage.html">
                         <img class="mypage-image">
                     </a>
-<<<<<<< HEAD
-                    <button class="item-upload-btn" onclick="rentalDateModalView()">물품 등록</button>
-=======
                     <button class="item-list-btn" onclick="goItemListPage()">물품 목록</button>
                     <button class="upload-btn" onclick="goUploadPage()">물품 등록</button>
->>>>>>> 38f0219ee6e09fa0f3cd38294e76a124f9a01fa0
                     <button class="login-btn" onclick="loginModalView()">로그인</button>
                     <button class="logout-btn">로그아웃</button>
                 </div>
@@ -114,12 +106,58 @@
             <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
         </div>
     </div>
+    <!-- chat button and modal -->
+    <button class="chat-btn" onclick="chatModalView()">채팅</button>
+
+    <div class="chat-modal-body">
+        <div class="chat-modal-container" id="chat-modal-container">
+            <div class="chat-rooms-container">
+                <div class="chat-room"><span class="nickname">상대닉네임상대닉네임상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
+            </div>
+            <div class="chat-container">
+                <div class="chat-area-container">
+                    <span>채팅공간</span>
+                    <div class="contract-btn-container">
+                        <button class="request-contract-btn">대여신청</button>
+                        <button class="end-contract-btn">대여종료</button>
+                    </div>
+                    <div class="chat-area-container">
+                        <div class="other-chat-wrap">
+                            <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            </div>
+                        </div>
+                        <div class="my-chat-wrap">
+                            <div class="my-chat">얼마까지 알아보고 오셨어요?</div>
+                        </div>
+                        <div class="my-chat-wrap">
+                            <div class="my-chat">얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요?</div>
+                        </div>
+                        <div class="contract-wrap">
+                            <div class="contract-request">대여신청이 도착했습니다</div>
+                            <div class="contract-look">신청보기</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="chat-send-container">
+                    <textarea type="text" class="chat-text" rows="2" placeholder="채팅을 입력해주세요."></textarea>
+                    <button class="chat-send-btn">
+                        <span class="material-symbols-outlined">
+                            sms
+                        </span>                    
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main-body">
         <div class="main-wrap">
             <div class="main-left-container">
                 <div class="profile-info-box">
                     <!-- 프로필 정보 -->
-                    <!-- https://t1.daumcdn.net/cfile/tistory/996750475F0941E836 -->
                 </div>
                 <hr>
                 <div class="mypage-category-box">
@@ -144,7 +182,7 @@
     <script type="text/javascript" src="../index/js/kakao_api.js"></script>
     <script type="text/javascript" src="../user/js/mypage_api.js"></script>
     <script type="text/javascript" src="../user/js/mypage.js"></script>
-
+    <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 
 </html>
