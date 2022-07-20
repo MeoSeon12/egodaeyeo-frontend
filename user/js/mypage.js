@@ -1,9 +1,20 @@
 const profileInfoBox = document.getElementsByClassName('profile-info-box')[0];
-const mypageTapWrap = document.getElementsByClassName('mypage-tap-wrap')[0]
+const mypageTapWrap = document.getElementsByClassName('mypage-tap-wrap')[0];
+const tabButtonClass = document.getElementsByClassName('category-tab-btn')[0];
+const tabButtonBox = document.querySelector('.mypage-category-box')
+const tabButton = document.querySelector('.mypage-category-box').getElementsByTagName('button');
+let tabButtonHover = 'mypage-category-box > button:hover {transform: scale(1.1);}'
+
+for (let i = 0; i < tabButton.length; i++) {
+    tabButton[i].addEventListener('click', (e) => {
+        $('.mypage-category-box').find('button').attr('style', '')
+        e.target.style.transform = "scale(1.1)"
+    })
+}
 
 async function myInfo() {
     const userData = await getUserView();
-    
+
     if (userData == undefined) {
         alert("회원 정보가 없어 메인페이지로 돌아갑니다.")
         window.location.replace("../index.html")
@@ -30,14 +41,37 @@ async function myInfo() {
     const newMyScore = document.createElement('div')
     newMyScore.setAttribute('class', 'info-text-score')
 
-    if(userData['score'] == null) {
+    if (userData['score'] == null) {
         newMyScore.innerText = "유저점수 없음"
         newProfileInfoText.append(newMyScore)
     }
-    else{
-        newMyScore.innerText = "유저점수 " + userData['score']
+    else {
+        //유저 점수에 따른 색
+        if (userData['score'] >= 80) {
+            //초록색
+            newMyScore.innerText = "유저점수 " + userData['score'] + " 😄"
+            newMyScore.style.color = "rgb(6, 190, 0)"
+        }
+        else if (userData['score'] < 80 && userData['score'] >= 60) {
+            //파란색
+            newMyScore.innerText = "유저점수 " + userData['score'] + " 🙂"
+            newMyScore.style.color = "rgb(0, 104, 190)"
+        }
+        else if (userData['score'] < 60 && userData['score'] > 30) {
+            //주황색
+            newMyScore.innerText = "유저점수 " + userData['score'] + " 😐"
+            newMyScore.style.color = "rgb(255, 201, 101)"
+        }
+        else if (userData['score'] <= 30) {
+            //빨간색
+            newMyScore.innerText = "유저점수 " + userData['score'] + " 👿"
+            newMyScore.style.color = "rgb(255, 0, 0)"
+        }
+
+        newMyScore.style.fontWeight = "bold"
         newProfileInfoText.append(newMyScore)
     }
+
     //페이지 로딩시 유저정보
     Profilecheck(userData)
 }
@@ -45,7 +79,7 @@ async function myInfo() {
 
 async function myPageTabInfo(tab) {
     let param = tab.id
-    const data = await myPageApiView(param) //data 전부다 
+    const data = await myPageApiView(param) //data 전부다
 
     mypageTapWrap.replaceChildren();
     if (data == "") {
@@ -61,20 +95,23 @@ async function myPageTabInfo(tab) {
     else {
         for (let i = 0; i < data.length; i++) {
             const item = data[i]['item']
+            const rentalDate = data[i]['rental_date']
+            const timeRemaining = data[i]['time_remaining']
+            console.log(data[i]['time_remaining'])
             const itemId = item['id']
-    
+
             const newTabContainer = document.createElement('div')
             newTabContainer.setAttribute('class', 'tab-info-container')
             mypageTapWrap.append(newTabContainer)
-        
+
             const newTabBox = document.createElement('div')
             newTabBox.setAttribute('class', 'tab-info-box')
             newTabContainer.append(newTabBox)
-        
+
             const newTabInner = document.createElement('div')
             newTabInner.setAttribute('class', 'tab-inner-box')
             newTabBox.append(newTabInner)
-        
+
             //이미지
             const newTabImage = document.createElement('img')
             newTabImage.setAttribute('class', 'tab-info-image')
@@ -83,28 +120,53 @@ async function myPageTabInfo(tab) {
                 location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
             })
             newTabInner.append(newTabImage)
-        
+
             const newTabTextBox = document.createElement('div')
             newTabTextBox.setAttribute('class', 'tab-info-text')
             newTabInner.append(newTabTextBox)
-            
+
             //섹션
             const newTextSection = document.createElement('div')
             newTextSection.setAttribute('class', 'info-text-section')
             newTextSection.innerText = item['section']
             newTabTextBox.append(newTextSection)
-        
+
+            if (item['section'] == "빌려요") {
+                newTabBox.style.backgroundColor = "#FDE7C5"
+                newTextSection.style.backgroundColor = "#FDB288"
+            }
+
             //아이템 제목
             const newTextTitle = document.createElement('div')
             newTextTitle.setAttribute('class', 'info-text-title')
             newTextTitle.innerText = item['title']
             newTabTextBox.append(newTextTitle)
-        
-            //시간, 스테이터스
-            const newInfoData = document.createElement('div')
-            newInfoData.setAttribute('class', 'info-data')
-            newInfoData.innerText = item['status']
-            newTabBox.append(newInfoData)    
+
+            if (param == "ongoing") {
+                //남은 기간
+                const newInfoData = document.createElement('div')
+                newInfoData.setAttribute('class', 'info-data')
+                newInfoData.innerText = timeRemaining + " 남음"
+                newInfoData.style.textAlign = "center"
+                newTabBox.append(newInfoData)
+            }
+            else if (param == "closed") {
+                //날짜
+                const newInfoData = document.createElement('div')
+                newInfoData.setAttribute('class', 'info-data')
+                newInfoData.innerText = rentalDate
+                newInfoData.style.textAlign = "left"
+                newTabBox.append(newInfoData)
+            }
+            else {
+                //스테이터스
+                const newInfoData = document.createElement('div')
+                newInfoData.setAttribute('class', 'info-data')
+                newInfoData.innerText = item['status']
+                newInfoData.style.fontSize = "16px"
+                newInfoData.style.textAlign = "center"
+                newTabBox.append(newInfoData)
+            }
         }
     }
 
@@ -161,7 +223,7 @@ function Profilecheck(userData) {
     const newProfileInfoBox = document.createElement('div')
     newProfileInfoBox.setAttribute('class', 'myprofile-info-box')
     newProfileBox.append(newProfileInfoBox)
-    
+
     const newNicknameBox = document.createElement('div')
     newNicknameBox.setAttribute('class', 'myprofile-nickname')
     newProfileInfoBox.append(newNicknameBox)
@@ -176,7 +238,7 @@ function Profilecheck(userData) {
     const newPutNickname = document.createElement('div')
     newPutNickname.setAttribute('class', 'myprofile-nickname-btn')
     newNicknameBox.append(newPutNickname)
-    
+
     const newNicknameText = document.createElement('p')
     newNicknameText.innerText = "닉네임 변경"
     newPutNickname.append(newNicknameText)
@@ -222,7 +284,7 @@ function Profilecheck(userData) {
     newCurrentPw.setAttribute('id', 'current-pw')
     newPasswordBox.append(newCurrentPw)
 
-   
+
     const newChangedPw = document.createElement('input')
     newChangedPw.setAttribute('class', 'profile-input')
     newChangedPw.setAttribute('placeholder', '새 비밀번호')
@@ -230,7 +292,7 @@ function Profilecheck(userData) {
     newChangedPw.setAttribute('id', 'new-pw')
     newPasswordBox.append(newChangedPw)
 
-    
+
     const newCheckPw = document.createElement('input')
     newCheckPw.setAttribute('class', 'profile-input')
     newCheckPw.setAttribute('placeholder', '새 비밀번호 재입력')
@@ -261,7 +323,7 @@ function Profilecheck(userData) {
     const newDeleteBtn = document.createElement('button')
     newDeleteBtn.setAttribute('class', 'delete-user-btn')
     newDeleteBtn.addEventListener('click', () => {
-        userDeleteApiView()
+        userDeleteModal()
     })
     newDeleteBtn.innerText = "회원 탈퇴"
     newSubmitBox.append(newDeleteBtn)
@@ -293,13 +355,70 @@ function siteFeedback() {
     const newSubmitBtnDiv = document.createElement('div')
     newSubmitBtnDiv.setAttribute('class', 'submit-btn')
     newFeedbackBody.append(newSubmitBtnDiv)
-    
+
     const newSubmitBtn = document.createElement('button')
     newSubmitBtn.addEventListener('click', () => {
         feedbackApiView()
     })
     newSubmitBtn.innerText = "전달하기"
     newSubmitBtnDiv.append(newSubmitBtn)
+}
+
+// 문의하기 버튼 클릭
+async function userDeleteModal() {
+
+    // 모달 바디 추가
+    const body = document.getElementsByTagName('body')[0]
+    body.style.overflow = 'hidden' // 스크롤 히든
+
+    const inquiryModalBody = document.createElement('div')
+    inquiryModalBody.setAttribute('class', 'delete-modal-body')
+    body.append(inquiryModalBody)
+
+    // 모달 컨테이너 추가
+    const inquiryModalContainer = document.createElement('div')
+    inquiryModalContainer.setAttribute('class', 'delete-modal-container')
+    inquiryModalBody.append(inquiryModalContainer)
+
+    // 모달 텍스트 추가
+    const inquiryModalText = document.createElement('p')
+    inquiryModalText.innerText =
+        `확인 버튼을 누르시면 회원 탈퇴가 진행됩니다. 
+        탈퇴 진행 하시겠습니까?`
+    inquiryModalContainer.append(inquiryModalText)
+
+    // 모달 버튼 박스 추가
+    const inquiryModalBtnBox = document.createElement('div')
+    inquiryModalBtnBox.setAttribute('class', 'delete-modal-btn-box')
+    inquiryModalContainer.append(inquiryModalBtnBox)
+
+    // 모달 버튼 추가
+    const inquiryModalEnterBtn = document.createElement('button')
+    inquiryModalEnterBtn.innerText = '확인'
+    const inquiryModalCancelBtn = document.createElement('button')
+    inquiryModalCancelBtn.innerText = '취소'
+    inquiryModalBtnBox.append(inquiryModalEnterBtn, inquiryModalCancelBtn)
+
+    // 모달 확인 버튼 클릭시
+    inquiryModalEnterBtn.addEventListener('click', function () {
+        userDeleteApiView()
+        body.style.overflow = 'auto'
+        inquiryModalBody.style.display = 'none'
+    })
+
+    // 모달 취소 버튼 클릭시
+    inquiryModalCancelBtn.addEventListener('click', function () {
+        body.style.overflow = 'auto'
+        inquiryModalBody.style.display = 'none'
+    })
+
+    // 모달 박스 바깥 클릭시
+    inquiryModalBody.addEventListener('click', function (e) {
+        if (e.target == inquiryModalBody) {
+            body.style.overflow = 'auto'
+            inquiryModalBody.style.display = 'none'
+        }
+    })
 }
 
 myInfo();
