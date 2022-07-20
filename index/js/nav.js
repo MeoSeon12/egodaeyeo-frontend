@@ -9,6 +9,7 @@ const signupContainer = document.querySelector('#signup-modal-container')
 const addressContainer = document.querySelector('#address-modal-container')
 const reviewContainer = document.querySelector('#review-modal-container')
 const rentalDateContainer = document.querySelector('#rental-date-modal-container')
+const chatContainer = document.querySelector('#chat-modal-container')
 
 const signUpBtn = document.querySelector('.signup-submit-btn')
 const loginBtn = document.querySelector('.login-btn')
@@ -16,6 +17,11 @@ const logoutBtn = document.querySelector('.logout-btn')
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
 const reviewSubmitBtn = document.querySelector('.review-submit-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
+<<<<<<< HEAD
+=======
+const chatBtn = document.querySelector('.chat-btn')
+const chatBtnHover = 'chat-btn:hover {cursor: pointer; background-color: #ffe398;}'
+>>>>>>> 38f0219ee6e09fa0f3cd38294e76a124f9a01fa0
 
 const rentalStartTime = document.getElementById('rental-start-time')
 const rentalEndTime = document.getElementById('rental-end-time')
@@ -65,6 +71,29 @@ function loginContainerView(){
     loginContainer.style.animation = ''
 }
 
+<<<<<<< HEAD
+=======
+let chatBtnCount = 0
+function chatModalView(){
+    if (chatBtnCount % 2 === 0){
+        chatModalBody.style.display = 'flex'
+        chatBtn.style.backgroundColor = '#ffe398'
+        chatBtnCount ++; 
+    }
+    else {
+        body.style.overflow = 'auto'
+        chatModalBody.style.display = 'none'
+        chatBtn.style.backgroundColor = '#E6E6E6'
+        chatBtn.style.cssText = chatBtnHover
+        chatBtnCount ++;
+    }
+}
+
+requestContractBtn.addEventListener('click', (e) => {
+    rentalDateModalView()
+})
+
+>>>>>>> 38f0219ee6e09fa0f3cd38294e76a124f9a01fa0
 function loginModalUnview(){
     body.style.overflow = 'auto'
     loginModalBody.style.display = 'flex'
@@ -88,7 +117,29 @@ function reviewModalUnview(){
 function rentalDateModalUnview(){
     body.style.overflow = 'auto'
     rentalDateModalBody.style.display = 'none'
+<<<<<<< HEAD
     rentalDateModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+=======
+}
+
+// 물품 목록 버튼
+function goItemListPage() {
+    location.href = '../item/list.html'
+}
+
+// 물품 등록 버튼
+function goUploadPage() {
+
+    // 비 로그인 유저일 경우
+    if (localStorage.payload == undefined) {
+        alert('로그인 후 이용 가능합니다')
+    }
+    
+    // 로그인 유저일 경우
+    else {
+        location.href = '../item/upload.html'
+    }
+>>>>>>> 38f0219ee6e09fa0f3cd38294e76a124f9a01fa0
 }
 
 // modalUnviews
@@ -119,11 +170,15 @@ $("#loginPassword").keyup(function(event) {
 if (localStorage.payload !== undefined) {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
+    chatBtn.style.display = "block";
+    chatModalBody.style.animation = 'roadRunnerIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards';
+    chatContainer.style.animation = 'roadRunnerIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards';
 }
 
 else {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
+    chatBtn.style.display = "none";
 }
 
 
