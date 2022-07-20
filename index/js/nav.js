@@ -10,6 +10,7 @@ const signupContainer = document.querySelector('#signup-modal-container')
 const addressContainer = document.querySelector('#address-modal-container')
 const reviewContainer = document.querySelector('#review-modal-container')
 const rentalDateContainer = document.querySelector('#rental-date-modal-container')
+const chatContainer = document.querySelector('#chat-modal-container')
 
 const signUpBtn = document.querySelector('.signup-submit-btn')
 const loginBtn = document.querySelector('.login-btn')
@@ -71,11 +72,13 @@ function chatModalView(){
     if (chatBtnCount % 2 === 0){
         body.style.overflow = 'hidden'
         chatModalBody.style.display = 'flex'
-        chatBtnCount ++;
+        chatBtn.style.backgroundColor = '#ffe398'
+        chatBtnCount ++; 
     }
     else {
         body.style.overflow = 'auto'
         chatModalBody.style.display = 'none'
+        chatBtn.style.backgroundColor = '#E6E6E6'
         chatBtnCount ++;
     }
 }
@@ -151,11 +154,15 @@ $("#loginPassword").keyup(function(event) {
 if (localStorage.payload !== undefined) {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
+    chatBtn.style.display = "block";
+    chatModalBody.style.animation = 'roadRunnerIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards';
+    chatContainer.style.animation = 'roadRunnerIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards';
 }
 
 else {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
+    chatBtn.style.display = "none";
 }
 
 
