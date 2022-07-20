@@ -1,5 +1,4 @@
 .item-wrap {
-    /* background-color: blue; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,8 +27,7 @@
 
 .bx-wrapper {
     margin-bottom: 20px !important;
-    border: 0 !important;
-    border-radius: 50% !important;
+    box-shadow: none !important;
 }
 
 .bx-prev {
@@ -64,7 +62,6 @@
 .user-container {
     display: flex;
     align-items: center;
-    /* background-color: green; */
 }
 
 .user-container > #post-user-image {
@@ -212,7 +209,6 @@
     width: 50px;
     height: 50px;
     object-fit: cover;
-    border-radius: 50%;
 }
 
 .review-user-box > span {
