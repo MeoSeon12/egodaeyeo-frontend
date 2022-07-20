@@ -18,7 +18,7 @@
     min-height: 210px;
     flex-wrap: wrap;
     justify-content: center;
-    border: 3px solid #B5B5B5;
+    border: 2px solid #B5B5B5;
     border-radius: 10px;
 }
 
@@ -59,11 +59,16 @@
 .file-input-custom > div > p:nth-child(1) {
     font-size: 50px;
     color: transparent;
+    text-shadow: 0 0 0 gray;
+}
+
+.file-input-custom:hover > div > p:nth-child(1) {
     text-shadow: 0 0 0 rgba(0, 255, 21, 0.514);
 }
 
 .file-list {
     width: 100%;
+    margin: 5px 0;
 }
 
 .filebox p {
@@ -79,7 +84,6 @@
 }
 
 .text-cotainer {
-    margin: 10px 0;
     width: 620px;
     border-top: 1px solid #B5B5B5;
     border-bottom: 1px solid #B5B5B5;
@@ -90,19 +94,42 @@
     justify-content: center;
 }
 
+.dropdown-box {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.dropdown-box > select {
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 1px solid #B5B5B5;
+    margin-right: 10px;
+}
+
+.dropdown-box > select:focus-visible {
+    outline: none;
+}
+
 #title {
     width: 600px;
     border: 1px solid #B5B5B5;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 #title:focus {
     outline: none;
 }
 
-#desc {
+#price {
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 1px solid #B5B5B5;
+    height: 22px;
+}
+
+#content {
     width: 600px;
     border: 1px solid #B5B5B5;
     border-radius: 5px;
@@ -111,7 +138,7 @@
     min-height: 200px;
 }
 
-#desc:focus {
+#content:focus {
     outline: none;
 }
 

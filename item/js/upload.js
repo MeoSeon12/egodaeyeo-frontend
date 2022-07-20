@@ -1,3 +1,20 @@
+// 페이지 뷰
+async function UploadPageView() {
+
+    const data = await getUploadPageViewData()
+
+    const categorySelect = document.getElementById('category')
+    
+    // 카테고리
+    for (let i = 0; i < data.length; i++) {
+        const category = document.createElement('option')
+        category.setAttribute('value', data[i].name)
+        category.innerText = `# ${data[i].name}`
+        categorySelect.append(category)
+    }
+}
+
+
 let fileNo = 0
 let filesArr = new Array()
 let previewArr = new Array()
@@ -18,12 +35,10 @@ function imgUpload(obj) {
 
     // 최대 개수 넘지 않았을 시
     else {
-
         for (const file of obj.files) {
-            
             const prImg = document.getElementById('pr-img')
             // 총 첨부된 이미지가 0, 3개 있을 시
-            if (attFileCnt + curFileCnt == 0 | attFileCnt + curFileCnt == 3) {
+            if (attFileCnt + curFileCnt == 0 || attFileCnt + curFileCnt == 3) {
                 prImg.style.justifyContent = 'center'
             } 
             else {
@@ -75,10 +90,13 @@ function deleteFile(num) {
 
     const prImg = document.getElementById('pr-img')
         // 총 첨부된 이미지가 0, 3개 있을 시
-        if (attFileCnt == 0 | attFileCnt == 3) {
+        if (attFileCnt == 0 || attFileCnt == 3) {
             prImg.style.justifyContent = 'center'
         }
         else {
             prImg.style.justifyContent = 'normal'
         }
 }
+
+
+UploadPageView()    // 페이지 뷰

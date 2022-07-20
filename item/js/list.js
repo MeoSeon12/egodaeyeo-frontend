@@ -211,15 +211,16 @@ function itemDataAppend(itemsInfo) {
             newItemPrice.innerText = "가격 협의"
             newItemDesc.append(newItemPrice)
         }else {
-            newItemPrice.innerText = item['price'].toLocaleString() + " /"
+            newItemPrice.innerText = item['price'].toLocaleString() + " / "
             newItemDesc.append(newItemPrice)
+            
+            //가격단위
+            const newPriceUnit = document.createElement('span')
+            newPriceUnit.setAttribute("class", "price-time-unit")
+            newPriceUnit.innerText = item['time_unit']
+            newItemPrice.append(newPriceUnit)
         }
 
-        //가격단위
-        const newPriceUnit = document.createElement('span')
-        newPriceUnit.setAttribute("class", "price-time-unit")
-        newPriceUnit.innerText = item['time_unit']
-        newItemPrice.append(newPriceUnit)
 
         // //주소
         // const newItemLocation = document.createElement('div')
