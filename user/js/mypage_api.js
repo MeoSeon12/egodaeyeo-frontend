@@ -76,8 +76,6 @@ async function profileApiView() {
         formDataUser.append('address', address)
         formDataUser.append('current_password', currentPassword)
         formDataUser.append('password', newPassword)
-
-        console.log(formDataUser)
     
         const token = localStorage.getItem("access_token");
         if (token == null) {

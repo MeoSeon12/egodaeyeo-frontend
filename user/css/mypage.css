@@ -61,6 +61,11 @@ h2 {
     font-weight: bold;
 }
 
+.info-text-score {
+    opacity: 0.6;
+    color: #3f3f3f;
+}
+
 .mypage-category-box {
     max-width: 330px;
     width: 100%;
@@ -113,7 +118,7 @@ h2 {
     max-width: 700px;
     width: 95%;
     height: 165px;
-    background-color: rgb(191, 255, 194);
+    background-color: #74C5AC;
     margin: 5px 0;
     display: flex;
     flex-direction: row;
@@ -126,6 +131,7 @@ h2 {
     display: flex;
     flex-direction: row;
     align-items: center;
+    cursor: pointer;
 }
 
 .tab-info-text {
@@ -136,25 +142,29 @@ h2 {
 }
 
 .info-text-section {
-    background-color: rgb(145, 255, 145);
+    background-color: #9BFB79;
     text-align: center;
-    width: 110px;
-    height: 30px;
-    line-height: 30px;
+    width: 90px;
+    font-size: 13px;
+    height: 24px;
+    line-height: 24px;
     border-radius: 30px;
 }
 
 .info-text-title {
-    text-align: center;
+    text-align: left;
     font-weight: bold;
+    width: 330px;
+    margin-left: 10px;
 }
 
 .info-data {
-    width: 150px;
+    width: 200px;
     height: 30px;
     line-height: 30px;
-    font-size: 14px;
-    color: rgb(121, 121, 121);
+    font-size: 15px;
+    color: rgb(94, 94, 94);
+    white-space: nowrap;
 }
 
 /* 프로필 수정 */
@@ -181,12 +191,12 @@ h2 {
 }
 
 .tab-info-image {
-    max-width: 150px;
+    max-width: 135px;
     width: 100%;
-    height: 150px;
-    margin: 8px 0 9px 8px;
+    height: 135px;
+    margin: 8px 0 9px 14px;
     object-fit: cover;
-    border-radius: 40px;
+    border-radius: 10px;
 }
 
 .myprofile-image-box > input {
@@ -326,7 +336,6 @@ h2 {
 }
 
 .feedback-body {
-    /* background-color: orange; */
     max-width: 700px;
     width: 100%;
     height: 500px;
@@ -384,6 +393,65 @@ h2 {
 .submit-btn > button:hover {
     background-color: rgb(153, 250, 158, 0.8);
     transform: scale(1.1);
+}
+
+/* 회원탈퇴 모달 */
+.delete-modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.delete-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.delete-modal-container > p {
+    margin: 0;
+    text-align: center;
+}
+
+.delete-modal-btn-box {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.delete-modal-btn-box > button {
+    border: 0;
+    border-radius: 20px;
+    padding: 5px 20px;
+    background-color: rgb(228, 228, 228);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.delete-modal-btn-box > button:nth-child(1):hover {
+    background-color: rgb(191, 255, 194);
+    transition: all 0.5s ease;
+    transform: scale(1.2);
+}
+
+.delete-modal-btn-box > button:nth-child(2):hover {
+    background-color: #ffe398;
+    transition: all 0.5s ease;
+    transform: scale(1.2);
 }
 
 @media screen and (max-width: 769px) {
