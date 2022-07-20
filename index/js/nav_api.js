@@ -51,7 +51,7 @@ $.ajaxSetup({
 
 //정규표현식 아이디 한글, 영문, 숫자
 function checkID(asValue) {
-    const regid = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+    const regid = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,10}$/;
     return regid.test(asValue);
 }
 
