@@ -522,15 +522,17 @@ nav {
     height: 70px;
     width: 70px;
     border-radius: 50%;
-    border: none;
+    border: 2px solid transparent;
     font-size: 13px;
     font-weight: bold;
     font-family: 'IBMPlexSansKR-Regular';
     margin: 10px 10px;
+    flex-wrap: wrap;
 }
 
 .chat-room:hover {
     cursor: pointer;
+    border: 2px solid yellowgreen;
 }
 
 .chat-open-btn:hover {
@@ -733,11 +735,20 @@ nav {
 }
 
 
-.material-symbols-outlined {
+.chat-submit-btn {
     transform: scale(1.5);
     font-variation-settings:
         'FILL'0,
         'wght'500,
         'GRAD'0,
         'opsz'48
+}
+
+.nickname {
+    width: 100%;
+    max-width: 60px;
+    overflow-wrap: break-word;
+    display: flex; 
+    justify-content: center
+
 }

@@ -5,6 +5,12 @@ kakaoBtn.addEventListener("click", (e) => {
     kakaoLogin();
 })
 
+const kakaoAddressSubmitBtn = document.querySelector('.address-submit-btn')
+kakaoAddressSubmitBtn.addEventListener("click", (e) => {
+    console.log('workworkw???')
+    onAddressEnter();
+})
+
 function kakaoLogin() {
     window.Kakao.Auth.login({
         scope: 'profile_nickname, account_email',
@@ -55,14 +61,14 @@ async function onAddressEnter() {
 
     const token = localStorage.getItem("access_token");
     const address = document.getElementById("address-kakao2").value;
-    const userId = JSON.parse(localStorage.getItem("payload")).user_id;
+    // const userId = JSON.parse(localStorage.getItem("payload")).user_id;
 
-    const response = await fetch(`${backEndBaseUrl}/users/${userId}/`, {
+    const response = await fetch(`${backEndBaseUrl}/users/`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': token,
+            'Authorization': 'Bearer ' + token,
             'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify({

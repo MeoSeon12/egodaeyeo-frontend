@@ -21,6 +21,7 @@ const requestContractBtn = document.querySelector('.request-contract-btn')
 const endContractBtn = document.querySelector('.request-contract-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
 const chatBtn = document.querySelector('.chat-btn')
+const chatBtnHover = 'chat-btn:hover {cursor: pointer; background-color: #ffe398;}'
 
 const rentalStartTime = document.getElementById('rental-start-time')
 const rentalEndTime = document.getElementById('rental-end-time')
@@ -70,7 +71,6 @@ function loginContainerView(){
 let chatBtnCount = 0
 function chatModalView(){
     if (chatBtnCount % 2 === 0){
-        body.style.overflow = 'hidden'
         chatModalBody.style.display = 'flex'
         chatBtn.style.backgroundColor = '#ffe398'
         chatBtnCount ++; 
@@ -79,6 +79,7 @@ function chatModalView(){
         body.style.overflow = 'auto'
         chatModalBody.style.display = 'none'
         chatBtn.style.backgroundColor = '#E6E6E6'
+        chatBtn.style.cssText = chatBtnHover
         chatBtnCount ++;
     }
 }
