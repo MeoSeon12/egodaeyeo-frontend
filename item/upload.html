@@ -4,29 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이거대여.</title>
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <!-- css-->
     <link rel="stylesheet" href="../index/css/nav.css">
-    <link rel="stylesheet" href="../index/css/footer.css">
-    <link rel="stylesheet" href="../user/css/mypage.css">
+    <link rel="stylesheet" href="css/upload.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
+
 <body>
     <nav>
         <div class="nav-wrap">
             <div class="nav-container">
-                <a href="../index.html"><div class="logo">이거대여.</div></a>
+                <div class="logo">이거대여.</div>
                 <input class="search" placeholder="검색">
                 <div class="nav-btns">
-                    <a class="mypage" href="../user/mypage.html">
+                    <a class="mypage">
                         <img class="mypage-image">
                     </a>
                     <button class="upload-btn" onclick="goUploadPage()">아이템 등록</button>
@@ -80,30 +73,108 @@
     <div class="review-modal-body">
         <div class="review-modal-container" id="review-modal-container">
             <h2 class="review-write">리뷰작성</h2>
-                <div class="rating">
-                    <span><input type="radio" name="rating" id="str5" value="5"><label for="str5">★</label></span>
-                    <span><input type="radio" name="rating" id="str4" value="4"><label for="str4">★</label></span>
-                    <span><input type="radio" name="rating" id="str3" value="3"><label for="str3">★</label></span>
-                    <span><input type="radio" name="rating" id="str2" value="2"><label for="str2">★</label></span>
-                    <span><input type="radio" name="rating" id="str1" value="1"><label for="str1">★</label></span>
-                </div>
-                    <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
-                    <button class="review-submit-btn">작성하기</button>
+            <div class="rating">
+                <span><input type="radio" name="rating" id="str5" value="5"><label for="str5">★</label></span>
+                <span><input type="radio" name="rating" id="str4" value="4"><label for="str4">★</label></span>
+                <span><input type="radio" name="rating" id="str3" value="3"><label for="str3">★</label></span>
+                <span><input type="radio" name="rating" id="str2" value="2"><label for="str2">★</label></span>
+                <span><input type="radio" name="rating" id="str1" value="1"><label for="str1">★</label></span>
+            </div>
+            <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
+            <button class="review-submit-btn">작성하기</button>
             <div class="ask-sign"> <a class="skip-review" onclick="">건너 뛰기</a></div>
         </div>
     </div>
     <div class="rental-date-modal-body">
         <div class="rental-date-modal-container" id="rental-date-modal-container">
             <h2 class="rental-apply">대여신청</h2>
-                <h5>대여 시작일</h5>
-                <input type="datetime-local" id="rental-start-time" name="rental-start-time">
-                <h5>대여 종료일</h5>
-                <input type="datetime-local" id="rental-end-time" name="rental-end-time"  min="timezoneNow">              
-                <button class="rental-date-submit-btn">신청하기</button>
+            <h5>대여 시작일</h5>
+            <input type="datetime-local" id="rental-start-time" name="rental-start-time">
+            <h5>대여 종료일</h5>
+            <input type="datetime-local" id="rental-end-time" name="rental-end-time" min="timezoneNow">
+            <button class="rental-date-submit-btn">신청하기</button>
             <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
         </div>
     </div>
+
     <!-- chat button and modal -->
+    <button class="chat-btn" onclick="chatModalView()">채팅</button>
+
+    <div class="chat-modal-body">
+        <div class="chat-modal-container" id="chat-modal-container">
+            <div class="chat-rooms-container">
+                <div class="chat-room"><span class="nickname">상대닉네임상대닉네임상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
+            </div>
+            <div class="chat-container">
+                <div class="chat-area-container">
+                    <span>채팅공간</span>
+                    <div class="contract-btn-container">
+                        <button class="request-contract-btn">대여신청</button>
+                        <button class="end-contract-btn">대여종료</button>
+                    </div>
+                    <div class="chat-area-container">
+                        <div class="other-chat-wrap">
+                            <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            </div>
+                        </div>
+                        <div class="my-chat-wrap">
+                            <div class="my-chat">얼마까지 알아보고 오셨어요?</div>
+                        </div>
+                        <div class="contract-wrap">
+                            <div class="contract-request">대여신청이 도착했습니다</div>
+                            <div class="contract-look">신청보기</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="chat-send-container">
+                    <textarea type="text" class="chat-text" rows="2" placeholder="채팅을 입력해주세요."></textarea>
+                    <button class="chat-send-btn">
+                        <span class="material-symbols-outlined">
+                            sms
+                        </span>                    
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 본문 -->
+    <div class="form-section">
+        <form id="form">
+            <div id="pr-img">
+                <label class="file-input-custom">
+                    <input type="file" id="file-input" accept="image/*" onchange="imgUpload(this)" multiple />
+                    <div>
+                        <p>✖️</p>
+                        <p>이미지 첨부하기</p>
+                    </div>
+                </label>
+            </div>
+            <div class="file-list"></div>
+            <div class="text-cotainer">
+                <input type="text" id="title" placeholder="제목을 입력해주세요">
+                <textarea type="text" id="desc" placeholder="내용을 입력해주세요"></textarea>
+            </div>
+            <button id="submit" type="button" onclick="submitForm()">등록하기</button>
+        </form>
+    </div>
+    
+</body>
+
+<script type="text/javascript" src="../index/js/nav.js"></script>
+<script type="text/javascript" src="../index/js/nav_api.js"></script>
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" src="../index/js/kakao_api.js"></script>
+<script type="text/javascript" src="js/upload_api.js"></script>
+<script type="text/javascript" src="js/upload.js"></script>
+<script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+</html>
+<!-- chat button and modal -->
     <button class="chat-btn" onclick="chatModalView()">채팅</button>
 
     <div class="chat-modal-body">
@@ -150,36 +221,3 @@
             </div>
         </div>
     </div>
-    <div class="main-body">
-        <div class="main-wrap">
-            <div class="main-left-container">
-                <div class="profile-info-box">
-                    <!-- 프로필 정보 -->
-                </div>
-                <hr>
-                <div class="mypage-category-box">
-                    <button id="ongoing" onclick="myPageTabInfo(this);">📒 대여중인 내역</button>
-                    <button id="closed" onclick="myPageTabInfo(this);">📃 대여종료 내역</button>
-                    <button id="bookmarks" onclick="myPageTabInfo(this);">💚 찜 목록</button>
-                    <button id="myitems" onclick="myPageTabInfo(this);">📖 내가 올린 아이템</button>
-                    <button id="profile" onclick="myInfo();">📸 프로필 정보 변경</button>
-                    <button id="feedback" onclick="siteFeedback();">💌 피드백 작성하기</button>
-                </div>
-            </div>
-            <div class="main-right-container">
-                <div class="mypage-tap-wrap">
-                    <!-- 내역 및 탭 정보 붙는곳-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="../index/js/nav.js"></script>
-    <script type="text/javascript" src="../index/js/nav_api.js"></script>
-    <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script type="text/javascript" src="../index/js/kakao_api.js"></script>
-    <script type="text/javascript" src="../user/js/mypage_api.js"></script>
-    <script type="text/javascript" src="../user/js/mypage.js"></script>
-    <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-</body>
-
-</html>

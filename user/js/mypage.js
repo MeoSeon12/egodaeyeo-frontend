@@ -3,13 +3,17 @@ const mypageTapWrap = document.getElementsByClassName('mypage-tap-wrap')[0]
 
 async function myInfo() {
     const userData = await getUserView();
-
+    
+    if (userData == undefined) {
+        alert("회원 정보가 없어 메인페이지로 돌아갑니다.")
+        window.location.replace("../index.html")
+    }
     profileInfoBox.replaceChildren();
 
     //프로필 이미지
     const newProfileImage = document.createElement('img')
     newProfileImage.setAttribute('class', 'profile-info-image')
-    newProfileImage.setAttribute('src', userData['user_image'])
+    newProfileImage.setAttribute('src', userData['image'])
     profileInfoBox.append(newProfileImage)
 
     const newProfileInfoText = document.createElement('div')
@@ -19,18 +23,19 @@ async function myInfo() {
     //닉네임
     const newMyNickname = document.createElement('div')
     newMyNickname.setAttribute('class', 'info-text-nickname')
-    newMyNickname.innerText = userData['user_nickname']
+    newMyNickname.innerText = userData['nickname']
     newProfileInfoText.append(newMyNickname)
 
     //유저 점수
     const newMyScore = document.createElement('div')
     newMyScore.setAttribute('class', 'info-text-score')
 
-    if(userData['user_score'] == null) {
+    if(userData['score'] == null) {
         newMyScore.innerText = "유저점수 없음"
         newProfileInfoText.append(newMyScore)
-    }else{
-        newMyScore.innerText = "유저점수 " + userData['user_score']
+    }
+    else{
+        newMyScore.innerText = "유저점수 " + userData['score']
         newProfileInfoText.append(newMyScore)
     }
     //페이지 로딩시 유저정보
@@ -41,7 +46,6 @@ async function myInfo() {
 async function myPageTabInfo(tab) {
     let param = tab.id
     const data = await myPageApiView(param) //data 전부다 
-    console.log(data)
 
     mypageTapWrap.replaceChildren();
     if (data == "") {
@@ -53,10 +57,11 @@ async function myPageTabInfo(tab) {
         noContentText.innerText = "해당하는 내역이 없습니다."
         noContent.append(noContentText)
 
-    }else {
+    }
+    else {
         for (let i = 0; i < data.length; i++) {
             const item = data[i]['item']
-            console.log(item)
+            const itemId = item['id']
     
             const newTabContainer = document.createElement('div')
             newTabContainer.setAttribute('class', 'tab-info-container')
@@ -74,6 +79,9 @@ async function myPageTabInfo(tab) {
             const newTabImage = document.createElement('img')
             newTabImage.setAttribute('class', 'tab-info-image')
             newTabImage.setAttribute('src', item['image'])
+            newTabImage.addEventListener('click', () => {
+                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+            })
             newTabInner.append(newTabImage)
         
             const newTabTextBox = document.createElement('div')
@@ -89,7 +97,7 @@ async function myPageTabInfo(tab) {
             //아이템 제목
             const newTextTitle = document.createElement('div')
             newTextTitle.setAttribute('class', 'info-text-title')
-            newTextTitle.innerText = item['section']
+            newTextTitle.innerText = item['title']
             newTabTextBox.append(newTextTitle)
         
             //시간, 스테이터스
@@ -102,6 +110,18 @@ async function myPageTabInfo(tab) {
 
 }
 
+//이미지 업로드시, image-preview기능
+function Reader(event) {
+    let data = event.target
+    let reader = new FileReader()
+    reader.onload = function () {
+        let dataURL = reader.result
+        let offset = "tab-info-image"
+        let output = document.getElementsByClassName(offset)[0]
+        output.src = dataURL
+    }
+    reader.readAsDataURL(data.files[0])
+}
 
 function Profilecheck(userData) {
 
@@ -122,12 +142,21 @@ function Profilecheck(userData) {
     //프로필 이미지
     const newTabImage = document.createElement('img')
     newTabImage.setAttribute('class', 'tab-info-image')
-    newTabImage.setAttribute('src', userData['user_image'])
+    newTabImage.setAttribute('src', userData['image'])
     newImageBox.append(newTabImage)
 
-    const newImageText = document.createElement('p')
-    newImageText.innerText = "프로필 이미지 변경"
-    newImageBox.append(newImageText)
+    const newInputLabel = document.createElement('label')
+    newInputLabel.setAttribute('class', 'profile-upload-btn')
+    newInputLabel.setAttribute('for', 'profile-input')
+    newInputLabel.innerText = "프로필 사진 변경"
+    newImageBox.append(newInputLabel)
+
+    const newImageInput = document.createElement('input')
+    newImageInput.setAttribute('type', 'file')
+    newImageInput.setAttribute('onchange', 'Reader(event)')
+    newImageInput.setAttribute('accept', 'image/*')
+    newImageInput.setAttribute('id', 'profile-input')
+    newImageBox.append(newImageInput)
 
     const newProfileInfoBox = document.createElement('div')
     newProfileInfoBox.setAttribute('class', 'myprofile-info-box')
@@ -137,10 +166,11 @@ function Profilecheck(userData) {
     newNicknameBox.setAttribute('class', 'myprofile-nickname')
     newProfileInfoBox.append(newNicknameBox)
 
-    //인풋창 value 수정 닉네임
+    //닉네임 인풋
     const newNicknameInput = document.createElement('input')
     newNicknameInput.setAttribute('class', 'profile-input')
-    newNicknameInput.value = userData['user_nickname']
+    newNicknameInput.setAttribute('id', 'nickname-input')
+    newNicknameInput.value = userData['nickname']
     newNicknameBox.append(newNicknameInput)
 
     const newPutNickname = document.createElement('div')
@@ -158,7 +188,18 @@ function Profilecheck(userData) {
     //인풋창 value 수정 주소
     const newAddressInput = document.createElement('input')
     newAddressInput.setAttribute('class', 'profile-input')
-    newAddressInput.value = userData['user_address']
+    newAddressInput.setAttribute('id', 'address-input')
+    // 카카오 주소 API(일반유저)
+    newAddressInput.addEventListener("click", function () {
+        new daum.Postcode({
+            oncomplete: function (data) { //선택시 입력값 세팅
+                newAddressInput.value = data.address;
+                newAddressInput.focus();
+            }
+        }).open();
+    });
+    newAddressInput.readOnly = true;
+    newAddressInput.value = userData['address']
     newPutAddress.append(newAddressInput)
 
     const newAddressText = document.createElement('p')
@@ -177,6 +218,7 @@ function Profilecheck(userData) {
     const newCurrentPw = document.createElement('input')
     newCurrentPw.setAttribute('class', 'profile-input')
     newCurrentPw.setAttribute('placeholder', '현재 비밀번호')
+    newCurrentPw.setAttribute('type', 'password')
     newCurrentPw.setAttribute('id', 'current-pw')
     newPasswordBox.append(newCurrentPw)
 
@@ -184,6 +226,7 @@ function Profilecheck(userData) {
     const newChangedPw = document.createElement('input')
     newChangedPw.setAttribute('class', 'profile-input')
     newChangedPw.setAttribute('placeholder', '새 비밀번호')
+    newChangedPw.setAttribute('type', 'password')
     newChangedPw.setAttribute('id', 'new-pw')
     newPasswordBox.append(newChangedPw)
 
@@ -191,6 +234,7 @@ function Profilecheck(userData) {
     const newCheckPw = document.createElement('input')
     newCheckPw.setAttribute('class', 'profile-input')
     newCheckPw.setAttribute('placeholder', '새 비밀번호 재입력')
+    newCheckPw.setAttribute('type', 'password')
     newCheckPw.setAttribute('id', 'check-pw')
     newPasswordBox.append(newCheckPw)
 
@@ -208,16 +252,22 @@ function Profilecheck(userData) {
 
     const newSubmitBtn = document.createElement('button')
     newSubmitBtn.setAttribute('class', 'submit-user-btn')
+    newSubmitBtn.addEventListener('click', () => {
+        profileApiView()
+    })
     newSubmitBtn.innerText = "회원 수정"
     newSubmitBox.append(newSubmitBtn)
 
     const newDeleteBtn = document.createElement('button')
     newDeleteBtn.setAttribute('class', 'delete-user-btn')
+    newDeleteBtn.addEventListener('click', () => {
+        userDeleteApiView()
+    })
     newDeleteBtn.innerText = "회원 탈퇴"
     newSubmitBox.append(newDeleteBtn)
 }
-async function siteFeedback() {
-    // const data = await feedbackApiView()
+
+function siteFeedback() {
 
     mypageTapWrap.replaceChildren();
 
@@ -245,6 +295,9 @@ async function siteFeedback() {
     newFeedbackBody.append(newSubmitBtnDiv)
     
     const newSubmitBtn = document.createElement('button')
+    newSubmitBtn.addEventListener('click', () => {
+        feedbackApiView()
+    })
     newSubmitBtn.innerText = "전달하기"
     newSubmitBtnDiv.append(newSubmitBtn)
 }
