@@ -156,8 +156,24 @@
             </div>
             <div class="file-list"></div>
             <div class="text-cotainer">
+                <div class="dropdown-box">
+                    <select id="section">
+                        <option value="빌려드려요" selected="selected">빌려드려요</option>
+                        <option value="빌려요">빌려요</option>
+                    </select>
+                    <select id="category">
+                        <option>카테고리</option>
+                    </select>
+                    <select id="time">
+                        <option>기간</option>
+                        <option value="시간">1시간</option>
+                        <option value="일">1일</option>
+                        <option value="월">1개월</option>
+                    </select>
+                    <input type="number" id="price" placeholder="가격을 입력해주세요">
+                </div>
                 <input type="text" id="title" placeholder="제목을 입력해주세요">
-                <textarea type="text" id="desc" placeholder="내용을 입력해주세요"></textarea>
+                <textarea type="text" id="content" placeholder="내용을 입력해주세요"></textarea>
             </div>
             <button id="submit" type="button" onclick="submitForm()">등록하기</button>
         </form>
