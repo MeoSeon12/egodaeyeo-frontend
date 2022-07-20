@@ -487,7 +487,7 @@ nav {
     border-radius: 50%;
     border: none;
     right: 90px;
-    bottom: 48px;
+    bottom: 30px;
     font-size: 20px;
     font-weight: bold;
     font-family: 'IBMPlexSansKR-Regular';
@@ -507,8 +507,9 @@ nav {
     height: 700px;
     width: 500px;
     right: 100px;
-    bottom: 150px;
+    bottom: 134px;
     padding: 10px;
+    z-index: 1;
 }
 
 .chat-modal-body:after {
@@ -601,7 +602,7 @@ nav {
 }
 
 .request-contract-btn {
-    background-color: lightskyblue;
+    background-color: #91FDF6;
     font-size: 15px;
     font-weight: bold;
     border: 0;
@@ -749,8 +750,8 @@ nav {
 }
 
 
-.chat-submit-btn {
-    transform: scale(1.5);
+#chat-submit-btn {
+    transform: scale(1.3);
     font-variation-settings:
         'FILL'0,
         'wght'500,
@@ -759,10 +760,5 @@ nav {
 }
 
 .nickname {
-    width: 100%;
-    max-width: 60px;
     overflow-wrap: break-word;
-    display: flex; 
-    justify-content: center
-
 }
