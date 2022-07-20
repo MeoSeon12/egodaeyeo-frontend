@@ -114,8 +114,8 @@
             <div class="chat-rooms-container">
                 <div class="chat-room"><span class="nickname">상대닉네임상대닉네임상대닉네임</span></div>
                 <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
-                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
-                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
+                <div class=" chat-room"><span class="nickname"">상대닉네임</span></div>
+                <div class=" chat-room"><span class="nickname"">상대닉네임</span></div>
             </div>
             <div class="chat-container">
                 <div class="chat-area-container">
@@ -126,14 +126,32 @@
                     </div>
                     <div class="chat-area-container">
                         <div class="other-chat-wrap">
-                            <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                                text ever since the 1500s, when an unknown printer took a galley of type
+                                and scrambled it to make a type specimen book. It has survived not only
+                                five centuries, but also the leap into electronic typesetting, remaining
+                                essentially unchanged. It was popularised in the 1960s with the release
+                                of Letraset sheets containing Lorem Ipsum passages, and more recently
+                                with desktop publishing software like Aldus PageMaker including versions
+                                of Lorem Ipsum.
                             </div>
+                            <div class="chat-time-stamp">오전 11:40</div>
+
+                        </div>
+                        <div class="other-chat-wrap">
+                            <div class="other-chat">선제시 ㅎㅎㅎ
+                            </div>
+                            <div class="chat-time-stamp">오전 11:40</div>
                         </div>
                         <div class="my-chat-wrap">
+                            <div class="chat-time-stamp">오전 11:40</div>
                             <div class="my-chat">얼마까지 알아보고 오셨어요?</div>
                         </div>
                         <div class="my-chat-wrap">
-                            <div class="my-chat">얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요?</div>
+                            <div class="chat-time-stamp">오전 11:40</div>
+                            <div class="my-chat">얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지
+                                알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요?</div>
                         </div>
                         <div class="contract-wrap">
                             <div class="contract-request">대여신청이 도착했습니다</div>
@@ -143,12 +161,13 @@
 
                 </div>
                 <div class="chat-send-container">
-                    <textarea type="text" class="chat-text" rows="2" placeholder="채팅을 입력해주세요."></textarea>
+                    <textarea type="text" class="chat-text" rows="2"
+                        placeholder="채팅을 입력해주세요."></textarea>
                     <button class="chat-send-btn">
-                        <span class="material-symbols-outlined">
+                        <span class="material-symbols-outlined" id="chat-submit-btn">
                             sms
-                        </span>                    
-                        </button>
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -161,12 +180,12 @@
                 </div>
                 <hr>
                 <div class="mypage-category-box">
-                    <button id="ongoing" onclick="myPageTabInfo(this);">📒 대여중인 내역</button>
-                    <button id="closed" onclick="myPageTabInfo(this);">📃 대여종료 내역</button>
-                    <button id="bookmarks" onclick="myPageTabInfo(this);">💚 찜 목록</button>
-                    <button id="myitems" onclick="myPageTabInfo(this);">📖 내가 올린 아이템</button>
-                    <button id="profile" onclick="myInfo();">📸 프로필 정보 변경</button>
-                    <button id="feedback" onclick="siteFeedback();">💌 피드백 작성하기</button>
+                    <button id="ongoing" class="category-tab-btn" onclick="myPageTabInfo(this);">📒 대여중인 내역</button>
+                    <button id="closed" class="category-tab-btn" onclick="myPageTabInfo(this);">📃 대여종료 내역</button>
+                    <button id="bookmarks" class="category-tab-btn" onclick="myPageTabInfo(this);">💚 찜 목록</button>
+                    <button id="myitems" class="category-tab-btn" onclick="myPageTabInfo(this);">📖 내가 올린 아이템</button>
+                    <button id="profile" class="category-tab-btn" onclick="myInfo();">📸 프로필 정보 변경</button>
+                    <button id="feedback" class="category-tab-btn" onclick="siteFeedback();">💌 피드백 작성하기</button>
                 </div>
             </div>
             <div class="main-right-container">

@@ -100,15 +100,19 @@ function selectedSectionItems(e) {
     selectedSection = e.innerText
     showSelectedItems()
 
-    const lendButton = document.getElementById('lend-btn')
     const borrowButton = document.getElementById('borrow-btn')
+    const lendButton = document.getElementById('lend-btn')
+    let borrowHover = 'borrow-btn:hover {background-color: #ffefc2}'
+    let lendHover = 'lend-btn:hover {background-color: rgb(191, 255, 194)}'
 
     if (selectedSection == "빌려드려요") {
         e.style.backgroundColor = "#bfffc2";
         borrowButton.style.backgroundColor = "rgb(236, 236, 236)";
+        borrowButton.style.cssText = borrowHover
     }else{
         e.style.backgroundColor = "#ffefc2";
         lendButton.style.backgroundColor = "rgb(236, 236, 236)";
+        lendButton.style.cssText = lendHover
     }
 }
 
