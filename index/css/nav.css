@@ -581,6 +581,7 @@ nav {
 .contract-btn-container {
     width: 100%;
     display: flex;
+    border-bottom: solid 1.7px gainsboro;
 }
 
 .request-contract-btn {
