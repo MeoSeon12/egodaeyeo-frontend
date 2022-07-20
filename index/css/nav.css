@@ -12,7 +12,7 @@
     font-style: normal;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
@@ -57,7 +57,6 @@ nav {
 }
 
 .nav-container {
-    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -67,7 +66,13 @@ nav {
     margin: 0 10px;
 }
 
-.logo {
+.nav-container > .logo {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.nav-container > .logo > a {
     margin-top: 10px;
     font-size: 30px;
     font-weight: bold;
@@ -78,7 +83,7 @@ nav {
     text-decoration: none;
 }
 
-.logo:hover {
+.nav-container > .logo > a:hover {
     color: rgb(68, 209, 110);
 }
 
@@ -142,16 +147,27 @@ nav {
 .nav-btns {
     display: flex;
     align-items: center;
+    flex-grow: 0.4;
+    justify-content: flex-end
 }
 
-.nav-btns>button {
-    margin: 10px 13px;
+.nav-btns > button {
+    margin: 10px 7px;
     font-size: 15px;
     font-weight: bold;
     border: 0;
     border-radius: 7px;
     height: 40px;
     width: 81px;
+    cursor: pointer;
+}
+
+.item-list-btn {
+    background-color: #91fdf6;
+}
+
+.item-list-btn:hover {
+    background-color: #3ffff2;
 }
 
 .upload-btn {
@@ -166,7 +182,6 @@ nav {
 }
 
 .upload-btn:hover {
-    cursor: pointer;
     background-color: rgb(153, 250, 158);
 }
 
@@ -177,7 +192,6 @@ nav {
 
 .login-btn:hover,
 .logout-btn:hover {
-    cursor: pointer;
     background-color: #ffe398;
 }
 

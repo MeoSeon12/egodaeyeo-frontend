@@ -113,7 +113,12 @@ function rentalDateModalUnview(){
     rentalDateModalBody.style.display = 'none'
 }
 
-// 아이템 등록 버튼
+// 물품 목록 버튼
+function goItemListPage() {
+    location.href = '../item/list.html'
+}
+
+// 물품 등록 버튼
 function goUploadPage() {
 
     // 비 로그인 유저일 경우
