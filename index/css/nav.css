@@ -620,6 +620,23 @@ nav {
     overflow-y: scroll;
 }
 
+.chat-area-wrap::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-area-wrap::-webkit-scrollbar-thumb {
+    background-color: rgb(180, 180, 180);
+    border-radius: 20px;
+}
+
+.chat-area-wrap::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.chat-area-wrap::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(146, 146, 146);
+}
+
 .contract-btn-container {
     width: 100%;
     display: flex;
@@ -627,32 +644,35 @@ nav {
 }
 
 .request-contract-btn {
-    background-color: #91FDF6;
+    background-color: rgb(153, 250, 158);
     font-size: 15px;
     font-weight: bold;
     border: 0;
     border-radius: 7px;
     height: 40px;
-    width: 81px;
+    width: 100%;
     margin: 10px 6px;
 }
 
 .end-contract-btn {
-    background-color: greenyellow;
+    background-color: #ffe398;
     font-size: 15px;
     font-weight: bold;
     border: 0;
     border-radius: 7px;
     height: 40px;
-    width: 81px;
+    width: 100%;
     margin: 10px 6px;
-
 }
 
-.request-contract-btn:hover,
+.request-contract-btn:hover {
+    cursor: pointer;
+    background-color: rgb(191, 255, 194);
+}
+
 .end-contract-btn:hover {
     cursor: pointer;
-    background-color: #ffe398;
+    background-color: #ffefc2;
 }
 
 .chat-send-container {
@@ -715,7 +735,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px 10px;
+    margin: 5px;
     padding: 5px;
 }
 
@@ -730,7 +750,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px 5px;
+    margin: 5px 10px;
     padding: 5px;
 }
 
@@ -738,43 +758,27 @@ nav {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: end;
-}
-
-
-.contract-request {
-    background-color: #91FDF6;
-    font-size: 15px;
-    font-weight: bold;
-    border: 0;
-    border-radius: 7px;
-    height: 50px;
-    width: 180px;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 10px;
 }
 
 .contract-look {
-    background-color: #91FDF6;
+    background-color: rgb(153, 250, 158);
     font-size: 15px;
     font-weight: bold;
     border: 0;
     border-radius: 7px;
     height: 40px;
-    width: 81px;
+    width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0px 54px;
+    margin: 5px;
 }
 
 .contract-look:hover {
     cursor: pointer;
-    background-color: #ffe398;
+    background-color: rgb(191, 255, 194);
 }
-
 
 #chat-submit-btn {
     transform: scale(1.3);
