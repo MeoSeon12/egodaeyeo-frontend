@@ -184,6 +184,32 @@ async function onLogin() {
     }
 }
 
+async function onSearchSubmit(searchValue) {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${backEndBaseUrl}/items/search?search=${searchValue}`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(searchValue)
+    }
+    )
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        window.location.replace(`${backEndBaseUrl}/items/search?search=${searchValue}`)
+    } else {
+        console.log(response_json)
+    }
+}
+
+
+
 async function onReviewSubmit() {
     const reviewContent = document.querySelector('#review').value
     const starRating = document.querySelector('input[name="rating"]:checked').value
@@ -208,8 +234,7 @@ async function onReviewSubmit() {
     response_json = await response.json()
 
     if (response.status == 200) {
-        alert("리뷰 작성 완료!")
-        window.location.reload()
+        window.location.href = '../item/search.html'
     } else {
         console.log(response_json)
     }
