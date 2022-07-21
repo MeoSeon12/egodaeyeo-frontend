@@ -492,6 +492,7 @@ nav {
     font-weight: bold;
     font-family: 'IBMPlexSansKR-Regular';
     position: fixed;
+    z-index: 1;
 }
 
 .chat-btn:hover {
@@ -571,7 +572,7 @@ nav {
     border-bottom-left-radius: 20px;
 }
 
-.chat-container {
+.chat-area-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -579,13 +580,13 @@ nav {
     border-top-right-radius: 20px;
 }
 
-.chat-container span {
+.chat-area-container span {
     font-weight: bold;
     font-size: large;
     margin-top: 4px;
 }
 
-.chat-area-container {
+.chat-area-box {
     display: flex;
     flex-direction: column;
     align-items: center;
