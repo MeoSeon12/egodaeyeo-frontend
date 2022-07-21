@@ -97,7 +97,6 @@ async function myPageTabInfo(tab) {
             const item = data[i]['item']
             const rentalDate = data[i]['rental_date']
             const timeRemaining = data[i]['time_remaining']
-            console.log(data[i]['time_remaining'])
             const itemId = item['id']
 
             const newTabContainer = document.createElement('div')
@@ -133,6 +132,12 @@ async function myPageTabInfo(tab) {
 
             if (item['section'] == "빌려요") {
                 newTabBox.style.backgroundColor = "#FDE7C5"
+                newTabBox.onmouseover = function() {
+                    this.style.backgroundColor = "#fcdba7"
+                }
+                newTabBox.onmouseout = function() {
+                    this.style.backgroundColor = "#FDE7C5"
+                }
                 newTextSection.style.backgroundColor = "#FDB288"
             }
 

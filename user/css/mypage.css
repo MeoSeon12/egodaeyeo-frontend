@@ -127,11 +127,15 @@ h2 {
     border-radius: 10px;
 }
 
+.tab-info-box:hover {
+    background-color: #4cc59f;
+    cursor: pointer;
+}
+
 .tab-inner-box {
     display: flex;
     flex-direction: row;
     align-items: center;
-    cursor: pointer;
 }
 
 .tab-info-text {
