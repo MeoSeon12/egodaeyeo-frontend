@@ -1,5 +1,6 @@
 # 👉🏻프로젝트 명 
-### 이거대여.
+![default_item](https://user-images.githubusercontent.com/104349901/180120218-522a246a-b12f-42b5-81b9-092f6a01c8dc.jpg)
+
 <br>  
 
 ## 🎨프로젝트 주제
@@ -30,10 +31,10 @@
 <br><br><br>
 
 ## 🤷🏻‍♂️🤷🏻‍♀️ 머선12조 팀원 및 역할분담
-<b>김규민</b><br>아이템 페이지<br> 마이페이지<br> 소셜로그인<br><br>
-<b>김철현</b><br>회원가입/로그인<br>소셜로그인<br><br>
-<b>김성호</b><br>메인 페이지<br>2<br><br>
-<b>최재완</b><br>아이템 상세페이지<br>2<br>
+<b>김규민</b><br>물품 목록 페이지<br> 마이페이지<br> 소셜로그인<br><br>
+<b>김철현</b><br>회원가입/로그인<br> 소셜로그인<br>리뷰 모달, 채팅 모달<br><br>
+<b>김성호</b><br>메인 페이지<br><br><br>
+<b>최재완</b><br>물품 상세페이지<br>물품 등록 페이지<br><br>
 <br><br><br>
 
 ## 🕘 프로젝트 일정
@@ -59,8 +60,7 @@
 ## ⚙ DB 설계 ERD
 <a href="https://docs.google.com/spreadsheets/d/1ZLFdnhCmHF1gWQ0VjzHNtW1nglS0MMpMtOdWKkzBeQo/edit?usp=sharing">구글 시트 바로가기</a>  
 <br>
-![image](https://user-images.githubusercontent.com/104349901/178717977-f30f75a8-139b-4b89-b4ec-9c8d5d49af26.png)
-
+![image](https://user-images.githubusercontent.com/104349901/178718045-dff3343b-d75e-4a09-af1d-a2403a581261.png)
 
 <br><br><br>
 
