@@ -492,6 +492,7 @@ nav {
     font-weight: bold;
     font-family: 'IBMPlexSansKR-Regular';
     position: fixed;
+    z-index: 1;
 }
 
 .chat-btn:hover {
@@ -571,7 +572,7 @@ nav {
     border-bottom-left-radius: 20px;
 }
 
-.chat-container {
+.chat-area-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -579,13 +580,13 @@ nav {
     border-top-right-radius: 20px;
 }
 
-.chat-container span {
+.chat-area-container span {
     font-weight: bold;
     font-size: large;
     margin-top: 4px;
 }
 
-.chat-area-container {
+.chat-area-box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -595,21 +596,28 @@ nav {
     /* overflow-y: scroll; */
 }
 
-.chat-area-container::-webkit-scrollbar {
+.chat-area-wrap::-webkit-scrollbar {
     width: 8px;
 }
 
-.chat-area-container::-webkit-scrollbar-thumb {
+.chat-area-wrap::-webkit-scrollbar-thumb {
     background-color: rgb(180, 180, 180);
     border-radius: 20px;
 }
 
-.chat-area-container::-webkit-scrollbar-track {
+.chat-area-wrap::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-.chat-area-container::-webkit-scrollbar-thumb:hover {
+.chat-area-wrap::-webkit-scrollbar-thumb:hover {
     background-color: rgb(146, 146, 146);
+    overflow-y: hidden;
+}
+
+.chat-area-wrap {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .contract-btn-container {
@@ -656,11 +664,13 @@ nav {
 
 .chat-text {
     width: 100%;
-    min-height: 30px;
-    max-height: 104px;
-    background-color: #F5F5F5;
     border: none;
     resize: none;
+    font-size: 16px;
+    background-color: #F5F5F5;
+    min-height: 32px;
+    padding: 10px 5px 0 5px;
+    overflow-y: hidden;
 }
 
 .chat-send-btn {
@@ -705,7 +715,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px 5px;
+    margin: 5px 10px;
     padding: 5px;
 }
 
@@ -729,7 +739,6 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: end;
-    padding: 10px;
 }
 
 
@@ -744,7 +753,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
+    margin: 10px;
 }
 
 .contract-look {
@@ -758,7 +767,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px;
+    margin: 0px 54px;
 }
 
 .contract-look:hover {
