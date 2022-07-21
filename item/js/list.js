@@ -215,7 +215,7 @@ function itemDataAppend(itemsInfo) {
             newItemPrice.innerText = "가격 협의"
             newItemDesc.append(newItemPrice)
         }else {
-            newItemPrice.innerText = item['price'].toLocaleString() + " / "
+            newItemPrice.innerText = item['price'].toLocaleString()+ "원" + " / "
             newItemDesc.append(newItemPrice)
             
             //가격단위

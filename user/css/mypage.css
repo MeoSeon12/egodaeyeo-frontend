@@ -15,7 +15,6 @@ h2 {
 .main-body {
     display: flex;
     justify-content: center;
-    min-height: 900px;
 }
 
 .main-wrap {
@@ -24,7 +23,6 @@ h2 {
     justify-content: center;
     max-width: 1300px;
     width: 100%;
-    min-height: 900px;
     margin-top: 80px;
 }
 
@@ -195,8 +193,7 @@ h2 {
 }
 
 .tab-info-image {
-    max-width: 135px;
-    width: 100%;
+    width: 135px;
     height: 135px;
     margin: 8px 0 9px 14px;
     object-fit: cover;
