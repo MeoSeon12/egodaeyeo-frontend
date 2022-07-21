@@ -216,5 +216,9 @@ $(".search").keyup(function(event) {
 //검색 기능 트리거
 searchBtn.addEventListener('click', (e) => {
     const searchValue = document.querySelector('.search').value
-    onSearchSubmit(searchValue)
+    // searchedItemSubmit(searchValue)
+    window.location.replace(`../item/list.html?query=${searchValue}`)
 })
+
+
+

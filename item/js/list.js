@@ -6,11 +6,13 @@ const modalContainer = document.getElementsByClassName('category-modal-container
 const itemWrap = document.getElementsByClassName("item-wrap")[0];
 const categoryBox = document.getElementsByClassName("category-modal-box")[0];
 const categoryText = document.getElementsByClassName("list-category")[0];
+const searchText = document.getElementsByClassName("list-search")[0];
 const sectionText = document.getElementsByClassName("list-section")[0];
 const addressText = document.getElementsByClassName("list-address")[0];
 let pageUrl = ""
 let selectedCategory = ""
 let selectedSection = ""
+
 
 function openModal(){
     modalContainer.style.animation = 'roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
@@ -175,6 +177,8 @@ async function showScrollItems() {
     }
 }
 
+
+
 function itemDataAppend(itemsInfo) {
     //json item 데이터 뽑기
     for (let i = 0; i < itemsInfo.length; i++) {
@@ -258,7 +262,27 @@ function itemDataAppend(itemsInfo) {
     }
 }
 
+async function showSearchedItems(searchValue) {
+    const items = await onSearchApiView(searchValue)
+    const itemsInfo = items['items']['results']
+
+    itemWrap.replaceChildren();
+
+    categoryText.innerText = "#검색"
+    searchText.innerText = "#" + searchValue
+    
+    itemDataAppend(itemsInfo)
+}
+
+window.onload = function(){
+    const query = location.href.split('=')[1]
+    console.log(query)
+    if (query != undefined) {
+        showSearchedItems(query)
+    }
+};
 showAllItems(selectedSection);
+
 
 
 

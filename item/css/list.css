@@ -95,6 +95,10 @@
     font-size: 30px;
 }
 
+.list-search {
+    margin-left: 12px;
+}
+
 .list-section {
     margin-left: 12px;
     color: aqua;
