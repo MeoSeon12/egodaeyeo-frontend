@@ -22,6 +22,7 @@ const endContractBtn = document.querySelector('.request-contract-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
 const chatBtn = document.querySelector('.chat-btn')
 const chatBtnHover = 'chat-btn:hover {cursor: pointer; background-color: #ffe398;}'
+const searchBtn = document.querySelector('#search-icon')
 
 const rentalStartTime = document.getElementById('rental-start-time')
 const rentalEndTime = document.getElementById('rental-end-time')
@@ -204,3 +205,17 @@ function calcTextareaHeight(e) {
     e.style.height = 'auto'
     e.style.height = `${e.scrollHeight}px`
 }
+
+// 검색창에서 엔터 누르면 검색 버튼 트리거
+$(".search").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#search-icon").click();
+    }
+});
+
+//검색 기능 트리거
+searchBtn.addEventListener('click', (e) => {
+    const searchValue = document.querySelector('.search').value
+    // searchView('search')
+    console.log(searchValue)
+})
