@@ -232,6 +232,10 @@ function Profilecheck(userData) {
     newNicknameBox.setAttribute('class', 'myprofile-nickname')
     newProfileInfoBox.append(newNicknameBox)
 
+    const newNicknameText = document.createElement('p')
+    newNicknameText.innerText = "닉네임"
+    newNicknameBox.append(newNicknameText)
+
     //닉네임 인풋
     const newNicknameInput = document.createElement('input')
     newNicknameInput.setAttribute('class', 'profile-input')
@@ -239,18 +243,15 @@ function Profilecheck(userData) {
     newNicknameInput.value = userData['nickname']
     newNicknameBox.append(newNicknameInput)
 
-    const newPutNickname = document.createElement('div')
-    newPutNickname.setAttribute('class', 'myprofile-nickname-btn')
-    newNicknameBox.append(newPutNickname)
-
-    const newNicknameText = document.createElement('p')
-    newNicknameText.innerText = "닉네임 변경"
-    newPutNickname.append(newNicknameText)
 
     const newPutAddress = document.createElement('div')
     newPutAddress.setAttribute('class', 'myprofile-address')
     newProfileInfoBox.append(newPutAddress)
-
+    
+    const newAddressText = document.createElement('p')
+    newAddressText.innerText = "주소 변경"
+    newPutAddress.append(newAddressText)
+    
     //인풋창 value 수정 주소
     const newAddressInput = document.createElement('input')
     newAddressInput.setAttribute('class', 'profile-input')
@@ -268,14 +269,15 @@ function Profilecheck(userData) {
     newAddressInput.value = userData['address']
     newPutAddress.append(newAddressInput)
 
-    const newAddressText = document.createElement('p')
-    newAddressText.innerText = "주소 변경"
-    newPutAddress.append(newAddressText)
 
     const newPutPassword = document.createElement('div')
     newPutPassword.setAttribute('class', 'myprofile-password')
     newProfileInfoBox.append(newPutPassword)
-
+    
+    const newPasswordText = document.createElement('p')
+    newPasswordText.innerText = "비밀번호 변경"
+    newPutPassword.append(newPasswordText)
+    
     const newPasswordBox = document.createElement('div')
     newPasswordBox.setAttribute('class', 'password-input')
     newPutPassword.append(newPasswordBox)
@@ -304,9 +306,6 @@ function Profilecheck(userData) {
     newCheckPw.setAttribute('id', 'check-pw')
     newPasswordBox.append(newCheckPw)
 
-    const newPasswordText = document.createElement('p')
-    newPasswordText.innerText = "비밀번호 변경"
-    newPutPassword.append(newPasswordText)
 
     const newBottomBox = document.createElement('div')
     newBottomBox.setAttribute('class', 'myprofile-bottom-box')
@@ -321,7 +320,7 @@ function Profilecheck(userData) {
     newSubmitBtn.addEventListener('click', () => {
         profileApiView()
     })
-    newSubmitBtn.innerText = "회원 수정"
+    newSubmitBtn.innerText = "변경 사항 저장"
     newSubmitBox.append(newSubmitBtn)
 
     const newDeleteBtn = document.createElement('button')
@@ -387,8 +386,8 @@ async function userDeleteModal() {
     // 모달 텍스트 추가
     const deleteModalText = document.createElement('p')
     deleteModalText.innerText =
-        `확인 버튼을 누르시면 회원 탈퇴가 진행됩니다. 
-        탈퇴 진행 하시겠습니까?`
+        `탈퇴가 완료된 계정은 다시 복구할 수 없습니다. 
+        탈퇴 하시겠습니까?`
     deleteModalContainer.append(deleteModalText)
 
     // 모달 버튼 박스 추가
