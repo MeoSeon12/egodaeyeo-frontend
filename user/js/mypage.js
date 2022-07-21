@@ -140,7 +140,7 @@ async function myPageTabInfo(tab) {
                 newTextSection.style.backgroundColor = "#FDB288"
             }
 
-            //아이템 제목
+            //물품 제목
             const newTextTitle = document.createElement('div')
             newTextTitle.setAttribute('class', 'info-text-title')
             newTextTitle.innerText = item['title']

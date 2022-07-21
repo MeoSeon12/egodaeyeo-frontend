@@ -110,8 +110,8 @@
             <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
         </div>
     </div>
-    <div class="menu-icon-wrap">
-        <span class="material-symbols-outlined menu-modal-icon" onmouseover="openModal()">menu</span>
+    <!-- 검색 페이지 바디 -->
+    <div class="main-body-top">
     </div>
     <div class="main-body">
         <div class="item-section-wrap">
@@ -121,25 +121,15 @@
             </div>
         </div>
         <div class="item-list-category">
-            <p class="list-category"></p>
+            <p class="list-base"></p>
+            <p class="list-search"></p>
             <p class="list-section"></p>
             <p class="list-address"></p>
         </div>
         <div class="item-wrap">
-            <!-- 아이템 붙는곳 -->
-        </div>
-        <div class="category-modal-wrap">
-            <div class="category-modal-container">
-                <div class="category-modal-close">
-                    <button class="category-modal-close-btn" onclick="closeModal()">❌</button>
-                </div>
-                <div class="category-modal-box">
-                    <!-- 카테고리 -->
-                </div>
-            </div>
+            <!--물품 붙는곳 -->
         </div>
     </div>
-
     <!-- chat button and modal -->
     <button class="chat-btn" onclick="chatModalView()">채팅</button>
 
@@ -210,8 +200,8 @@
     <script type="text/javascript" src="../index/js/nav_api.js"></script>
     <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script type="text/javascript" src="../index/js/kakao_api.js"></script>
-    <script type="text/javascript" src="../item/js/list_api.js"></script>
-    <script type="text/javascript" src="../item/js/list.js"></script>
+    <script type="text/javascript" src="../item/js/search_api.js"></script>
+    <script type="text/javascript" src="../item/js/search.js"></script>
     <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </body>

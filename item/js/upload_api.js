@@ -26,7 +26,7 @@ async function submitForm() {
     
     // 비 로그인 유저
     if (token == undefined) {
-        return alert('아이템 등록은 로그인 후 이용가능합니다')
+        return alert('물품 등록은 로그인 후 이용가능합니다')
     }
 
     // 데이터 가져오기

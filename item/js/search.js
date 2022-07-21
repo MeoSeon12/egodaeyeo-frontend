@@ -1,53 +1,32 @@
-const categoryModalBody = document.querySelector('.category-modal-wrap')
-const modalWrap = document.getElementsByClassName('category-modal-wrap')[0]
-const modalContainer = document.getElementsByClassName('category-modal-container')[0]
-
 const itemWrap = document.getElementsByClassName("item-wrap")[0];
-const categoryBox = document.getElementsByClassName("category-modal-box")[0];
-const categoryText = document.getElementsByClassName("list-category")[0];
 const searchText = document.getElementsByClassName("list-search")[0];
 const sectionText = document.getElementsByClassName("list-section")[0];
 const addressText = document.getElementsByClassName("list-address")[0];
-
+const baseText = document.getElementsByClassName("list-base")[0];
 let pageUrl = ""
-let selectedCategory = ""
 let selectedSection = ""
 
+async function showSearchedItems(searchValue) {
 
-function openModal(){
-    modalContainer.style.animation = 'roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.animation = 'fadeIn 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.display = 'flex'
-}
-
-function closeModal(){
-    modalContainer.style.animation = 'scaleLeft 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.animation = 'wrapRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-}
-
-categoryModalBody.addEventListener('mouseover', (e) => {
-    if (e.target == categoryModalBody) {
-        closeModal()
-    }
-})
-
-async function showAllItems(selectedSection) {
-    //api에서 return한 json데이터
-    const items = await itemApiView();
-    const categories = items['categories']
+    const items = await onSearchApiView(searchValue, selectedSection)
     const itemsInfo = items['items']['results']
     const userAddress = itemsInfo[0]['user_address']
     pageUrl = items['items']['next']
 
-    categoryText.innerText = "#전체";
 
+    itemWrap.replaceChildren();
+
+    baseText.innerText = "#검색"
+    //검색 값 # 태그
+    searchText.innerText = "#" + searchValue
+    //유저의 주소 #태그
     if (userAddress == null) {
         addressText.innerText = "";
     }
     else {
         addressText.innerText = "#" + userAddress
     }
-    
+    //섹션 선택 #태그 붙이는 부분
     if (selectedSection == "undefined" || selectedSection == "") {
         sectionText.innerText = "";
     }
@@ -60,27 +39,9 @@ async function showAllItems(selectedSection) {
         sectionText.style.color = '#ffe18a';
     }
 
-    categoryBox.replaceChildren();
-    itemWrap.replaceChildren();
-
-    //카테고리
-    const allCategory = document.createElement("div")
-    allCategory.setAttribute("class", "category-btn")
-    allCategory.setAttribute("onclick", "selectedAllItems()")
-    allCategory.innerHTML += "전체" + '<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'
-    categoryBox.append(allCategory)
-    
-    //json category 데이터 뽑기
-    for (let i = 0; i < categories.length; i++) {
-        const category = categories[i]['name']
-        const newCategory = document.createElement("div")
-        newCategory.setAttribute("class", "category-btn")
-        newCategory.setAttribute("onclick", "selectedCategoryItems(this)")
-        newCategory.innerHTML += category + '<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'
-        categoryBox.append(newCategory)
-    }
+    //검색결과 없을때 예외처리
     if (items['items']['count'] == 0) {
-        itemWrap.innerText = "등록된 물품이 없습니다."
+        itemWrap.innerText = "검색 결과가 없습니다."
         itemWrap.style.justifyContent = "center";
         itemWrap.style.fontSize = "24px";
         itemWrap.style.marginTop = "100px";
@@ -92,23 +53,14 @@ async function showAllItems(selectedSection) {
     }
 }
 
-//파라미터 저장을 위한 함수들
-function selectedAllItems() {
-    selectedCategory = ""
-    showAllItems(selectedSection)
-}
-
-function selectedCategoryItems(e) {
-    //변수에 카테고리 저장
-    selectedCategory = e.innerText
-    showSelectedItems()
-}
-
+//섹션 파라미터 저장을 위한 함수
 function selectedSectionItems(e) {
+    const query = location.href.split('=')[1]
+    
     //변수에 빌려드려요, 빌려요 저장
     selectedSection = e.innerText
-    showSelectedItems()
-
+    showSelectedItems(decodeURI(query))
+    
     const borrowButton = document.getElementById('borrow-btn')
     const lendButton = document.getElementById('lend-btn')
     let borrowHover = 'borrow-btn:hover {background-color: #ffefc2}'
@@ -126,34 +78,23 @@ function selectedSectionItems(e) {
     }
 }
 
-async function showSelectedItems() {
-    const items = await selectedItemApiView(selectedCategory, selectedSection)
+//빌려드려요, 빌려요 섹션 선택시 Api호출 함수
+async function showSelectedItems(query) {
+
+    const items = await onSearchApiView(query, selectedSection)
     const itemsInfo = items['items']['results']
     pageUrl = items['items']['next']
     
 
-    if (selectedCategory == "" && selectedSection == "빌려드려요") {
-        categoryText.innerText = "#전체" + selectedCategory
-        sectionText.innerText = "#" + selectedSection
-        sectionText.style.color = '#85ff8a';
-    }
-    else if (selectedCategory == "" && selectedSection == "빌려요"){
-        categoryText.innerText = "#전체" + selectedCategory
-        sectionText.innerText = "#" + selectedSection
-        sectionText.style.color = '#ffe18a';
-    }
-    else if (selectedSection == "빌려드려요") {
-        categoryText.innerText = "#" + selectedCategory
+    if (selectedSection == "빌려드려요") {
         sectionText.innerText = "#" + selectedSection;
         sectionText.style.color = '#85ff8a';
     }
     else if (selectedSection == "빌려요") {
-        categoryText.innerText = "#" + selectedCategory
         sectionText.innerText = "#" + selectedSection;
         sectionText.style.color = '#ffe18a';
     }
     else if (selectedSection == ""){
-        categoryText.innerText = "#" + selectedCategory
         sectionText.innerText = ""
     }
 
@@ -228,8 +169,7 @@ function itemDataAppend(itemsInfo) {
         if (item['price'] == null) {
             newItemPrice.innerText = "가격 협의"
             newItemDesc.append(newItemPrice)
-        }
-        else {
+        }else {
             newItemPrice.innerText = item['price'].toLocaleString()+ "원" + " / "
             newItemDesc.append(newItemPrice)
             
@@ -266,7 +206,14 @@ function itemDataAppend(itemsInfo) {
     }
 }
 
-showAllItems(selectedSection);
+window.onload = function(){
+    const query = location.href.split('=')[1]
+    console.log(query)
+    showSearchedItems(decodeURI(query))
+};
+
+
+
 
 
 

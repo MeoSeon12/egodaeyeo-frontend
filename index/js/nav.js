@@ -217,7 +217,7 @@ $(".search").keyup(function(event) {
 searchBtn.addEventListener('click', (e) => {
     const searchValue = document.querySelector('.search').value
     // searchedItemSubmit(searchValue)
-    window.location.replace(`../item/list.html?query=${searchValue}`)
+    window.location.replace(`../item/search.html?query=${searchValue}`)
 })
 
 
