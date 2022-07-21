@@ -274,7 +274,7 @@ h2 {
 .myprofile-bottom-box {
     max-width: 660px;
     height: 70px;
-    margin-top: 10px;
+    margin-top: -10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
