@@ -1,8 +1,11 @@
+
+
 .form-section {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 50px;
+    background: url("../../");
 }
 
 #form {
@@ -10,6 +13,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px; 
+    border-radius: 20px; 
+    margin-bottom: 50px;
 }
 
 #pr-img {

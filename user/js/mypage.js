@@ -3,7 +3,6 @@ const mypageTapWrap = document.getElementsByClassName('mypage-tap-wrap')[0];
 const tabButtonClass = document.getElementsByClassName('category-tab-btn')[0];
 const tabButtonBox = document.querySelector('.mypage-category-box')
 const tabButton = document.querySelector('.mypage-category-box').getElementsByTagName('button');
-let tabButtonHover = 'mypage-category-box > button:hover {transform: scale(1.1);}'
 
 for (let i = 0; i < tabButton.length; i++) {
     tabButton[i].addEventListener('click', (e) => {
