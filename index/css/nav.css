@@ -820,3 +820,14 @@ nav {
     font-size: 12px;
     margin-bottom: 3px;
 }
+
+#search-icon {
+    color: gray;
+    position: absolute;
+    left: 55.5%;
+}
+
+#search-icon:hover {
+    color: black;
+    cursor: pointer;
+}

@@ -28,6 +28,9 @@
                     <a href="../index.html">이거대여.</a>
                 </div>
                 <input class="search" placeholder="검색">
+                <span class="material-symbols-outlined" id="search-icon">
+                    search
+                </span>
                 <div class="nav-btns">
                     <a class="mypage" href="../user/mypage.html">
                         <img class="mypage-image">
@@ -119,6 +122,7 @@
         </div>
         <div class="item-list-category">
             <p class="list-category"></p>
+            <p class="list-search"></p>
             <p class="list-section"></p>
             <p class="list-address"></p>
         </div>
@@ -144,9 +148,9 @@
         <div class="chat-modal-container" id="chat-modal-container">
             <div class="chat-rooms-container">
                 <div class="chat-room"><span class="nickname">상대닉네임상대닉네임상대닉네임</span></div>
-                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
-                <div class=" chat-room"><span class="nickname"">상대닉네임</span></div>
-                <div class=" chat-room"><span class="nickname"">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname">상대닉네임</span></div>
             </div>
             <div class="chat-area-container">
                 <div class="chat-area-box">
@@ -191,7 +195,7 @@
 
                 </div>
                 <div class="chat-send-container">
-                    <textarea type="text" class="chat-text" rows="1" oninput="calcTextareaHeight()"
+                    <textarea type="text" class="chat-text" rows="1" oninput="calcTextareaHeight(this)"
                         placeholder="채팅을 입력해주세요."></textarea>
                     <button class="chat-send-btn">
                         <span class="material-symbols-outlined" id="chat-submit-btn">

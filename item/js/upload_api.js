@@ -4,7 +4,8 @@ async function getUploadPageViewData() {
     const token = localStorage.getItem('access_token')  // 비 로그인 유저는 null
     
     if (token == null) {
-        alert('아이템 등록은 로그인 후 사용 가능합니다')
+        alert('로그인 후 사용 가능합니다. 메인 페이지로 돌아갑니다')
+        location.href = '../index.html'
     }
 
     const response = await fetch(`${backEndBaseUrl}/items/upload`, {

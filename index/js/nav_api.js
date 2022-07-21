@@ -184,6 +184,48 @@ async function onLogin() {
     }
 }
 
+async function onSearchApiView(searchValue) {
+    
+    const token = localStorage.getItem("access_token");
+    if (token == null) {
+        const response = await fetch(`${backEndBaseUrl}/items/?search=${searchValue}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            }
+        }
+        )
+        return searchAPIResponse(response)
+    }else {
+        const response = await fetch(`${backEndBaseUrl}/items/?search=${searchValue}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'X-CSRFToken': csrftoken,
+                'Authorization': 'Bearer ' + token,
+            }
+        }
+        )
+        return searchAPIResponse(response)
+    }
+}    
+
+async function searchAPIResponse(response) {
+    response_json = await response.json()
+    if (response.status == 200) {
+        
+        items = response_json
+        return items
+    }else if (response.status == 401) {
+        alert("인증 에러가 발생했습니다. 다시 로그인 해주세요.")
+        window.location.replace("../index.html")
+    }else {
+        alert("페이지를 불러오는데 실패했습니다. 다시 접속 해주세요.")
+        window.location.replace("../index.html")
+    }
+}
+
 async function onReviewSubmit() {
     const reviewContent = document.querySelector('#review').value
     const starRating = document.querySelector('input[name="rating"]:checked').value
@@ -208,8 +250,7 @@ async function onReviewSubmit() {
     response_json = await response.json()
 
     if (response.status == 200) {
-        alert("리뷰 작성 완료!")
-        window.location.reload()
+        window.location.href = '../item/search.html'
     } else {
         console.log(response_json)
     }
