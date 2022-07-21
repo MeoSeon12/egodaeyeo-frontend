@@ -295,7 +295,7 @@
 }
 
 .inquiry-modal-btn-box > button:nth-child(2):hover {
-    background-color: #ffe398;
+    background-color: #ffb098;
     transition: all 0.5s ease;
     transform: scale(1.2);
 }

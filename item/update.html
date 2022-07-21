@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="../index/css/nav.css">
     <link rel="stylesheet" href="css/upload.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
@@ -22,9 +19,6 @@
                     <a href="../index.html">이거대여.</a>
                 </div>
                 <input class="search" placeholder="검색">
-                <span class="material-symbols-outlined" id="search-icon">
-                    search
-                </span>
                 <div class="nav-btns">
                     <a class="mypage" href="../user/mypage.html">
                         <img class="mypage-image">
@@ -105,47 +99,6 @@
         </div>
     </div>
 
-    <!-- 본문 -->
-    <div class="page-title-section">
-        <h1>물품 등록하기</h1>
-    </div>
-    <div class="form-section">
-        <form id="form">
-            <div id="pr-img">
-                <label class="file-input-custom">
-                    <input type="file" id="file-input" accept="image/*" onchange="imgUpload(this)" multiple />
-                    <div>
-                        <p>➕</p>
-                        <p>이미지 첨부하기</p>
-                        <p>(최대 5장)</p>
-                    </div>
-                </label>
-            </div>
-            <div class="file-list"></div>
-            <div class="text-cotainer">
-                <div class="dropdown-box">
-                    <select id="section">
-                        <option value="빌려드려요" selected="selected">빌려드려요</option>
-                        <option value="빌려요">빌려요</option>
-                    </select>
-                    <select id="category">
-                        <option>카테고리</option>
-                    </select>
-                    <select id="time">
-                        <option>기간</option>
-                        <option value="시간">1시간</option>
-                        <option value="일">1일</option>
-                        <option value="월">1개월</option>
-                    </select>
-                    <input type="number" id="price" placeholder="가격을 입력해주세요">
-                </div>
-                <input type="text" id="title" placeholder="제목을 입력해주세요">
-                <textarea type="text" id="content" placeholder="내용을 입력해주세요"></textarea>
-            </div>
-            <button id="submit" type="button" onclick="submitForm()">등록하기</button>
-        </form>
-    </div>
-
     <!-- chat button and modal -->
     <button class="chat-btn" onclick="chatModalView()">채팅</button>
 
@@ -211,12 +164,56 @@
             </div>
         </div>
     </div>
+
+    <!-- 본문 -->
+    <div class="page-title-section">
+        <h1>물품 수정하기</h1>
+    </div>
+    <div class="form-section">
+        <form id="form">
+            <div id="pr-img">
+                <label class="file-input-custom">
+                    <input type="file" id="file-input" accept="image/*" onchange="imgUpload(this)" multiple />
+                    <div>
+                        <p>➕</p>
+                        <p>이미지 첨부하기</p>
+                        <p>(최대 5장)</p>
+                    </div>
+                </label>
+            </div>
+            <div class="file-list"></div>
+            <div class="text-cotainer">
+                <div class="dropdown-box">
+                    <select id="section">
+                        <option value="빌려드려요" selected="selected">빌려드려요</option>
+                        <option value="빌려요">빌려요</option>
+                    </select>
+                    <select id="category">
+                        <option>카테고리</option>
+                    </select>
+                    <select id="time">
+                        <option>기간</option>
+                        <option value="시간">1시간</option>
+                        <option value="일">1일</option>
+                        <option value="월">1개월</option>
+                    </select>
+                    <input type="number" id="price" placeholder="가격을 입력해주세요">
+                </div>
+                <input type="text" id="title" placeholder="제목을 입력해주세요">
+                <textarea type="text" id="content" placeholder="내용을 입력해주세요"></textarea>
+            </div>
+            <button id="submit" type="button" onclick="submitForm()">수정하기</button>
+        </form>
+    </div>
+    
 </body>
 
 <script type="text/javascript" src="../index/js/nav.js"></script>
 <script type="text/javascript" src="../index/js/nav_api.js"></script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="../index/js/kakao_api.js"></script>
-<script type="text/javascript" src="js/upload_api.js"></script>
-<script type="text/javascript" src="js/upload.js"></script>
+<script type="text/javascript" src="js/update_api.js"></script>
+<script type="text/javascript" src="js/update.js"></script>
 <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+</html>
