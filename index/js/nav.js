@@ -199,22 +199,7 @@ rentalEndTime.min = now.toISOString().slice(0,16);
 
 
 // 채팅 입력 길이에 맞춰서 높이 조절
-function calcTextareaHeight() {
-    const textArea = document.getElementsByClassName('chat-text')[0]
-    let scrollHeight = textArea.scrollHeight
-    console.log(scrollHeight)
-
-    if (scrollHeight < 56) {
-        textArea.style.height = 'auto'
-        textArea.style.height = '32px'
-    }
-    else if (scrollHeight >= 56 && scrollHeight < 260) {
-        textArea.style.height = 'auto'
-        textArea.style.height = `${textArea.scrollHeight}px`
-    }
-    
-    else if (scrollHeight >= 260) {
-        textArea.style.height = '240px'
-        textArea.style.overflowY = 'auto'
-    }
+function calcTextareaHeight(e) {
+    e.style.height = 'auto'
+    e.style.height = `${e.scrollHeight}px`
 }

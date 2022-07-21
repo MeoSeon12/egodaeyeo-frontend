@@ -670,9 +670,10 @@ nav {
     resize: none;
     font-size: 16px;
     background-color: #F5F5F5;
-    min-height: 32px;
+    height: 32px;
+    max-height: 110px;
     padding: 10px 5px 0 5px;
-    overflow-y: hidden;
+    overflow-y: scroll;
 }
 
 .chat-send-btn {
