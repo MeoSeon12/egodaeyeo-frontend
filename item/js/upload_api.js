@@ -10,6 +10,9 @@ async function getUploadPageViewData() {
 
     const response = await fetch(`${backEndBaseUrl}/items/upload`, {
         method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
     })
 
     if (response.status == 200) {
