@@ -216,6 +216,5 @@ $(".search").keyup(function(event) {
 //검색 기능 트리거
 searchBtn.addEventListener('click', (e) => {
     const searchValue = document.querySelector('.search').value
-    // searchView('search')
-    console.log(searchValue)
+    onSearchSubmit(searchValue)
 })
