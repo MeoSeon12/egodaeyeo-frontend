@@ -73,11 +73,12 @@ function chatModalView(){
     if (chatBtnCount % 2 === 0){
         chatModalBody.style.display = 'flex'
         chatBtn.style.backgroundColor = '#ffe398'
+        chatModalBody.style.animation = 'moveUp 0.5s'
         chatBtnCount ++; 
     }
     else {
         body.style.overflow = 'auto'
-        chatModalBody.style.display = 'none'
+        chatModalBody.style.animation = 'moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
         chatBtn.style.backgroundColor = '#E6E6E6'
         chatBtn.style.cssText = chatBtnHover
         chatBtnCount ++;

@@ -375,52 +375,52 @@ async function userDeleteModal() {
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = 'hidden' // 스크롤 히든
 
-    const inquiryModalBody = document.createElement('div')
-    inquiryModalBody.setAttribute('class', 'delete-modal-body')
-    body.append(inquiryModalBody)
+    const deleteModalBody = document.createElement('div')
+    deleteModalBody.setAttribute('class', 'delete-modal-body')
+    body.append(deleteModalBody)
 
     // 모달 컨테이너 추가
-    const inquiryModalContainer = document.createElement('div')
-    inquiryModalContainer.setAttribute('class', 'delete-modal-container')
-    inquiryModalBody.append(inquiryModalContainer)
+    const deleteModalContainer = document.createElement('div')
+    deleteModalContainer.setAttribute('class', 'delete-modal-container')
+    deleteModalBody.append(deleteModalContainer)
 
     // 모달 텍스트 추가
-    const inquiryModalText = document.createElement('p')
-    inquiryModalText.innerText =
+    const deleteModalText = document.createElement('p')
+    deleteModalText.innerText =
         `확인 버튼을 누르시면 회원 탈퇴가 진행됩니다. 
         탈퇴 진행 하시겠습니까?`
-    inquiryModalContainer.append(inquiryModalText)
+    deleteModalContainer.append(deleteModalText)
 
     // 모달 버튼 박스 추가
-    const inquiryModalBtnBox = document.createElement('div')
-    inquiryModalBtnBox.setAttribute('class', 'delete-modal-btn-box')
-    inquiryModalContainer.append(inquiryModalBtnBox)
+    const deleteModalBtnBox = document.createElement('div')
+    deleteModalBtnBox.setAttribute('class', 'delete-modal-btn-box')
+    deleteModalContainer.append(deleteModalBtnBox)
 
     // 모달 버튼 추가
-    const inquiryModalEnterBtn = document.createElement('button')
-    inquiryModalEnterBtn.innerText = '확인'
-    const inquiryModalCancelBtn = document.createElement('button')
-    inquiryModalCancelBtn.innerText = '취소'
-    inquiryModalBtnBox.append(inquiryModalEnterBtn, inquiryModalCancelBtn)
+    const deleteModalEnterBtn = document.createElement('button')
+    deleteModalEnterBtn.innerText = '확인'
+    const deleteModalCancelBtn = document.createElement('button')
+    deleteModalCancelBtn.innerText = '취소'
+    deleteModalBtnBox.append(deleteModalEnterBtn, deleteModalCancelBtn)
 
     // 모달 확인 버튼 클릭시
-    inquiryModalEnterBtn.addEventListener('click', function () {
+    deleteModalEnterBtn.addEventListener('click', function () {
         userDeleteApiView()
         body.style.overflow = 'auto'
-        inquiryModalBody.style.display = 'none'
+        deleteModalBody.style.display = 'none'
     })
 
     // 모달 취소 버튼 클릭시
-    inquiryModalCancelBtn.addEventListener('click', function () {
+    deleteModalCancelBtn.addEventListener('click', function () {
         body.style.overflow = 'auto'
-        inquiryModalBody.style.display = 'none'
+        deleteModalBody.style.display = 'none'
     })
 
     // 모달 박스 바깥 클릭시
-    inquiryModalBody.addEventListener('click', function (e) {
-        if (e.target == inquiryModalBody) {
+    deleteModalBody.addEventListener('click', function (e) {
+        if (e.target == deleteModalBody) {
             body.style.overflow = 'auto'
-            inquiryModalBody.style.display = 'none'
+            deleteModalBody.style.display = 'none'
         }
     })
 }

@@ -425,6 +425,28 @@ nav {
     }
 }
 
+@keyframes moveUp {
+	/* 하단에서 */
+	0% {
+		transform: translateY(390px) translateX(210px) scale(0.03);
+	}
+	/* 중앙으로 위치 */
+	100% {
+        transform: translateY(0) translateX(0) scale(1);
+	}
+}
+
+@keyframes moveDown {
+	/* 중앙에 있는 모달 콘텐츠를 */
+	0% {
+		transform: translateY(0) translateX(0) scale(1);
+	}
+	/* 하단으로 위치 */
+	100% {
+        transform: translateY(395px) translateX(210px) scale(0);
+	}
+}
+
 .review-write {
     margin-bottom: -1px;
 }
