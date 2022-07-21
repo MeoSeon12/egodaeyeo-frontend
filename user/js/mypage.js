@@ -104,6 +104,9 @@ async function myPageTabInfo(tab) {
 
             const newTabBox = document.createElement('div')
             newTabBox.setAttribute('class', 'tab-info-box')
+            newTabBox.addEventListener('click', () => {
+                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+            })
             newTabContainer.append(newTabBox)
 
             const newTabInner = document.createElement('div')
@@ -114,9 +117,6 @@ async function myPageTabInfo(tab) {
             const newTabImage = document.createElement('img')
             newTabImage.setAttribute('class', 'tab-info-image')
             newTabImage.setAttribute('src', item['image'])
-            newTabImage.addEventListener('click', () => {
-                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
-            })
             newTabInner.append(newTabImage)
 
             const newTabTextBox = document.createElement('div')
