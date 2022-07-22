@@ -7,7 +7,7 @@ async function updatePageView() {
 
     // 수정 페이지 로드 데이터 얻기
     data = await getUpdatePageLoadData()
-    
+
     // 카테고리 리스트
     const categorySelect = document.getElementById('category')
     for (let i = 0; i < data.category_list.length; i++) {
@@ -17,12 +17,14 @@ async function updatePageView() {
         categorySelect.append(category)
     }
 
-    // 로드 데이터에 맞게 드롭다운 선택하기
+    // 로드 데이터를 페이지에 반영
     $('#section').val(`${data.item_data.section}`).prop('selected', true)
     $('#category').val(`${data.item_data.category}`).prop('selected', true)
+    $('#status').val(`${data.item_data.status}`).prop('selected', true)
     $('#title').val(`${data.item_data.title}`)
     $('#content').val(`${data.item_data.content}`)
-    // 시간 단위, 가격 데이터가 null이 아닐 경우
+
+    // 시간, 가격이 null이면 반영하지 않음
     if (data.item_data.time_unit != null) {
         $('#time').val(`${data.item_data.time_unit}`).prop("selected", true)
     }
@@ -30,48 +32,51 @@ async function updatePageView() {
         $('#price').val(`${data.item_data.price}`)
     }
 
-    // 이미지 데이터 반영하기
-    // 디폴트 이미지를 갖고 있으면 건너뛰기
-    if (data.image_list[0] != '../static/default_item.jpg') {
+    // 디폴트 이미지를 갖고 있지않으면 이미지 데이터 반영
+    if (data.image_list[0]['image'] != '../static/default_item.jpg') {
 
-        // 기존 이미지 하나씩
+        // 이미지 하나씩
         for (let i = 0; i < data.image_list.length; i++) {
-
             // 이미지 미리보기
             let img = new Image()
             previewArr.push(data.image_list[i])
-            img.src = `https://egodaeyeo.s3.amazonaws.com/${data.image_list[i]}`
-    
+            img.src = `https://egodaeyeo.s3.amazonaws.com/${data.image_list[i]['image']}`
+            
             let previewHtmlData = img
             previewHtmlData.setAttribute('id', `preview-img-${fileNo}`)
             $('.file-input-custom').before(previewHtmlData)
-
+            
             // 이미지 목록에 추가
             let htmlData = ''
             htmlData += '<div id="file' + fileNo + '" class="filebox">'
-            htmlData += '   <p class="name">' + data.image_list[i].substring(5) + '</p>'
+            htmlData += '   <p class="name">' + data.image_list[i]['image'].substring(5) + '</p>'
             htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ')">❌</a>'
             htmlData += '</div>'
             $('.file-list').append(htmlData)
 
-            // 파일 배열에 담기
-            var canver = document.createElement("canvas")
-            var ctx = canver.getContext("2d")
+            // 이미 저장된 이미지들 배열에 담기
+            filesArr.push({
+                'image': '이미 저장된 이미지',
+                'id': data.image_list[i]['id'],  // 삭제할 경우를 위해 ID 값을 포함시킴
+                'go_delete': false,
+            })
+            // var canver = document.createElement("canvas")
+            // var ctx = canver.getContext("2d")
             
-            img.crossOrigin = "anonymous"
-            img.onload = function () {
-                canver.width = this.naturalWidth
-                canver.height = this.naturalHeight
-                ctx.drawImage(this, 0, 0)
+            // img.crossOrigin = "anonymous"
+            // img.onload = function () {
+            //     canver.width = this.naturalWidth
+            //     canver.height = this.naturalHeight
+            //     ctx.drawImage(this, 0, 0)
                 
-                canver.toBlob(function (blob) {
-                    let reader = new FileReader()
-                    reader.onload = function () {
-                        filesArr.push(blob)
-                    }
-                    reader.readAsDataURL(blob)
-                })
-            }
+                // canver.toBlob(function (blob) {
+                //     let reader = new FileReader()
+                //     reader.onload = function () {
+                //         filesArr.push(blob)
+                //     }
+                //     reader.readAsDataURL(blob)
+                // })
+            // }
             fileNo++
         }
         uploadButtonPosition()
@@ -79,7 +84,7 @@ async function updatePageView() {
 }
 
 
-// 이미지 첨부 시
+// 이미지 첨부
 function imgUpload(obj) {
 
     let maxFileCnt = 5   // 첨부파일 최대 개수
@@ -134,8 +139,16 @@ function imgUpload(obj) {
 // 첨부파일 삭제 
 function deleteFile(num) {
     document.querySelector("#file" + num).remove()
-    filesArr[num].is_delete = true
 
+    // 기존에 저장된 이미지는 go_delete true 로 지정
+    if (filesArr[num]['image']) {
+        filesArr[num].go_delete = true
+    }
+    else {
+        // 새로 첨부한 이미지는 is_delete true 로 지정
+        filesArr[num].is_delete = true
+    }
+    
     document.querySelector("#preview-img-" + num).remove()
     previewArr[num].is_delete = true
 
