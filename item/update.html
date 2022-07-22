@@ -202,9 +202,9 @@
                         <option value="일">1일</option>
                         <option value="월">1개월</option>
                     </select>
-                    <input type="number" id="price" placeholder="가격을 입력해주세요">
+                    <input id="price" type="number" min="0" step="100" placeholder="가격을 입력해주세요">
+                    <span>원</span>
                     <select id="status">
-                        <option>-- 대여 상태 --</option>
                         <option value="대여 가능">대여 가능</option>
                         <option value="대여 중">대여 중</option>
                         <option value="대여 종료">대여 종료</option>
