@@ -117,22 +117,41 @@ nav {
     }
 }
 
-.search {
+.search-container {
+    display: flex;
+    justify-content: space-between;
     height: 30px;
     max-width: 250px;
     width: 100%;
     border-radius: 20px;
-    border: 0;
     background-color: rgba(187, 187, 187, 0.3);
     padding: 0 10px;
 }
 
-.search:focus {
+.search {
+    height: 30px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color:transparent;
+}
+
+.search-container:focus {
     outline: 2px solid rgb(190, 190, 190);
 }
 
 .search:placeholder-shown {
     font-weight: bold;
+}
+
+#search-icon {
+    margin: 3px 3px;
+    color: gray;
+}
+
+#search-icon:hover {
+    color: black;
+    cursor: pointer;
 }
 
 .mypage-image {
@@ -819,15 +838,4 @@ nav {
 .chat-time-stamp {
     font-size: 12px;
     margin-bottom: 3px;
-}
-
-#search-icon {
-    color: gray;
-    position: absolute;
-    left: 55.5%;
-}
-
-#search-icon:hover {
-    color: black;
-    cursor: pointer;
 }
