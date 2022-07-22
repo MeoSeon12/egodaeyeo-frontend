@@ -44,6 +44,7 @@ async function kakaoLoginApi(kakaoUserData) {
     }
     )
     response_json = await response.json()
+    console.log(response_json)
 
     if (response.status == 200) {
         setLocalStorageItems()
