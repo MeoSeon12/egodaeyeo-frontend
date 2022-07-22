@@ -13,7 +13,6 @@ async function showSearchedItems(searchValue) {
     const userAddress = itemsInfo[0]['user_address']
     pageUrl = items['items']['next']
 
-
     itemWrap.replaceChildren();
 
     baseText.innerText = "#검색"
@@ -208,7 +207,6 @@ function itemDataAppend(itemsInfo) {
 
 window.onload = function(){
     const query = location.href.split('=')[1]
-    console.log(query)
     showSearchedItems(decodeURI(query))
 };
 
