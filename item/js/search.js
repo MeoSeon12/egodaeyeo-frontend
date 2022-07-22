@@ -54,11 +54,11 @@ async function showSearchedItems(searchValue) {
 
 //섹션 파라미터 저장을 위한 함수
 function selectedSectionItems(e) {
-    const query = location.href.split('=')[1]
+    const query = location.href.split('query=')[1]
     
     //변수에 빌려드려요, 빌려요 저장
     selectedSection = e.innerText
-    showSelectedItems(decodeURI(query))
+    showSearchedItems(decodeURI(query))
     
     const borrowButton = document.getElementById('borrow-btn')
     const lendButton = document.getElementById('lend-btn')
@@ -74,41 +74,6 @@ function selectedSectionItems(e) {
         e.style.backgroundColor = "#ffefc2";
         lendButton.style.backgroundColor = "rgb(236, 236, 236)";
         lendButton.style.cssText = lendHover
-    }
-}
-
-//빌려드려요, 빌려요 섹션 선택시 Api호출 함수
-async function showSelectedItems(query) {
-
-    const items = await onSearchApiView(query, selectedSection)
-    const itemsInfo = items['items']['results']
-    pageUrl = items['items']['next']
-    
-
-    if (selectedSection == "빌려드려요") {
-        sectionText.innerText = "#" + selectedSection;
-        sectionText.style.color = '#85ff8a';
-    }
-    else if (selectedSection == "빌려요") {
-        sectionText.innerText = "#" + selectedSection;
-        sectionText.style.color = '#ffe18a';
-    }
-    else if (selectedSection == ""){
-        sectionText.innerText = ""
-    }
-
-    itemWrap.replaceChildren();
-
-    if (items['items']['count'] == 0) {
-        itemWrap.innerText = "등록된 물품이 없습니다."
-        itemWrap.style.justifyContent = "center";
-        itemWrap.style.fontSize = "24px";
-        itemWrap.style.marginTop = "100px";
-    }
-    else{
-        itemWrap.style.justifyContent = "flex-start";
-        itemWrap.style.marginTop = "20px";
-        itemDataAppend(itemsInfo)
     }
 }
 
@@ -206,7 +171,7 @@ function itemDataAppend(itemsInfo) {
 }
 
 window.onload = function(){
-    const query = location.href.split('=')[1]
+    const query = location.href.split('query=')[1]
     showSearchedItems(decodeURI(query))
 };
 
