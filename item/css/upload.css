@@ -80,7 +80,7 @@
 }
 
 .file-input-custom:hover > div > p:nth-child(1) {
-    text-shadow: 0 0 0 rgba(0, 255, 21, 0.514);
+    text-shadow: 0 0 0 rgb(88, 206, 123);
 }
 
 .file-list {
@@ -151,7 +151,7 @@
     border: 1px solid white;
     height: 22px;
     outline: none;
-    width: 150px;
+    width: 120px;
 }
 
 #content {

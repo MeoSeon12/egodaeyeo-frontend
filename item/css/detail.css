@@ -299,3 +299,11 @@
     transition: all 0.5s ease;
     transform: scale(1.2);
 }
+
+.delete-ok-btn:hover {
+    background-color: #ffb098 !important;
+}
+
+.cancel-ok-btn:hover {
+    background-color: rgb(191, 255, 194) !important;
+}
