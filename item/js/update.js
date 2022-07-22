@@ -1,20 +1,12 @@
+let fileNo = 0  // 이미지 파일 순서대로 번호 부여
+let filesArr = new Array()  // 폼 데이터에 넣은 이미지 리스트
+let previewArr = new Array()    // 미리보기 이미지 리스트
+
 // 물품 수정 페이지 뷰
 async function updatePageView() {
 
     // 수정 페이지 로드 데이터 얻기
     data = await getUpdatePageLoadData()
-    console.log(data.image_list)
-
-    // CSS
-    const form = document.getElementById('form')
-    const submitBtn = document.getElementById('submit')
-    form.style.backgroundColor = 'rgb(255 247 225)'
-    submitBtn.addEventListener('mouseover', function() {
-        submitBtn.style.backgroundColor = '#ffd662'
-    })
-    submitBtn.addEventListener('mouseout', function() {
-        submitBtn.style.backgroundColor = 'rgb(240, 240, 240'
-    })
     
     // 카테고리 리스트
     const categorySelect = document.getElementById('category')
@@ -38,29 +30,51 @@ async function updatePageView() {
         $('#price').val(`${data.item_data.price}`)
     }
 
-
     // 이미지 데이터 반영하기
     // 디폴트 이미지를 갖고 있으면 건너뛰기
     if (data.image_list[0] != '../static/default_item.jpg') {
 
-        let fileNo = 0
-        let filesArr = new Array()
-        let previewArr = new Array()
-
-        // 이미지 미리보기
+        // 기존 이미지 하나씩
         for (let i = 0; i < data.image_list.length; i++) {
-            console.log(data.image_list[i])
-    
+
+            // 이미지 미리보기
             let img = new Image()
-            img.onload = function() {
-                previewArr.push(data.image_list[i])
-            }
+            previewArr.push(data.image_list[i])
             img.src = `https://egodaeyeo.s3.amazonaws.com/${data.image_list[i]}`
     
             let previewHtmlData = img
             previewHtmlData.setAttribute('id', `preview-img-${fileNo}`)
             $('.file-input-custom').before(previewHtmlData)
+
+            // 이미지 목록에 추가
+            let htmlData = ''
+            htmlData += '<div id="file' + fileNo + '" class="filebox">'
+            htmlData += '   <p class="name">' + data.image_list[i].substring(5) + '</p>'
+            htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ')">❌</a>'
+            htmlData += '</div>'
+            $('.file-list').append(htmlData)
+
+            // 파일 배열에 담기
+            var canver = document.createElement("canvas")
+            var ctx = canver.getContext("2d")
+            
+            img.crossOrigin = "anonymous"
+            img.onload = function () {
+                canver.width = this.naturalWidth
+                canver.height = this.naturalHeight
+                ctx.drawImage(this, 0, 0)
+                
+                canver.toBlob(function (blob) {
+                    let reader = new FileReader()
+                    reader.onload = function () {
+                        filesArr.push(blob)
+                    }
+                    reader.readAsDataURL(blob)
+                })
+            }
+            fileNo++
         }
+        uploadButtonPosition()
     }
 }
 
@@ -82,15 +96,6 @@ function imgUpload(obj) {
     // 최대 개수 넘지 않았을 시
     else {
         for (const file of obj.files) {
-            const prImg = document.getElementById('pr-img')
-            // 총 첨부된 이미지가 0, 3개 있을 시
-            if (attFileCnt + curFileCnt == 0 || attFileCnt + curFileCnt == 3) {
-                prImg.style.justifyContent = 'center'
-            } 
-            else {
-                prImg.style.justifyContent = 'normal'
-            }
-
             // 이미지 미리보기
             let img = new Image()
             img.onload = function() {
@@ -102,13 +107,14 @@ function imgUpload(obj) {
             previewHtmlData.setAttribute('id', `preview-img-${fileNo}`)
             $('.file-input-custom').before(previewHtmlData)
 
+            
             // 파일 배열에 담기
             let reader = new FileReader()
             reader.onload = function() {
                 filesArr.push(file)
             }
             reader.readAsDataURL(file)
-
+            
             // 이미지 목록에 추가
             let htmlData = ''
             htmlData += '<div id="file' + fileNo + '" class="filebox">'
@@ -116,7 +122,8 @@ function imgUpload(obj) {
             htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ')">❌</a>'
             htmlData += '</div>'
             $('.file-list').append(htmlData)
-
+            
+            uploadButtonPosition()
             fileNo++
         }
     }
@@ -129,19 +136,25 @@ function deleteFile(num) {
     document.querySelector("#file" + num).remove()
     filesArr[num].is_delete = true
 
-    let attFileCnt = document.querySelectorAll('.filebox').length
-
     document.querySelector("#preview-img-" + num).remove()
     previewArr[num].is_delete = true
 
+    uploadButtonPosition()
+}
+
+
+// 미리보기 이미지 갯수에 따라 첨부 버튼 정렬
+function uploadButtonPosition() {
+    let attFileCnt = document.querySelectorAll('.filebox').length
     const prImg = document.getElementById('pr-img')
-        // 총 첨부된 이미지가 0, 3개 있을 시
-        if (attFileCnt == 0 || attFileCnt == 3) {
-            prImg.style.justifyContent = 'center'
-        }
-        else {
-            prImg.style.justifyContent = 'normal'
-        }
+
+    // 총 첨부된 이미지가 0, 3개 있을 시
+    if (attFileCnt == 0 || attFileCnt == 3) {
+        prImg.style.justifyContent = 'center'
+    }
+    else {
+        prImg.style.justifyContent = 'normal'
+    }
 }
 
 
