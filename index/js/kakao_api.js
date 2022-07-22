@@ -50,10 +50,14 @@ async function kakaoLoginApi(kakaoUserData) {
         alert(response_json['msg'])
         window.location.reload()
 
-    } else if (response.status == 201) {
+    }
+    else if (response.status == 201) {
         setLocalStorageItems()
         alert("원활한 서비스 이용을 위해 주소를 입력해주세요.")
         addressModalView();
+    }
+    else {
+        alert(response_json['error'])
     }
 }
 

@@ -10,21 +10,23 @@ async function showSearchedItems(searchValue) {
 
     const items = await onSearchApiView(searchValue, selectedSection)
     const itemsInfo = items['items']['results']
-    const userAddress = itemsInfo[0]['user_address']
+
     pageUrl = items['items']['next']
-
-
+    
     itemWrap.replaceChildren();
-
+    
     baseText.innerText = "#검색"
     //검색 값 # 태그
     searchText.innerText = "#" + searchValue
     //유저의 주소 #태그
-    if (userAddress == null) {
-        addressText.innerText = "";
-    }
-    else {
-        addressText.innerText = "#" + userAddress
+    if (itemsInfo != "") {
+        const userAddress = itemsInfo[0]['user_address']
+        if (userAddress == null) {
+            addressText.innerText = "";
+        }
+        else {
+            addressText.innerText = "#" + userAddress
+        }
     }
     //섹션 선택 #태그 붙이는 부분
     if (selectedSection == "undefined" || selectedSection == "") {
@@ -38,7 +40,6 @@ async function showSearchedItems(searchValue) {
         sectionText.innerText = "#" + selectedSection;
         sectionText.style.color = '#ffe18a';
     }
-
     //검색결과 없을때 예외처리
     if (items['items']['count'] == 0) {
         itemWrap.innerText = "검색 결과가 없습니다."
@@ -59,7 +60,7 @@ function selectedSectionItems(e) {
     
     //변수에 빌려드려요, 빌려요 저장
     selectedSection = e.innerText
-    showSelectedItems(decodeURI(query))
+    showSearchedItems(decodeURI(query))
     
     const borrowButton = document.getElementById('borrow-btn')
     const lendButton = document.getElementById('lend-btn')
@@ -75,41 +76,6 @@ function selectedSectionItems(e) {
         e.style.backgroundColor = "#ffefc2";
         lendButton.style.backgroundColor = "rgb(236, 236, 236)";
         lendButton.style.cssText = lendHover
-    }
-}
-
-//빌려드려요, 빌려요 섹션 선택시 Api호출 함수
-async function showSelectedItems(query) {
-
-    const items = await onSearchApiView(query, selectedSection)
-    const itemsInfo = items['items']['results']
-    pageUrl = items['items']['next']
-    
-
-    if (selectedSection == "빌려드려요") {
-        sectionText.innerText = "#" + selectedSection;
-        sectionText.style.color = '#85ff8a';
-    }
-    else if (selectedSection == "빌려요") {
-        sectionText.innerText = "#" + selectedSection;
-        sectionText.style.color = '#ffe18a';
-    }
-    else if (selectedSection == ""){
-        sectionText.innerText = ""
-    }
-
-    itemWrap.replaceChildren();
-
-    if (items['items']['count'] == 0) {
-        itemWrap.innerText = "등록된 물품이 없습니다."
-        itemWrap.style.justifyContent = "center";
-        itemWrap.style.fontSize = "24px";
-        itemWrap.style.marginTop = "100px";
-    }
-    else{
-        itemWrap.style.justifyContent = "flex-start";
-        itemWrap.style.marginTop = "20px";
-        itemDataAppend(itemsInfo)
     }
 }
 
@@ -208,7 +174,6 @@ function itemDataAppend(itemsInfo) {
 
 window.onload = function(){
     const query = location.href.split('=')[1]
-    console.log(query)
     showSearchedItems(decodeURI(query))
 };
 
