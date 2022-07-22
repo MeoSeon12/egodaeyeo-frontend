@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이거대여.</title>
     <link rel="stylesheet" href="../index/css/nav.css">
-    <link rel="stylesheet" href="css/upload.css">
+    <link rel="stylesheet" href="css/update.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -194,15 +194,22 @@
                         <option value="빌려요">빌려요</option>
                     </select>
                     <select id="category">
-                        <option>카테고리</option>
+                        <option>-- 카테고리 --</option>
                     </select>
                     <select id="time">
-                        <option>기간</option>
+                        <option>-- 기간 --</option>
                         <option value="시간">1시간</option>
                         <option value="일">1일</option>
                         <option value="월">1개월</option>
                     </select>
                     <input type="number" id="price" placeholder="가격을 입력해주세요">
+                    <select id="status">
+                        <option>-- 대여 상태 --</option>
+                        <option value="대여 가능">대여 가능</option>
+                        <option value="대여 중">대여 중</option>
+                        <option value="대여 종료">대여 종료</option>
+                        <option value="예약 중">예약 중</option>
+                    </select>
                 </div>
                 <input type="text" id="title" placeholder="제목을 입력해주세요">
                 <textarea type="text" id="content" placeholder="내용을 입력해주세요"></textarea>
