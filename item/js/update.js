@@ -60,23 +60,6 @@ async function updatePageView() {
                 'id': data.image_list[i]['id'],  // 삭제할 경우를 위해 ID 값을 포함시킴
                 'go_delete': false,
             })
-            // var canver = document.createElement("canvas")
-            // var ctx = canver.getContext("2d")
-            
-            // img.crossOrigin = "anonymous"
-            // img.onload = function () {
-            //     canver.width = this.naturalWidth
-            //     canver.height = this.naturalHeight
-            //     ctx.drawImage(this, 0, 0)
-                
-                // canver.toBlob(function (blob) {
-                //     let reader = new FileReader()
-                //     reader.onload = function () {
-                //         filesArr.push(blob)
-                //     }
-                //     reader.readAsDataURL(blob)
-                // })
-            // }
             fileNo++
         }
         uploadButtonPosition()
@@ -170,5 +153,16 @@ function uploadButtonPosition() {
     }
 }
 
+
+// 빌려요 선택한 경우
+function sectionValCheck(obj) {
+    const status = document.getElementById('status')
+    if (obj.value == '빌려요') {
+        status.style.display = 'none'
+    }
+    else {
+        status.style.display = 'inline-block'
+    }
+}
 
 updatePageView()
