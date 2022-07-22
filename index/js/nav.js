@@ -21,7 +21,6 @@ const requestContractBtn = document.querySelector('.request-contract-btn')
 const endContractBtn = document.querySelector('.request-contract-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
 const chatBtn = document.querySelector('.chat-btn')
-const chatBtnHover = 'chat-btn:hover {cursor: pointer; background-color: #ffe398;}'
 const searchBtn = document.querySelector('#search-icon')
 
 const rentalStartTime = document.getElementById('rental-start-time')
@@ -73,15 +72,12 @@ let chatBtnCount = 0
 function chatModalView(){
     if (chatBtnCount % 2 === 0){
         chatModalBody.style.display = 'flex'
-        chatBtn.style.backgroundColor = '#ffe398'
         chatModalBody.style.animation = 'moveUp 0.5s'
         chatBtnCount ++; 
     }
     else {
         body.style.overflow = 'auto'
         chatModalBody.style.animation = 'moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-        chatBtn.style.backgroundColor = '#E6E6E6'
-        chatBtn.style.cssText = chatBtnHover
         chatBtnCount ++;
     }
 }
@@ -216,8 +212,9 @@ $(".search").keyup(function(event) {
 //검색 기능 트리거
 searchBtn.addEventListener('click', (e) => {
     const searchValue = document.querySelector('.search').value
-    // searchedItemSubmit(searchValue)
-    window.location.replace(`../item/search.html?query=${searchValue}`)
+    if (searchValue != '') {
+        window.location.replace(`../item/search.html?query=${searchValue}`)
+    }
 })
 
 

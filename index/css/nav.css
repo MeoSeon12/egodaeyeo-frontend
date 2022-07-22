@@ -117,22 +117,41 @@ nav {
     }
 }
 
-.search {
+.search-container {
+    display: flex;
+    justify-content: space-between;
     height: 30px;
     max-width: 250px;
     width: 100%;
     border-radius: 20px;
-    border: 0;
     background-color: rgba(187, 187, 187, 0.3);
     padding: 0 10px;
 }
 
-.search:focus {
+.search {
+    height: 30px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color:transparent;
+}
+
+.search-container:focus {
     outline: 2px solid rgb(190, 190, 190);
 }
 
 .search:placeholder-shown {
     font-weight: bold;
+}
+
+#search-icon {
+    margin: 3px 3px;
+    color: gray;
+}
+
+#search-icon:hover {
+    color: black;
+    cursor: pointer;
 }
 
 .mypage-image {
@@ -502,7 +521,7 @@ nav {
 
 /* 채팅 */
 .chat-btn {
-    background-color: #E6E6E6;
+    background-color: #ffe398;
     display: block;
     height: 70px;
     width: 70px;
@@ -519,7 +538,11 @@ nav {
 
 .chat-btn:hover {
     cursor: pointer;
-    background-color: #ffe398;
+    background-color: #F8FFA4;
+}
+
+#chat-icon {
+    transform: scale(1.4);
 }
 
 .chat-modal-body {
@@ -531,7 +554,6 @@ nav {
     width: 500px;
     right: 100px;
     bottom: 130px;
-    padding: 10px;
     z-index: 1;
 }
 
@@ -545,7 +567,7 @@ nav {
     border-bottom: 0;
     border-right: 0;
     margin-left: 175px;
-    margin-bottom: -38px;
+    margin-bottom: -32px;
 }
 
 .chat-modal-container {
@@ -721,7 +743,7 @@ nav {
     font-weight: bold;
     border: 0;
     width: 50px;
-    background-color: #ffefc2;
+    background-color: #ffe398;
 }
 
 .chat-send-btn:hover {
@@ -819,15 +841,4 @@ nav {
 .chat-time-stamp {
     font-size: 12px;
     margin-bottom: 3px;
-}
-
-#search-icon {
-    color: gray;
-    position: absolute;
-    left: 55.5%;
-}
-
-#search-icon:hover {
-    color: black;
-    cursor: pointer;
 }

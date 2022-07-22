@@ -21,10 +21,12 @@
                 <div class="logo">
                     <a href="../index.html">이거대여.</a>
                 </div>
-                <input class="search" placeholder="검색">
-                <span class="material-symbols-outlined" id="search-icon">
-                    search
-                </span>
+                <div class="search-container">
+                    <input class="search" placeholder="검색">
+                    <span class="material-symbols-outlined" id="search-icon">
+                        search
+                    </span>
+                </div>
                 <div class="nav-btns">
                     <a class="mypage" href="../user/mypage.html">
                         <img class="mypage-image">
@@ -106,7 +108,9 @@
     </div>
 
     <!-- chat button and modal -->
-    <button class="chat-btn" onclick="chatModalView()">채팅</button>
+    <button class="chat-btn" onclick="chatModalView()">
+        <i class="fa-solid fa-comment" id="chat-icon"></i>
+    </button>
 
     <div class="chat-modal-body">
         <div class="chat-modal-container" id="chat-modal-container">
@@ -162,9 +166,7 @@
                     <textarea type="text" class="chat-text" rows="1" oninput="calcTextareaHeight(this)"
                         placeholder="채팅을 입력해주세요."></textarea>
                     <button class="chat-send-btn">
-                        <span class="material-symbols-outlined" id="chat-submit-btn">
-                            sms
-                        </span>
+                        <i class="fa-solid fa-comment"></i>
                     </button>
                 </div>
             </div>
