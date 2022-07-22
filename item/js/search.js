@@ -10,20 +10,23 @@ async function showSearchedItems(searchValue) {
 
     const items = await onSearchApiView(searchValue, selectedSection)
     const itemsInfo = items['items']['results']
-    const userAddress = itemsInfo[0]['user_address']
+
     pageUrl = items['items']['next']
 
     itemWrap.replaceChildren();
-
+    
     baseText.innerText = "#검색"
     //검색 값 # 태그
     searchText.innerText = "#" + searchValue
     //유저의 주소 #태그
-    if (userAddress == null) {
-        addressText.innerText = "";
-    }
-    else {
-        addressText.innerText = "#" + userAddress
+    if (itemsInfo != "") {
+        const userAddress = itemsInfo[0]['user_address']
+        if (userAddress == null) {
+            addressText.innerText = "";
+        }
+        else {
+            addressText.innerText = "#" + userAddress
+        }
     }
     //섹션 선택 #태그 붙이는 부분
     if (selectedSection == "undefined" || selectedSection == "") {
@@ -37,7 +40,6 @@ async function showSearchedItems(searchValue) {
         sectionText.innerText = "#" + selectedSection;
         sectionText.style.color = '#ffe18a';
     }
-
     //검색결과 없을때 예외처리
     if (items['items']['count'] == 0) {
         itemWrap.innerText = "검색 결과가 없습니다."
