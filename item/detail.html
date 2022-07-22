@@ -25,10 +25,12 @@
                 <div class="logo">
                     <a href="../index.html">이거대여.</a>
                 </div>
-                <input class="search" placeholder="검색">
-                <span class="material-symbols-outlined" id="search-icon">
-                    search
-                </span>
+                <div class="search-container">
+                    <input class="search" placeholder="검색">
+                    <span class="material-symbols-outlined" id="search-icon">
+                        search
+                    </span>
+                </div>
                 <div class="nav-btns">
                     <a class="mypage" href="../user/mypage.html">
                         <img class="mypage-image">
@@ -108,6 +110,7 @@
             <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
         </div>
     </div>
+    
     <!-- chat button and modal -->
     <button class="chat-btn" onclick="chatModalView()">채팅</button>
 
@@ -210,10 +213,7 @@
                 </div>
             </div>
             <!-- 커뮤니케이션 버튼 -->
-            <div class="communication-container">
-                <button class="bookmark-btn" onclick="bookmark()"></button>
-                <button onclick="inquiry()">문의하기</button>
-            </div>
+            <div class="communication-container"></div>
         </div>
         <!-- 리뷰 섹션 -->
         <div class="review-section">

@@ -12,7 +12,7 @@ async function showSearchedItems(searchValue) {
     const itemsInfo = items['items']['results']
 
     pageUrl = items['items']['next']
-    
+
     itemWrap.replaceChildren();
     
     baseText.innerText = "#검색"
@@ -56,7 +56,7 @@ async function showSearchedItems(searchValue) {
 
 //섹션 파라미터 저장을 위한 함수
 function selectedSectionItems(e) {
-    const query = location.href.split('=')[1]
+    const query = location.href.split('query=')[1]
     
     //변수에 빌려드려요, 빌려요 저장
     selectedSection = e.innerText
@@ -173,7 +173,7 @@ function itemDataAppend(itemsInfo) {
 }
 
 window.onload = function(){
-    const query = location.href.split('=')[1]
+    const query = location.href.split('query=')[1]
     showSearchedItems(decodeURI(query))
 };
 
