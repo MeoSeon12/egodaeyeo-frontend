@@ -50,8 +50,7 @@ async function submitForm() {
     }
 
     // 폼데이터에 담기
-    let form = document.querySelector("form")
-    let formData = new FormData(form)
+    let formData = new FormData()
     formData.append('section', section)
     formData.append('category', category)
     formData.append('time', time)

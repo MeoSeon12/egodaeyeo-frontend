@@ -59,8 +59,7 @@ async function submitForm() {
     }
 
     // 폼데이터에 담기
-    let form = document.querySelector("form")
-    let formData = new FormData(form)
+    let formData = new FormData()
     formData.append('section', section)
     formData.append('category', category)
     formData.append('status', status)
@@ -69,23 +68,26 @@ async function submitForm() {
     formData.append('content', content)
     formData.append('price', price)
 
-    // 기존 이미지는 삭제할 이미지만, 새로 첨부한 이미지는 삭제되지 않은 이미지만 남김
+    // 기존 이미지 중 삭제할 이미지와 새로 첨부한 이미지 중 삭제되지 않은 이미지만 남김
     filesArr = filesArr.filter(function(obj) {
-        return obj.is_delete !== true && obj.go_delete !== false
+        if (obj.go_delete == true || obj.is_delete == false) {
+            return true
+        }
     })
 
     for (let i = 0; i < filesArr.length; i++) {
         
-        // 삭제할 이미지는 formData로 보낼 수 있도록 스트링화
+        // 삭제할 이미지는 ID값만 보냄
         if (filesArr[i]['go_delete']) {
             formData.append('delete_image', filesArr[i]['id'])
         }
+        // 저장할 이미지
         else {
             formData.append('save_image', filesArr[i])
         }
     }
 
-    // 백엔드로 포스트 요청
+    // 백엔드로 풋 요청
     const itemId = location.href.split('?')[1].split('=')[1]
     const response = await fetch(`${backEndBaseUrl}/items/update/${itemId}`, {
         method: 'PUT',
