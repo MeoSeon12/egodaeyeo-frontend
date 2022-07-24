@@ -15,9 +15,8 @@ async function UploadPageView() {
 }
 
 
-let fileNo = 0
-let filesArr = new Array()
-let previewArr = new Array()
+let fileNo = 0  // 이미지 마다 다른 id를 지정해주기 위함
+let filesArr = []  // 업로드한 이미지들을 담을 파일 리스트
 
 // 이미지 첨부 시
 function imgUpload(obj) {
@@ -44,25 +43,18 @@ function imgUpload(obj) {
             else {
                 prImg.style.justifyContent = 'normal'
             }
+            
+            // 파일 배열에 담기
+            filesArr.push(file)
 
             // 이미지 미리보기
             let img = new Image()
-            img.onload = function() {
-                previewArr.push(file)
-            }
             img.src = URL.createObjectURL(file)
             
             let previewHtmlData = img
             previewHtmlData.setAttribute('id', `preview-img-${fileNo}`)
             $('.file-input-custom').before(previewHtmlData)
-
-            // 파일 배열에 담기
-            let reader = new FileReader()
-            reader.onload = function() {
-                filesArr.push(file)
-            }
-            reader.readAsDataURL(file)
-
+            
             // 이미지 목록에 추가
             let htmlData = ''
             htmlData += '<div id="file' + fileNo + '" class="filebox">'
@@ -74,20 +66,15 @@ function imgUpload(obj) {
             fileNo++
         }
     }
-    // 초기화
-    document.querySelector("input[type=file]").value = ""
 }
 
 // 첨부파일 삭제 
 function deleteFile(num) {
     document.querySelector("#file" + num).remove()
-    filesArr[num].is_delete = true
-
-    let attFileCnt = document.querySelectorAll('.filebox').length
-
     document.querySelector("#preview-img-" + num).remove()
-    previewArr[num].is_delete = true
-
+    filesArr[num].is_delete = true
+    
+    let attFileCnt = document.querySelectorAll('.filebox').length
     const prImg = document.getElementById('pr-img')
         // 총 첨부된 이미지가 0, 3개 있을 시
         if (attFileCnt == 0 || attFileCnt == 3) {

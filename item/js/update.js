@@ -1,6 +1,5 @@
 let fileNo = 0  // 이미지 파일 순서대로 번호 부여
-let filesArr = new Array()  // 폼 데이터에 넣은 이미지 리스트
-let previewArr = new Array()    // 미리보기 이미지 리스트
+let filesArr = []  // 이미지 리스트
 
 // 물품 수정 페이지 뷰
 async function updatePageView() {
@@ -33,13 +32,12 @@ async function updatePageView() {
     }
 
     // 디폴트 이미지를 갖고 있지않으면 이미지 데이터 반영
-    if (data.image_list[0]['image'] != '../static/default_item.jpg') {
+    if (data.image_list.length != 0) {
 
         // 이미지 하나씩
         for (let i = 0; i < data.image_list.length; i++) {
             // 이미지 미리보기
             let img = new Image()
-            previewArr.push(data.image_list[i])
             img.src = `https://egodaeyeo.s3.amazonaws.com/${data.image_list[i]['image']}`
             
             let previewHtmlData = img
@@ -56,8 +54,7 @@ async function updatePageView() {
 
             // 이미 저장된 이미지들 배열에 담기
             filesArr.push({
-                'image': '이미 저장된 이미지',
-                'id': data.image_list[i]['id'],  // 삭제할 경우를 위해 ID 값을 포함시킴
+                'id': data.image_list[i]['id'],  // 삭제할 경우 백엔드에서 ID로 조회해야됨
                 'go_delete': false,
             })
             fileNo++
@@ -69,7 +66,7 @@ async function updatePageView() {
 
 // 이미지 첨부
 function imgUpload(obj) {
-
+    
     let maxFileCnt = 5   // 첨부파일 최대 개수
     let attFileCnt = document.querySelectorAll('.filebox').length    // 기존 추가된 첨부파일 개수
     let remainFileCnt = maxFileCnt - attFileCnt    // 추가로 첨부가능한 개수
@@ -80,30 +77,24 @@ function imgUpload(obj) {
     if (curFileCnt > remainFileCnt) {
         alert("이미지는 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.")
     }
-
+    
     // 최대 개수 넘지 않았을 시
     else {
         for (const file of obj.files) {
-            // 이미지 미리보기
+            
+            // 파일 배열에 담기
+            filesArr.push(file)
+            filesArr[fileNo].is_delete = false
+
+            // 미리보기
             let img = new Image()
-            img.onload = function() {
-                previewArr.push(file)
-            }
             img.src = URL.createObjectURL(file)
             
             let previewHtmlData = img
             previewHtmlData.setAttribute('id', `preview-img-${fileNo}`)
             $('.file-input-custom').before(previewHtmlData)
-
             
-            // 파일 배열에 담기
-            let reader = new FileReader()
-            reader.onload = function() {
-                filesArr.push(file)
-            }
-            reader.readAsDataURL(file)
-            
-            // 이미지 목록에 추가
+            // 파일 이름 및 삭제 버튼
             let htmlData = ''
             htmlData += '<div id="file' + fileNo + '" class="filebox">'
             htmlData += '   <p class="name">' + file.name + '</p>'
@@ -115,26 +106,21 @@ function imgUpload(obj) {
             fileNo++
         }
     }
-    // 초기화
-    document.querySelector("input[type=file]").value = ""
 }
 
 // 첨부파일 삭제 
 function deleteFile(num) {
     document.querySelector("#file" + num).remove()
+    document.querySelector("#preview-img-" + num).remove()
 
     // 기존에 저장된 이미지는 go_delete true 로 지정
-    if (filesArr[num]['image']) {
+    if (filesArr[num]['go_delete'] == false) {
         filesArr[num].go_delete = true
     }
     else {
         // 새로 첨부한 이미지는 is_delete true 로 지정
         filesArr[num].is_delete = true
     }
-    
-    document.querySelector("#preview-img-" + num).remove()
-    previewArr[num].is_delete = true
-
     uploadButtonPosition()
 }
 
