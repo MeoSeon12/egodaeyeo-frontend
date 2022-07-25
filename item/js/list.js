@@ -205,12 +205,22 @@ function itemDataAppend(itemsInfo) {
         const newItemBox = document.createElement('div')
         newItemBox.setAttribute("class", "item-link-box")
         newItemLink.append(newItemBox)
+        console.log(item['image'])
 
-        //이미지
-        const newItemImage = document.createElement('img')
-        newItemImage.setAttribute("class", "item-image")
-        newItemImage.setAttribute("src", item['image'])
-        newItemBox.append(newItemImage)
+        if (item['image'] == null) {
+            //이미지 없을시
+            const newItemImage = document.createElement('img')
+            newItemImage.setAttribute("class", "item-image")
+            newItemImage.setAttribute("src", "https://egodaeyeo.s3.amazonaws.com/static/default_item.jpg")
+            newItemBox.append(newItemImage)
+        }
+        else {
+            //이미지 있을시
+            const newItemImage = document.createElement('img')
+            newItemImage.setAttribute("class", "item-image")
+            newItemImage.setAttribute("src", item['image'])
+            newItemBox.append(newItemImage)
+        }
 
         const newItemDesc = document.createElement('div')
         newItemDesc.setAttribute("class", "item-desc")
