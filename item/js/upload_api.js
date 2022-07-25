@@ -41,7 +41,7 @@ async function submitForm() {
     const time = document.getElementById('time').value
 
     // 카테고리, 제목, 내용은 필수
-    if (category == '카테고리') {
+    if (category == '-- 카테고리 --') {
         return alert('카테고리는 필수입니다')
     } else if (title == '') {
         return alert('제목은 필수입니다')
@@ -50,8 +50,7 @@ async function submitForm() {
     }
 
     // 폼데이터에 담기
-    let form = document.querySelector("form")
-    let formData = new FormData(form)
+    let formData = new FormData()
     formData.append('section', section)
     formData.append('category', category)
     formData.append('time', time)

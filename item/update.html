@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이거대여.</title>
     <link rel="stylesheet" href="../index/css/nav.css">
-    <link rel="stylesheet" href="css/upload.css">
+    <link rel="stylesheet" href="css/update.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -105,7 +105,9 @@
     </div>
 
     <!-- chat button and modal -->
-    <button class="chat-btn" onclick="chatModalView()">채팅</button>
+    <button class="chat-btn" onclick="chatModalView()">
+        <i class="fa-solid fa-comment" id="chat-icon"></i>
+    </button>
 
     <div class="chat-modal-body">
         <div class="chat-modal-container" id="chat-modal-container">
@@ -161,9 +163,7 @@
                     <textarea type="text" class="chat-text" rows="1" oninput="calcTextareaHeight(this)"
                         placeholder="채팅을 입력해주세요."></textarea>
                     <button class="chat-send-btn">
-                        <span class="material-symbols-outlined" id="chat-submit-btn">
-                            sms
-                        </span>
+                        <i class="fa-solid fa-comment"></i>
                     </button>
                 </div>
             </div>
@@ -189,20 +189,27 @@
             <div class="file-list"></div>
             <div class="text-cotainer">
                 <div class="dropdown-box">
-                    <select id="section">
+                    <select id="section" onchange="sectionValCheck(this)">
                         <option value="빌려드려요" selected="selected">빌려드려요</option>
                         <option value="빌려요">빌려요</option>
                     </select>
                     <select id="category">
-                        <option>카테고리</option>
+                        <option>-- 카테고리 --</option>
                     </select>
                     <select id="time">
-                        <option>기간</option>
+                        <option>-- 기간 --</option>
                         <option value="시간">1시간</option>
                         <option value="일">1일</option>
                         <option value="월">1개월</option>
                     </select>
-                    <input type="number" id="price" placeholder="가격을 입력해주세요">
+                    <input id="price" type="number" min="0" step="100" placeholder="가격을 입력해주세요">
+                    <span>원</span>
+                    <select id="status">
+                        <option value="대여 가능">대여 가능</option>
+                        <option value="대여 중">대여 중</option>
+                        <option value="대여 종료">대여 종료</option>
+                        <option value="예약 중">예약 중</option>
+                    </select>
                 </div>
                 <input type="text" id="title" placeholder="제목을 입력해주세요">
                 <textarea type="text" id="content" placeholder="내용을 입력해주세요"></textarea>

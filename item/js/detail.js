@@ -1,9 +1,9 @@
-// 아이템 & 유저 ID 정보 가져오기
+// 물품 & 유저 ID 정보 가져오기
 const itemId = location.href.split('?')[1]
 const payload = JSON.parse(localStorage.getItem('payload'))
 
 
-// 아이템, 리뷰 데이터 레이아웃 생성 & 입력
+// 물품, 리뷰 데이터 레이아웃 생성 & 입력
 async function getDetailView() {
 
     // API 기능 호출
@@ -15,18 +15,29 @@ async function getDetailView() {
         return
     }
 
-    // 아이템 섹션
-    // 아이템 사진
-    for (i = 0; i < data.images.length; i++) {
-
-        const slider = document.getElementsByClassName('slider')[0]
+    // 물품 섹션
+    // 물품 이미지
+    const slider = document.getElementsByClassName('slider')[0]
+    
+    // 이미지가 없는 경우
+    if (data.images.length == 0) {
         let sliderLi = document.createElement('li')
         let sliderPicture = document.createElement('img')
-        sliderPicture.setAttribute('src', `${data.images[i]}`)
+        sliderPicture.setAttribute('src', 'https://egodaeyeo.s3.amazonaws.com/static/default_item.jpg')
         sliderLi.append(sliderPicture)
     }
+    // 이미지가 있는 경우
+    else {
+        for (i = 0; i < data.images.length; i++) {
+            let sliderLi = document.createElement('li')
+            slider.append(sliderLi)
+            let sliderPicture = document.createElement('img')
+            sliderPicture.setAttribute('src', `${data.images[i]}`)
+            sliderLi.append(sliderPicture)
+        }
+    }
 
-    // 아이템 사진 슬라이드
+    // 물품 이미지 슬라이드
     $(document).ready(function () {
         $('.slider').bxSlider({
             touchEnabled: false
@@ -157,7 +168,6 @@ async function getDetailView() {
             this.style.backgroundColor = 'rgb(196, 196, 196)'
         })
     }
-    
 
 
     // 리뷰 섹션
@@ -310,6 +320,65 @@ async function inquiry() {
             }
         })
     }
+}
+
+
+// 삭제하기 버튼 클릭
+function showDeleteCheckModal() {
+    // 모달 바디 추가
+    const body = document.getElementsByTagName('body')[0]
+    body.style.overflow = 'hidden' // 스크롤 히든
+
+    const inquiryModalBody = document.createElement('div')
+    inquiryModalBody.setAttribute('class', 'inquiry-modal-body')
+    body.append(inquiryModalBody)
+
+    // 모달 컨테이너 추가
+    const inquiryModalContainer = document.createElement('div')
+    inquiryModalContainer.setAttribute('class', 'inquiry-modal-container')
+    inquiryModalBody.append(inquiryModalContainer)
+
+    // 모달 텍스트 추가
+    const inquiryModalText = document.createElement('p')
+    inquiryModalText.innerText =
+        `확인 버튼을 누르면 게시글이 삭제됩니다
+            삭제하시겠습니까?`
+    inquiryModalContainer.append(inquiryModalText)
+
+    // 모달 버튼 박스 추가
+    const inquiryModalBtnBox = document.createElement('div')
+    inquiryModalBtnBox.setAttribute('class', 'inquiry-modal-btn-box')
+    inquiryModalContainer.append(inquiryModalBtnBox)
+
+    // 모달 버튼 추가
+    const inquiryModalEnterBtn = document.createElement('button')
+    inquiryModalEnterBtn.setAttribute('class', 'delete-ok-btn')
+    inquiryModalEnterBtn.setAttribute('onclick', 'deleteItem()')
+    inquiryModalEnterBtn.innerText = '삭제'
+    const inquiryModalCancelBtn = document.createElement('button')
+    inquiryModalCancelBtn.setAttribute('class', 'cancel-ok-btn')
+    inquiryModalCancelBtn.innerText = '취소'
+    inquiryModalBtnBox.append(inquiryModalEnterBtn, inquiryModalCancelBtn)
+
+    // 모달 확인 버튼 클릭시
+    inquiryModalEnterBtn.addEventListener('click', function () {
+        body.style.overflow = 'auto'
+        inquiryModalBody.style.display = 'none'
+    })
+
+    // 모달 취소 버튼 클릭시
+    inquiryModalCancelBtn.addEventListener('click', function () {
+        body.style.overflow = 'auto'
+        inquiryModalBody.style.display = 'none'
+    })
+
+    // 모달 박스 바깥 클릭시
+    inquiryModalBody.addEventListener('click', function (e) {
+        if (e.target == inquiryModalBody) {
+            body.style.overflow = 'auto'
+            inquiryModalBody.style.display = 'none'
+        }
+    })
 }
 
 

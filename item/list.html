@@ -143,7 +143,9 @@
     </div>
 
     <!-- chat button and modal -->
-    <button class="chat-btn" onclick="chatModalView()">채팅</button>
+    <button class="chat-btn" onclick="chatModalView()">
+        <i class="fa-solid fa-comment" id="chat-icon"></i>
+    </button>
 
     <div class="chat-modal-body">
         <div class="chat-modal-container" id="chat-modal-container">
@@ -199,9 +201,7 @@
                     <textarea type="text" class="chat-text" name="message" rows="1" oninput="calcTextareaHeight(this)"
                         placeholder="채팅을 입력해주세요."></textarea>
                     <button class="chat-send-btn">
-                        <span class="material-symbols-outlined" id="chat-submit-btn">
-                            sms
-                        </span>
+                        <i class="fa-solid fa-comment"></i>
                     </button>
                 </div>
             </div>

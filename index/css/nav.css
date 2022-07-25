@@ -521,7 +521,7 @@ nav {
 
 /* 채팅 */
 .chat-btn {
-    background-color: #E6E6E6;
+    background-color: #ffe398;
     display: block;
     height: 70px;
     width: 70px;
@@ -538,7 +538,11 @@ nav {
 
 .chat-btn:hover {
     cursor: pointer;
-    background-color: #ffe398;
+    background-color: #F8FFA4;
+}
+
+#chat-icon {
+    transform: scale(1.4);
 }
 
 .chat-modal-body {
@@ -550,7 +554,6 @@ nav {
     width: 500px;
     right: 100px;
     bottom: 130px;
-    padding: 10px;
     z-index: 1;
 }
 
@@ -564,7 +567,7 @@ nav {
     border-bottom: 0;
     border-right: 0;
     margin-left: 175px;
-    margin-bottom: -38px;
+    margin-bottom: -32px;
 }
 
 .chat-modal-container {
@@ -740,7 +743,7 @@ nav {
     font-weight: bold;
     border: 0;
     width: 50px;
-    background-color: #ffefc2;
+    background-color: #ffe398;
 }
 
 .chat-send-btn:hover {
