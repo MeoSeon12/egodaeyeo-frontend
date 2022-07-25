@@ -160,7 +160,7 @@
                         <button class="request-contract-btn">대여신청</button>
                         <button class="end-contract-btn">대여종료</button>
                     </div>
-                    <div class="chat-area-wrap">
+                    <div class="chat-area-wrap" id="messages">
                         <div class="other-chat-wrap">
                             <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and
                                 typesetting industry. Lorem Ipsum has been the industry's standard dummy
@@ -195,8 +195,8 @@
                     </div>
 
                 </div>
-                <div class="chat-send-container">
-                    <textarea type="text" class="chat-text" rows="1" oninput="calcTextareaHeight(this)"
+                <div class="chat-send-container" id="chat-form">
+                    <textarea type="text" class="chat-text" name="message" rows="1" oninput="calcTextareaHeight(this)"
                         placeholder="채팅을 입력해주세요."></textarea>
                     <button class="chat-send-btn">
                         <span class="material-symbols-outlined" id="chat-submit-btn">
@@ -207,7 +207,7 @@
             </div>
         </div>
     </div>
-
+`
     <script type="text/javascript" src="../index/js/nav.js"></script>
     <script type="text/javascript" src="../index/js/nav_api.js"></script>
     <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>

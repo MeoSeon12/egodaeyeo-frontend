@@ -21,7 +21,6 @@ async function getDetailView() {
 
         const slider = document.getElementsByClassName('slider')[0]
         let sliderLi = document.createElement('li')
-        slider.append(sliderLi)
         let sliderPicture = document.createElement('img')
         sliderPicture.setAttribute('src', `${data.images[i]}`)
         sliderLi.append(sliderPicture)
@@ -294,8 +293,7 @@ async function inquiry() {
     
         // 모달 확인 버튼 클릭시
         inquiryModalEnterBtn.addEventListener('click', function() {
-            body.style.overflow = 'auto'
-            inquiryModalBody.style.display = 'none'
+            console.log('hello')
         })
     
         // 모달 취소 버튼 클릭시

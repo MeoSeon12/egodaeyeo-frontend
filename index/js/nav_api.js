@@ -364,3 +364,54 @@ async function getUserView() {
 
 }
 getUserView()
+//1. 문의하기 -> 1:1 채팅방이 생성(view post, -> 현재user, item의user, -> room 생성)
+//채팅 수송신
+let url = `ws://127.0.0.1:8000/ws/socket-server/`
+
+const chatSocket = new WebSocket(url)
+
+chatSocket.onmessage = function(e){
+    let data = JSON.parse(e.data)
+    console.log(data)
+
+    if(data.type === 'chat') {
+        let messages = document.getElementById('messages')
+
+        messages.insertAdjacentHTML('beforeend', `<div>
+                            <p>${data.message}</p>
+                        </div>`)
+    }
+}
+
+let form = document.getElementById('chat-form')
+form.addEventListener('submit', (e)=> {
+    e.preventDefault()
+    let message = e.target.message.value
+    chatSocket.send(JSON.stringify({
+        'message': message
+    }))
+    form.reset()
+})
+
+
+// 검색창에서 엔터 누르면 채팅 버튼 트리거
+$(".chat-text").keydown(function(e) {
+    if (e.keyCode === 13 | e.keyCode === 10) {
+        e.preventDefault();
+        $(".chat-send-btn").click();
+    }
+});
+
+//채킹 기능 트리거
+chatSendBtn.addEventListener('click', (e) => {
+    const chatText = document.querySelector('.chat-text')
+    if (chatText.value != '') {
+        let message = chatText.value
+        console.log(message)
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }))
+        chatText.value = ''
+        chatText.focus()
+    }
+})
