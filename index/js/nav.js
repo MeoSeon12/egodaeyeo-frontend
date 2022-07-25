@@ -22,6 +22,7 @@ const endContractBtn = document.querySelector('.request-contract-btn')
 const rentalDateSubmitBtn = document.querySelector('.rental-date-submit-btn')
 const chatBtn = document.querySelector('.chat-btn')
 const searchBtn = document.querySelector('#search-icon')
+const chatSendBtn = document.querySelector('.chat-send-btn')
 
 const rentalStartTime = document.getElementById('rental-start-time')
 const rentalEndTime = document.getElementById('rental-end-time')
@@ -217,5 +218,42 @@ searchBtn.addEventListener('click', (e) => {
     }
 })
 
+// 채팅 기능
+// let url = `ws://${window.location.host}/ws/socket-server/`
 
+// const chatSocket = new WebSocket(url)
 
+// chatSocket.onmessage = function (e) {
+//     let data = JSON.parse(e.data)
+//     console.log('Data:', data)
+
+    // if (data.type === 'chat') {
+    //     let messages = document.getElementById('messages')
+
+    //     messages.insertAdjacentHTML('beforeend', `<div>
+    //                                     <p>${data.message}</p>
+    //                                 </div>`)
+    // }
+// }
+
+// 검색창에서 엔터 누르면 채팅 버튼 트리거
+$(".chat-text").keydown(function(e) {
+    if (e.keyCode === 13 | e.keyCode === 10) {
+        e.preventDefault();
+        $(".chat-send-btn").click();
+    }
+});
+
+//채킹 기능 트리거
+chatSendBtn.addEventListener('click', (e) => {
+    const chatText = document.querySelector('.chat-text')
+    if (chatText.value != '') {
+        let message = chatText.value
+        console.log(message)
+        // chatSocket.send(JSON.stringify({
+        //     'message': message
+        // }))
+        chatText.value = ''
+        chatText.focus()
+    }
+})
