@@ -364,54 +364,46 @@ async function getUserView() {
 
 }
 getUserView()
-//1. 문의하기 -> 1:1 채팅방이 생성(view post, -> 현재user, item의user, -> room 생성)
-//채팅 수송신
-let url = `ws://127.0.0.1:8000/ws/socket-server/`
 
-const chatSocket = new WebSocket(url)
+//1. 문의하기 -> 1:1 채팅방이 생성(view post, -> 현재 user, item의 user, -> room 생성)
+//채팅 송수신
+const webSocketUrl = `ws://127.0.0.1:8000/ws/socket-server/`
+
+const chatSocket = new WebSocket(webSocketUrl)
 
 chatSocket.onmessage = function(e){
-    let data = JSON.parse(e.data)
-    console.log(data)
+    const data = JSON.parse(e.data)
+    console.log(data.time)
 
     if(data.type === 'chat') {
-        let messages = document.getElementById('messages')
+        const messages = document.getElementById('messages')
 
-        messages.insertAdjacentHTML('beforeend', `<div>
-                            <p>${data.message}</p>
-                        </div>`)
+        messages.insertAdjacentHTML('beforeend', 
+        `<div class="my-chat-wrap">
+            <div class="chat-time-stamp">${data.time}</div>
+            <div class="my-chat">${data.message}</div>
+        </div>`
+        )        
+        chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
     }
 }
 
-let form = document.getElementById('chat-form')
-form.addEventListener('submit', (e)=> {
-    e.preventDefault()
-    let message = e.target.message.value
-    chatSocket.send(JSON.stringify({
-        'message': message
-    }))
-    form.reset()
-})
-
-
-// 검색창에서 엔터 누르면 채팅 버튼 트리거
+// 채팅창에서 엔터 누르면 채팅 버튼 트리거
 $(".chat-text").keydown(function(e) {
-    if (e.keyCode === 13 | e.keyCode === 10) {
+    if (e.keyCode === 13) {
         e.preventDefault();
         $(".chat-send-btn").click();
     }
 });
 
-//채킹 기능 트리거
+//채팅 기능 트리거
 chatSendBtn.addEventListener('click', (e) => {
     const chatText = document.querySelector('.chat-text')
     if (chatText.value != '') {
-        let message = chatText.value
-        console.log(message)
+        const message = chatText.value
         chatSocket.send(JSON.stringify({
-            'message': message
+            'message': message,
         }))
         chatText.value = ''
-        chatText.focus()
-    }
-})
+        chatText.focus();
+}});

@@ -637,7 +637,6 @@ nav {
     width: 380px;
     height: 100%;
     overflow-x: hidden;
-    /* overflow-y: scroll; */
 }
 
 .chat-area-wrap::-webkit-scrollbar {
@@ -735,7 +734,7 @@ nav {
     height: 32px;
     max-height: 110px;
     padding: 10px 5px 0 5px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .chat-send-btn {
