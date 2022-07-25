@@ -242,7 +242,6 @@ h2 {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
-    margin-top: -7px;
     white-space: nowrap;
 }
 
