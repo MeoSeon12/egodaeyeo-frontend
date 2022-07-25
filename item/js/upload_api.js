@@ -4,11 +4,15 @@ async function getUploadPageViewData() {
     const token = localStorage.getItem('access_token')  // 비 로그인 유저는 null
     
     if (token == null) {
-        alert('아이템 등록은 로그인 후 사용 가능합니다')
+        alert('로그인 후 사용 가능합니다. 메인 페이지로 돌아갑니다')
+        location.href = '../index.html'
     }
 
     const response = await fetch(`${backEndBaseUrl}/items/upload`, {
         method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
     })
 
     if (response.status == 200) {
@@ -25,7 +29,7 @@ async function submitForm() {
     
     // 비 로그인 유저
     if (token == undefined) {
-        return alert('아이템 등록은 로그인 후 이용가능합니다')
+        return alert('물품 등록은 로그인 후 이용가능합니다')
     }
 
     // 데이터 가져오기
@@ -37,7 +41,7 @@ async function submitForm() {
     const time = document.getElementById('time').value
 
     // 카테고리, 제목, 내용은 필수
-    if (category == '카테고리') {
+    if (category == '-- 카테고리 --') {
         return alert('카테고리는 필수입니다')
     } else if (title == '') {
         return alert('제목은 필수입니다')
@@ -46,8 +50,7 @@ async function submitForm() {
     }
 
     // 폼데이터에 담기
-    let form = document.querySelector("form")
-    let formData = new FormData(form)
+    let formData = new FormData()
     formData.append('section', section)
     formData.append('category', category)
     formData.append('time', time)

@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 </head>
 
@@ -20,15 +22,21 @@
     <nav>
         <div class="nav-wrap">
             <div class="nav-container">
-                <a href="../index.html">
-                    <div class="logo">이거대여.</div>
-                </a>
-                <input class="search" placeholder="검색">
+                <div class="logo">
+                    <a href="../index.html">이거대여.</a>
+                </div>
+                <div class="search-container">
+                    <input class="search" placeholder="검색">
+                    <span class="material-symbols-outlined" id="search-icon">
+                        search
+                    </span>
+                </div>
                 <div class="nav-btns">
                     <a class="mypage" href="../user/mypage.html">
                         <img class="mypage-image">
                     </a>
-                    <button class="upload-btn" onclick="goUploadPage()">아이템 등록</button>
+                    <button class="item-list-btn" onclick="goItemListPage()">물품 목록</button>
+                    <button class="upload-btn" onclick="goUploadPage()">물품 등록</button>
                     <button class="login-btn" onclick="loginModalView()">로그인</button>
                     <button class="logout-btn">로그아웃</button>
                 </div>
@@ -102,109 +110,118 @@
             <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
         </div>
     </div>
+    
     <!-- chat button and modal -->
-    <button class="chat-btn" onclick="chatModalView()">채팅</button>
+    <button class="chat-btn" onclick="chatModalView()">
+        <i class="fa-solid fa-comment" id="chat-icon"></i>
+    </button>
 
     <div class="chat-modal-body">
         <div class="chat-modal-container" id="chat-modal-container">
             <div class="chat-rooms-container">
-                <div class="chat-room"><span class="nickname">SHOWNSHOWN</span></div>
-                <div class="chat-room"><span class="nickname"">상대닉네임</span></div>
-                 <div class=" chat-room"><span class="nickname"">상대닉네임</span></div>
-                 <div class=" chat-room"><span class="nickname"">상대닉네임</span></div>
-             </div>
-             <div class=" chat-container">
-                                <div class="chat-area-container">
-                                    <span>채팅공간</span>
-                                    <div class="contract-btn-container">
-                                        <button class="request-contract-btn">대여신청</button>
-                                        <button class="end-contract-btn">대여종료</button>
-                                    </div>
-                                    <div class="chat-area-container">
-                                        <div class="other-chat-wrap">
-                                            <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and
-                                                typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s, when an unknown printer took a galley of type
-                                                and scrambled it to make a type specimen book. It has survived not only
-                                                five centuries, but also the leap into electronic typesetting, remaining
-                                                essentially unchanged. It was popularised in the 1960s with the release
-                                                of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                                with desktop publishing software like Aldus PageMaker including versions
-                                                of Lorem Ipsum.
-                                            </div>
-                                        </div>
-                                        <div class="my-chat-wrap">
-                                            <div class="my-chat">얼마까지 알아보고 오셨어요?</div>
-                                        </div>
-                                        <div class="my-chat-wrap">
-                                            <div class="my-chat">얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지
-                                                알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요?</div>
-                                        </div>
-                                        <div class="contract-wrap">
-                                            <div class="contract-request">대여신청이 도착했습니다</div>
-                                            <div class="contract-look">신청보기</div>
-                                        </div>
-                                    </div>
+                <div class="chat-room"><span class="nickname">상대닉네임상대닉네임상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname">상대닉네임</span></div>
+                <div class="chat-room"><span class="nickname">상대닉네임</span></div>
+            </div>
+            <div class="chat-area-container">
+                <div class="chat-area-box">
+                    <span>{{물품 제목}}</span>
+                    <div class="contract-btn-container">
+                        <button class="request-contract-btn">대여신청</button>
+                        <button class="end-contract-btn">대여종료</button>
+                    </div>
+                    <div class="chat-area-wrap">
+                        <div class="other-chat-wrap">
+                            <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                                text ever since the 1500s, when an unknown printer took a galley of type
+                                and scrambled it to make a type specimen book. It has survived not only
+                                five centuries, but also the leap into electronic typesetting, remaining
+                                essentially unchanged. It was popularised in the 1960s with the release
+                                of Letraset sheets containing Lorem Ipsum passages, and more recently
+                                with desktop publishing software like Aldus PageMaker including versions
+                                of Lorem Ipsum.
+                            </div>
+                            <div class="chat-time-stamp">오전 11:40</div>
 
-                                </div>
-                                <div class="chat-send-container">
-                                    <textarea type="text" class="chat-text" rows="2"
-                                        placeholder="채팅을 입력해주세요."></textarea>
-                                    <button class="chat-send-btn">
-                                        <span class="material-symbols-outlined" id="chat-submit-btn">
-                                            sms
-                                        </span>
-                                    </button>
-                                </div>
+                        </div>
+                        <div class="other-chat-wrap">
+                            <div class="other-chat">선제시 ㅎㅎㅎ
+                            </div>
+                            <div class="chat-time-stamp">오전 11:40</div>
+                        </div>
+                        <div class="my-chat-wrap">
+                            <div class="chat-time-stamp">오전 11:40</div>
+                            <div class="my-chat">얼마까지 알아보고 오셨어요?</div>
+                        </div>
+                        <div class="my-chat-wrap">
+                            <div class="chat-time-stamp">오전 11:40</div>
+                            <div class="my-chat">얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지
+                                알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요?</div>
+                        </div>
+                        <div class="contract-wrap">
+                            <div class="contract-look">대여신청이 도착했습니다</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="chat-send-container">
+                    <textarea type="text" class="chat-text" rows="1" oninput="calcTextareaHeight(this)"
+                        placeholder="채팅을 입력해주세요."></textarea>
+                    <button class="chat-send-btn">
+                        <button class="chat-send-btn">
+                            <i class="fa-solid fa-comment"></i>
+                        </button>
+                    </button>
                 </div>
             </div>
         </div>
-        <!-- 본문 -->
-        <div class="item-wrap">
-            <!-- 아이템 섹션 -->
-            <div class="item-section">
-                <!-- 아이템 사진 -->
-                <div class="slider"></div>
-                <!-- 유저 정보 -->
-                <div class="user-container">
-                    <img id="post-user-image">
-                    <div class="user-box">
-                        <p id="post-nickname"></p>
-                        <p id="address"></p>
-                    </div>
-                    <span class="user-container-score"></span>
+    </div>
+
+    <!-- 본문 -->
+    <div class="item-wrap">
+        <!-- 아이템 섹션 -->
+        <div class="item-section">
+            <!-- 아이템 사진 -->
+            <div class="slider"></div>
+            <!-- 유저 정보 -->
+            <div class="user-container">
+                <img id="post-user-image">
+                <div class="user-box">
+                    <p id="post-nickname"></p>
+                    <p id="address"></p>
                 </div>
-                <!-- 아이템 정보 -->
-                <div class="item-container">
-                    <div class="item-box-status">
-                        <span id="status"></span>
-                    </div>
-                    <div class="item-box-title">
-                        <span id="title"></span>
-                        <span id="created-at"></span>
-                    </div>
-                    <p id="category"></p>
-                    <div class="item-box-price">
-                        <span id="price"></span>
-                        <span id="time-unit"></span>
-                    </div>
-                    <p id="post-content"></p>
-                    <div class="item-box-contact">
-                        <p><span>찜</span><span id="bookmarks"></span></p>
-                        <p><span>문의</span><span id="inquiries"></span></p>
-                    </div>
+                <span class="user-container-score"></span>
+            </div>
+            <!-- 아이템 정보 -->
+            <div class="item-container">
+                <div class="item-box-status">
+                    <span id="status"></span>
                 </div>
-                <!-- 커뮤니케이션 버튼 -->
-                <div class="communication-container">
-                    <button class="bookmark-btn" onclick="bookmark()"></button>
-                    <button onclick="inquiry()">문의하기</button>
+                <div class="item-box-title">
+                    <span id="title"></span>
+                    <span id="created-at"></span>
+                </div>
+                <p id="category"></p>
+                <div class="item-box-price">
+                    <span id="price"></span>
+                    <span id="time-unit"></span>
+                </div>
+                <p id="post-content"></p>
+                <div class="item-box-contact">
+                    <p><span>찜</span><span id="bookmarks"></span></p>
+                    <p><span>문의</span><span id="inquiries"></span></p>
                 </div>
             </div>
-            <!-- 리뷰 섹션 -->
-            <div class="review-section">
-                <p>리뷰</p>
-            </div>
+            <!-- 커뮤니케이션 버튼 -->
+            <div class="communication-container"></div>
         </div>
+        <!-- 리뷰 섹션 -->
+        <div class="review-section">
+            <p>리뷰</p>
+        </div>
+    </div>
 </body>
 
 <script type="text/javascript" src="../index/js/nav.js"></script>

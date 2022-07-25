@@ -208,8 +208,7 @@ async function onReviewSubmit() {
     response_json = await response.json()
 
     if (response.status == 200) {
-        alert("리뷰 작성 완료!")
-        window.location.reload()
+        window.location.href = '../item/search.html'
     } else {
         console.log(response_json)
     }

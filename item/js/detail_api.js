@@ -4,14 +4,14 @@ async function DetailViewGetApi() {
     // 비로그인 유저일 경우
     if (payload == null) {
         var response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
-        method: 'GET'
+            method: 'GET'
         })
     }
     
     // 로그인 유저일 경우
     else {
         var response = await fetch(`${backEndBaseUrl}/items/details/${itemId}?user_id=${payload['user_id']}`, {
-        method: 'GET'
+            method: 'GET'
         })
     }
 
@@ -46,5 +46,24 @@ async function DetailViewPostApi() {
     }
     else {
         alert('주소를 등록한 후 이용가능합니다')
+    }
+}
+
+
+// 게시글 삭제
+async function deleteItem() {
+
+    const token = localStorage.getItem('access_token')
+    const response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+
+    //  요청 성공 (아이템 DB 존재함)
+    if (response.status == 200 || response.status == 201) {
+        alert('게시글이 삭제되었습니다')
+        location.href = '../item/list.html'
     }
 }

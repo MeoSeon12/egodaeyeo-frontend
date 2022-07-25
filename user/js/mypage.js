@@ -3,7 +3,6 @@ const mypageTapWrap = document.getElementsByClassName('mypage-tap-wrap')[0];
 const tabButtonClass = document.getElementsByClassName('category-tab-btn')[0];
 const tabButtonBox = document.querySelector('.mypage-category-box')
 const tabButton = document.querySelector('.mypage-category-box').getElementsByTagName('button');
-let tabButtonHover = 'mypage-category-box > button:hover {transform: scale(1.1);}'
 
 for (let i = 0; i < tabButton.length; i++) {
     tabButton[i].addEventListener('click', (e) => {
@@ -97,7 +96,6 @@ async function myPageTabInfo(tab) {
             const item = data[i]['item']
             const rentalDate = data[i]['rental_date']
             const timeRemaining = data[i]['time_remaining']
-            console.log(data[i]['time_remaining'])
             const itemId = item['id']
 
             const newTabContainer = document.createElement('div')
@@ -106,6 +104,9 @@ async function myPageTabInfo(tab) {
 
             const newTabBox = document.createElement('div')
             newTabBox.setAttribute('class', 'tab-info-box')
+            newTabBox.addEventListener('click', () => {
+                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+            })
             newTabContainer.append(newTabBox)
 
             const newTabInner = document.createElement('div')
@@ -116,9 +117,6 @@ async function myPageTabInfo(tab) {
             const newTabImage = document.createElement('img')
             newTabImage.setAttribute('class', 'tab-info-image')
             newTabImage.setAttribute('src', item['image'])
-            newTabImage.addEventListener('click', () => {
-                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
-            })
             newTabInner.append(newTabImage)
 
             const newTabTextBox = document.createElement('div')
@@ -133,10 +131,16 @@ async function myPageTabInfo(tab) {
 
             if (item['section'] == "빌려요") {
                 newTabBox.style.backgroundColor = "#FDE7C5"
+                newTabBox.onmouseover = function() {
+                    this.style.backgroundColor = "#fcdba7"
+                }
+                newTabBox.onmouseout = function() {
+                    this.style.backgroundColor = "#FDE7C5"
+                }
                 newTextSection.style.backgroundColor = "#FDB288"
             }
 
-            //아이템 제목
+            //물품 제목
             const newTextTitle = document.createElement('div')
             newTextTitle.setAttribute('class', 'info-text-title')
             newTextTitle.innerText = item['title']
@@ -228,6 +232,10 @@ function Profilecheck(userData) {
     newNicknameBox.setAttribute('class', 'myprofile-nickname')
     newProfileInfoBox.append(newNicknameBox)
 
+    const newNicknameText = document.createElement('p')
+    newNicknameText.innerText = "닉네임"
+    newNicknameBox.append(newNicknameText)
+
     //닉네임 인풋
     const newNicknameInput = document.createElement('input')
     newNicknameInput.setAttribute('class', 'profile-input')
@@ -235,18 +243,15 @@ function Profilecheck(userData) {
     newNicknameInput.value = userData['nickname']
     newNicknameBox.append(newNicknameInput)
 
-    const newPutNickname = document.createElement('div')
-    newPutNickname.setAttribute('class', 'myprofile-nickname-btn')
-    newNicknameBox.append(newPutNickname)
-
-    const newNicknameText = document.createElement('p')
-    newNicknameText.innerText = "닉네임 변경"
-    newPutNickname.append(newNicknameText)
 
     const newPutAddress = document.createElement('div')
     newPutAddress.setAttribute('class', 'myprofile-address')
     newProfileInfoBox.append(newPutAddress)
-
+    
+    const newAddressText = document.createElement('p')
+    newAddressText.innerText = "주소 변경"
+    newPutAddress.append(newAddressText)
+    
     //인풋창 value 수정 주소
     const newAddressInput = document.createElement('input')
     newAddressInput.setAttribute('class', 'profile-input')
@@ -264,14 +269,15 @@ function Profilecheck(userData) {
     newAddressInput.value = userData['address']
     newPutAddress.append(newAddressInput)
 
-    const newAddressText = document.createElement('p')
-    newAddressText.innerText = "주소 변경"
-    newPutAddress.append(newAddressText)
 
     const newPutPassword = document.createElement('div')
     newPutPassword.setAttribute('class', 'myprofile-password')
     newProfileInfoBox.append(newPutPassword)
-
+    
+    const newPasswordText = document.createElement('p')
+    newPasswordText.innerText = "비밀번호 변경"
+    newPutPassword.append(newPasswordText)
+    
     const newPasswordBox = document.createElement('div')
     newPasswordBox.setAttribute('class', 'password-input')
     newPutPassword.append(newPasswordBox)
@@ -300,9 +306,6 @@ function Profilecheck(userData) {
     newCheckPw.setAttribute('id', 'check-pw')
     newPasswordBox.append(newCheckPw)
 
-    const newPasswordText = document.createElement('p')
-    newPasswordText.innerText = "비밀번호 변경"
-    newPutPassword.append(newPasswordText)
 
     const newBottomBox = document.createElement('div')
     newBottomBox.setAttribute('class', 'myprofile-bottom-box')
@@ -317,7 +320,7 @@ function Profilecheck(userData) {
     newSubmitBtn.addEventListener('click', () => {
         profileApiView()
     })
-    newSubmitBtn.innerText = "회원 수정"
+    newSubmitBtn.innerText = "변경 사항 저장"
     newSubmitBox.append(newSubmitBtn)
 
     const newDeleteBtn = document.createElement('button')
@@ -371,52 +374,52 @@ async function userDeleteModal() {
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = 'hidden' // 스크롤 히든
 
-    const inquiryModalBody = document.createElement('div')
-    inquiryModalBody.setAttribute('class', 'delete-modal-body')
-    body.append(inquiryModalBody)
+    const deleteModalBody = document.createElement('div')
+    deleteModalBody.setAttribute('class', 'delete-modal-body')
+    body.append(deleteModalBody)
 
     // 모달 컨테이너 추가
-    const inquiryModalContainer = document.createElement('div')
-    inquiryModalContainer.setAttribute('class', 'delete-modal-container')
-    inquiryModalBody.append(inquiryModalContainer)
+    const deleteModalContainer = document.createElement('div')
+    deleteModalContainer.setAttribute('class', 'delete-modal-container')
+    deleteModalBody.append(deleteModalContainer)
 
     // 모달 텍스트 추가
-    const inquiryModalText = document.createElement('p')
-    inquiryModalText.innerText =
-        `확인 버튼을 누르시면 회원 탈퇴가 진행됩니다. 
-        탈퇴 진행 하시겠습니까?`
-    inquiryModalContainer.append(inquiryModalText)
+    const deleteModalText = document.createElement('p')
+    deleteModalText.innerText =
+        `탈퇴가 완료된 계정은 다시 복구할 수 없습니다. 
+        탈퇴 하시겠습니까?`
+    deleteModalContainer.append(deleteModalText)
 
     // 모달 버튼 박스 추가
-    const inquiryModalBtnBox = document.createElement('div')
-    inquiryModalBtnBox.setAttribute('class', 'delete-modal-btn-box')
-    inquiryModalContainer.append(inquiryModalBtnBox)
+    const deleteModalBtnBox = document.createElement('div')
+    deleteModalBtnBox.setAttribute('class', 'delete-modal-btn-box')
+    deleteModalContainer.append(deleteModalBtnBox)
 
     // 모달 버튼 추가
-    const inquiryModalEnterBtn = document.createElement('button')
-    inquiryModalEnterBtn.innerText = '확인'
-    const inquiryModalCancelBtn = document.createElement('button')
-    inquiryModalCancelBtn.innerText = '취소'
-    inquiryModalBtnBox.append(inquiryModalEnterBtn, inquiryModalCancelBtn)
+    const deleteModalEnterBtn = document.createElement('button')
+    deleteModalEnterBtn.innerText = '확인'
+    const deleteModalCancelBtn = document.createElement('button')
+    deleteModalCancelBtn.innerText = '취소'
+    deleteModalBtnBox.append(deleteModalEnterBtn, deleteModalCancelBtn)
 
     // 모달 확인 버튼 클릭시
-    inquiryModalEnterBtn.addEventListener('click', function () {
+    deleteModalEnterBtn.addEventListener('click', function () {
         userDeleteApiView()
         body.style.overflow = 'auto'
-        inquiryModalBody.style.display = 'none'
+        deleteModalBody.style.display = 'none'
     })
 
     // 모달 취소 버튼 클릭시
-    inquiryModalCancelBtn.addEventListener('click', function () {
+    deleteModalCancelBtn.addEventListener('click', function () {
         body.style.overflow = 'auto'
-        inquiryModalBody.style.display = 'none'
+        deleteModalBody.style.display = 'none'
     })
 
     // 모달 박스 바깥 클릭시
-    inquiryModalBody.addEventListener('click', function (e) {
-        if (e.target == inquiryModalBody) {
+    deleteModalBody.addEventListener('click', function (e) {
+        if (e.target == deleteModalBody) {
             body.style.overflow = 'auto'
-            inquiryModalBody.style.display = 'none'
+            deleteModalBody.style.display = 'none'
         }
     })
 }

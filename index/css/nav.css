@@ -18,7 +18,6 @@ a {
 
 body {
     margin: 0;
-    /* background-color: grey; */
 }
 
 body::-webkit-scrollbar {
@@ -26,11 +25,12 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(163, 163, 163);
+    border-radius: 20px;
 }
 
 body::-webkit-scrollbar-track {
-    background-color: rgb(175, 175, 175);
+    background-color: transparent;
 }
 
 * {
@@ -117,22 +117,41 @@ nav {
     }
 }
 
-.search {
+.search-container {
+    display: flex;
+    justify-content: space-between;
     height: 30px;
     max-width: 250px;
     width: 100%;
     border-radius: 20px;
-    border: 0;
     background-color: rgba(187, 187, 187, 0.3);
     padding: 0 10px;
 }
 
-.search:focus {
+.search {
+    height: 30px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color:transparent;
+}
+
+.search-container:focus {
     outline: 2px solid rgb(190, 190, 190);
 }
 
 .search:placeholder-shown {
     font-weight: bold;
+}
+
+#search-icon {
+    margin: 3px 3px;
+    color: gray;
+}
+
+#search-icon:hover {
+    color: black;
+    cursor: pointer;
 }
 
 .mypage-image {
@@ -425,6 +444,28 @@ nav {
     }
 }
 
+@keyframes moveUp {
+	/* 하단에서 */
+	0% {
+		transform: translateY(390px) translateX(210px) scale(0.03);
+	}
+	/* 중앙으로 위치 */
+	100% {
+        transform: translateY(0) translateX(0) scale(1);
+	}
+}
+
+@keyframes moveDown {
+	/* 중앙에 있는 모달 콘텐츠를 */
+	0% {
+		transform: translateY(0) translateX(0) scale(1);
+	}
+	/* 하단으로 위치 */
+	100% {
+        transform: translateY(395px) translateX(210px) scale(0);
+	}
+}
+
 .review-write {
     margin-bottom: -1px;
 }
@@ -480,7 +521,7 @@ nav {
 
 /* 채팅 */
 .chat-btn {
-    background-color: #E6E6E6;
+    background-color: #ffe398;
     display: block;
     height: 70px;
     width: 70px;
@@ -492,11 +533,16 @@ nav {
     font-weight: bold;
     font-family: 'IBMPlexSansKR-Regular';
     position: fixed;
+    z-index: 1;
 }
 
 .chat-btn:hover {
     cursor: pointer;
-    background-color: #ffe398;
+    background-color: #F8FFA4;
+}
+
+#chat-icon {
+    transform: scale(1.4);
 }
 
 .chat-modal-body {
@@ -508,7 +554,6 @@ nav {
     width: 500px;
     right: 100px;
     bottom: 130px;
-    padding: 10px;
     z-index: 1;
 }
 
@@ -522,7 +567,7 @@ nav {
     border-bottom: 0;
     border-right: 0;
     margin-left: 175px;
-    margin-bottom: -38px;
+    margin-bottom: -32px;
 }
 
 .chat-modal-container {
@@ -571,7 +616,7 @@ nav {
     border-bottom-left-radius: 20px;
 }
 
-.chat-container {
+.chat-area-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -579,20 +624,61 @@ nav {
     border-top-right-radius: 20px;
 }
 
-.chat-container span {
+.chat-area-container span {
     font-weight: bold;
     font-size: large;
     margin-top: 4px;
 }
 
-.chat-area-container {
+.chat-area-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 380px;
     height: 100%;
     overflow-x: hidden;
+    /* overflow-y: scroll; */
+}
+
+.chat-area-wrap::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-area-wrap::-webkit-scrollbar-thumb {
+    background-color: rgb(180, 180, 180);
+    border-radius: 20px;
+}
+
+.chat-area-wrap::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.chat-area-wrap::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(146, 146, 146);
+    overflow-y: hidden;
+}
+
+.chat-area-wrap {
+    width: 100%;
+    overflow-x: hidden;
     overflow-y: scroll;
+}
+
+.chat-area-wrap::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-area-wrap::-webkit-scrollbar-thumb {
+    background-color: rgb(180, 180, 180);
+    border-radius: 20px;
+}
+
+.chat-area-wrap::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.chat-area-wrap::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(146, 146, 146);
 }
 
 .contract-btn-container {
@@ -602,32 +688,35 @@ nav {
 }
 
 .request-contract-btn {
-    background-color: #91FDF6;
+    background-color: rgb(153, 250, 158);
     font-size: 15px;
     font-weight: bold;
     border: 0;
     border-radius: 7px;
     height: 40px;
-    width: 81px;
+    width: 100%;
     margin: 10px 6px;
 }
 
 .end-contract-btn {
-    background-color: greenyellow;
+    background-color: #ffe398;
     font-size: 15px;
     font-weight: bold;
     border: 0;
     border-radius: 7px;
     height: 40px;
-    width: 81px;
+    width: 100%;
     margin: 10px 6px;
-
 }
 
-.request-contract-btn:hover,
+.request-contract-btn:hover {
+    cursor: pointer;
+    background-color: rgb(191, 255, 194);
+}
+
 .end-contract-btn:hover {
     cursor: pointer;
-    background-color: #ffe398;
+    background-color: #ffefc2;
 }
 
 .chat-send-container {
@@ -639,11 +728,14 @@ nav {
 
 .chat-text {
     width: 100%;
-    min-height: 30px;
-    max-height: 104px;
-    background-color: #F5F5F5;
     border: none;
     resize: none;
+    font-size: 16px;
+    background-color: #F5F5F5;
+    height: 32px;
+    max-height: 110px;
+    padding: 10px 5px 0 5px;
+    overflow-y: scroll;
 }
 
 .chat-send-btn {
@@ -651,7 +743,7 @@ nav {
     font-weight: bold;
     border: 0;
     width: 50px;
-    background-color: #ffefc2;
+    background-color: #ffe398;
 }
 
 .chat-send-btn:hover {
@@ -682,13 +774,13 @@ nav {
     font-size: 15px;
     font-weight: bold;
     border: 0;
-    border-radius: 7px
+    border-radius: 7px;
     border-bottom-right-radius: 0px;
     max-width: 260px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px 5px;
+    margin: 5px;
     padding: 5px;
 }
 
@@ -703,7 +795,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px 5px;
+    margin: 5px 10px;
     padding: 5px;
 }
 
@@ -711,44 +803,27 @@ nav {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: end;
-    padding: 10px;
-}
-
-
-.contract-request {
-    background-color: #91FDF6;
-    font-size: 15px;
-    font-weight: bold;
-    border: 0;
-    border-radius: 7px;
-    height: 50px;
-    width: 180px;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 0 10px;
 }
 
 .contract-look {
-    background-color: #91FDF6;
+    background-color: rgb(153, 250, 158);
     font-size: 15px;
     font-weight: bold;
     border: 0;
     border-radius: 7px;
     height: 40px;
-    width: 81px;
+    width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px;
+    margin: 5px;
 }
 
 .contract-look:hover {
     cursor: pointer;
-    background-color: #ffe398;
+    background-color: rgb(191, 255, 194);
 }
-
 
 #chat-submit-btn {
     transform: scale(1.3);
