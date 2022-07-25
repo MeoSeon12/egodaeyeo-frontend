@@ -304,8 +304,7 @@ async function inquiry() {
     
         // 모달 확인 버튼 클릭시
         inquiryModalEnterBtn.addEventListener('click', function() {
-            body.style.overflow = 'auto'
-            inquiryModalBody.style.display = 'none'
+            console.log('채팅방 생성 기능')
         })
     
         // 모달 취소 버튼 클릭시
