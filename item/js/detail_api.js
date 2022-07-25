@@ -67,3 +67,25 @@ async function deleteItem() {
         location.href = '../item/list.html'
     }
 }
+
+//채팅방 생성 및 이동 API
+async function chatStartApi() {
+
+    const token = localStorage.getItem('access_token')
+    const response = await fetch(`${backEndBaseUrl}/chats/${itemId}`, {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    
+    //  요청 성공 (아이템 DB 존재함)
+    if (response.status == 200 || response.status == 201) {
+        data = await response.json()
+        console.log(data)
+        return data
+    }
+    else {
+        alert('현재 대여 가능한 물품이 아닙니다.')
+    }
+}
