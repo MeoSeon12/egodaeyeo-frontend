@@ -53,14 +53,6 @@ p {
     font-size: 1rem;
 }
 
-* {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
-}
 
 @media all and (max-width: 992px) {
     * {
@@ -74,18 +66,13 @@ body {
     overflow-x: hidden;
 }
 
-body button {
+section button {
     font-weight: bold;
     font-size: 1rem;
     background-color: #00000000;
     border: none;
 }
 
-/* 
-body input {
-    border: none;
-    outline: none;
-} */
 
 .index-main .background-beige {
     background-color: #fbf7f2;
