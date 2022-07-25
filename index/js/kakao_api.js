@@ -7,7 +7,6 @@ kakaoBtn.addEventListener("click", (e) => {
 
 const kakaoAddressSubmitBtn = document.querySelector('.address-submit-btn')
 kakaoAddressSubmitBtn.addEventListener("click", (e) => {
-    console.log('workworkw???')
     onAddressEnter();
 })
 
@@ -44,11 +43,9 @@ async function kakaoLoginApi(kakaoUserData) {
     }
     )
     response_json = await response.json()
-    console.log(response_json)
 
     if (response.status == 200) {
         setLocalStorageItems()
-        alert(response_json['msg'])
         window.location.reload()
 
     }
@@ -66,7 +63,6 @@ async function onAddressEnter() {
 
     const token = localStorage.getItem("access_token");
     const address = document.getElementById("address-kakao2").value;
-    // const userId = JSON.parse(localStorage.getItem("payload")).user_id;
 
     const response = await fetch(`${backEndBaseUrl}/users/`, {
         method: 'PUT',
