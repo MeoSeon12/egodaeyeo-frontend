@@ -381,7 +381,6 @@ async function chatModalApi() {
     response_json = await response.json()
     
     if (response.status == 200) {
-        console.log(response_json)
         return response_json
     }
     else {
@@ -416,16 +415,15 @@ async function chatRoomApi(room_id) {
 //1. 문의하기 -> 1:1 채팅방이 생성(view post, -> 현재 user, item의 user, -> room 생성)
 //채팅 송수신
 // const webSocketUrl = `ws://127.0.0.1:8000/ws/socket-server/1`
-const webSocketUrl = 'ws://127.0.0.1:8000/chats/'
+const webSocketUrl = `ws://127.0.0.1:8000/chats/${userId}`
 const chatSocket = new WebSocket(webSocketUrl)
 
 chatSocket.onmessage = async function(e){
     const chatAreaWrap = document.querySelector('.chat-area-wrap')
     let data = JSON.parse(e.data)
-    console.log("아아아아", data)
 
     const messages = document.getElementById('messages')
-    
+
     if (data.sender == userId) {
         messages.insertAdjacentHTML('beforeend', 
         `<div class="my-chat-wrap">
