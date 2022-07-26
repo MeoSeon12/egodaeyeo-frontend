@@ -101,7 +101,6 @@ async function profileApiView() {
 
             }
             else if (response.status == 400) {
-                console.log(response_json)
                 if (response_json["nickname"]) {
                     alert("이미 사용중인 닉네임입니다.")
                     $('#nickname-input').focus()

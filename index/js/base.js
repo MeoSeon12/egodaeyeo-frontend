@@ -330,14 +330,21 @@ async function chatRoomSelect(room_id) {
 
     //채팅 기능 트리거
     chatSendBtn.addEventListener('click', (e) => {
-        console.log("아무거나!")
         const chatInput = document.querySelector('.chat-text')
+        const senderId = data['sender']['id']
+        var receiverId = data['receiver']['id']
+
+        // 받는사람이 유저와 동일할 경우 받는사람을 sender로 수정
+        if (receiverId == userId) {
+            receiverId = senderId
+        }
+
         if (chatInput.value != '') {
             const message = chatInput.value
             chatSocket.send(JSON.stringify({
                 'message': message,
                 'sender' : userId,
-                // 'receiver': data['receiver']['id'],
+                'receiver': receiverId,
                 'room_id' : room_id
             }))
             chatInput.value = ''
