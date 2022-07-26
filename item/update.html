@@ -126,34 +126,17 @@
                         <button class="request-contract-btn">대여신청</button>
                         <button class="end-contract-btn">대여종료</button>
                     </div>
-                    <div class="chat-area-wrap">
+                    <div class="chat-area-wrap" id="messages">
                         <div class="other-chat-wrap">
                             <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                text ever since the 1500s, when an unknown printer took a galley of type
-                                and scrambled it to make a type specimen book. It has survived not only
-                                five centuries, but also the leap into electronic typesetting, remaining
-                                essentially unchanged. It was popularised in the 1960s with the release
-                                of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                with desktop publishing software like Aldus PageMaker including versions
-                                of Lorem Ipsum.
+                                typesetting industry.
                             </div>
                             <div class="chat-time-stamp">오전 11:40</div>
-
                         </div>
                         <div class="other-chat-wrap">
                             <div class="other-chat">선제시 ㅎㅎㅎ
                             </div>
                             <div class="chat-time-stamp">오전 11:40</div>
-                        </div>
-                        <div class="my-chat-wrap">
-                            <div class="chat-time-stamp">오전 11:40</div>
-                            <div class="my-chat">얼마까지 알아보고 오셨어요?</div>
-                        </div>
-                        <div class="my-chat-wrap">
-                            <div class="chat-time-stamp">오전 11:40</div>
-                            <div class="my-chat">얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지
-                                알아보고 오셨어요? 얼마까지 알아보고 오셨어요? 얼마까지 알아보고 오셨어요?</div>
                         </div>
                         <div class="contract-wrap">
                             <div class="contract-look">대여신청이 도착했습니다</div>
@@ -161,8 +144,8 @@
                     </div>
 
                 </div>
-                <div class="chat-send-container">
-                    <textarea type="text" class="chat-text" rows="1" oninput="calcTextareaHeight(this)"
+                <div class="chat-send-container" id="chat-form">
+                    <textarea type="text" class="chat-text" name="message" rows="1" oninput="calcTextareaHeight(this)"
                         placeholder="채팅을 입력해주세요."></textarea>
                     <button class="chat-send-btn">
                         <i class="fa-solid fa-comment"></i>
@@ -222,8 +205,8 @@
     
 </body>
 
-<script type="text/javascript" src="../index/js/nav.js"></script>
-<script type="text/javascript" src="../index/js/nav_api.js"></script>
+<script type="text/javascript" src="../index/js/base.js"></script>
+<script type="text/javascript" src="../index/js/base_api.js"></script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="../index/js/kakao_api.js"></script>
 <script type="text/javascript" src="js/update_api.js"></script>

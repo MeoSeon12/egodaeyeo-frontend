@@ -75,7 +75,7 @@ async function myInfo() {
     Profilecheck(userData)
 }
 
-
+//각종 내역 불러오는 함수
 async function myPageTabInfo(tab) {
     let param = tab.id
     const data = await myPageApiView(param) //data 전부다
@@ -113,11 +113,20 @@ async function myPageTabInfo(tab) {
             newTabInner.setAttribute('class', 'tab-inner-box')
             newTabBox.append(newTabInner)
 
-            //이미지
-            const newTabImage = document.createElement('img')
-            newTabImage.setAttribute('class', 'tab-info-image')
-            newTabImage.setAttribute('src', item['image'])
-            newTabInner.append(newTabImage)
+            if (item['image'] == null) {
+                //이미지 없을시
+                const newTabImage = document.createElement('img')
+                newTabImage.setAttribute('class', 'tab-info-image')
+                newTabImage.setAttribute('src', "https://egodaeyeo.s3.amazonaws.com/static/default_item.jpg")
+                newTabInner.append(newTabImage)
+            }
+            else {
+                //이미지 있을시
+                const newTabImage = document.createElement('img')
+                newTabImage.setAttribute('class', 'tab-info-image')
+                newTabImage.setAttribute('src', item['image'])
+                newTabInner.append(newTabImage)
+            }
 
             const newTabTextBox = document.createElement('div')
             newTabTextBox.setAttribute('class', 'tab-info-text')
@@ -176,7 +185,7 @@ async function myPageTabInfo(tab) {
 
 }
 
-//이미지 업로드시, image-preview기능
+//프로필이미지 수정업로드시, image-preview기능
 function Reader(event) {
     let data = event.target
     let reader = new FileReader()
@@ -189,6 +198,7 @@ function Reader(event) {
     reader.readAsDataURL(data.files[0])
 }
 
+//프로필 정보변경 탭
 function Profilecheck(userData) {
 
     mypageTapWrap.replaceChildren();
@@ -332,6 +342,7 @@ function Profilecheck(userData) {
     newSubmitBox.append(newDeleteBtn)
 }
 
+//피드백 탭
 function siteFeedback() {
 
     mypageTapWrap.replaceChildren();
@@ -367,7 +378,7 @@ function siteFeedback() {
     newSubmitBtnDiv.append(newSubmitBtn)
 }
 
-// 문의하기 버튼 클릭
+// 회원 탈퇴시 안내 모달
 async function userDeleteModal() {
 
     // 모달 바디 추가
