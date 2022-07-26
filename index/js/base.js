@@ -251,6 +251,7 @@ async function chatRoomSelect(room_id) {
 
     const data = await chatRoomApi(room_id)
     const chatData = data['chat_messages']
+    console.log(data)
     const chatAreaContainer = document.querySelector('.chat-area-container')
 
     chatAreaContainer.replaceChildren();
@@ -329,12 +330,14 @@ async function chatRoomSelect(room_id) {
 
     //채팅 기능 트리거
     chatSendBtn.addEventListener('click', (e) => {
+        console.log("아무거나!")
         const chatInput = document.querySelector('.chat-text')
         if (chatInput.value != '') {
             const message = chatInput.value
             chatSocket.send(JSON.stringify({
                 'message': message,
                 'sender' : userId,
+                // 'receiver': data['receiver']['id'],
                 'room_id' : room_id
             }))
             chatInput.value = ''
