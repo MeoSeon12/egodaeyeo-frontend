@@ -72,15 +72,16 @@ async function deleteItem() {
 async function chatStartApi() {
 
     const token = localStorage.getItem('access_token')
-    const response = await fetch(`${backEndBaseUrl}/chats/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/chats/rooms/${itemId}`, {
         method: 'POST',
         headers: {
+            'X-CSRFToken': csrftoken,
             'Authorization': 'Bearer ' + token
         }
     })
     
     //  요청 성공 (아이템 DB 존재함)
-    if (response.status == 200 || response.status == 201) {
+    if (response.status == 200) {
         data = await response.json()
         console.log(data)
         return data

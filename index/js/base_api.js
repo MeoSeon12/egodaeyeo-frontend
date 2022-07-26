@@ -346,7 +346,6 @@ async function getUserView() {
 
         const response = await fetch(`${backEndBaseUrl}/users/${userId}/`, {
             method: 'GET',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
             },
@@ -365,45 +364,98 @@ async function getUserView() {
 }
 getUserView()
 
+
+// 채팅 모달 데이터 요청
+async function chatModalApi() {
+
+    const token = localStorage.getItem('access_token')
+    const userId = JSON.parse(localStorage.getItem('payload')).user_id
+
+    const response = await fetch(`${backEndBaseUrl}/chats/`, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'Authorization': 'Bearer ' + token
+        },
+    })
+    response_json = await response.json()
+    
+    if (response.status == 200) {
+        console.log(response_json)
+        return response_json
+    }
+    else {
+        alert(response_json["error"])
+    }
+}
+
+// 채팅 룸 선택 (채팅 ㅇ)
+async function chatRoomApi(room_id) {
+
+    const token = localStorage.getItem('access_token')
+    const userId = JSON.parse(localStorage.getItem('payload')).user_id
+
+    const response = await fetch(`${backEndBaseUrl}/chats/${room_id}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'Authorization': 'Bearer ' + token
+        },
+    })
+    response_json = await response.json()
+    
+    if (response.status == 200) {
+        return response_json
+    }
+    else {
+        alert(response_json["error"])
+    }
+}
+
+
 //1. 문의하기 -> 1:1 채팅방이 생성(view post, -> 현재 user, item의 user, -> room 생성)
 //채팅 송수신
-const webSocketUrl = `ws://127.0.0.1:8000/ws/socket-server/`
-
+// const webSocketUrl = `ws://127.0.0.1:8000/ws/socket-server/1`
+const webSocketUrl = 'ws://127.0.0.1:8000/chats/'
 const chatSocket = new WebSocket(webSocketUrl)
 
-chatSocket.onmessage = function(e){
-    const data = JSON.parse(e.data)
-    console.log(data.time)
+chatSocket.onmessage = async function(e){
+    const chatAreaWrap = document.querySelector('.chat-area-wrap')
+    let data = JSON.parse(e.data)
+    console.log("아아아아", data)
 
-    if(data.type === 'chat') {
-        const messages = document.getElementById('messages')
-
+    
+    const messages = document.getElementById('messages')
+    if (data.sender == userId) {
         messages.insertAdjacentHTML('beforeend', 
         `<div class="my-chat-wrap">
             <div class="chat-time-stamp">${data.time}</div>
             <div class="my-chat">${data.message}</div>
         </div>`
         )        
-        chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
+        
     }
+    else {
+        messages.insertAdjacentHTML('beforeend', 
+        `<div class="other-chat-wrap">
+            <div class="other-chat">${data.message}</div>
+            <div class="chat-time-stamp">${data.time}</div>
+        </div>`
+        )
+    }
+    chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
+    
 }
 
-// 채팅창에서 엔터 누르면 채팅 버튼 트리거
-$(".chat-text").keydown(function(e) {
-    if (e.keyCode === 13) {
-        e.preventDefault();
-        $(".chat-send-btn").click();
-    }
-});
+//상대방 채팅 html
+// `<div class="other-chat-wrap">
+// <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and
+//     typesetting industry.
+// </div>
+// <div class="chat-time-stamp">오전 11:40</div>
+// </div>`
 
-//채팅 기능 트리거
-chatSendBtn.addEventListener('click', (e) => {
-    const chatText = document.querySelector('.chat-text')
-    if (chatText.value != '') {
-        const message = chatText.value
-        chatSocket.send(JSON.stringify({
-            'message': message,
-        }))
-        chatText.value = ''
-        chatText.focus();
-}});
+//대여신청 도착 html
+// `<div class="contract-wrap">
+// <div class="contract-look">대여신청이 도착했습니다</div>
+// </div>`
