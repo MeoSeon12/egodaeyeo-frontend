@@ -389,7 +389,7 @@ async function chatModalApi() {
     }
 }
 
-// 채팅 룸 선택 (채팅 ㅇ)
+// 채팅 룸 선택
 async function chatRoomApi(room_id) {
 
     const token = localStorage.getItem('access_token')
@@ -424,8 +424,8 @@ chatSocket.onmessage = async function(e){
     let data = JSON.parse(e.data)
     console.log("아아아아", data)
 
-    
     const messages = document.getElementById('messages')
+    
     if (data.sender == userId) {
         messages.insertAdjacentHTML('beforeend', 
         `<div class="my-chat-wrap">
@@ -447,13 +447,6 @@ chatSocket.onmessage = async function(e){
     
 }
 
-//상대방 채팅 html
-// `<div class="other-chat-wrap">
-// <div class="other-chat">Lorem Ipsum is simply dummy text of the printing and
-//     typesetting industry.
-// </div>
-// <div class="chat-time-stamp">오전 11:40</div>
-// </div>`
 
 //대여신청 도착 html
 // `<div class="contract-wrap">
