@@ -293,6 +293,13 @@ async function chatRoomSelect(room_id) {
     chatAreaBox.append(chatAreaWrap)
     
     for (let i = 0; i < chatData.length; i++) {
+        if (i > 0 && chatData[i].date != chatData[i-1].date) {
+            const dateWrap = document.createElement('div');
+            dateWrap.setAttribute("class", "date-wrap");
+            dateWrap.innerHTML = `<i class="fa-regular fa-calendar"></i>
+                                  <div class="chat-date-stamp">${chatData[i].date}</div>`
+            chatAreaWrap.append(dateWrap)
+        }
         if (chatData[i]['user'] == userId) {
             const myChatWrap = document.createElement('div');
             myChatWrap.setAttribute("class", "my-chat-wrap");
@@ -308,6 +315,7 @@ async function chatRoomSelect(room_id) {
             chatAreaWrap.append(otherChatWrap)
         }
     }
+
     chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
 
     const chatSendContainer = document.createElement('div');

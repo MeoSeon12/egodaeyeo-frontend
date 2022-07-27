@@ -855,3 +855,19 @@ nav {
     font-size: 12px;
     margin-bottom: 3px;
 }
+
+.date-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.chat-date-stamp {
+    font-size: 12px;
+    font-weight: bold;
+    border: solid black;
+    border-radius: 20px;
+    padding: 0 5px;
+    margin-left: 3px;
+}
