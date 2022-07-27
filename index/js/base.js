@@ -463,7 +463,7 @@ async function chatRoomSelect(room_id) {
                                   &nbsp;${chatData[i].date}</div>`
             chatAreaWrap.append(dateWrap)
         }
-        if (chatData[i].content == "대여신청이 도착했습니다.") {
+        if (chatData[i].content == "대여신청이 도착했습니다!!!!!") {
             if (chatData[i]['user'] == userId) {
                 messages.insertAdjacentHTML('beforeend', 
                 `<div class="contract-wrap">
