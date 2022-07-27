@@ -296,8 +296,9 @@ async function chatRoomSelect(room_id) {
         if (i > 0 && chatData[i].date != chatData[i-1].date) {
             const dateWrap = document.createElement('div');
             dateWrap.setAttribute("class", "date-wrap");
-            dateWrap.innerHTML = `<i class="fa-regular fa-calendar"></i>
-                                  <div class="chat-date-stamp">${chatData[i].date}</div>`
+            dateWrap.innerHTML = `<div class="chat-date-stamp">
+                                  <i class="fa-regular fa-calendar"></i>
+                                  &nbsp;${chatData[i].date}</div>`
             chatAreaWrap.append(dateWrap)
         }
         if (chatData[i]['user'] == userId) {
@@ -316,8 +317,6 @@ async function chatRoomSelect(room_id) {
         }
     }
 
-    chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
-
     const chatSendContainer = document.createElement('div');
     chatSendContainer.setAttribute("class", "chat-send-container");
     chatAreaContainer.append(chatSendContainer)
@@ -335,6 +334,8 @@ async function chatRoomSelect(room_id) {
     chatSendBtn.setAttribute("class", "chat-send-btn");
     chatSendBtn.innerHTML = `<i class="fa-solid fa-comment"></i>`
     chatSendContainer.append(chatSendBtn)
+
+    chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
 
     //채팅 기능 트리거
     chatSendBtn.addEventListener('click', (e) => {
