@@ -15,9 +15,6 @@ addEventListener('click', (e) => {
     if (e.target == reviewSubmitBtn) {
         onReviewSubmit()
     }
-    if (e.target == rentalDateSubmitBtn) {
-        onRentalSubmit()
-    }
 })
 
 function getCookie(name) {
@@ -223,23 +220,24 @@ function dhm(ms) {
     return days + "days: " + hours + "hr: " + minutes + "min"
 }
 
-async function onRentalSubmit() {
+async function onRentalSubmit(itemId) {
+    const startTime = document.querySelector('#rental-start-time')
+    const endTime = document.querySelector('#rental-end-time')
+
     const token = localStorage.getItem("access_token");
 
-    if (rentalStartTime.value > rentalEndTime.value) {
+    if (startTime.value > endTime.value) {
         alert('대여 종료일을 대여 시작일 이전으로 설정할 수 없습니다.')
     }
     else {
         const rentalSubmitData = {
-            rentalStartTime: rentalStartTime.value,
-            rentalEndTime: rentalEndTime.value
+            startTime: startTime.value,
+            endTime: endTime.value,
         }
 
-        const response = await fetch(`${backEndBaseUrl}/items/contracts/start/1`, {
+        const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
             method: 'POST',
-            mode: 'cors',
             headers: {
-                Accept: "application/json",
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token,
                 'X-CSRFToken': csrftoken,
@@ -250,13 +248,34 @@ async function onRentalSubmit() {
         response_json = await response.json()
 
         if (response.status == 200) {
-            alert("리뷰 작성 완료!")
-            window.location.reload()
+            alert("대여신청 완료!")
+            // window.location.reload()
         } else {
             console.log(response_json)
         }
     }
+}
 
+async function contractDetailApi(itemId) {
+
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+    }
+    )
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        console.log(response_json)
+        return response_json
+    } else {
+        console.log(response_json)
+    }
 }
 
 // 카카오 주소 API(일반유저)
@@ -419,34 +438,76 @@ const webSocketUrl = `ws://127.0.0.1:8000/chats/${userId}`
 const chatSocket = new WebSocket(webSocketUrl)
 
 chatSocket.onmessage = async function(e){
-    const chatAreaWrap = document.querySelector('.chat-area-wrap')
     let data = JSON.parse(e.data)
-
+    
     const messages = document.getElementById('messages')
-
-    if (data.sender == userId) {
-        messages.insertAdjacentHTML('beforeend', 
-        `<div class="my-chat-wrap">
+    if (data.message == "대여신청이 도착했습니다!!!!!") {
+        if (data.sender == userId) {
+            messages.insertAdjacentHTML('beforeend', 
+            `<div class="contract-wrap">
+            <div class="contract-look" style="background-color: #f0f0f0;">대여신청을 보냈습니다</div>
+            </div>`
+            )
+        }
+        else {
+            const contractWrap = document.createElement('div')
+            contractWrap.setAttribute('class', 'contract-wrap')
+            messages.append(contractWrap)
+            const contractLook = document.createElement('div')
+            contractLook.setAttribute('class', 'contract-look')
+            contractLook.setAttribute('onclick', `checkRentalDateModal(${data.item_id})`)
+            contractLook.innerText = "대여신청이 도착했습니다"
+            contractWrap.append(contractLook)
+        }
+    }
+    else{
+        if (data.sender == userId) {
+            messages.insertAdjacentHTML('beforeend', 
+            `<div class="my-chat-wrap">
             <div class="chat-time-stamp">${data.time}</div>
             <div class="my-chat">${data.message}</div>
-        </div>`
-        )        
-        
-    }
-    else {
-        messages.insertAdjacentHTML('beforeend', 
-        `<div class="other-chat-wrap">
+            </div>`
+            )        
+            
+        }
+        else {
+            messages.insertAdjacentHTML('beforeend', 
+            `<div class="other-chat-wrap">
             <div class="other-chat">${data.message}</div>
             <div class="chat-time-stamp">${data.time}</div>
-        </div>`
-        )
+            </div>`
+            )
+        }
     }
+
+    const chatAreaWrap = document.querySelector('.chat-area-wrap')
     chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
-    
 }
 
+// rentalSocket.onmessage = async function(e){
+//     let data = JSON.parse(e.data)
+    
+//     const messages = document.getElementById('messages')
+    
+//     //대여신청 도착 html 이거 쓰면되여
+//     // `<div class="contract-wrap">
+//     // <div class="contract-look">대여신청이 도착했습니다</div>
+//     // </div>`
+//     if (data.sender == userId) {
+//         messages.insertAdjacentHTML('beforeend', 
+//         `<div class="contract-wrap">
+//         <div class="contract-look">대여신청이 도착했습니다</div>
+//         </div>`
+//         )        
+        
+//     }
+//     else {
+//         messages.insertAdjacentHTML('beforeend', 
+//         `<div class="contract-wrap">
+//         <div class="contract-look">대여신청이 도착했습니다</div>
+//         </div>`
+//         )
+//     }    
+// }
 
-//대여신청 도착 html
-// `<div class="contract-wrap">
-// <div class="contract-look">대여신청이 도착했습니다</div>
-// </div>`
+
