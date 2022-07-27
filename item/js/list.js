@@ -205,7 +205,6 @@ function itemDataAppend(itemsInfo) {
         const newItemBox = document.createElement('div')
         newItemBox.setAttribute("class", "item-link-box")
         newItemLink.append(newItemBox)
-        console.log(item['image'])
 
         if (item['image'] == null) {
             //이미지 없을시

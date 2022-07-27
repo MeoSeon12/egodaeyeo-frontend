@@ -251,6 +251,7 @@ async function chatRoomSelect(room_id) {
 
     const data = await chatRoomApi(room_id)
     const chatData = data['chat_messages']
+    console.log(data)
     const chatAreaContainer = document.querySelector('.chat-area-container')
 
     chatAreaContainer.replaceChildren();
@@ -330,11 +331,20 @@ async function chatRoomSelect(room_id) {
     //채팅 기능 트리거
     chatSendBtn.addEventListener('click', (e) => {
         const chatInput = document.querySelector('.chat-text')
+        const senderId = data['sender']['id']
+        var receiverId = data['receiver']['id']
+
+        // 받는사람이 유저와 동일할 경우 받는사람을 sender로 수정
+        if (receiverId == userId) {
+            receiverId = senderId
+        }
+
         if (chatInput.value != '') {
             const message = chatInput.value
             chatSocket.send(JSON.stringify({
                 'message': message,
                 'sender' : userId,
+                'receiver': receiverId,
                 'room_id' : room_id
             }))
             chatInput.value = ''
