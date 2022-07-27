@@ -34,6 +34,7 @@ function addressModalView(){
     addressContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
+//대여신청하는 모달폼 
 function rentalDateModalView(itemId, room_id){
     const rentalModalBody = document.querySelector('.rental-date-modal-body');
     console.log(rentalModalBody)
@@ -133,6 +134,7 @@ function rentalDateModalView(itemId, room_id){
     });
 }
 
+//대여신청이 도착했습니다. 클릭시 생기는 모달
 async function checkRentalDateModal(itemId) {
 
     const data = await contractDetailApi(itemId)
@@ -191,14 +193,19 @@ async function checkRentalDateModal(itemId) {
     askSign.append(cancelRental)
 
     addEventListener('click', (e) => {
-        if (e.target == rentalDateModalBody || e.target == cancelRental) {
+        if (e.target == rentalDateModalBody) {
             body.style.overflow = 'auto'
             rentalDateModalBody.style.display = 'none'
         }
     })
 
     rentalSubmitBtn.addEventListener('click', (e) => {
-        // onRentalSubmit(itemId)
+        contractAcceptApi(itemId)
+        body.style.overflow = 'auto'
+        rentalDateModalBody.style.display = 'none'
+    })
+    cancelRental.addEventListener('click', (e) => {
+        contractRefuseApi(itemId)
         body.style.overflow = 'auto'
         rentalDateModalBody.style.display = 'none'
     })

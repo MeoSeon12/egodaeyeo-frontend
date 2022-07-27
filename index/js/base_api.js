@@ -278,6 +278,50 @@ async function contractDetailApi(itemId) {
     }
 }
 
+async function contractAcceptApi(itemId) {
+
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+    }
+    )
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        console.log(response_json)
+        // return response_json
+    } else {
+        console.log(response_json)
+    }
+}
+
+async function contractRefuseApi(itemId) {
+
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+    }
+    )
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        console.log(response_json)
+        // return response_json
+    } else {
+        console.log(response_json)
+    }
+}
+
 // 카카오 주소 API(일반유저)
 document.getElementById("address-kakao").addEventListener("click", function () {
     new daum.Postcode({
@@ -479,7 +523,6 @@ chatSocket.onmessage = async function(e){
             )
         }
     }
-
     const chatAreaWrap = document.querySelector('.chat-area-wrap')
     chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
 }
