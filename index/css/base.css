@@ -866,7 +866,7 @@ nav {
 .chat-date-stamp {
     font-size: 12px;
     font-weight: bold;
-    border: solid black;
+    border: solid gray;
     border-radius: 20px;
     padding: 0 5px;
     margin-left: 3px;
