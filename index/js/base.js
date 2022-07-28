@@ -1,35 +1,255 @@
 const body = document.getElementsByTagName('body')[0]
-const loginModalBody = document.querySelector('.login-modal-body')
 const addressModalBody = document.querySelector('.address-modal-body')
 const reviewModalBody = document.querySelector('.review-modal-body')
-
 const loginContainer = document.querySelector('#login-modal-container')
 const signupContainer = document.querySelector('#signup-modal-container')
 const addressContainer = document.querySelector('#address-modal-container')
-const reviewContainer = document.querySelector('#review-modal-container')
-
-const signUpBtn = document.querySelector('.signup-submit-btn')
-const loginSubmitBtn = document.querySelector('.login-submit-btn')
-const reviewSubmitBtn = document.querySelector('.review-submit-btn')
 const searchBtn = document.querySelector('#search-icon')
-const loginBtn = document.querySelector('.login-btn')
-const logoutBtn = document.querySelector('.logout-btn')
 
-function loginModalView(){
+
+//대여신청하는 모달폼 
+function rentalDateModalView(itemId, room_id){
+    const rentalModalBody = document.querySelector('.rental-date-modal-body');
+    console.log(rentalModalBody)
+    if (rentalModalBody) {
+        rentalModalBody.remove()
+    }
+    const rentalDateModalBody = document.createElement('div');
+    rentalDateModalBody.setAttribute("class", "rental-date-modal-body");
+    body.append(rentalDateModalBody)
+    
+    const rentalDateContainer = document.createElement('div');
+    rentalDateContainer.setAttribute("class", "rental-date-modal-container");
+    rentalDateContainer.setAttribute("id", "rental-date-modal-container");
+    rentalDateModalBody.append(rentalDateContainer)
+    
+    const rentalApply = document.createElement('h2');
+    rentalApply.setAttribute("class", "rental-apply");
+    rentalApply.innerText = "대여신청"
+    rentalDateContainer.append(rentalApply)
+
+    const rentalStart = document.createElement('h5');
+    rentalStart.innerText = "대여 시작일"
+    rentalDateContainer.append(rentalStart)
+
+    const startTime = document.createElement('input');
+    startTime.setAttribute("type", "datetime-local");
+    startTime.setAttribute("id", "rental-start-time");
+    startTime.setAttribute("name", "rental-start-time");
+    rentalDateContainer.append(startTime)
+    
+    const rentalEnd = document.createElement('h5');
+    rentalEnd.innerText = "대여 종료일"
+    rentalDateContainer.append(rentalEnd)
+    
+    const endTime = document.createElement('input');
+    endTime.setAttribute("type", "datetime-local");
+    endTime.setAttribute("id", "rental-end-time");
+    endTime.setAttribute("name", "rental-end-time");
+    rentalDateContainer.append(endTime)
+
+    const rentalSubmitBtn = document.createElement('button');
+    rentalSubmitBtn.setAttribute("class", "rental-date-submit-btn");
+    rentalSubmitBtn.innerText = "신청하기"
+    rentalDateContainer.append(rentalSubmitBtn)
+
+    const askSign = document.createElement('div');
+    askSign.setAttribute("class", "ask-sign");
+    rentalDateContainer.append(askSign)
+
+    const cancelRental = document.createElement('a');
+    cancelRental.setAttribute("class", "cancel-rental");
+    cancelRental.innerText = "취소"
+    askSign.append(cancelRental)
+    
+    // 대여 시작일과 종료일 default값 현재 시간으로 지정
+    // 대여 시작일과 종료일은 오늘 이후로만 설정 가능
+    var now = new Date();
+    var timezoneNow = now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+    startTime.value = now.toISOString().slice(0,16);
+    endTime.value = now.toISOString().slice(0,16);
+    startTime.min = now.toISOString().slice(0,16);
+    endTime.min = now.toISOString().slice(0,16);
+
     body.style.overflow = 'hidden'
-    loginModalBody.style.display = 'flex'
-    loginContainer.style.display = 'flex'
-    signupContainer.style.display = 'none'
-    loginModalBody.style.animation = ''
-    loginContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    rentalDateModalBody.style.display = 'flex'
+    
+    
+    addEventListener('click', (e) => {
+        if (e.target == rentalDateModalBody || e.target == cancelRental) {
+            body.style.overflow = 'auto'
+            rentalDateModalBody.style.display = 'none'
+        }
+    })
+
+    rentalSubmitBtn.addEventListener('click', (e) => {
+        onRentalSubmit(itemId)
+        console.log(startTime.value, endTime.value)
+        body.style.overflow = 'auto'
+        rentalDateModalBody.style.display = 'none'
+
+        const senderId = data[0]['sender']['id']
+        var receiverId = data[0]['receiver']['id']
+
+        // 받는사람이 유저와 동일할 경우 받는사람을 sender로 수정
+        if (receiverId == userId) {
+            receiverId = senderId
+        }
+        
+        chatSocket.send(JSON.stringify({
+            'item_id': itemId,
+            'message': "대여신청이 도착했습니다!!!!!",
+            'sender': userId,
+            'receiver': receiverId,
+            'room_id': room_id,
+        }))
+    });
 }
 
-function addressModalView(){
-    body.style.overflow = 'hidden'
-    loginModalBody.style.display = 'none'
-    addressModalBody.style.display = 'flex'
-    addressModalBody.style.animation = ''
-    addressContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+//대여신청이 도착했습니다. 클릭시 생기는 모달
+async function checkRentalDateModal(itemId) {
+
+    const data = await contractDetailApi(itemId)
+
+    const startDate = timeFormat(data['start_date'])
+    const endDate = timeFormat(data['end_date'])
+
+    const rentalModalBody = document.querySelector('.rental-date-modal-body');
+    
+    if (rentalModalBody) {
+        rentalModalBody.remove()
+    }
+    const rentalDateModalBody = document.createElement('div');
+    rentalDateModalBody.setAttribute("class", "rental-date-modal-body");
+    body.append(rentalDateModalBody)
+    rentalDateModalBody.style.display = 'flex'
+    
+    const rentalDateContainer = document.createElement('div');
+    rentalDateContainer.setAttribute("class", "rental-date-modal-container");
+    rentalDateContainer.setAttribute("id", "rental-date-modal-container");
+    rentalDateModalBody.append(rentalDateContainer)
+    
+    const rentalApply = document.createElement('h2');
+    rentalApply.setAttribute("class", "rental-apply");
+    rentalApply.innerText = "대여신청 확인"
+    rentalDateContainer.append(rentalApply)
+
+    const rentalStart = document.createElement('h5');
+    rentalStart.innerText = "대여 시작일"
+    rentalDateContainer.append(rentalStart)
+
+    const startTime = document.createElement('p');
+    startTime.innerText = startDate
+    rentalDateContainer.append(startTime)
+    
+    const rentalEnd = document.createElement('h5');
+    rentalEnd.innerText = "대여 종료일"
+    rentalDateContainer.append(rentalEnd)
+    
+    const endTime = document.createElement('p');
+    endTime.innerText = endDate
+    rentalDateContainer.append(endTime)
+
+    const rentalSubmitBtn = document.createElement('button');
+    rentalSubmitBtn.setAttribute("class", "rental-date-submit-btn");
+    rentalSubmitBtn.setAttribute("name", "대여 중");
+    rentalSubmitBtn.innerText = "수락"
+    rentalDateContainer.append(rentalSubmitBtn)
+
+    const askSign = document.createElement('div');
+    askSign.setAttribute("class", "ask-sign");
+    rentalDateContainer.append(askSign)
+
+    const cancelRental = document.createElement('a');
+    cancelRental.setAttribute("class", "cancel-rental");
+    cancelRental.innerText = "거절"
+    askSign.append(cancelRental)
+
+    addEventListener('click', (e) => {
+        if (e.target == rentalDateModalBody) {
+            body.style.overflow = 'auto'
+            rentalDateModalBody.style.display = 'none'
+        }
+    })
+
+    rentalSubmitBtn.addEventListener('click', (e) => {
+        contractAcceptEndApi(itemId, "대여 중")
+        body.style.overflow = 'auto'
+        rentalDateModalBody.style.display = 'none'
+
+        const contractBtnContainer = document.querySelector('.contract-btn-container')
+        contractBtnContainer.replaceChildren()
+
+        const endContractBtn = document.createElement('button');
+        endContractBtn.setAttribute("class", "end-contract-btn");
+        endContractBtn.innerText = "대여종료"
+        endContractBtn.addEventListener('click', (e) => {
+            contractAcceptEndApi(itemId, "대여종료")
+        
+            const reviewModalBody = document.createElement('div');
+            reviewModalBody.setAttribute("class", "review-modal-body");
+            reviewModalBody.setAttribute("id", "review-modal-container");
+            body.append(reviewModalBody)
+
+            const reviewContainer = document.createElement('div');
+            reviewContainer.setAttribute("class", "review-modal-body");
+            reviewModalBody.append(reviewContainer)
+
+            const reviewModalHeader = document.createElement('h2');
+            reviewModalHeader.setAttribute("class", "review-write");
+            reviewModalHeader.innerText = 리뷰작성
+            reviewContainer.append(reviewModalHeader)
+
+            const rating = document.createElement('div');
+            rating.setAttribute("class", "rating");
+
+            for (let i = 5; i > 0; i--) {
+                const ratingSpan = document.createElement('span');
+                const radioRating = document.createElement('input');
+                
+                radioRating.setAttribute("type", "radio");
+                radioRating.setAttribute("id", `str${i}`);
+                radioRating.setAttribute("value", `${i}`);
+                ratingSpan.append(radioRating)
+
+                const ratingLabel = document.createElement('label');
+                ratingLabel.setAttribute("for", `str${i}`);
+                ratingLabel.innerText = '★'
+                radioRating.append(ratingLabel)
+                reviewContainer.append(ratingSpan)
+            }
+
+            reviewContainer.append(rating)
+
+            const reviewInput = document.createElement('textarea');
+            reviewInput.setAttribute("id", "review");
+            reviewInput.setAttribute("name", "review");
+            reviewInput.setAttribute("rows", "5");
+            reviewInput.setAttribute("cols", "33");
+            reviewInput.setAttribute("placeholder", "리뷰를 작성해주세요.");
+            reviewContainer.append(rating)
+
+            const reviewSubmitBtn = document.createElement('button');
+            reviewSubmitBtn.setAttribute("class", "review-submit-btn");
+            reviewSubmitBtn.setAttribute("onclick", `onReviewSubmit(${itemId})`);
+            reviewContainer.append(reviewSubmitBtn)
+
+            const skipReview = document.createElement('div');
+            skipReview.setAttribute("class", "ask-sign");
+            // skipReview.setAttribute("onclick", "reviewModalUnview()");
+            skipReview.innerText = '건너 뛰기'
+            reviewContainer.append(skipReview)
+
+        })
+        contractBtnContainer.append(endContractBtn)
+
+    })
+    cancelRental.addEventListener('click', (e) => {
+        contractRefuseApi(itemId)
+        body.style.overflow = 'auto'
+        rentalDateModalBody.style.display = 'none'
+    })
 }
 
 
@@ -47,8 +267,8 @@ function timeFormat(date) {
 function reviewModalView(){
     body.style.overflow = 'hidden'
     loginModalBody.style.display = 'none'
-    reviewModalBody.style.display = 'flex'
-    reviewModalBody.style.animation = ''
+    reviewContainer.style.display = 'flex'
+    reviewContainer.style.animation = ''
     reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
@@ -96,8 +316,8 @@ function addressModalUnview(){
 
 function reviewModalUnview(){
     body.style.overflow = 'auto'
-    reviewModalBody.style.display = 'none'
-    // reviewModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    reviewContainer.style.display = 'none'
+    // reviewContainer.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 // 물품 목록 버튼
@@ -128,9 +348,9 @@ addEventListener('click', (e) => {
     if (e.target == addressModalBody) {
         alert("주소를 입력해주세요.")
     }
-    if (e.target == reviewModalBody) {
-        reviewModalUnview()
-    }
+    // if (e.target == reviewContainer) {
+    //     reviewModalUnview()
+    // }
 })
 
 // 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
@@ -361,6 +581,7 @@ async function chatRoomSelect(room_id) {
                 <i class="fa-regular fa-calendar"></i>
                 &nbsp;${chatData[i].date}
             </div>`
+
             chatAreaWrap.append(dateWrap)
         }
         if (chatData[i].content == "대여신청이 도착했습니다!!!!!") {
