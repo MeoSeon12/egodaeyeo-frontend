@@ -455,15 +455,18 @@ async function appendChatModal() {
 
 //채팅방 선택
 let connectedChatSocket = ''
+let connectedRentalSocket = ''
 async function chatRoomSelect(room_id) {
-    if (connectedChatSocket != '') {
+    if (connectedChatSocket != '' && connectedRentalSocket != '') {
         connectedChatSocket.close()
+        connectedRentalSocket.close()
     }
 
     const data = await chatRoomApi(room_id)
     const chatSocket = new WebSocket(`ws://127.0.0.1:8000/chats/${room_id}`)
+    const rentalSocket = new WebSocket(`ws://127.0.0.1:8000/chats/contracts/${room_id}`)
     connectedChatSocket = chatSocket
-    
+    connectedRentalSocket = rentalSocket
     chatSocket.onmessage = async function(e){
         let data = JSON.parse(e.data)
         
