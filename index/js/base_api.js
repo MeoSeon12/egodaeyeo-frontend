@@ -12,9 +12,6 @@ addEventListener('click', (e) => {
     if (e.target == logoutBtn) {
         onLogout()
     }
-    if (e.target == reviewSubmitBtn) {
-        onReviewSubmit()
-    }
 })
 
 function getCookie(name) {

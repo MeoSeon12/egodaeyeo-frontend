@@ -1,36 +1,11 @@
 const body = document.getElementsByTagName('body')[0]
-const loginModalBody = document.querySelector('.login-modal-body')
 const addressModalBody = document.querySelector('.address-modal-body')
 const reviewModalBody = document.querySelector('.review-modal-body')
-
 const loginContainer = document.querySelector('#login-modal-container')
 const signupContainer = document.querySelector('#signup-modal-container')
 const addressContainer = document.querySelector('#address-modal-container')
-const reviewContainer = document.querySelector('#review-modal-container')
-
-const signUpBtn = document.querySelector('.signup-submit-btn')
-const loginSubmitBtn = document.querySelector('.login-submit-btn')
-const reviewSubmitBtn = document.querySelector('.review-submit-btn')
 const searchBtn = document.querySelector('#search-icon')
-const loginBtn = document.querySelector('.login-btn')
-const logoutBtn = document.querySelector('.logout-btn')
 
-function loginModalView(){
-    body.style.overflow = 'hidden'
-    loginModalBody.style.display = 'flex'
-    loginContainer.style.display = 'flex'
-    signupContainer.style.display = 'none'
-    loginModalBody.style.animation = ''
-    loginContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-}
-
-function addressModalView(){
-    body.style.overflow = 'hidden'
-    loginModalBody.style.display = 'none'
-    addressModalBody.style.display = 'flex'
-    addressModalBody.style.animation = ''
-    addressContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-}
 
 //대여신청하는 모달폼 
 function rentalDateModalView(itemId, room_id){
@@ -213,18 +188,39 @@ async function checkRentalDateModal(itemId) {
             contractAcceptEndApi(itemId, "대여종료")
         
             const reviewModalBody = document.createElement('div');
-            reviewModalBody.setAttribute("class", "review-modal-container");
+            reviewModalBody.setAttribute("class", "review-modal-body");
             reviewModalBody.setAttribute("id", "review-modal-container");
             body.append(reviewModalBody)
+
+            const reviewContainer = document.createElement('div');
+            reviewContainer.setAttribute("class", "review-modal-body");
+            reviewModalBody.append(reviewContainer)
 
             const reviewModalHeader = document.createElement('h2');
             reviewModalHeader.setAttribute("class", "review-write");
             reviewModalHeader.innerText = 리뷰작성
-            reviewModalBody.append(reviewModalHeader)
+            reviewContainer.append(reviewModalHeader)
 
             const rating = document.createElement('div');
             rating.setAttribute("class", "rating");
-            reviewModalBody.append(rating)
+
+            for (let i = 5; i > 0; i--) {
+                const ratingSpan = document.createElement('span');
+                const radioRating = document.createElement('input');
+                
+                radioRating.setAttribute("type", "radio");
+                radioRating.setAttribute("id", `str${i}`);
+                radioRating.setAttribute("value", `${i}`);
+                ratingSpan.append(radioRating)
+
+                const ratingLabel = document.createElement('label');
+                ratingLabel.setAttribute("for", `str${i}`);
+                ratingLabel.innerText = '★'
+                radioRating.append(ratingLabel)
+                reviewContainer.append(ratingSpan)
+            }
+
+            reviewContainer.append(rating)
 
             const reviewInput = document.createElement('textarea');
             reviewInput.setAttribute("id", "review");
@@ -232,11 +228,19 @@ async function checkRentalDateModal(itemId) {
             reviewInput.setAttribute("rows", "5");
             reviewInput.setAttribute("cols", "33");
             reviewInput.setAttribute("placeholder", "리뷰를 작성해주세요.");
-            reviewModalBody.append(rating)
+            reviewContainer.append(rating)
 
             const reviewSubmitBtn = document.createElement('button');
             reviewSubmitBtn.setAttribute("class", "review-submit-btn");
-            reviewModalBody.append(rating)
+            reviewSubmitBtn.setAttribute("onclick", `onReviewSubmit(${itemId})`);
+            reviewContainer.append(reviewSubmitBtn)
+
+            const skipReview = document.createElement('div');
+            skipReview.setAttribute("class", "ask-sign");
+            // skipReview.setAttribute("onclick", "reviewModalUnview()");
+            skipReview.innerText = '건너 뛰기'
+            reviewContainer.append(skipReview)
+
         })
         contractBtnContainer.append(endContractBtn)
 
@@ -262,8 +266,8 @@ function timeFormat(date) {
 function reviewModalView(){
     body.style.overflow = 'hidden'
     loginModalBody.style.display = 'none'
-    reviewModalBody.style.display = 'flex'
-    reviewModalBody.style.animation = ''
+    reviewContainer.style.display = 'flex'
+    reviewContainer.style.animation = ''
     reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
@@ -311,8 +315,8 @@ function addressModalUnview(){
 
 function reviewModalUnview(){
     body.style.overflow = 'auto'
-    reviewModalBody.style.display = 'none'
-    // reviewModalBody.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    reviewContainer.style.display = 'none'
+    // reviewContainer.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
 }
 
 // 물품 목록 버튼
@@ -343,9 +347,9 @@ addEventListener('click', (e) => {
     if (e.target == addressModalBody) {
         alert("주소를 입력해주세요.")
     }
-    if (e.target == reviewModalBody) {
-        reviewModalUnview()
-    }
+    // if (e.target == reviewContainer) {
+    //     reviewModalUnview()
+    // }
 })
 
 // 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
@@ -552,12 +556,12 @@ async function chatRoomSelect(room_id) {
             const dateWrap = document.createElement('div');
             dateWrap.setAttribute("class", "date-wrap");
             dateWrap.innerHTML = `<div class="chat-date-stamp">
-            <i class="fa-regular fa-calendar"></i>
-                                  &nbsp;${chatData[i].date}</div>`
-                                  chatAreaWrap.append(dateWrap)
-                                }
-                                if (chatData[i].content == "대여신청이 도착했습니다!!!!!") {
-                                    if (chatData[i]['user'] == userId) {
+                                    <i class="fa-regular fa-calendar"></i>
+                                    &nbsp;${chatData[i].date}</div>`
+            chatAreaWrap.append(dateWrap)
+        }
+        if (chatData[i].content == "대여신청이 도착했습니다!!!!!") {
+            if (chatData[i]['user'] == userId) {
                 messages.insertAdjacentHTML('beforeend', 
                 `<div class="contract-wrap">
                 <div class="contract-look" style="background-color: #f0f0f0;">대여신청을 보냈습니다</div>
