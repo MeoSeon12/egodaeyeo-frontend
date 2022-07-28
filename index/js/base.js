@@ -11,8 +11,6 @@ const reviewContainer = document.querySelector('#review-modal-container')
 const signUpBtn = document.querySelector('.signup-submit-btn')
 const loginSubmitBtn = document.querySelector('.login-submit-btn')
 const reviewSubmitBtn = document.querySelector('.review-submit-btn')
-const requestContractBtn = document.querySelector('.request-contract-btn')
-const endContractBtn = document.querySelector('.request-contract-btn')
 const searchBtn = document.querySelector('#search-icon')
 const loginBtn = document.querySelector('.login-btn')
 const logoutBtn = document.querySelector('.logout-btn')
@@ -180,6 +178,7 @@ async function checkRentalDateModal(itemId) {
 
     const rentalSubmitBtn = document.createElement('button');
     rentalSubmitBtn.setAttribute("class", "rental-date-submit-btn");
+    rentalSubmitBtn.setAttribute("name", "대여 중");
     rentalSubmitBtn.innerText = "수락"
     rentalDateContainer.append(rentalSubmitBtn)
 
@@ -200,9 +199,51 @@ async function checkRentalDateModal(itemId) {
     })
 
     rentalSubmitBtn.addEventListener('click', (e) => {
-        contractAcceptApi(itemId)
+        contractAcceptEndApi(itemId, "대여 중")
         body.style.overflow = 'auto'
         rentalDateModalBody.style.display = 'none'
+
+        const contractBtnContainer = document.querySelector('.contract-btn-container')
+        contractBtnContainer.replaceChildren()
+
+        const endContractBtn = document.createElement('button');
+        endContractBtn.setAttribute("class", "end-contract-btn");
+        endContractBtn.innerText = "대여종료"
+        endContractBtn.addEventListener('click', (e) => {
+            contractAcceptEndApi(itemId, "대여종료")
+        
+            const reviewModalBody = document.createElement('div');
+            reviewModalBody.setAttribute("class", "review-modal-container");
+            reviewModalBody.setAttribute("id", "review-modal-container");
+            body.append(reviewModalBody)
+
+            const reviewModalHeader = document.createElement('h2');
+            reviewModalHeader.setAttribute("class", "review-write");
+            reviewModalHeader.innerText = 리뷰작성
+            reviewModalBody.append(reviewModalHeader)
+
+            const rating = document.createElement('div');
+            rating.setAttribute("class", "rating");
+            reviewModalBody.append(rating)
+
+            const rating = document.createElement('div');
+            rating.setAttribute("class", "rating");
+            reviewModalBody.append(rating)
+
+            const reviewSubmitBtn = document.createElement('button');
+            reviewSubmitBtn.setAttribute("class", "review-submit-btn");
+            reviewModalBody.append(rating)
+
+
+
+
+
+
+
+
+        })
+        contractBtnContainer.append(endContractBtn)
+
     })
     cancelRental.addEventListener('click', (e) => {
         contractRefuseApi(itemId)
@@ -416,9 +457,63 @@ async function appendChatModal() {
     chatAreaBox.append(selectSpan)
 }
 
+//채팅방 선택
+let connectedChatSocket = ''
 async function chatRoomSelect(room_id) {
+    if (connectedChatSocket != '') {
+        connectedChatSocket.close()
+    }
 
     const data = await chatRoomApi(room_id)
+    const chatSocket = new WebSocket(`ws://127.0.0.1:8000/chats/${room_id}`)
+    connectedChatSocket = chatSocket
+    
+    chatSocket.onmessage = async function(e){
+        let data = JSON.parse(e.data)
+        
+        const messages = document.getElementById('messages')
+        if (data.message == "대여신청이 도착했습니다!!!!!") {
+            if (data.sender == userId) {
+                messages.insertAdjacentHTML('beforeend', 
+                `<div class="contract-wrap">
+                <div class="contract-look" style="background-color: #f0f0f0;">대여신청을 보냈습니다</div>
+                </div>`
+                )
+            }
+            else {
+                const contractWrap = document.createElement('div')
+                contractWrap.setAttribute('class', 'contract-wrap')
+                messages.append(contractWrap)
+                const contractLook = document.createElement('div')
+                contractLook.setAttribute('class', 'contract-look')
+                contractLook.setAttribute('onclick', `checkRentalDateModal(${data.item_id})`)
+                contractLook.innerText = "대여신청이 도착했습니다"
+                contractWrap.append(contractLook)
+            }
+        }
+        else{
+            if (data.sender == userId) {
+                messages.insertAdjacentHTML('beforeend', 
+                `<div class="my-chat-wrap">
+                <div class="chat-time-stamp">${data.time}</div>
+                <div class="my-chat">${data.message}</div>
+                </div>`
+                )        
+                
+            }
+            else {
+                messages.insertAdjacentHTML('beforeend', 
+                `<div class="other-chat-wrap">
+                <div class="other-chat">${data.message}</div>
+                <div class="chat-time-stamp">${data.time}</div>
+                </div>`
+                )
+            }
+        }
+        const chatAreaWrap = document.querySelector('.chat-area-wrap')
+        chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
+    }
+    
     const chatData = data['chat_messages']
     console.log("룸데이타",data)
     const chatAreaContainer = document.querySelector('.chat-area-container')
@@ -451,11 +546,6 @@ async function chatRoomSelect(room_id) {
         })
     }
 
-    // const endContractBtn = document.createElement('button');
-    // endContractBtn.setAttribute("class", "end-contract-btn");
-    // endContractBtn.innerText = "대여종료"
-    // contractBtnContainer.append(endContractBtn)
-
     const chatAreaWrap = document.createElement('div');
     chatAreaWrap.setAttribute("class", "chat-area-wrap");
     chatAreaWrap.setAttribute("id", "messages");
@@ -466,12 +556,12 @@ async function chatRoomSelect(room_id) {
             const dateWrap = document.createElement('div');
             dateWrap.setAttribute("class", "date-wrap");
             dateWrap.innerHTML = `<div class="chat-date-stamp">
-                                  <i class="fa-regular fa-calendar"></i>
+            <i class="fa-regular fa-calendar"></i>
                                   &nbsp;${chatData[i].date}</div>`
-            chatAreaWrap.append(dateWrap)
-        }
-        if (chatData[i].content == "대여신청이 도착했습니다!!!!!") {
-            if (chatData[i]['user'] == userId) {
+                                  chatAreaWrap.append(dateWrap)
+                                }
+                                if (chatData[i].content == "대여신청이 도착했습니다!!!!!") {
+                                    if (chatData[i]['user'] == userId) {
                 messages.insertAdjacentHTML('beforeend', 
                 `<div class="contract-wrap">
                 <div class="contract-look" style="background-color: #f0f0f0;">대여신청을 보냈습니다</div>
@@ -527,7 +617,7 @@ async function chatRoomSelect(room_id) {
     chatSendContainer.append(chatSendBtn)
 
     chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
-
+    
     //채팅 기능 트리거
     chatSendBtn.addEventListener('click', (e) => {
         const chatInput = document.querySelector('.chat-text')
@@ -560,7 +650,6 @@ async function chatRoomSelect(room_id) {
         }
     });
 }
-
 
 // 채팅 입력 길이에 맞춰서 높이 조절
 function calcTextareaHeight(e) {

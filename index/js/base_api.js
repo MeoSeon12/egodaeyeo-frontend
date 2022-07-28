@@ -147,7 +147,6 @@ async function onLogin() {
         $('#loginEmail').focus()
         return
     }
-
     if (password === '') {
         alert('비밀번호를 입력해주세요')
         $('#loginPassword').focus()
@@ -229,13 +228,16 @@ async function onRentalSubmit(itemId) {
     if (startTime.value > endTime.value) {
         alert('대여 종료일을 대여 시작일 이전으로 설정할 수 없습니다.')
     }
+    if (startTime.value === endTime.value) {
+        alert('대여 종료일과 대여 시작일이 일치할 수 없습니다.')
+    }
     else {
         const rentalSubmitData = {
             startTime: startTime.value,
             endTime: endTime.value,
         }
 
-        const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+        const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -260,7 +262,7 @@ async function contractDetailApi(itemId) {
 
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -278,16 +280,19 @@ async function contractDetailApi(itemId) {
     }
 }
 
-async function contractAcceptApi(itemId) {
+async function contractAcceptEndApi(itemId, status) {
 
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'PUT',
         headers: {
             'Authorization': 'Bearer ' + token,
             'X-CSRFToken': csrftoken,
         },
+        body: JSON.stringify({
+            "status": status
+        })
     }
     )
     response_json = await response.json()
@@ -304,7 +309,7 @@ async function contractRefuseApi(itemId) {
 
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -472,59 +477,6 @@ async function chatRoomApi(room_id) {
     else {
         alert(response_json["error"])
     }
-}
-
-
-//1. 문의하기 -> 1:1 채팅방이 생성(view post, -> 현재 user, item의 user, -> room 생성)
-//채팅 송수신
-// const webSocketUrl = `ws://127.0.0.1:8000/ws/socket-server/1`
-const webSocketUrl = `ws://127.0.0.1:8000/chats/${userId}`
-const chatSocket = new WebSocket(webSocketUrl)
-
-chatSocket.onmessage = async function(e){
-    let data = JSON.parse(e.data)
-    
-    const messages = document.getElementById('messages')
-    if (data.message == "대여신청이 도착했습니다!!!!!") {
-        if (data.sender == userId) {
-            messages.insertAdjacentHTML('beforeend', 
-            `<div class="contract-wrap">
-            <div class="contract-look" style="background-color: #f0f0f0;">대여신청을 보냈습니다</div>
-            </div>`
-            )
-        }
-        else {
-            const contractWrap = document.createElement('div')
-            contractWrap.setAttribute('class', 'contract-wrap')
-            messages.append(contractWrap)
-            const contractLook = document.createElement('div')
-            contractLook.setAttribute('class', 'contract-look')
-            contractLook.setAttribute('onclick', `checkRentalDateModal(${data.item_id})`)
-            contractLook.innerText = "대여신청이 도착했습니다"
-            contractWrap.append(contractLook)
-        }
-    }
-    else{
-        if (data.sender == userId) {
-            messages.insertAdjacentHTML('beforeend', 
-            `<div class="my-chat-wrap">
-            <div class="chat-time-stamp">${data.time}</div>
-            <div class="my-chat">${data.message}</div>
-            </div>`
-            )        
-            
-        }
-        else {
-            messages.insertAdjacentHTML('beforeend', 
-            `<div class="other-chat-wrap">
-            <div class="other-chat">${data.message}</div>
-            <div class="chat-time-stamp">${data.time}</div>
-            </div>`
-            )
-        }
-    }
-    const chatAreaWrap = document.querySelector('.chat-area-wrap')
-    chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
 }
 
 // rentalSocket.onmessage = async function(e){
