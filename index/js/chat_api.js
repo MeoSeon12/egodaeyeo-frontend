@@ -255,6 +255,7 @@ async function onRentalSubmit(itemId) {
     }
 }
 
+// 대여 정보 조회
 async function contractDetailApi(itemId) {
 
     const token = localStorage.getItem("access_token");

@@ -107,9 +107,11 @@ function rentalDateModalView(itemId, room_id){
     });
 }
 
-//대여신청이 도착했습니다. 클릭시 생기는 모달
+
+// 대여 신청 수신 버튼 모달
 async function checkRentalDateModal(itemId) {
 
+    // 대여 정보 조회
     const data = await contractDetailApi(itemId)
 
     const startDate = timeFormat(data['start_date'])
