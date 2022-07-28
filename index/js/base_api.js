@@ -147,7 +147,6 @@ async function onLogin() {
         $('#loginEmail').focus()
         return
     }
-
     if (password === '') {
         alert('비밀번호를 입력해주세요')
         $('#loginPassword').focus()
@@ -229,13 +228,16 @@ async function onRentalSubmit(itemId) {
     if (startTime.value > endTime.value) {
         alert('대여 종료일을 대여 시작일 이전으로 설정할 수 없습니다.')
     }
+    if (startTime.value === endTime.value) {
+        alert('대여 종료일과 대여 시작일이 일치할 수 없습니다.')
+    }
     else {
         const rentalSubmitData = {
             startTime: startTime.value,
             endTime: endTime.value,
         }
 
-        const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+        const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -255,7 +257,7 @@ async function contractDetailApi(itemId) {
 
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${backEndBaseUrl}/contracts/start/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -268,6 +270,53 @@ async function contractDetailApi(itemId) {
     if (response.status == 200) {
         console.log(response_json)
         return response_json
+    } else {
+        console.log(response_json)
+    }
+}
+
+async function contractAcceptEndApi(itemId, status) {
+
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+            "status": status
+        })
+    }
+    )
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        console.log(response_json)
+        // return response_json
+    } else {
+        console.log(response_json)
+    }
+}
+
+async function contractRefuseApi(itemId) {
+
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+    }
+    )
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        console.log(response_json)
+        // return response_json
     } else {
         console.log(response_json)
     }
@@ -402,6 +451,7 @@ async function chatModalApi() {
     }
 }
 
+
 // 채팅 룸 선택
 async function chatRoomApi(room_id) {
 
@@ -423,43 +473,6 @@ async function chatRoomApi(room_id) {
     else {
         alert(response_json["error"])
     }
-}
-
-
-// 채팅 웹소켓 통신
-const chatSocket = new WebSocket(`ws://127.0.0.1:8000/chats/${userId}`)
-
-// 채팅 웹소켓 요청 받았을 시
-chatSocket.onmessage = function(e){
-
-    let data = JSON.parse(e.data)
-    
-    const messages = document.getElementById('messages')
-    
-    // 채팅 발신자
-    if (data.sender == userId) {
-        console.log('채팅 발신자입니다')
-        messages.insertAdjacentHTML('beforeend', 
-        `<div class="my-chat-wrap">
-        <div class="chat-time-stamp">${data.time}</div>
-        <div class="my-chat">${data.message}</div>
-        </div>`
-        )
-    }
-    
-    // 채팅 수신자
-    else {
-        console.log('채팅 수신자입니다')
-        messages.insertAdjacentHTML('beforeend', 
-        `<div class="other-chat-wrap">
-            <div class="other-chat">${data.message}</div>
-            <div class="chat-time-stamp">${data.time}</div>
-        </div>`
-        )
-    }
-    // 스크롤 가장 아래로 이동
-    const chatAreaWrap = document.querySelector('.chat-area-wrap')
-    chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
 }
 
 
