@@ -242,16 +242,11 @@ async function onRentalSubmit(itemId) {
                 'X-CSRFToken': csrftoken,
             },
             body: JSON.stringify(rentalSubmitData)
-        }
-        )
+        })
         response_json = await response.json()
 
-        if (response.status == 200) {
-            alert("대여신청 완료!")
-            // window.location.reload()
-        } else {
-            console.log(response_json)
-        }
+        if (response.status == 200) {console.log("대여신청 완료!")}
+        else {console.log(response_json)}
     }
 }
 
@@ -454,6 +449,7 @@ async function chatModalApi() {
     }
 }
 
+
 // 채팅 룸 선택
 async function chatRoomApi(room_id) {
 
@@ -477,30 +473,45 @@ async function chatRoomApi(room_id) {
     }
 }
 
-// rentalSocket.onmessage = async function(e){
-//     let data = JSON.parse(e.data)
-    
-//     const messages = document.getElementById('messages')
-    
-//     //대여신청 도착 html 이거 쓰면되여
-//     // `<div class="contract-wrap">
-//     // <div class="contract-look">대여신청이 도착했습니다</div>
-//     // </div>`
-//     if (data.sender == userId) {
-//         messages.insertAdjacentHTML('beforeend', 
-//         `<div class="contract-wrap">
-//         <div class="contract-look">대여신청이 도착했습니다</div>
-//         </div>`
-//         )        
-        
-//     }
-//     else {
-//         messages.insertAdjacentHTML('beforeend', 
-//         `<div class="contract-wrap">
-//         <div class="contract-look">대여신청이 도착했습니다</div>
-//         </div>`
-//         )
-//     }    
-// }
 
+// 대여 신청 웹소켓 통신
+const rentalSocket = new WebSocket(`ws://127.0.0.1:8000/chats/contracts/${userId}`)
 
+// 대여 신청 요청 받았을 시
+rentalSocket.onmessage = function (e) {
+
+    const messages = document.getElementById('messages')
+
+    let data = JSON.parse(e.data)
+    
+    // 대여 신청 발신자
+    if (data.sender == userId) {
+        console.log('대여 신청 발신자입니다')
+        const contractWrap = document.createElement('div')
+        contractWrap.setAttribute('class', 'contract-wrap')
+        messages.append(contractWrap)
+
+        const contractLook = document.createElement('div')
+        contractLook.setAttribute('class', 'contract-look')
+        contractLook.style.cssText = "background-color: #f0f0f0; cursor: auto;"
+        contractLook.innerText = "대여신청을 보냈습니다"
+        contractWrap.append(contractLook)
+    }
+    
+    // 대여 신청 수신자
+    else {
+        console.log('대여 신청 수신자입니다')
+        const contractWrap = document.createElement('div')
+        contractWrap.setAttribute('class', 'contract-wrap')
+        messages.append(contractWrap)
+
+        const contractLook = document.createElement('div')
+        contractLook.setAttribute('class', 'contract-look')
+        contractLook.setAttribute('onclick', `checkRentalDateModal(${data.item_id})`)
+        contractLook.innerText = "대여신청이 도착했습니다"
+        contractWrap.append(contractLook)
+    }
+    // 스크롤 가장 아래로 이동
+    const chatAreaWrap = document.querySelector('.chat-area-wrap')
+    chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight;
+}
