@@ -226,21 +226,17 @@ async function checkRentalDateModal(itemId) {
             rating.setAttribute("class", "rating");
             reviewModalBody.append(rating)
 
-            const rating = document.createElement('div');
-            rating.setAttribute("class", "rating");
+            const reviewInput = document.createElement('textarea');
+            reviewInput.setAttribute("id", "review");
+            reviewInput.setAttribute("name", "review");
+            reviewInput.setAttribute("rows", "5");
+            reviewInput.setAttribute("cols", "33");
+            reviewInput.setAttribute("placeholder", "리뷰를 작성해주세요.");
             reviewModalBody.append(rating)
 
             const reviewSubmitBtn = document.createElement('button');
             reviewSubmitBtn.setAttribute("class", "review-submit-btn");
             reviewModalBody.append(rating)
-
-
-
-
-
-
-
-
         })
         contractBtnContainer.append(endContractBtn)
 
