@@ -252,6 +252,7 @@ async function checkRentalDateModal(itemId) {
     })
 }
 
+
 function timeFormat(date) {
     const year = date.substring(0,4)
     const month = date.substring(5,7)
@@ -375,6 +376,23 @@ $(document).ready(function(){
 });
 
 
+// 검색창에서 엔터 누르면 검색 버튼 트리거
+$(".search").keyup(function (event) {
+    if (event.keyCode === 13) {
+        $("#search-icon").click();
+    }
+});
+
+
+//검색 기능 트리거
+searchBtn.addEventListener('click', (e) => {
+    const searchValue = document.querySelector('.search').value
+    if (searchValue != '') {
+        window.location.replace(`../item/search.html?query=${searchValue}`)
+    }
+})
+
+
 // 로그인, 비로그인에 따라 로그인, 로그아웃 채팅 모달 버튼 display 여부
 function appendChatAndLoginBtns() {
 
@@ -457,17 +475,21 @@ async function appendChatModal() {
     chatAreaBox.append(selectSpan)
 }
 
+
 //채팅방 선택
 let connectedChatSocket = ''
+let connectedRentalSocket = ''
 async function chatRoomSelect(room_id) {
-    if (connectedChatSocket != '') {
+    if (connectedChatSocket != '' && connectedRentalSocket != '') {
         connectedChatSocket.close()
+        connectedRentalSocket.close()
     }
 
     const data = await chatRoomApi(room_id)
     const chatSocket = new WebSocket(`ws://127.0.0.1:8000/chats/${room_id}`)
+    const rentalSocket = new WebSocket(`ws://127.0.0.1:8000/chats/contracts/${room_id}`)
     connectedChatSocket = chatSocket
-    
+    connectedRentalSocket = rentalSocket
     chatSocket.onmessage = async function(e){
         let data = JSON.parse(e.data)
         
@@ -515,7 +537,6 @@ async function chatRoomSelect(room_id) {
     }
     
     const chatData = data['chat_messages']
-    console.log("룸데이타",data)
     const chatAreaContainer = document.querySelector('.chat-area-container')
 
     chatAreaContainer.replaceChildren();
@@ -540,9 +561,9 @@ async function chatRoomSelect(room_id) {
         requestContractBtn.setAttribute("class", "request-contract-btn");
         requestContractBtn.innerText = "대여신청"
         contractBtnContainer.append(requestContractBtn)
-
+        console.log(data)
         requestContractBtn.addEventListener('click', (e) => {
-            rentalDateModalView(data.item, room_id)
+            rentalDateModalView(data.item, roomId, data.sender.id, data.receiver.id)
         })
     }
 
@@ -555,9 +576,12 @@ async function chatRoomSelect(room_id) {
         if (i > 0 && chatData[i].date != chatData[i-1].date) {
             const dateWrap = document.createElement('div');
             dateWrap.setAttribute("class", "date-wrap");
-            dateWrap.innerHTML = `<div class="chat-date-stamp">
-                                    <i class="fa-regular fa-calendar"></i>
-                                    &nbsp;${chatData[i].date}</div>`
+            dateWrap.innerHTML =
+            `<div class="chat-date-stamp">
+                <i class="fa-regular fa-calendar"></i>
+                &nbsp;${chatData[i].date}
+            </div>`
+
             chatAreaWrap.append(dateWrap)
         }
         if (chatData[i].content == "대여신청이 도착했습니다!!!!!") {
@@ -635,7 +659,7 @@ async function chatRoomSelect(room_id) {
                 'message': message,
                 'sender' : userId,
                 'receiver': receiverId,
-                'room_id' : room_id
+                'room_id': roomId
             }))
             chatInput.value = ''
             chatInput.focus();
@@ -651,27 +675,187 @@ async function chatRoomSelect(room_id) {
     });
 }
 
+
+// 대여 신청 발신자 모달 뷰
+function rentalDateModalView(itemId, roomId, senderId, receiverId) {
+    const rentalModalBody = document.querySelector('.rental-date-modal-body');
+    if (rentalModalBody) {
+        rentalModalBody.remove()
+    }
+    const rentalDateModalBody = document.createElement('div');
+    rentalDateModalBody.setAttribute("class", "rental-date-modal-body");
+    body.append(rentalDateModalBody)
+
+    const rentalDateContainer = document.createElement('div');
+    rentalDateContainer.setAttribute("class", "rental-date-modal-container");
+    rentalDateContainer.setAttribute("id", "rental-date-modal-container");
+    rentalDateModalBody.append(rentalDateContainer)
+
+    const rentalApply = document.createElement('h2');
+    rentalApply.setAttribute("class", "rental-apply");
+    rentalApply.innerText = "대여신청"
+    rentalDateContainer.append(rentalApply)
+
+    const rentalStart = document.createElement('h5');
+    rentalStart.innerText = "대여 시작일"
+    rentalDateContainer.append(rentalStart)
+
+    const startTime = document.createElement('input');
+    startTime.setAttribute("type", "datetime-local");
+    startTime.setAttribute("id", "rental-start-time");
+    startTime.setAttribute("name", "rental-start-time");
+    rentalDateContainer.append(startTime)
+
+    const rentalEnd = document.createElement('h5');
+    rentalEnd.innerText = "대여 종료일"
+    rentalDateContainer.append(rentalEnd)
+
+    const endTime = document.createElement('input');
+    endTime.setAttribute("type", "datetime-local");
+    endTime.setAttribute("id", "rental-end-time");
+    endTime.setAttribute("name", "rental-end-time");
+    rentalDateContainer.append(endTime)
+
+    const rentalSubmitBtn = document.createElement('button');
+    rentalSubmitBtn.setAttribute("class", "rental-date-submit-btn");
+    rentalSubmitBtn.innerText = "신청하기"
+    rentalDateContainer.append(rentalSubmitBtn)
+
+    const askSign = document.createElement('div');
+    askSign.setAttribute("class", "ask-sign");
+    rentalDateContainer.append(askSign)
+
+    const cancelRental = document.createElement('a');
+    cancelRental.setAttribute("class", "cancel-rental");
+    cancelRental.innerText = "취소"
+    askSign.append(cancelRental)
+
+    // 대여 시작일과 종료일 default값 현재 시간으로 지정
+    // 대여 시작일과 종료일은 오늘 이후로만 설정 가능
+    var now = new Date();
+    var timezoneNow = now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+    startTime.value = now.toISOString().slice(0, 16);
+    endTime.value = now.toISOString().slice(0, 16);
+    startTime.min = now.toISOString().slice(0, 16);
+    endTime.min = now.toISOString().slice(0, 16);
+
+    body.style.overflow = 'hidden'
+    rentalDateModalBody.style.display = 'flex'
+
+    // 대여 신청 모달 unview
+    addEventListener('click', (e) => {
+        if (e.target == rentalDateModalBody || e.target == cancelRental) {
+            body.style.overflow = 'auto'
+            rentalDateModalBody.style.display = 'none'
+        }
+    })
+
+    // 신청하기 버튼 클릭
+    rentalSubmitBtn.addEventListener('click', (e) => {
+
+        // 백엔드 포스트 요청
+        onRentalSubmit(itemId)
+
+        // 대여 신청 모달 unview
+        body.style.overflow = 'auto'
+        rentalDateModalBody.style.display = 'none'
+
+        // 받는사람이 유저와 동일할 경우 받는사람을 sender로 수정
+        if (receiverId == userId) {
+            receiverId = senderId
+        }
+
+        // 대여 신청 웹소켓 요청
+        rentalSocket.send(JSON.stringify({
+            'item_id': itemId,
+            'message': "대여신청이 도착했습니다!!!!!",
+            'sender': userId,
+            'receiver': receiverId,
+            'room_id': roomId,
+        }))
+    });
+}
+
+
+// 대여 신청 수신자 모달
+async function checkRentalDateModal(itemId) {
+
+    const data = await contractDetailApi(itemId)
+
+    const startDate = timeFormat(data['start_date'])
+    const endDate = timeFormat(data['end_date'])
+
+    const rentalModalBody = document.querySelector('.rental-date-modal-body');
+
+    if (rentalModalBody) {
+        rentalModalBody.remove()
+    }
+    const rentalDateModalBody = document.createElement('div');
+    rentalDateModalBody.setAttribute("class", "rental-date-modal-body");
+    body.append(rentalDateModalBody)
+    rentalDateModalBody.style.display = 'flex'
+
+    const rentalDateContainer = document.createElement('div');
+    rentalDateContainer.setAttribute("class", "rental-date-modal-container");
+    rentalDateContainer.setAttribute("id", "rental-date-modal-container");
+    rentalDateModalBody.append(rentalDateContainer)
+
+    const rentalApply = document.createElement('h2');
+    rentalApply.setAttribute("class", "rental-apply");
+    rentalApply.innerText = "대여신청 확인"
+    rentalDateContainer.append(rentalApply)
+
+    const rentalStart = document.createElement('h5');
+    rentalStart.innerText = "대여 시작일"
+    rentalDateContainer.append(rentalStart)
+
+    const startTime = document.createElement('p');
+    startTime.innerText = startDate
+    rentalDateContainer.append(startTime)
+
+    const rentalEnd = document.createElement('h5');
+    rentalEnd.innerText = "대여 종료일"
+    rentalDateContainer.append(rentalEnd)
+
+    const endTime = document.createElement('p');
+    endTime.innerText = endDate
+    rentalDateContainer.append(endTime)
+
+    const rentalSubmitBtn = document.createElement('button');
+    rentalSubmitBtn.setAttribute("class", "rental-date-submit-btn");
+    rentalSubmitBtn.innerText = "수락"
+    rentalDateContainer.append(rentalSubmitBtn)
+
+    const askSign = document.createElement('div');
+    askSign.setAttribute("class", "ask-sign");
+    rentalDateContainer.append(askSign)
+
+    const cancelRental = document.createElement('a');
+    cancelRental.setAttribute("class", "cancel-rental");
+    cancelRental.innerText = "거절"
+    askSign.append(cancelRental)
+
+    addEventListener('click', (e) => {
+        if (e.target == rentalDateModalBody || e.target == cancelRental) {
+            body.style.overflow = 'auto'
+            rentalDateModalBody.style.display = 'none'
+        }
+    })
+
+    rentalSubmitBtn.addEventListener('click', (e) => {
+        // onRentalSubmit(itemId)
+        body.style.overflow = 'auto'
+        rentalDateModalBody.style.display = 'none'
+    })
+}
+
+
 // 채팅 입력 길이에 맞춰서 높이 조절
 function calcTextareaHeight(e) {
     e.style.height = 'auto'
     e.style.height = `${e.scrollHeight}px`
 }
-
-
-// 검색창에서 엔터 누르면 검색 버튼 트리거
-$(".search").keyup(function(event) {
-    if (event.keyCode === 13) {
-        $("#search-icon").click();
-    }
-});
-
-//검색 기능 트리거
-searchBtn.addEventListener('click', (e) => {
-    const searchValue = document.querySelector('.search').value
-    if (searchValue != '') {
-        window.location.replace(`../item/search.html?query=${searchValue}`)
-    }
-})
 
 
 appendChatAndLoginBtns();
