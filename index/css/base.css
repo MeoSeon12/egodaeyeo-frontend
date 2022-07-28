@@ -456,7 +456,7 @@ nav {
 }
 
 @keyframes moveDown {
-	/* 중앙에 있는 모달 콘텐츠를 */
+	/*모달 콘텐츠를 */
 	0% {
 		transform: translateY(0) translateX(0) scale(1);
 	}
@@ -611,7 +611,7 @@ nav {
 
 .chat-rooms-container {
     display: flex;
-    max-width: 90px;
+    width: 90px;
     flex-direction: column;
     align-items: center;
     background-color: #FCFCFC;
@@ -719,7 +719,7 @@ nav {
     border-radius: 7px;
     height: 40px;
     width: 340px;
-    margin: 10px 6px;
+    margin: 0px 6px 10px 6px;
 }
 
 .request-contract-btn:hover {
@@ -866,8 +866,8 @@ nav {
 .chat-date-stamp {
     font-size: 12px;
     font-weight: bold;
-    border: solid gray;
-    border-radius: 20px;
+    border: 2px solid rgb(212, 212, 212);
+    border-radius: 10px;
     padding: 0 5px;
     margin-left: 3px;
 }
