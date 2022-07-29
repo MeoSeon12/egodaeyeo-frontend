@@ -262,13 +262,19 @@ async function chatRoomSelectAndWebSocket(roomId) {
             contractBtnContainer.append(requestContractBtn)
         }
         else if (data.contract_status == "대여 종료"){
-            requestContractBtn.innerText = "리뷰 쓰기"
-            requestContractBtn.style.backgroundColor = "#bae1ff"
-            contractBtnContainer.append(requestContractBtn)
-
-            requestContractBtn.addEventListener("click", (e) => {
+            if(data.is_reviewed == true) {
+                requestContractBtn.innerText = "대여 종료된 물품"
+                requestContractBtn.style.cursor = "auto"
+                requestContractBtn.style.backgroundColor = "#fac7aa"
+                contractBtnContainer.append(requestContractBtn)
+            }
+            else{
+                requestContractBtn.innerText = "리뷰 쓰기"
+                requestContractBtn.style.backgroundColor = "#bae1ff"
+                contractBtnContainer.append(requestContractBtn)
                 //리뷰 모달 열리는 함수 실행
-            })
+                requestContractBtn.addEventListener("click", reviewModalView(data.item));
+        }
         }
     }
     // 등록자는 물품이 대여 중인 상태에 대여 종료 버튼 생성,
@@ -288,7 +294,7 @@ async function chatRoomSelectAndWebSocket(roomId) {
                 // 비동기로 버튼 바꿔줌
                 endContractBtn.innerText = "대여 종료된 물품"
                 endContractBtn.style.cursor = "auto"
-                endContractBtn.style.backgroundColor = "#c5e4fc"
+                endContractBtn.style.backgroundColor = "#fac7aa"
             })
         }
         // 대여 종료 상테면 다시 등록하기 활성화
@@ -680,24 +686,92 @@ function timeFormat(date) {
 }
 
 
-// 리뷰 섹션
-function reviewModalView(){
-    body.style.overflow = 'hidden'
-    loginModalBody.style.display = 'none'
-    reviewContainer.style.display = 'flex'
-    reviewContainer.style.animation = ''
-    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-}
-
 function reviewModalUnview(){
+    const reviewModalBody = document.querySelector('.review-modal-body');
     body.style.overflow = 'auto'
-    reviewContainer.style.display = 'none'
-    // reviewContainer.style.animation = 'bodyGoOut 1.0s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    reviewModalBody.remove()
 }
 
-// 리뷰 평점 별점 핸들링
-$(document).ready(function(){
+function reviewModalView(itemId){
+    
+    const body = document.getElementsByTagName('body')[0]
 
+    const reviewModalBody = document.createElement('div');
+    reviewModalBody.setAttribute("class", "review-modal-body");
+    body.append(reviewModalBody)
+
+    const reviewContainer = document.createElement('div');
+    reviewContainer.setAttribute("class", "review-modal-container");
+    reviewContainer.setAttribute("id", "review-modal-container");
+    reviewModalBody.append(reviewContainer)
+
+    const reviewModalHeader = document.createElement('h2');
+    reviewModalHeader.setAttribute("class", "review-write");
+    reviewModalHeader.innerText = "리뷰작성"
+    reviewContainer.append(reviewModalHeader)
+
+    const rating = document.createElement('div');
+    rating.setAttribute("class", "rating");
+
+    for (let i = 5; i > 0; i--) {
+        const ratingSpan = document.createElement('span');
+        const radioRating = document.createElement('input');
+        
+        radioRating.setAttribute("type", "radio");
+        radioRating.setAttribute("name", "rating");
+        radioRating.setAttribute("id", `str${i}`);
+        radioRating.setAttribute("value", `${i}`);
+        ratingSpan.append(radioRating)
+
+        const ratingLabel = document.createElement('label');
+        ratingLabel.setAttribute("for", `str${i}`);
+        ratingLabel.innerText = '★'
+        ratingSpan.append(ratingLabel)
+        rating.append(ratingSpan)
+    }
+
+    reviewContainer.append(rating)
+
+    const reviewContent = document.createElement('textarea');
+    reviewContent.setAttribute("id", "review");
+    reviewContent.setAttribute("name", "review");
+    reviewContent.setAttribute("rows", "5");
+    reviewContent.setAttribute("cols", "33");
+    reviewContent.setAttribute("placeholder", "리뷰를 작성해주세요.");
+    reviewContainer.append(reviewContent)
+
+    const reviewSubmitBtn = document.createElement('button');
+    reviewSubmitBtn.setAttribute("class", "review-submit-btn");
+    reviewSubmitBtn.innerText = "작성 하기"
+    reviewContainer.append(reviewSubmitBtn)
+
+    reviewSubmitBtn.addEventListener('click', (e) => {
+        onReviewSubmit(itemId)
+
+        //리뷰 작성 하고, 리뷰 쓰기 버튼 -> 대여 종료된 물품으로 변경
+        const requestContractBtn = document.querySelector('.request-contract-btn')
+        requestContractBtn.innerText = "대여 종료된 물품"
+        requestContractBtn.style.cursor = "auto"
+        requestContractBtn.style.backgroundColor = "#fac7aa"
+        requestContractBtn.removeEventListener("click", reviewModalView);
+    })
+
+    const askSign = document.createElement('div');
+    askSign.setAttribute("class", "ask-sign");
+    reviewContainer.append(askSign)
+
+    const skipReview = document.createElement('a');
+    skipReview.setAttribute("class", "skip-review");
+    skipReview.innerText = '건너 뛰기'
+    askSign.append(skipReview)
+
+    addEventListener('click', (e) => {
+        if (e.target == reviewModalBody | e.target == skipReview) {
+            reviewModalUnview()
+        }
+    })
+
+    // 리뷰 평점 별점 핸들링
     $('.rating input').click(function () {
         $(".rating span").removeClass('checked');
         $(this).parent().addClass('checked');
@@ -707,66 +781,8 @@ $(document).ready(function(){
     $('input:radio').change(function() {
         var userRating = this.value;
     }); 
-});
 
-
-//리뷰 모달
-// const reviewModalBody = document.createElement('div');
-// reviewModalBody.setAttribute("class", "review-modal-body");
-// reviewModalBody.setAttribute("id", "review-modal-container");
-// body.append(reviewModalBody)
-
-// const reviewContainer = document.createElement('div');
-// reviewContainer.setAttribute("class", "review-modal-body");
-// reviewModalBody.append(reviewContainer)
-
-// const reviewModalHeader = document.createElement('h2');
-// reviewModalHeader.setAttribute("class", "review-write");
-// reviewModalHeader.innerText = 리뷰작성
-// reviewContainer.append(reviewModalHeader)
-
-// const rating = document.createElement('div');
-// rating.setAttribute("class", "rating");
-
-// for (let i = 5; i > 0; i--) {
-//     const ratingSpan = document.createElement('span');
-//     const radioRating = document.createElement('input');
-    
-//     radioRating.setAttribute("type", "radio");
-//     radioRating.setAttribute("id", `str${i}`);
-//     radioRating.setAttribute("value", `${i}`);
-//     ratingSpan.append(radioRating)
-
-//     const ratingLabel = document.createElement('label');
-//     ratingLabel.setAttribute("for", `str${i}`);
-//     ratingLabel.innerText = '★'
-//     radioRating.append(ratingLabel)
-//     reviewContainer.append(ratingSpan)
-// }
-
-// reviewContainer.append(rating)
-
-// const reviewInput = document.createElement('textarea');
-// reviewInput.setAttribute("id", "review");
-// reviewInput.setAttribute("name", "review");
-// reviewInput.setAttribute("rows", "5");
-// reviewInput.setAttribute("cols", "33");
-// reviewInput.setAttribute("placeholder", "리뷰를 작성해주세요.");
-// reviewContainer.append(rating)
-
-// const reviewSubmitBtn = document.createElement('button');
-// reviewSubmitBtn.setAttribute("class", "review-submit-btn");
-// reviewSubmitBtn.setAttribute("onclick", `onReviewSubmit(${itemId})`);
-// reviewContainer.append(reviewSubmitBtn)
-
-// const skipReview = document.createElement('div');
-// skipReview.setAttribute("class", "ask-sign");
-// skipReview.setAttribute("onclick", "reviewModalUnview()");
-// skipReview.innerText = '건너 뛰기'
-// reviewContainer.append(skipReview)
-
-// addEventListener('click', (e) => {
-//     if (e.target == reviewContainer) {
-//         reviewModalUnview()
-//     }
-// })
+    body.style.overflow = 'hidden'
+    reviewModalBody.style.display = 'flex'
+    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}

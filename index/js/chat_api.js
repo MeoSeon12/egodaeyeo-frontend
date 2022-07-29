@@ -156,10 +156,8 @@ async function contractRefuseApi(itemId) {
 }
 
 
-/*
-리뷰 섹션
-*/
-async function onReviewSubmit() {
+//리뷰 작성 API
+async function onReviewSubmit(itemId) {
     const reviewContent = document.querySelector('#review').value
     const starRating = document.querySelector('input[name="rating"]:checked').value
     const token = localStorage.getItem("access_token");
@@ -168,11 +166,10 @@ async function onReviewSubmit() {
         content: reviewContent,
         rating: starRating
     }
-    const response = await fetch(`${backEndBaseUrl}/items/reviews/1`, {
+    const response = await fetch(`${backEndBaseUrl}/items/reviews/${itemId}`, {
         method: 'POST',
         mode: 'cors',
         headers: {
-            Accept: "application/json",
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
             'X-CSRFToken': csrftoken,
@@ -182,7 +179,8 @@ async function onReviewSubmit() {
     response_json = await response.json()
 
     if (response.status == 200) {
-        window.location.href = '../item/search.html'
+        alert('리뷰가 작성되었습니다.')
+        reviewModalUnview()
     } else {
         console.log(response_json)
     }
