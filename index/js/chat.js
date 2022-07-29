@@ -114,6 +114,17 @@ async function chatModalView(){
         chatBtnCount ++;
         chatBody.replaceChildren();
     }
+
+    //유저가 현재 들어가 채팅방 보더로 표시
+    const chatRooms = document.getElementsByClassName('chat-room');
+    console.log(chatRooms)
+    for (let i = 0; i < chatRooms.length; i++) {
+        chatRooms[i].addEventListener('click', (e) => {
+            $('.chat-rooms-container').find('div').attr('style', 'background-color: rgb(191, 255, 194)')
+            chatRooms[i].style = "border: 0.8mm ridge lime; background-color: rgb(191, 255, 194)"
+        })
+    }
+    
 }
 
 // 채팅방 선택
