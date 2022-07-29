@@ -70,11 +70,13 @@ async function chatModalView(){
             if (authorId == userId) {
                 spanNickname.innerText = inquirerNickname
                 chatRoom.style.backgroundColor = "rgb(255, 239, 194)"
+                chatRoom.setAttribute("class", "chat-room lend-room");
                 chatRoom.append(spanNickname)
             }
             else {
                 spanNickname.innerText = authorNickname
                 chatRoom.style.backgroundColor = "rgb(191, 255, 194)"
+                chatRoom.setAttribute("class", "chat-room borrow-room");
                 chatRoom.append(spanNickname)
             }
         }
@@ -108,20 +110,20 @@ async function chatModalView(){
     // 채팅 모달 unview
     else {
         const chatBody = document.querySelector('.chat-modal-body')
-        
         body.style.overflow = 'auto'
         chatBody.style.animation = 'moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
         chatBtnCount ++;
         chatBody.replaceChildren();
     }
 
-    //유저가 현재 들어가 채팅방 보더로 표시
+    //유저가 현재 들어간 채팅방 보더로 표시
     const chatRooms = document.getElementsByClassName('chat-room');
     console.log(chatRooms)
     for (let i = 0; i < chatRooms.length; i++) {
         chatRooms[i].addEventListener('click', (e) => {
-            $('.chat-rooms-container').find('div').attr('style', 'background-color: rgb(191, 255, 194)')
-            chatRooms[i].style = "border: 0.8mm ridge lime; background-color: rgb(191, 255, 194)"
+            $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
+            $('.borrow-room').attr('style', 'background-color: rgb(191, 255, 194)')
+            chatRooms[i].style.boxShadow = "5px 5px 5px yellowgreen"
         })
     }
     
@@ -393,6 +395,10 @@ async function chatRoomSelectAndWebSocket(roomId) {
             endContractBtn.innerText = "다시 등록 하기"
             endContractBtn.style.backgroundColor = "#a7fcf7"
             contractBtnContainer.append(endContractBtn)
+            // 다시 등록하기 버튼을 누르면 물품 등록 페이지로 이동
+            endContractBtn.addEventListener('click', (e) => {
+                window.location.href = "../item/upload.html"
+            })
         }
     }
 
