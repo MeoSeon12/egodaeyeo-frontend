@@ -184,7 +184,6 @@ async function getDetailView() {
         noReview.style.cssText = 'font-size: 20px; border-bottom: 0; color: gray;'
         reviewContainer.append(noReview)
     }
-    
     // 리뷰가 있을 시
     else {
         for (i = data.reviews.length - 1; i >= 0; i--) {
@@ -228,6 +227,7 @@ async function getDetailView() {
         }
     }
 }
+getDetailView()
 
 
 // 찜 버튼 클릭
@@ -385,6 +385,3 @@ function showDeleteCheckModal() {
         }
     })
 }
-
-
-getDetailView()
