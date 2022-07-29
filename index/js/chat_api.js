@@ -76,6 +76,7 @@ async function rentalSubmitApi(itemId) {
 
     if (response.status == 200) {
         console.log("대여신청 완료!")
+        return response_json
     }
     else {
         console.log(response_json)
