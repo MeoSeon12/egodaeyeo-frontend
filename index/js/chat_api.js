@@ -59,8 +59,9 @@ async function rentalSubmitApi(itemId) {
     const token = localStorage.getItem("access_token");
     
     const rentalSubmitData = {
-        startTime: startTime.value,
-        endTime: endTime.value,
+        "startTime": startTime.value,
+        "endTime": endTime.value,
+        "status": "예약 중",
     }
 
     const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
@@ -99,7 +100,7 @@ async function contractDetailApi(itemId) {
     response_json = await response.json()
 
     if (response.status == 200) {
-        console.log(response_json)
+        // console.log(response_json)
         return response_json
     } else {
         console.log(response_json)
@@ -126,7 +127,8 @@ async function contractAcceptAndEndApi(itemId, status) {
     response_json = await response.json()
 
     if (response.status == 200) {
-        console.log(response_json)
+        // console.log(response_json)
+        return response_json
     }
     else {
         console.log(response_json)
@@ -149,7 +151,8 @@ async function contractRefuseApi(itemId) {
     response_json = await response.json()
 
     if (response.status == 200) {
-        console.log(response_json)
+        // console.log(response_json)
+        return response_json
     }
     else {
         console.log(response_json)
@@ -169,7 +172,6 @@ async function onReviewSubmit(itemId) {
     }
     const response = await fetch(`${backEndBaseUrl}/items/reviews/${itemId}`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
