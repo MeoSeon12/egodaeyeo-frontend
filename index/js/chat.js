@@ -234,8 +234,7 @@ async function chatRoomSelectAndWebSocket(roomId) {
     contractBtnContainer.setAttribute("class", "contract-btn-container");
     chatAreaBox.append(contractBtnContainer)
     
-    // 문의자 한테는 대여 신청 버튼 생성
-    console.log(data.contract_status)
+    // 문의자는 대여 신청 버튼 생성
     if (data.inquirer.id == userId) {
         const requestContractBtn = document.createElement('button');
         requestContractBtn.setAttribute("class", "request-contract-btn");
@@ -524,7 +523,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
     rentalSubmitBtn.addEventListener('click', (e) => {
     
         if ((new Date(endTime.value) - new Date(startTime.value)) / 3600000 < 1) {
-            alert('대여 종료일을 최소 대여 시작일 1시간 이후로 설정해 주세요')
+            alert('대여 종료일을 대여 시작일로부터 1시간 이후로 설정해주세요')
         }
         else {
             // 대여 신청 API
