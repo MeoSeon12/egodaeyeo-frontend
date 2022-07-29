@@ -522,7 +522,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
 
     // 신청하기 버튼 클릭
     rentalSubmitBtn.addEventListener('click', (e) => {
-      
+    
         if ((new Date(endTime.value) - new Date(startTime.value)) / 3600000 < 1) {
             alert('대여 종료일을 최소 대여 시작일 1시간 이후로 설정해 주세요')
         }

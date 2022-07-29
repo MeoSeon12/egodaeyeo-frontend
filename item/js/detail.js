@@ -302,11 +302,13 @@ async function inquiry() {
         inquiryModalBtnBox.append(inquiryModalEnterBtn, inquiryModalCancelBtn)
     
         // 모달 확인 버튼 클릭시
-        inquiryModalEnterBtn.addEventListener('click', function() {
+        inquiryModalEnterBtn.addEventListener('click', async function() {
 
+            await chatStartApi()
             body.style.overflow = 'auto' 
             inquiryModalBody.style.display = 'none'
-            chatStartApi()
+
+            chatModalView()
         })
     
         // 모달 취소 버튼 클릭시
