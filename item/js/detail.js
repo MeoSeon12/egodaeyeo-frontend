@@ -119,7 +119,7 @@ async function getDetailView() {
     
     // 문의하기 카운트
     const inquiries = document.getElementById('inquiries')
-    inquiries.innerText = data.inquiry_length
+    inquiries.innerText = data.chatroom_length
 
     // 상호작용 버튼들
     const communicationContainer = document.getElementsByClassName('communication-container')[0]
