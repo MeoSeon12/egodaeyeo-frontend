@@ -12,6 +12,7 @@ function goItemListPage() {
     location.href = '../item/list.html'
 }
 
+
 // 물품 등록 버튼
 function goUploadPage() {
 
@@ -19,12 +20,13 @@ function goUploadPage() {
     if (localStorage.payload == undefined) {
         alert('로그인 후 이용 가능합니다')
     }
-    
+
     // 로그인 유저일 경우
     else {
         location.href = '../item/upload.html'
     }
 }
+
 
 // 검색창에서 엔터 누르면 검색 버튼 트리거
 $(".search").keyup(function (event) {
@@ -32,6 +34,7 @@ $(".search").keyup(function (event) {
         $("#search-icon").click();
     }
 });
+
 
 //검색 기능 트리거
 searchBtn.addEventListener('click', (e) => {
@@ -42,7 +45,7 @@ searchBtn.addEventListener('click', (e) => {
 })
 
 
-// 로그인 유저는 로그아웃 버튼 display
+// 로그인 여부에 따라 로그인 로그아웃 display
 function displayLoginLogoutBtn() {
 
     if (localStorage.payload !== undefined) {

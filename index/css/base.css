@@ -181,6 +181,56 @@ nav {
     cursor: pointer;
 }
 
+/* 채팅 알람 효과와 모달 */
+.chat-alert-effect {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgb(255, 60, 0);
+    margin-top: -38px;
+    margin-right: 318px;
+    display: none;
+}
+
+.chat-alert-modal-wrap {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-top: 165px;
+    margin-right: 203px;
+    height: 120px;
+    z-index: 1;
+}
+
+.chat-alert-modal-wrap > section {
+    width: 230px;
+    font-weight: normal;
+    font-size: 12px;
+    margin: 1px 0;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+}
+
+.chat-alert-modal-wrap > p {
+    width: 230px;
+    font-weight: normal;
+    font-size: 12px;
+    margin: 1px 0;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.chat-alert-modal-wrap > p:hover {
+    color: grey;
+}
+
 .item-list-btn {
     background-color: #91fdf6;
 }
@@ -554,7 +604,6 @@ nav {
     width: 500px;
     right: 100px;
     bottom: 130px;
-    z-index: 1;
 }
 
 .chat-modal-body:after {
@@ -608,6 +657,16 @@ nav {
     overflow: hidden;
 }
 
+.chat-room-alert-effect {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgb(255, 60, 0);
+    margin-top: -60px;
+    margin-right: 40px;
+    display: none;
+}
 
 .chat-rooms-container {
     display: flex;

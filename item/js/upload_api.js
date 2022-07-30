@@ -2,7 +2,7 @@
 async function getUploadPageViewData() {
 
     const token = localStorage.getItem('access_token')  // 비 로그인 유저는 null
-    
+
     if (token == null) {
         alert('로그인 후 사용 가능합니다. 메인 페이지로 돌아갑니다')
         location.href = '../index.html'
@@ -16,7 +16,7 @@ async function getUploadPageViewData() {
     })
 
     if (response.status == 200) {
-    data = await response.json()
+        data = await response.json()
         return data
     }
 }
@@ -24,9 +24,9 @@ async function getUploadPageViewData() {
 
 // 폼 전송
 async function submitForm() {
-    
+
     const token = localStorage.getItem('access_token')
-    
+
     // 비 로그인 유저
     if (token == undefined) {
         return alert('물품 등록은 로그인 후 이용가능합니다')
@@ -40,13 +40,15 @@ async function submitForm() {
     const price = document.getElementById('price').value
     const time = document.getElementById('time').value
 
-    // 카테고리, 제목, 내용은 필수
+    // 카테고리, 제목, 내용은 필수 / 가격은 0~천만원만 가능
     if (category == '-- 카테고리 --') {
         return alert('카테고리는 필수입니다')
     } else if (title == '') {
         return alert('제목은 필수입니다')
     } else if (content == '') {
         return alert('내용은 필수입니다')
+    } else if (price < 0 || price > 10000000) {
+        return alert('가격은 천만원을 넘을 수 없습니다')
     }
 
     // 폼데이터에 담기
@@ -64,7 +66,7 @@ async function submitForm() {
             formData.append('image', filesArr[i])
         }
     }
-    
+
     // 백엔드로 포스트 요청
     const response = await fetch(`${backEndBaseUrl}/items/upload`, {
         method: 'POST',
@@ -73,10 +75,15 @@ async function submitForm() {
         },
         body: formData
     })
-    
-    //  요청 성공 (아이템 DB 존재함)
+
+    //  요청 성공
     if (response.status == 200) {
-        item_id = await response.json()
-        window.location.href = `detail.html?${item_id}`
+        itemId = await response.json()
+        window.location.href = `detail.html?${itemId}`
+    }
+    // 요청 실패
+    else if (response.status == 400) {
+        error = await response.json()
+        console.log(error.title)
     }
 }
