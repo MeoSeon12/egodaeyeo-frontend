@@ -1,3 +1,8 @@
+const addressModalBody = document.querySelector('.address-modal-body')
+const loginContainer = document.querySelector('#login-modal-container')
+const signupContainer = document.querySelector('#signup-modal-container')
+const addressContainer = document.querySelector('#address-modal-container')
+
 function loginModalView(){
     body.style.overflow = 'hidden'
     loginModalBody.style.display = 'flex'

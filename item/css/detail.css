@@ -123,6 +123,7 @@
 .item-box-title > span:nth-child(2) {
     color: gray;
     margin: 0 10px;
+    min-width: 50px;
 }
 
 .item-container > p {

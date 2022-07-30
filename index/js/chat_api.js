@@ -1,6 +1,27 @@
-/*
-채팅 모달 섹션
-*/
+// 읽지 않은 메세지 API
+async function getUnreadMessageApi(userId) {
+
+    const token = localStorage.getItem('access_token')
+
+    // views.py - ChatAlertView
+    const response = await fetch(`${backEndBaseUrl}/chats/alerts/${userId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'Authorization': 'Bearer ' + token
+        },
+    })
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        return response_json
+    }
+    else {
+        alert(response_json["error"])
+    }
+}
+
+
 // 채팅 모달 데이터 요청 API
 async function chatModalApi() {
 
@@ -42,14 +63,11 @@ async function chatRoomApi(room_id) {
         return response_json
     }
     else {
-        alert(response_json["error"])
+        console.log(response_json["error"])
     }
 }
 
 
-/*
-대여 신청 섹션
-*/
 // 대여 신청 API
 async function rentalSubmitApi(itemId) {
 
@@ -75,12 +93,8 @@ async function rentalSubmitApi(itemId) {
     })
     response_json = await response.json()
 
-    if (response.status == 200) {
-        console.log("대여신청 완료!")
-        return response_json
-    }
-    else {
-        console.log(response_json)
+    if (response.status == 400) {
+        console.log(response_json["error"])
     }
 }
 
