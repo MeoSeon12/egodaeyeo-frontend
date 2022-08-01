@@ -6,7 +6,6 @@ async function myPageApiView(param) {
     else {
         const response = await fetch(`${backEndBaseUrl}/users/mypages?tab=${param}`, {
             method: 'GET',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Authorization': 'Bearer ' + token,
@@ -84,7 +83,6 @@ async function profileApiView() {
         else {
             const response = await fetch(`${backEndBaseUrl}/users/`, {
                 method: 'PUT',
-                mode: 'cors',
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'X-CSRFToken': csrftoken,
@@ -134,7 +132,6 @@ async function userDeleteApiView() {
     }else {
         const response = await fetch(`${backEndBaseUrl}/users`, {
             method: 'DELETE',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Authorization': 'Bearer ' + token,
@@ -170,9 +167,7 @@ async function feedbackApiView() {
     }else {
         const response = await fetch(`${backEndBaseUrl}/help/`, {
             method: 'POST',
-            mode: 'cors',
             headers: {
-                Accept: "application/json",
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
                 'Authorization': 'Bearer ' + token,

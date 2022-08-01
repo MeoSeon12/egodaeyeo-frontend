@@ -62,22 +62,31 @@ async function showAllItems(selectedSection) {
 
     categoryBox.replaceChildren();
     itemWrap.replaceChildren();
-
+    
     //카테고리
+    const categoryContainer = document.createElement("div")
+    categoryContainer.setAttribute("class", "category-container")
+    categoryBox.append(categoryContainer)
+
     const allCategory = document.createElement("div")
     allCategory.setAttribute("class", "category-btn")
     allCategory.setAttribute("onclick", "selectedAllItems()")
     allCategory.innerHTML += "전체" + '<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'
-    categoryBox.append(allCategory)
+    categoryContainer.append(allCategory)
     
     //json category 데이터 뽑기
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i]['name']
+
+        const categoryContainer = document.createElement("div")
+        categoryContainer.setAttribute("class", "category-container")
+        categoryBox.append(categoryContainer)
+
         const newCategory = document.createElement("div")
         newCategory.setAttribute("class", "category-btn")
         newCategory.setAttribute("onclick", "selectedCategoryItems(this)")
         newCategory.innerHTML += category + '<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'
-        categoryBox.append(newCategory)
+        categoryContainer.append(newCategory)
     }
     if (items['items']['count'] == 0) {
         itemWrap.innerText = "등록된 물품이 없습니다."

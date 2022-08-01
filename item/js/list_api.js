@@ -3,7 +3,6 @@ async function itemApiView() {
     if (token == null) {
         const response = await fetch(`${backEndBaseUrl}/items`, {
             method: 'GET',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
             }
@@ -14,7 +13,6 @@ async function itemApiView() {
     else {
         const response = await fetch(`${backEndBaseUrl}/items`, {
             method: 'GET',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Authorization': 'Bearer ' + token,
@@ -31,7 +29,6 @@ async function selectedItemApiView(category, section) {
     if (token == null) {
         const response = await fetch(`${backEndBaseUrl}/items?category=${category}&section=${section}`, {
             method: 'GET',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
             }
@@ -42,7 +39,6 @@ async function selectedItemApiView(category, section) {
     else {
         const response = await fetch(`${backEndBaseUrl}/items?category=${category}&section=${section}`, {
             method: 'GET',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Authorization': 'Bearer ' + token,
@@ -59,7 +55,6 @@ async function scrollItemApiView(url) {
     if (token == null) {
         const response = await fetch(url, {
             method: 'GET',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
             }
@@ -70,7 +65,6 @@ async function scrollItemApiView(url) {
     else {
         const response = await fetch(url, {
             method: 'GET',
-            mode: 'cors',
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Authorization': 'Bearer ' + token,

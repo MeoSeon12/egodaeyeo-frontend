@@ -188,7 +188,7 @@
 }
 
 .category-modal-container {
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(240, 240, 240);
     display: flex;
     flex-direction: column;
     margin-top: 80px;
@@ -225,18 +225,24 @@
     margin: 10px 0;
 }
 
+.category-container {
+    /* background-color: red; */
+    width: 320px;
+    margin-left: -10px;
+}
+
 .category-btn {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px;
+    padding: 12px;
     width: 200px;
     margin: 0 40px;
     cursor: pointer;
 }
 
-.category-btn:hover {
-    background-color: rgb(172, 172, 172);
+.category-container:hover {
+    background-image: linear-gradient(to right top, #dcdcdc, #dedede, #dfe0df, #e1e1e1, #e3e3e3, #e6e6e6, #e8e8e8, #ebebeb, #efefef, #f2f2f2, #f6f6f6, #fafafa);
 }
 
 @media screen and (max-width: 770px) {

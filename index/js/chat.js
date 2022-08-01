@@ -45,9 +45,9 @@ class CreateElement {
 
     // 채팅방 생성
     chatRoom(data, userId) {
-        let authorId = data['author']['id']
-        let authorNickname = data['author']['nickname']
-        let inquirerNickname = data['inquirer']['nickname']
+        let authorId = data.author.id
+        let authorNickname = data.author.nickname
+        let inquirerNickname = data.inquirer.nickname
 
         const selectSpan = document.getElementsByClassName('select-chat-room')[0]
         selectSpan.innerText = "채팅방을 선택해주세요"
@@ -120,40 +120,35 @@ class CreateElement {
             switch (contractStatus) {
                 case null:
                     requestContractBtn.innerText = "대여 신청"
-                    contractBtnContainer.append(requestContractBtn)
-
                     // 대여 신청 버튼 클릭 이벤트
                     requestContractBtn.setAttribute("onclick", `rentalDateModalView(${itemId}, ${roomId}, ${inquirerId}, ${authorId})`)
+                    contractBtnContainer.append(requestContractBtn)
                     break
 
                 case "검토 중":
                     requestContractBtn.innerText = "대여 신청중"
-                    requestContractBtn.style.cursor = "auto"
-                    requestContractBtn.style.backgroundColor = "#b6faf6"
+                    requestContractBtn.style.cssText = "background-color: #b6faf6; cursor: auto;"
                     contractBtnContainer.append(requestContractBtn)
                     break
 
                 case "대여 중":
                     requestContractBtn.innerText = "대여 중인 물품"
-                    requestContractBtn.style.cursor = "auto"
-                    requestContractBtn.style.backgroundColor = "#fcffb3"
+                    requestContractBtn.style.cssText = "background-color: #fcffb3; cursor: auto;"
                     contractBtnContainer.append(requestContractBtn)
                     break
 
                 case "대여 종료":
                     if (isReviewed == true) {
                         requestContractBtn.innerText = "대여 종료된 물품"
-                        requestContractBtn.style.cursor = "auto"
-                        requestContractBtn.style.backgroundColor = "#fac7aa"
+                        requestContractBtn.style.cssText = "background-color: #fac7aa; cursor: auto;"
                         contractBtnContainer.append(requestContractBtn)
                     }
                     else {
                         requestContractBtn.innerText = "리뷰 쓰기"
-                        requestContractBtn.style.backgroundColor = "#bae1ff"
-                        contractBtnContainer.append(requestContractBtn)
+                        requestContractBtn.style.cssText = "background-color: #bae1ff;"
                         //리뷰 모달 열리는 함수 실행
                         requestContractBtn.setAttribute("onclick", `reviewModalView(${itemId})`)
-
+                        contractBtnContainer.append(requestContractBtn)
                     }
             }
         }
@@ -169,10 +164,21 @@ class CreateElement {
 
                     // 대여 종료 버튼 클릭
                     // 물품 상태를 대여 중 -> 대여 종료로 바꿈
-                    endContractBtn.addEventListener('click', (e) => {
+                    endContractBtn.addEventListener('click', async (e) => {
+                        alert("대여가 종료 되었습니다.")
                         // 대여 상태 변경 API
-                        contractAcceptAndEndApi(itemId, "대여 종료")
-                        // 비동기로 버튼 바꿔줌
+                        let endData = await contractAcceptAndEndApi(itemId, "대여 종료")
+                        let roomId = endData.room_id
+            
+                        let contractType = "종료"
+                        // 대여 거절 웹소켓 요청
+                        contractSocket.send(JSON.stringify({
+                            'item_id': itemId,
+                            'sender': payload.user_id,
+                            'receiver': inquiryId,
+                            'room_id': roomId,
+                            'contract_type': contractType
+                        }))
                         endContractBtn.innerText = "대여 종료된 물품"
                         endContractBtn.style.cursor = "auto"
                         endContractBtn.style.backgroundColor = "#fac7aa"
@@ -188,7 +194,6 @@ class CreateElement {
                     endContractBtn.addEventListener('click', (e) => {
                         window.location.href = "../item/upload.html"
                     })
-                    break
             }
         }
 
@@ -245,7 +250,6 @@ class CreateElement {
                         case "수락":
                             //대여 수락 [수신자]
                             if (sender != userId) {
-                                console.log('aaa')
                                 new CreateElement().contractMessage(messages, "대여 신청이 수락되었습니다", cssText)
                             }
                             else {
@@ -678,8 +682,10 @@ class Websocket {
                         requestContractBtn.onmouseover = function () { }
                         requestContractBtn.onmouseout = function () { }
 
-
                         new CreateElement().contractMessage(messages, "대여 신청이 수락되었습니다", cssText)
+                    }
+                    else {
+                        new CreateElement().contractMessage(messages, "대여 신청을 수락했습니다", cssText)
                     }
                     break
                 case "거절":
@@ -700,9 +706,10 @@ class Websocket {
                             requestContractBtn.style.backgroundColor = "rgb(153, 250, 158)"
                         }
 
-
                         new CreateElement().contractMessage(messages, "대여 신청이 거절되었습니다", cssText)
-
+                    }
+                    else {
+                        new CreateElement().contractMessage(messages, "대여 신청을 거절했습니다", cssText)
                     }
                     break;
                 case "종료":
@@ -718,9 +725,7 @@ class Websocket {
                         requestContractBtn.onmouseout = function () { }
 
                         // 리뷰 모달 열리는 함수 실행
-                        requestContractBtn.addEventListener("click", reviewModalhandler = (e) => {
-                            reviewModalView(itemId)
-                        });
+                        requestContractBtn.setAttribute("onclick", `reviewModalView(${itemId})`)
                     }
             }
 
@@ -936,7 +941,6 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
         else {
             // 대여 신청 API
             let data = await rentalSubmitApi(itemId)
-            console.log(data)
             // 대여 신청 모달 unview
             body.style.overflow = 'auto'
             rentalDateModalBody.style.display = 'none'

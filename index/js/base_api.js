@@ -80,9 +80,7 @@ async function onSignUp() {
     if (password == password2) {
         const response = await fetch(`${backEndBaseUrl}/users/`, {
             method: 'POST',
-            mode: 'cors',
             headers: {
-                Accept: "application/json",
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
             },
@@ -144,9 +142,7 @@ async function onLogin() {
 
     const response = await fetch(`${backEndBaseUrl}/users/api/token`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
-            Accept: "application/json",
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
         },
@@ -191,7 +187,6 @@ async function kakaoLoginApi(kakaoUserData) {
 
     const response = await fetch(`${backEndBaseUrl}/users/api/kakao/`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
@@ -223,7 +218,6 @@ async function onAddressEnter() {
 
     const response = await fetch(`${backEndBaseUrl}/users/`, {
         method: 'PUT',
-        mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
@@ -255,7 +249,6 @@ window.onload = () => {
             const requestRefreshToken = async (url) => {
                 const response = await fetch(url, {
                     headers: {
-                        Accept: "application/json",
                         'Content-Type': 'application/json',
                     },
                     method: "POST",
