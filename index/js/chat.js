@@ -482,7 +482,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 // 채팅 모달 열기
-async function openChatModal() {
+function openChatModal() {
     const chatBody = document.getElementsByClassName('chat-modal-body')[0]
     chatBody.style.animation = 'moveUp 0.5s'
     chatBody.style.display = 'flex'
