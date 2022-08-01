@@ -304,11 +304,16 @@ async function inquiry() {
         // 모달 확인 버튼 클릭시
         inquiryModalEnterBtn.addEventListener('click', async function() {
 
-            await chatStartApi()
+            const data = await chatStartApi()
             body.style.overflow = 'auto' 
             inquiryModalBody.style.display = 'none'
 
-            chatModalView()
+            if (data['status'] == '채팅방 생성됨') {
+                // 채팅방 생성
+                new CreateElement().chatRoom(data)
+            }
+            // 채팅방 이동
+            openDirectChatRoom(data.id)
         })
     
         // 모달 취소 버튼 클릭시

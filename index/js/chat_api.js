@@ -17,7 +17,7 @@ async function getUnreadMessageApi(userId) {
         return response_json
     }
     else {
-        alert(response_json["error"])
+        console.log(response_json["error"])
     }
 }
 
@@ -79,7 +79,6 @@ async function rentalSubmitApi(itemId) {
     const rentalSubmitData = {
         "startTime": startTime.value,
         "endTime": endTime.value,
-        "status": "예약 중",
     }
 
     const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
@@ -114,7 +113,6 @@ async function contractDetailApi(itemId) {
     response_json = await response.json()
 
     if (response.status == 200) {
-        // console.log(response_json)
         return response_json
     } else {
         console.log(response_json)
@@ -124,7 +122,6 @@ async function contractDetailApi(itemId) {
 
 // 대여 상태 변경 API (대여 수락, 종료 버튼 클릭 시)
 async function contractAcceptAndEndApi(itemId, status) {
-    console.log(status)
     const token = localStorage.getItem("access_token");
 
     const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
@@ -141,7 +138,6 @@ async function contractAcceptAndEndApi(itemId, status) {
     response_json = await response.json()
 
     if (response.status == 200) {
-        // console.log(response_json)
         return response_json
     }
     else {
@@ -165,7 +161,6 @@ async function contractRefuseApi(itemId) {
     response_json = await response.json()
 
     if (response.status == 200) {
-        // console.log(response_json)
         return response_json
     }
     else {
