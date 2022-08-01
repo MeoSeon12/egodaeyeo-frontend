@@ -1,6 +1,5 @@
 // 물품 & 유저 ID 정보 가져오기
 const itemId = location.href.split('?')[1]
-const payload = JSON.parse(localStorage.getItem('payload'))
 
 
 // 물품, 리뷰 데이터 레이아웃 생성 & 입력
@@ -8,7 +7,7 @@ async function getDetailView() {
 
     // API 기능 호출
     let data = await DetailViewGetApi()
-    
+
     if (data.error_msg) {
         const itemWrap = document.getElementsByClassName('item-wrap')[0]
         itemWrap.style.display = 'none'
@@ -18,7 +17,7 @@ async function getDetailView() {
     // 물품 섹션
     // 물품 이미지
     const slider = document.getElementsByClassName('slider')[0]
-    
+
     // 이미지가 없는 경우
     if (data.images.length == 0) {
         let sliderLi = document.createElement('li')
@@ -58,7 +57,7 @@ async function getDetailView() {
 
     // 포스트 유저 점수
     const score = document.getElementsByClassName('user-container-score')[0]
-    
+
     if (data.user.score == null) {
         score.innerText = '유저점수 없음'
         score.style.color = 'gray'
@@ -116,7 +115,7 @@ async function getDetailView() {
     // 찜 카운트
     const bookmarks = document.getElementById('bookmarks')
     bookmarks.innerText = data.bookmark_length
-    
+
     // 문의하기 카운트
     const inquiries = document.getElementById('inquiries')
     inquiries.innerText = data.chatroom_length
@@ -134,7 +133,7 @@ async function getDetailView() {
 
         // 찜 하기 버튼
         communicationLeftBtn.setAttribute('onclick', 'bookmark()')
-        
+
         // 이미 찜한 경우
         if (data.is_bookmark == true) {
             communicationLeftBtn.style.backgroundColor = '#ffe398'
@@ -160,11 +159,11 @@ async function getDetailView() {
         communicationRightBtn.setAttribute('onclick', 'showDeleteCheckModal()')
         communicationRightBtn.innerText = '삭제하기'
         // 마우스 오버 시
-        communicationRightBtn.addEventListener('mouseover', function() {
+        communicationRightBtn.addEventListener('mouseover', function () {
             this.style.backgroundColor = 'rgb(253, 125, 125)'
         })
         // 마우스 아웃 시
-        communicationRightBtn.addEventListener('mouseout', function() {
+        communicationRightBtn.addEventListener('mouseout', function () {
             this.style.backgroundColor = 'rgb(196, 196, 196)'
         })
     }
@@ -172,7 +171,7 @@ async function getDetailView() {
 
     // 리뷰 섹션
     const reviewSection = document.getElementsByClassName('review-section')[0]
-    
+
     // 리뷰가 없을 시
     if (data.reviews.length == 0) {
         const reviewContainer = document.createElement('div')
@@ -195,7 +194,7 @@ async function getDetailView() {
             const reviewUserBox = document.createElement('div')
             reviewUserBox.setAttribute('class', 'review-user-box')
             reviewContainer.append(reviewUserBox)
-            
+
             const reviewContentBox = document.createElement('div')
             reviewContentBox.setAttribute('class', 'review-content-box')
             reviewContainer.append(reviewContentBox)
@@ -203,17 +202,17 @@ async function getDetailView() {
             // 리뷰어 프로필 이미지
             const reviewUserImage = document.createElement('img')
             reviewUserImage.setAttribute('src', data.reviews[i].image)
-            
+
             // 리뷰어 닉네임
             const reviewUserNickname = document.createElement('span')
             reviewUserNickname.innerText = data.reviews[i].nickname
-            
+
             reviewUserBox.append(reviewUserImage, reviewUserNickname)
 
             // 리뷰어 내용
             const reviewContent = document.createElement('span')
             reviewContent.innerText = data.reviews[i].content
-            
+
             // 작성 시간
             const reviewCreatedAt = document.createElement('span')
             reviewCreatedAt.innerText = data.reviews[i].created_at
@@ -237,12 +236,12 @@ async function bookmark() {
     if (payload == null) {
         alert('로그인 후 이용가능합니다')
     }
-    
+
     // 로그인 유저일 경우
     else {
         // API 기능 호출
         let bookmarkData = await DetailViewPostApi()
-        
+
         const bookmarkBtn = document.getElementsByClassName('communication-left-btn')[0]
         if (bookmarkData.is_bookmark == true) {
             bookmarkBtn.style.backgroundColor = '#ffe398'
@@ -272,40 +271,40 @@ async function inquiry() {
         // 모달 바디 추가
         const body = document.getElementsByTagName('body')[0]
         body.style.overflow = 'hidden' // 스크롤 히든
-    
+
         const inquiryModalBody = document.createElement('div')
         inquiryModalBody.setAttribute('class', 'inquiry-modal-body')
         body.append(inquiryModalBody)
-    
+
         // 모달 컨테이너 추가
         const inquiryModalContainer = document.createElement('div')
         inquiryModalContainer.setAttribute('class', 'inquiry-modal-container')
         inquiryModalBody.append(inquiryModalContainer)
-    
+
         // 모달 텍스트 추가
         const inquiryModalText = document.createElement('p')
         inquiryModalText.innerText =
             `확인 버튼을 누르면 채팅으로 게시자와 연결됩니다
             문의하시겠습니까?`
         inquiryModalContainer.append(inquiryModalText)
-    
+
         // 모달 버튼 박스 추가
         const inquiryModalBtnBox = document.createElement('div')
         inquiryModalBtnBox.setAttribute('class', 'inquiry-modal-btn-box')
         inquiryModalContainer.append(inquiryModalBtnBox)
-        
+
         // 모달 버튼 추가
         const inquiryModalEnterBtn = document.createElement('button')
         inquiryModalEnterBtn.innerText = '확인'
         const inquiryModalCancelBtn = document.createElement('button')
         inquiryModalCancelBtn.innerText = '취소'
         inquiryModalBtnBox.append(inquiryModalEnterBtn, inquiryModalCancelBtn)
-    
+
         // 모달 확인 버튼 클릭시
-        inquiryModalEnterBtn.addEventListener('click', async function() {
+        inquiryModalEnterBtn.addEventListener('click', async function () {
 
             const data = await chatStartApi()
-            body.style.overflow = 'auto' 
+            body.style.overflow = 'auto'
             inquiryModalBody.style.display = 'none'
 
             if (data['status'] == '채팅방 생성됨') {
@@ -315,15 +314,15 @@ async function inquiry() {
             // 채팅방 이동
             openDirectChatRoom(data.id)
         })
-    
+
         // 모달 취소 버튼 클릭시
-        inquiryModalCancelBtn.addEventListener('click', function() {
+        inquiryModalCancelBtn.addEventListener('click', function () {
             body.style.overflow = 'auto'
             inquiryModalBody.style.display = 'none'
         })
-    
+
         // 모달 박스 바깥 클릭시
-        inquiryModalBody.addEventListener('click', function(e) {
+        inquiryModalBody.addEventListener('click', function (e) {
             if (e.target == inquiryModalBody) {
                 body.style.overflow = 'auto'
                 inquiryModalBody.style.display = 'none'

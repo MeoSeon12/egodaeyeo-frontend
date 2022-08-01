@@ -155,10 +155,11 @@ nav {
 }
 
 .mypage-image {
+    display: none;
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    margin: 5px 5px 0 5px;
+    margin: 5px;
     cursor: pointer;
     object-fit: cover;
 }

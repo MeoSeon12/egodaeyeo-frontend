@@ -2,7 +2,6 @@
 async function getUnreadMessageApi(userId) {
 
     const token = localStorage.getItem('access_token')
-
     // views.py - ChatAlertView
     const response = await fetch(`${backEndBaseUrl}/chats/alerts/${userId}`, {
         method: 'GET',
@@ -12,9 +11,11 @@ async function getUnreadMessageApi(userId) {
         },
     })
     response_json = await response.json()
-
     if (response.status == 200) {
         return response_json
+    }
+    else if (response.status == 204) {
+        console.log(response_json)
     }
     else {
         console.log(response_json["error"])
@@ -35,7 +36,7 @@ async function chatModalApi() {
         },
     })
     response_json = await response.json()
-    
+
     if (response.status == 200) {
         return response_json
     }
@@ -58,13 +59,27 @@ async function chatRoomApi(room_id) {
         },
     })
     response_json = await response.json()
-    
+
     if (response.status == 200) {
         return response_json
     }
     else {
         console.log(response_json["error"])
     }
+}
+
+
+// 실시간으로 바로 읽은 메세지 처리
+async function liveReadApi(room_id) {
+    const token = localStorage.getItem('access_token')
+
+    await fetch(`${backEndBaseUrl}/chats/${room_id}`, {
+        method: 'PUT',
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'Authorization': 'Bearer ' + token
+        },
+    })
 }
 
 
@@ -75,11 +90,13 @@ async function rentalSubmitApi(itemId) {
     const endTime = document.querySelector('#rental-end-time')
 
     const token = localStorage.getItem("access_token");
-    
+
     const rentalSubmitData = {
         "startTime": startTime.value,
         "endTime": endTime.value,
+        "status": "검토 중"
     }
+    console.log(rentalSubmitData)
 
     const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'POST',
@@ -92,8 +109,11 @@ async function rentalSubmitApi(itemId) {
     })
     response_json = await response.json()
 
-    if (response.status == 400) {
-        console.log(response_json["error"])
+    if (response.status == 200) {
+        return response_json
+    }
+    else if (response.status == 400) {
+        console.log(response_json)
     }
 }
 
@@ -114,7 +134,8 @@ async function contractDetailApi(itemId) {
 
     if (response.status == 200) {
         return response_json
-    } else {
+    }
+    else {
         console.log(response_json)
     }
 }
