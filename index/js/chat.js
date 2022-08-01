@@ -81,8 +81,10 @@ class CreateElement {
         }
     }
 
+
+    // 채팅방 내용 생성
     async chatRoomElements(roomId, roomData) {
-        let userId = JSON.parse(localStorage.getItem("payload")).user_id
+        let userId = payload.user_id
         let itemTitle = roomData.title
         let itemId = roomData.item
         let inquirerId = roomData.inquirer.id
@@ -115,16 +117,13 @@ class CreateElement {
             requestContractBtn.setAttribute("class", "request-contract-btn");
 
             // contract status에 따른 문의자 버튼 텍스트,css 변경
-            console.log(contractStatus)
             switch (contractStatus) {
                 case null:
                     requestContractBtn.innerText = "대여 신청"
                     contractBtnContainer.append(requestContractBtn)
-                    console.log(requestContractBtn)
+
                     // 대여 신청 버튼 클릭 이벤트
-                    requestContractBtn.addEventListener('click', (e) => {
-                        rentalDateModalView(itemId, roomId, inquirerId, authorId)
-                    })
+                    requestContractBtn.setAttribute("onclick", `rentalDateModalView(${itemId}, ${roomId}, ${inquirerId}, ${authorId})`)
                     break
 
                 case "검토 중":
@@ -153,9 +152,8 @@ class CreateElement {
                         requestContractBtn.style.backgroundColor = "#bae1ff"
                         contractBtnContainer.append(requestContractBtn)
                         //리뷰 모달 열리는 함수 실행
-                        requestContractBtn.addEventListener("click", reviewModalhandler = (e) => {
-                            reviewModalView(roomData.item)
-                        });
+                        requestContractBtn.setAttribute("onclick", `reviewModalView(${itemId})`)
+
                     }
             }
         }
@@ -199,6 +197,7 @@ class CreateElement {
         chatAreaWrap.setAttribute("id", "messages");
         chatAreaBox.append(chatAreaWrap)
 
+        const messages = document.getElementById('messages')
         const chatMessages = roomData.chat_messages
         // 이전 채팅 메세지
         for (let i = 0; i < chatMessages.length; i++) {
@@ -214,13 +213,13 @@ class CreateElement {
                 dateWrap.setAttribute("class", "date-wrap");
                 dateWrap.innerHTML =
                     `<div class="chat-date-stamp">
-                    <i class="fa-regular fa-calendar"></i>
-                    &nbsp;${chatMessages[i].date}
-                </div>`
+                            <i class="fa-regular fa-calendar"></i>
+                            & nbsp;${chatMessages[i].date}
+                    </div>`
                 chatAreaWrap.append(dateWrap)
             }
-
             // isApplication true = 대여 신청메시지, false = 일반 채팅메시지
+            const cssText = "background-color: #f0f0f0; cursor: auto;"
             switch (isApplication) {
                 //대여신청 메시지 일때,
                 case true:
@@ -228,24 +227,17 @@ class CreateElement {
                         case "신청":
                             // 대여 신청 [발신자]
                             if (sender == userId) {
-                                let contractLook = new CreateElement().contractMessage(messages)
-                                contractLook.innerText = "대여 신청을 보냈습니다"
+                                new CreateElement().contractMessage(messages, "대여 신청을 보냈습니다", cssText)
                             }
                             // 대여 신청 [수신자]
                             else {
-                                let contractLook = new CreateElement().contractMessage(messages)
-                                contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId})`)
-                                contractLook.style.cssText = "background-color: rgb(153, 250, 158); cursor: pointer;"
-                                contractLook.innerText = "대여 신청이 도착했습니다"
-
-                                // 대여 신청을 확인했습니다
+                                // // 대여 신청을 확인했습니다
                                 if (contractStatus == "대여 중" || contractStatus == "대여 종료" || contractStatus == null) {
-                                    const contractLook = document.createElement('div')
-                                    contractLook.setAttribute('class', 'contract-look')
-                                    contractLook.innerText = "대여 신청을 확인했습니다"
-                                    contractLook.style.backgroundColor = '#f0f0f0'
-                                    contractLook.style.cursor = 'auto'
-                                    contractWrap.append(contractLook)
+                                    new CreateElement().contractMessage(messages, '대여 신청을 확인했습니다', cssText)
+                                }
+                                else {
+                                    let contractLook = new CreateElement().contractMessage(messages, "대여 신청이 도착했습니다")
+                                    contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId})`)
                                 }
                             }
                             break
@@ -253,24 +245,30 @@ class CreateElement {
                         case "수락":
                             //대여 수락 [수신자]
                             if (sender != userId) {
-                                let contractLook = new CreateElement().contractMessage(messages)
-                                contractLook.innerText = "대여 신청이 수락되었습니다"
+                                console.log('aaa')
+                                new CreateElement().contractMessage(messages, "대여 신청이 수락되었습니다", cssText)
+                            }
+                            else {
+                                new CreateElement().contractMessage(messages, "대여 신청을 수락했습니다", cssText)
                             }
                             break
 
                         case "거절":
                             //대여 거절 [수신자]
                             if (sender != userId) {
-                                let contractLook = new CreateElement().contractMessage(messages)
-                                contractLook.innerText = "대여 신청이 거절되었습니다"
+                                new CreateElement().contractMessage(messages, "대여 신청이 거절되었습니다", cssText)
+                            }
+                            else {
+                                new CreateElement().contractMessage(messages, "대여 신청을 거절했습니다", cssText)
                             }
                             break
 
                         case "종료":
                             //대여 종료 [수신자, 발신자]
-                            let contractLook = new CreateElement().contractMessage(messages)
-                            contractLook.innerText = "대여가 종료되었습니다."
+                            new CreateElement().contractMessage(messages, "대여가 종료되었습니다.", cssText)
                     }
+                    break
+
                 //일반 채팅 메시지일때
                 case false:
                     // 채팅 메세지 발신자
@@ -278,7 +276,7 @@ class CreateElement {
                         const myChatWrap = document.createElement('div');
                         myChatWrap.setAttribute("class", "my-chat-wrap");
                         myChatWrap.innerHTML = `<div class="chat-time-stamp">${timeStamp}</div>
-                                                <div class="my-chat">${message}</div>`
+                            <div class="my-chat">${message}</div>`
                         chatAreaWrap.append(myChatWrap)
                     }
                     // 채팅 메세지 수신자
@@ -286,7 +284,7 @@ class CreateElement {
                         const otherChatWrap = document.createElement('div');
                         otherChatWrap.setAttribute("class", "other-chat-wrap");
                         otherChatWrap.innerHTML = `<div class="other-chat">${message}</div>
-                                                    <div class="chat-time-stamp">${timeStamp}</div>`
+                            <div class="chat-time-stamp">${timeStamp}</div>`
                         chatAreaWrap.append(otherChatWrap)
                     }
             }
@@ -313,8 +311,7 @@ class CreateElement {
         chatAreaWrap.scrollTop = chatAreaWrap.scrollHeight
 
         // 채팅 전송 버튼
-        chatSendBtn.addEventListener('click', (e) => {
-            const chatInput = document.querySelector('.chat-text')
+        chatSendBtn.addEventListener('click', async (e) => {
 
             // 채팅 발신하는 유저가 물품 등록자(author)일 경우,
             // 채팅 수신자를 문의자(inquirer)로 수정
@@ -324,29 +321,11 @@ class CreateElement {
 
             // 채팅 메세지 전송
             if (chatInput.value != '') {
-                const message = chatInput.value
-                chatSocket.send(JSON.stringify({
-                    'message': message,
-                    'sender': userId,
-                    'receiver': authorId,
-                    'room_id': roomId,
-                }))
-                chatInput.value = ''
-                chatInput.focus()
+                // 채팅 웹소켓 보내기
+                new Websocket().sendChat(chatSocket, userId, authorId, roomId)
 
-                // 채팅 알림 웹소켓 통신
-                chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${authorId}`)
-
-                // 상대방에게 채팅 알람 보냄
-                chatAlertSocket.onopen = function () {
-                    chatAlertSocket.send(JSON.stringify({
-                        'room_id': roomId,
-                        'sender': userId,
-                        'receiver': authorId,
-                        'title': roomData.title,
-                        'status': null,
-                    }))
-                }
+                // 알람 웹소켓 보내기
+                new Websocket().sendAlert(userId, authorId, roomId)
             }
         })
 
@@ -359,21 +338,21 @@ class CreateElement {
         })
     }
 
-    //채팅방 상단 제목아래 버튼
-    contractMessage(messages) {
+    // 채팅방 거래 상태 메세지
+    contractMessage(message, innerText, cssText) {
         const contractWrap = document.createElement('div')
         contractWrap.setAttribute('class', 'contract-wrap')
-        messages.append(contractWrap)
+        message.append(contractWrap)
 
         const contractLook = document.createElement('div')
         contractLook.setAttribute('class', 'contract-look')
-        contractLook.style.cssText = "background-color: #f0f0f0; cursor: auto;"
         contractWrap.append(contractLook)
+
+        contractLook.style.cssText = cssText
+        contractLook.innerText = innerText
 
         return contractLook
     }
-
-
 
     // 알람 모달 생성
     alertModal() {
@@ -434,7 +413,7 @@ class Alert {
     }
 
     // 알람 효과 (채팅 모달)
-    async chatModalAlertEffect(data) {
+    chatModalAlertEffect(data) {
         const chatRoom = document.getElementById(`chat-room-${data.room_id}`)
         chatRoom.children[0].style.display = 'block'
     }
@@ -499,7 +478,8 @@ class Alert {
     }
 
     // 알람 메세지 작성 (실시간 알람)
-    alertNewMessage(data) {
+
+    MessageInnerText(data) {
         if (data.title.length > 5) {
             data.title = `${data.title.slice(0, 5)}...`
         }
@@ -551,10 +531,10 @@ class Alert {
 // 웹소켓 관련 기능
 class Websocket {
 
-    // 알람 웹소켓
+    // 알람 웹소켓 연결 및 온메세지
     alertWebsocket(userId) {
-        // 알람 웹소켓 연결
-        const chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${userId}`)
+
+        chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${userId}`)
 
         // 알람 수신
         chatAlertSocket.onmessage = function (e) {
@@ -562,17 +542,32 @@ class Websocket {
             let data = JSON.parse(e.data)
             // 알람 메세지 생성
             new CreateElement().alertMessage(data)
-            new Alert().alertNewMessage(data)
+
+            new Alert().MessageInnerText(data)
+            // 알람 효과
+            new Alert().navAlertEffect()
         }
     }
 
-    // 채팅 웹소켓
+    // 알람 웹소켓 보내기
+    sendAlert(userId, authorId, roomId) {
+        // 상대방에게 채팅 알람 보냄
+        chatAlertSocket.send(JSON.stringify({
+            'room_id': roomId,
+            'sender': userId,
+            'receiver': authorId,
+            'status': null,
+        }))
+    }
+
+    // 채팅 웹소켓 연결 및 온메세지
     chatWebsocket(roomId) {
-        // 채팅 웹소켓 연결
+
         chatSocket = new WebSocket(`ws://127.0.0.1:8000/chats/${roomId}`)
 
         // 채팅 수신
-        chatSocket.onmessage = function (e) {
+        chatSocket.onmessage = async function (e) {
+
             const messages = document.getElementById('messages')
             let chatData = JSON.parse(e.data)
             let chatSender = chatData.sender
@@ -580,7 +575,7 @@ class Websocket {
             let timeStamp = chatData.time
 
             // 채팅 발신자 화면
-            if (chatSender == userId) {
+            if (chatSender == payload.user_id) {
                 messages.insertAdjacentHTML('beforeend',
                     `<div class="my-chat-wrap">
                 <div class="chat-time-stamp">${timeStamp}</div>
@@ -590,6 +585,9 @@ class Websocket {
             }
             // 채팅 수신자 화면
             else {
+                // 백엔드에 통신해서 is_read = True 로 바꿈
+                await liveReadApi(roomId)
+
                 messages.insertAdjacentHTML('beforeend',
                     `<div class="other-chat-wrap">
                 <div class="other-chat">${message}</div>
@@ -603,9 +601,23 @@ class Websocket {
         }
     }
 
-    // 거래 웹소켓
+    // 채팅 웹소켓 보내기
+    sendChat(chatSocket, userId, authorId, roomId) {
+        const chatInput = document.querySelector('.chat-text')
+        const message = chatInput.value
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'sender': userId,
+            'receiver': authorId,
+            'room_id': roomId,
+        }))
+        chatInput.value = ''
+        chatInput.focus()
+    }
+
+    // 거래 웹소켓 연결 및 온메세지
     contractWebsocket(roomId, roomData) {
-        // 거래 웹소켓 통신
+
         contractSocket = new WebSocket(`ws://127.0.0.1:8000/chats/contracts/${roomId}`)
 
         //room데이터
@@ -618,34 +630,43 @@ class Websocket {
         contractSocket.onmessage = function (e) {
 
             const messages = document.getElementById('messages')
+
+            const contractBtnContainer = document.querySelector('.contract-btn-container')
+
             //채팅방 상단 제목아래 버튼
             const requestContractBtn = document.querySelector('.request-contract-btn')
 
             //요청받은 데이터
             let contractData = JSON.parse(e.data)
-            let contractStatus = contractData.status
+
+            let contractType = contractData.contract_type
             let contractSender = contractData.sender
+            let cssText = "background-color: #f0f0f0; cursor: auto;"
 
             // 거래 상태에 따른 비동기 UI변경 로직
-            switch (contractStatus) {
-                case "대여 신청":
+            switch (contractType) {
+                case "신청":
                     // 대여 신청 발신자
                     if (contractSender == userId) {
-                        let contractLook = new CreateElement().contractMessage(messages)
-                        contractLook.innerText = "대여 신청을 보냈습니다"
+                        new CreateElement().contractMessage(messages, "대여 신청을 보냈습니다", cssText)
 
                         requestContractBtn.innerText = "대여 신청중"
                         requestContractBtn.style.cursor = 'auto'
                         requestContractBtn.style.backgroundColor = "#b6faf6"
-                        requestContractBtn.removeEventListener("click", dateModalhandler)
+
+                        requestContractBtn.setAttribute("onclick", "")
+
+                        // hover 색변경 기능해제
+                        requestContractBtn.onmouseover = function () { }
+                        requestContractBtn.onmouseout = function () { }
                     }
                     // 대여 신청 수신자
                     else {
-                        let contractLook = new CreateElement().contractMessage(messages)
-                        contractLook.innerText = "대여 신청이 도착했습니다"
+                        let contractLook = new CreateElement().contractMessage(messages, "대여 신청이 도착했습니다")
+                        contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId})`)
                     }
                     break
-                case "대여 수락":
+                case "수락":
                     //수신자
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "대여 중인 물품"
@@ -657,11 +678,11 @@ class Websocket {
                         requestContractBtn.onmouseover = function () { }
                         requestContractBtn.onmouseout = function () { }
 
-                        let contractLook = new CreateElement().contractMessage(messages)
-                        contractLook.innerText = "대여 신청이 수락되었습니다"
+
+                        new CreateElement().contractMessage(messages, "대여 신청이 수락되었습니다", cssText)
                     }
                     break
-                case "대여 거절":
+                case "거절":
                     // 수신자
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "대여 신청"
@@ -670,9 +691,7 @@ class Websocket {
                         contractBtnContainer.append(requestContractBtn)
 
                         // 대여 신청 버튼 클릭 이벤트
-                        requestContractBtn.addEventListener('click', dateModalhandler = (e) => {
-                            rentalDateModalView(itemId, roomId, inquirerId, authorId)
-                        })
+                        requestContractBtn.setAttribute("onclick", `rentalDateModalView(${itemId}, ${roomId}, ${inquirerId}, ${authorId})`)
                         //hover 색변경 기능
                         requestContractBtn.onmouseover = function () {
                             requestContractBtn.style.backgroundColor = "rgb(191, 255, 194)"
@@ -681,13 +700,13 @@ class Websocket {
                             requestContractBtn.style.backgroundColor = "rgb(153, 250, 158)"
                         }
 
-                        let contractLook = new CreateElement().contractMessage(messages)
-                        contractLook.innerText = "대여 신청이 거절되었습니다"
+
+                        new CreateElement().contractMessage(messages, "대여 신청이 거절되었습니다", cssText)
+
                     }
                     break;
-                case "대여 종료":
-                    let contractLook = new CreateElement().contractMessage(messages)
-                    contractLook.innerText = "대여가 종료되었습니다"
+                case "종료":
+                    new CreateElement().contractMessage(messages, "대여가 종료되었습니다", cssText)
 
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "리뷰 쓰기"
@@ -712,9 +731,12 @@ class Websocket {
     }
 }
 
+
+
+var chatAlertSocket = ''
 // 페이지 로드 시 실행되는 기능
 document.addEventListener("DOMContentLoaded", async function () {
-    const payload = JSON.parse(localStorage.getItem('payload'))
+
     // 로그인 유저일 경우
     if (payload != null) {
         const userId = payload.user_id
@@ -767,6 +789,12 @@ function closeChatModal() {
     chatBody.style.animation = 'moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
     const chatBtn = document.getElementsByClassName('chat-btn')[0]
     chatBtn.setAttribute('onclick', 'openChatModal()')
+
+    // 이미 접속한 채팅, 거래 웹소켓이 있다면 종료
+    if (chatSocket != '' && contractSocket != '') {
+        chatSocket.close()
+        contractSocket.close()
+    }
 }
 
 
@@ -915,7 +943,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
 
             // 채팅 발신하는 유저가 물품 등록자(author)일 경우,
             // 채팅 수신자를 문의자(inquirer)로 수정
-            if (userId == authorId) {
+            if (payload.user_id == authorId) {
                 authorId = inquirerId
             }
 
@@ -923,7 +951,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
             // 대여 신청 웹소켓으로 보내기
             contractSocket.send(JSON.stringify({
                 'room_id': roomId,
-                'sender': userId,
+                'sender': payload.user_id,
                 'receiver': authorId,
                 'contract_type': contractType,
             }))
@@ -939,7 +967,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
             chatAlertSocket.onopen = function () {
                 chatAlertSocket.send(JSON.stringify({
                     'room_id': roomId,
-                    'sender': userId,
+                    'sender': payload.user_id,
                     'receiver': authorId,
                     'status': '대여 신청'
                 }))
@@ -952,6 +980,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
 
 // 대여 신청 수신자 버튼 모달
 async function checkRentalDateModal(itemId) {
+    const body = document.querySelector('body')
 
     // 대여 정보 조회 API
     const contractDetailData = await contractDetailApi(itemId)
@@ -1013,12 +1042,13 @@ async function checkRentalDateModal(itemId) {
         let refuseData = await contractRefuseApi(itemId)
         let contractType = "거절"
         // // 대여 거절 웹소켓 요청
-        rentalSocket.send(JSON.stringify({
+        contractSocket.send(JSON.stringify({
             'item_id': itemId,
-            'sender': userId,
+            'sender': payload.user_id,
             'receiver': inquiryId,
             'room_id': refuseData.room_id,
-            'status': contractType,
+            'contract_type': contractType,
+
         }))
 
         const contractLook = document.getElementsByClassName('contract-look')
@@ -1049,10 +1079,11 @@ async function checkRentalDateModal(itemId) {
         // 물품 상태를 대여 가능 -> 대여 중으로 바꿈
         let acceptData = await contractAcceptAndEndApi(itemId, "대여 중")
         let contractType = "수락"
-        // 대여 거절 웹소켓 요청
-        rentalSocket.send(JSON.stringify({
+
+        // 대여 수락 웹소켓 요청
+        contractSocket.send(JSON.stringify({
             'item_id': itemId,
-            'sender': userId,
+            'sender': payload.user_id,
             'receiver': inquiryId,
             'room_id': acceptData.room_id,
             'contract_type': contractType
@@ -1087,9 +1118,9 @@ async function checkRentalDateModal(itemId) {
 
             let contractType = "종료"
             // 대여 거절 웹소켓 요청
-            rentalSocket.send(JSON.stringify({
+            contractSocket.send(JSON.stringify({
                 'item_id': itemId,
-                'sender': userId,
+                'sender': payload.user_id,
                 'receiver': inquiryId,
                 'room_id': roomId,
                 'contract_type': contractType
@@ -1115,16 +1146,9 @@ function timeFormat(date) {
     return formatedDate
 }
 
-
-function reviewModalUnview() {
-    const reviewModalBody = document.querySelector('.review-modal-body');
-    body.style.overflow = 'auto'
-    reviewModalBody.remove()
-}
-
+//리뷰 모달 생성과 동시에 모달 뷰
 function reviewModalView(itemId) {
-
-    const body = document.getElementsByTagName('body')[0]
+    const body = document.querySelector('body');
 
     const reviewModalBody = document.createElement('div');
     reviewModalBody.setAttribute("class", "review-modal-body");
@@ -1183,7 +1207,7 @@ function reviewModalView(itemId) {
         requestContractBtn.innerText = "대여 종료된 물품"
         requestContractBtn.style.cursor = "auto"
         requestContractBtn.style.backgroundColor = "#fac7aa"
-        requestContractBtn.removeEventListener("click", reviewModalhandler);
+        requestContractBtn.setAttribute("onclick", "");
     })
 
     const askSign = document.createElement('div');
@@ -1215,4 +1239,11 @@ function reviewModalView(itemId) {
     body.style.overflow = 'hidden'
     reviewModalBody.style.display = 'flex'
     reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+}
+
+function reviewModalUnview() {
+    const body = document.querySelector('body');
+    const reviewModalBody = document.querySelector('.review-modal-body');
+    body.style.overflow = 'auto'
+    reviewModalBody.remove()
 }

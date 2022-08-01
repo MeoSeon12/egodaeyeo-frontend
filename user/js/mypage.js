@@ -11,9 +11,9 @@ for (let i = 0; i < tabButton.length; i++) {
     })
 }
 
-async function myInfo() {
-    const userData = await getUserView();
-
+async function myInfo(userData) {
+    // const userData = await getUserView();
+    console.log(userData)
     if (userData == undefined) {
         alert("회원 정보가 없어 메인페이지로 돌아갑니다.")
         window.location.replace("../index.html")
@@ -435,4 +435,4 @@ async function userDeleteModal() {
     })
 }
 
-myInfo();
+myInfo(userData);

@@ -277,6 +277,7 @@ window.onload = () => {
     }
 };
 
+
 // 로컬 스트로지에 토근값들과 페이로드에 정보 담아주기
 function setLocalStorageItems() {
     localStorage.setItem("access_token", response_json.access)

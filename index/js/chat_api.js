@@ -69,6 +69,20 @@ async function chatRoomApi(room_id) {
 }
 
 
+// 실시간으로 바로 읽은 메세지 처리
+async function liveReadApi(room_id) {
+    const token = localStorage.getItem('access_token')
+
+    await fetch(`${backEndBaseUrl}/chats/${room_id}`, {
+        method: 'PUT',
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'Authorization': 'Bearer ' + token
+        },
+    })
+}
+
+
 // 대여 신청 API
 async function rentalSubmitApi(itemId) {
 

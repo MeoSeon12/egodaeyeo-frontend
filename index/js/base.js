@@ -366,6 +366,9 @@ class NavModalView {
 }
 
 
+
+var payload = JSON.parse(localStorage.getItem('payload'))
+
 // 페이지 로드 시 실행되는 기능
 document.addEventListener("DOMContentLoaded", async function () {
     new CreateNavElement().createNav()
@@ -422,10 +425,10 @@ function goUploadPage() {
     }
 }
 
-
 // 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
 $("#loginPassword").keyup(function (event) {
     if (event.keyCode === 13) {
         $(".login-submit-btn").click();
     }
 });
+

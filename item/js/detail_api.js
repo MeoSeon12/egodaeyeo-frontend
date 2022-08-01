@@ -61,14 +61,14 @@ async function deleteItem() {
         }
     })
 
-    //  요청 성공 (아이템 DB 존재함)
+    // 요청 성공 (아이템 DB 존재함)
     if (response.status == 200 || response.status == 201) {
         alert('게시글이 삭제되었습니다')
         location.href = '../item/list.html'
     }
 }
 
-//채팅방 생성 및 이동 API
+// 채팅방 생성 및 이동 API
 async function chatStartApi() {
 
     const token = localStorage.getItem('access_token')
@@ -80,7 +80,7 @@ async function chatStartApi() {
         }
     })
     
-    //  요청 성공 (아이템 DB 존재함)
+    // 요청 성공 (아이템 DB 존재함)
     if (response.status == 200) {
         data = await response.json()
         return data
