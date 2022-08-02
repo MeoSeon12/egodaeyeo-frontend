@@ -237,32 +237,35 @@ class CreateElement {
                             }
                             // 대여 신청 [수신자]
                             else {
-                                // // 대여 신청을 확인했습니다
-                                if (contractStatus == "대여 중" || contractStatus == "대여 종료" || contractStatus == null) {
-                                    new CreateElement().contractMessage(messages, '대여 신청을 확인했습니다', cssText)
-                                }
-                                else {
-                                    let contractLook = new CreateElement().contractMessage(messages, "대여 신청이 도착했습니다")
-                                    contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId})`)
-                                }
+                                let contractLook = new CreateElement().contractMessage(messages, "대여 신청이 도착했습니다")
+                                contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId})`)
+                            }
+                            break
+
+                        case "확인":
+                            // 대여 확인 [발신자]
+                            if (sender == userId) {
+                                new CreateElement().contractMessage(messages, "대여 신청을 확인했습니다", cssText)
                             }
                             break
 
                         case "수락":
-                            //대여 수락 [수신자]
+                            // 대여 수락 [수신자]
                             if (sender != userId) {
                                 new CreateElement().contractMessage(messages, "대여 신청이 수락되었습니다", cssText)
                             }
+                            // 대여 수락 [발신자]
                             else {
                                 new CreateElement().contractMessage(messages, "대여 신청을 수락했습니다", cssText)
                             }
                             break
 
                         case "거절":
-                            //대여 거절 [수신자]
+                            // 대여 거절 [수신자]
                             if (sender != userId) {
                                 new CreateElement().contractMessage(messages, "대여 신청이 거절되었습니다", cssText)
                             }
+                            // 대여 거절 [발신자]
                             else {
                                 new CreateElement().contractMessage(messages, "대여 신청을 거절했습니다", cssText)
                             }
@@ -624,7 +627,7 @@ class Websocket {
 
         contractSocket = new WebSocket(`ws://127.0.0.1:8000/chats/contracts/${roomId}`)
 
-        //room데이터
+        // room데이터
         let itemId = roomData.item
         let inquirerId = roomData.inquirer.id
         let authorId = roomData.author.id
@@ -637,10 +640,10 @@ class Websocket {
 
             const contractBtnContainer = document.querySelector('.contract-btn-container')
 
-            //채팅방 상단 제목아래 버튼
+            // 채팅방 상단 제목아래 버튼
             const requestContractBtn = document.querySelector('.request-contract-btn')
 
-            //요청받은 데이터
+            // 요청받은 데이터
             let contractData = JSON.parse(e.data)
 
             let contractType = contractData.contract_type
@@ -1052,7 +1055,6 @@ async function checkRentalDateModal(itemId) {
             'receiver': inquiryId,
             'room_id': refuseData.room_id,
             'contract_type': contractType,
-
         }))
 
         const contractLook = document.getElementsByClassName('contract-look')
@@ -1063,7 +1065,6 @@ async function checkRentalDateModal(itemId) {
             contractLook[i].setAttribute('onclick', "")
             contractLook[i].innerText = "대여 신청을 확인했습니다"
         }
-
         body.style.overflow = 'auto'
         rentalDateModalBody.style.display = 'none'
     })
