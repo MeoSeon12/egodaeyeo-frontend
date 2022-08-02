@@ -245,6 +245,9 @@ class CreateElement {
                         case "확인":
                             // 대여 확인 [발신자]
                             if (sender == userId) {
+                                new CreateElement().contractMessage(messages, "대여 신청을 보냈습니다", cssText)
+                            }
+                            else {
                                 new CreateElement().contractMessage(messages, "대여 신청을 확인했습니다", cssText)
                             }
                             break
