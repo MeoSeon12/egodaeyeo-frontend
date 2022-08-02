@@ -169,7 +169,7 @@ class CreateElement {
                         // 대여 상태 변경 API
                         let endData = await contractAcceptAndEndApi(itemId, "대여 종료")
                         let roomId = endData.room_id
-            
+
                         let contractType = "종료"
                         // 대여 거절 웹소켓 요청
                         contractSocket.send(JSON.stringify({
@@ -204,7 +204,7 @@ class CreateElement {
 
         const messages = document.getElementById('messages')
         const chatMessages = roomData.chat_messages
-        // 이전 채팅 메세지
+        // 이전 채팅 메시지
         for (let i = 0; i < chatMessages.length; i++) {
             let isApplication = chatMessages[i].application
             let sender = chatMessages[i].user
@@ -219,11 +219,12 @@ class CreateElement {
                 dateWrap.innerHTML =
                     `<div class="chat-date-stamp">
                             <i class="fa-regular fa-calendar"></i>
-                            & nbsp;${chatMessages[i].date}
+                            ${chatMessages[i].date}
                     </div>`
                 chatAreaWrap.append(dateWrap)
             }
-            // isApplication true = 대여 신청메시지, false = 일반 채팅메시지
+
+            // isApplication true = 거래 상태 메시지, false = 일반 채팅 메시지
             const cssText = "background-color: #f0f0f0; cursor: auto;"
             switch (isApplication) {
                 //대여신청 메시지 일때,
@@ -275,7 +276,7 @@ class CreateElement {
 
                 //일반 채팅 메시지일때
                 case false:
-                    // 채팅 메세지 발신자
+                    // 채팅 메시지 발신자
                     if (sender == userId) {
                         const myChatWrap = document.createElement('div');
                         myChatWrap.setAttribute("class", "my-chat-wrap");
@@ -283,7 +284,7 @@ class CreateElement {
                             <div class="my-chat">${message}</div>`
                         chatAreaWrap.append(myChatWrap)
                     }
-                    // 채팅 메세지 수신자
+                    // 채팅 메시지 수신자
                     else {
                         const otherChatWrap = document.createElement('div');
                         otherChatWrap.setAttribute("class", "other-chat-wrap");
@@ -323,11 +324,10 @@ class CreateElement {
                 authorId = inquirerId
             }
 
-            // 채팅 메세지 전송
+            // 채팅 메시지 전송
             if (chatInput.value != '') {
                 // 채팅 웹소켓 보내기
                 new Websocket().sendChat(chatSocket, userId, authorId, roomId)
-
                 // 알람 웹소켓 보내기
                 new Websocket().sendAlert(userId, authorId, roomId)
             }
@@ -342,7 +342,7 @@ class CreateElement {
         })
     }
 
-    // 채팅방 거래 상태 메세지
+    // 채팅방 거래 상태 메시지
     contractMessage(message, innerText, cssText) {
         const contractWrap = document.createElement('div')
         contractWrap.setAttribute('class', 'contract-wrap')
@@ -390,10 +390,10 @@ class CreateElement {
         })
     }
 
-    // 알람 메세지 생성
+    // 알람 메시지 생성
     alertMessage(data) {
         if (document.getElementsByName(`chat-alert-modal-message-button-${data.room_id}`)[0] == null) {
-            // 알람 메세지 생성
+            // 알람 메시지 생성
             const chatAlertModalMessageButton = document.createElement('p')
             chatAlertModalMessageButton.setAttribute('class', 'chat-alert-modal-message-button')
             chatAlertModalMessageButton.setAttribute('name', `chat-alert-modal-message-button-${data.room_id}`)
@@ -424,7 +424,7 @@ class Alert {
 
     // 알람 효과 끄기
     offAlertEffect(roomId) {
-        // 알람 모달 메세지 삭제
+        // 알람 모달 메시지 삭제
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${roomId}`)[0]
         if (chatAlertModalMessageButton) {
             chatAlertModalMessageButton.remove()
@@ -444,7 +444,7 @@ class Alert {
         }
     }
 
-    // 알람 메세지 작성 (이전 메세지)
+    // 알람 메시지 작성 (이전 메시지)
     alertPastMessage(data) {
         // 제목이 긴 경우 자름
         if (data.title.length > 5) {
@@ -467,7 +467,7 @@ class Alert {
         }
 
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${data.room_id}`)[0]
-        // 채팅 메세지일 경우
+        // 채팅 메시지일 경우
         if (data.status == null) {
             chatAlertModalMessageButton.innerText =
                 `[${data.title}]에서 ${data.sender}님이
@@ -481,7 +481,7 @@ class Alert {
         }
     }
 
-    // 알람 메세지 작성 (실시간 알람)
+    // 알람 메시지 작성 (실시간 알람)
 
     MessageInnerText(data) {
         if (data.title.length > 5) {
@@ -489,7 +489,7 @@ class Alert {
         }
 
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${data.room_id}`)[0]
-        // 채팅 메세지일 경우
+        // 채팅 메시지일 경우
         if (data.status == null) {
             chatAlertModalMessageButton.innerText =
                 `[${data.title}]에서 ${data.sender}님이
@@ -503,10 +503,10 @@ class Alert {
         }
     }
 
-    // 알람 메세지 삭제 및 채팅방 열기
+    // 알람 메시지 삭제 및 채팅방 열기
     async alertMessageClick(roomId) {
 
-        // 알람 메세지 삭제
+        // 알람 메시지 삭제
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${roomId}`)[0]
         chatAlertModalMessageButton.remove()
 
@@ -535,7 +535,7 @@ class Alert {
 // 웹소켓 관련 기능
 class Websocket {
 
-    // 알람 웹소켓 연결 및 온메세지
+    // 알람 웹소켓 연결 및 온메시지
     alertWebsocket(userId) {
 
         chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${userId}`)
@@ -544,12 +544,14 @@ class Websocket {
         chatAlertSocket.onmessage = function (e) {
             // 알람 데이터
             let data = JSON.parse(e.data)
-            // 알람 메세지 생성
-            new CreateElement().alertMessage(data)
-
-            new Alert().MessageInnerText(data)
-            // 알람 효과
-            new Alert().navAlertEffect()
+            console.log(chatSocket['url'])
+            if (chatSocket.url != `ws://127.0.0.1:8000/chats/${data.room_id}`) {
+                console.log('알람 메시지 생성')
+                // 알람 메시지 및 효과생성
+                new CreateElement().alertMessage(data)
+                new Alert().MessageInnerText(data)
+                new Alert().navAlertEffect()
+            }
         }
     }
 
@@ -564,7 +566,7 @@ class Websocket {
         }))
     }
 
-    // 채팅 웹소켓 연결 및 온메세지
+    // 채팅 웹소켓 연결 및 온메시지
     chatWebsocket(roomId) {
 
         chatSocket = new WebSocket(`ws://127.0.0.1:8000/chats/${roomId}`)
@@ -619,7 +621,7 @@ class Websocket {
         chatInput.focus()
     }
 
-    // 거래 웹소켓 연결 및 온메세지
+    // 거래 웹소켓 연결 및 온메시지
     contractWebsocket(roomId, roomData) {
 
         contractSocket = new WebSocket(`ws://127.0.0.1:8000/chats/contracts/${roomId}`)
@@ -762,7 +764,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // 알람 웹소켓
         new Websocket().alertWebsocket(userId)
 
-        // 읽지 않은 메세지 API
+        // 읽지 않은 메시지 API
         unread_chatroom_list = await getUnreadMessageApi(userId)
         if (unread_chatroom_list.length != 0) {
             // 채팅방 알람 효과
@@ -803,7 +805,7 @@ function closeChatModal() {
 }
 
 
-// 알람 메세지 및 문의하기 확인 버튼 클릭
+// 알람 메시지 및 문의하기 확인 버튼 클릭
 function openDirectChatRoom(roomId) {
     const chatBody = document.getElementsByClassName('chat-modal-body')[0]
     if (getComputedStyle(chatBody).display == 'none') {
@@ -952,7 +954,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
             }
 
             let contractType = "신청"
-            // 대여 신청 웹소켓으로 보내기
+            // 거래 상태 웹소켓으로 보내기 (신청)
             contractSocket.send(JSON.stringify({
                 'room_id': roomId,
                 'sender': payload.user_id,
@@ -963,7 +965,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
             // 채팅 알림 웹소켓 통신
             chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${authorId}`)
 
-            // 메세지 작성 시간
+            // 메시지 작성 시간
             let now = new Date()
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset())  // 한국시간으로
 
@@ -1045,7 +1047,7 @@ async function checkRentalDateModal(itemId) {
         // 대여 거절 API
         let refuseData = await contractRefuseApi(itemId)
         let contractType = "거절"
-        // // 대여 거절 웹소켓 요청
+        // // 거래 상태 웹소켓 요청 (거절)
         contractSocket.send(JSON.stringify({
             'item_id': itemId,
             'sender': payload.user_id,
@@ -1084,7 +1086,7 @@ async function checkRentalDateModal(itemId) {
         let acceptData = await contractAcceptAndEndApi(itemId, "대여 중")
         let contractType = "수락"
 
-        // 대여 수락 웹소켓 요청
+        // 거래 상태 웹소켓 요청 (수락)
         contractSocket.send(JSON.stringify({
             'item_id': itemId,
             'sender': payload.user_id,
@@ -1121,7 +1123,7 @@ async function checkRentalDateModal(itemId) {
             let roomId = endData.room_id
 
             let contractType = "종료"
-            // 대여 거절 웹소켓 요청
+            // 거래 상태 웹소켓 요청 (종료)
             contractSocket.send(JSON.stringify({
                 'item_id': itemId,
                 'sender': payload.user_id,

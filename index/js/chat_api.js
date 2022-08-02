@@ -1,4 +1,4 @@
-// 읽지 않은 메세지 API
+// 읽지 않은 메시지 API
 async function getUnreadMessageApi(userId) {
 
     const token = localStorage.getItem('access_token')
@@ -69,7 +69,7 @@ async function chatRoomApi(room_id) {
 }
 
 
-// 실시간으로 바로 읽은 메세지 처리
+// 실시간으로 바로 읽은 메시지 처리
 async function liveReadApi(room_id) {
     const token = localStorage.getItem('access_token')
 
