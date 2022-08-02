@@ -366,17 +366,14 @@ class NavModalView {
 }
 
 
-
 var payload = JSON.parse(localStorage.getItem('payload'))
 var userData = ""
 
 // 페이지 로드 시 실행되는 기능
-document.addEventListener("DOMContentLoaded", async function () {
+async function baseLoad() {
     new CreateNavElement().createNav()
     new CreateNavElement().createLoginSignupModal()
     new CreateNavElement().createAddressModal()
-
-    const payload = JSON.parse(localStorage.getItem('payload'))
 
     displayLoginLogoutBtn(payload)
 
@@ -388,7 +385,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         mypageImage.setAttribute('src', profileImage)
         mypageImage.style.display = 'block'
     }
-})
+} baseLoad()
 
 
 // 로그인 여부에 따라 로그인 로그아웃 display

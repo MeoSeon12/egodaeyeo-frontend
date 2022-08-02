@@ -287,6 +287,7 @@ function setLocalStorageItems() {
     localStorage.setItem("payload", jsonPayload);
 }
 
+
 function onLogout() {
     localStorage.removeItem("access_token")
     localStorage.removeItem("refresh_token")
@@ -305,6 +306,5 @@ async function getUserView(payload) {
         },
     })
     userData = await response.json()
-
     return userData
 }

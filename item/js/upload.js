@@ -45,7 +45,9 @@ function imgUpload(obj) {
             }
             
             // 파일 배열에 담기
-            filesArr.push(file)
+            var blob = file.slice(0, file.size, 'image/png')
+            newFile = new File([blob], `${file.name.split('.')[0]}-${(new Date / 1)}.png`, { type: 'image/png' })
+            filesArr.push(newFile)
 
             // 이미지 미리보기
             let img = new Image()
