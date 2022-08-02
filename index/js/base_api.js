@@ -1,25 +1,6 @@
 const frontEndBaseUrl = "https://egodaeyeo.netlify.app"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
-
-addEventListener('click', (e) => {
-    if (e.target == signUpBtn) {
-        onSignUp()
-    }
-    if (e.target == loginSubmitBtn) {
-        onLogin()
-    }
-    if (e.target == logoutBtn) {
-        onLogout()
-    }
-    if (e.target == reviewSubmitBtn) {
-        onReviewSubmit()
-    }
-    if (e.target == rentalDateSubmitBtn) {
-        onRentalSubmit()
-    }
-})
-
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -51,7 +32,7 @@ $.ajaxSetup({
 
 //정규표현식 아이디 한글, 영문, 숫자
 function checkID(asValue) {
-    const regid = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+    const regid = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,10}$/;
     return regid.test(asValue);
 }
 
@@ -99,9 +80,7 @@ async function onSignUp() {
     if (password == password2) {
         const response = await fetch(`${backEndBaseUrl}/users/`, {
             method: 'POST',
-            mode: 'cors',
             headers: {
-                Accept: "application/json",
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
             },
@@ -117,7 +96,7 @@ async function onSignUp() {
             $('#inputPassword2').val('')
             $('#address-kakao').val('')
             alert("회원가입 성공")
-            loginModalView()
+            new NavModalView().loginSignupModalView()
         } else {
             // 이메일 형식 체크 / 이메일 중복 체크 / 닉네임 중복 체크
             if (response_json["email"] == 'user의 이메일은/는 이미 존재합니다.') {
@@ -150,7 +129,6 @@ async function onLogin() {
         $('#loginEmail').focus()
         return
     }
-
     if (password === '') {
         alert('비밀번호를 입력해주세요')
         $('#loginPassword').focus()
@@ -164,9 +142,7 @@ async function onLogin() {
 
     const response = await fetch(`${backEndBaseUrl}/users/api/token`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
-            Accept: "application/json",
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
         },
@@ -184,101 +160,82 @@ async function onLogin() {
     }
 }
 
-async function onReviewSubmit() {
-    const reviewContent = document.querySelector('#review').value
-    const starRating = document.querySelector('input[name="rating"]:checked').value
-    const token = localStorage.getItem("access_token");
 
-    const reviewData = {
-        content: reviewContent,
-        rating: starRating
-    }
-    const response = await fetch(`${backEndBaseUrl}/items/reviews/1`, {
+window.Kakao.init("328675de434c7c0bdbf3c0eca65038c0");
+
+function kakaoLogin() {
+    window.Kakao.Auth.login({
+        scope: 'profile_nickname, account_email',
+        success: function (authObj) {
+            window.Kakao.API.request({
+                url: '/v2/user/me',
+                success: res => {
+                    kakaoAccount = res.kakao_account;
+                    kakaoUserData = {
+                        'email': kakaoAccount['email'],
+                        'nickname': kakaoAccount['profile']['nickname']
+                    }
+                    kakaoLoginApi(kakaoUserData)
+                }
+            });
+        }
+    });
+}
+
+// 소셜 유저 회원가입위해 카카오 유저 정보(이메일, 닉네임) 백엔드로 보내주기
+async function kakaoLoginApi(kakaoUserData) {
+
+    const response = await fetch(`${backEndBaseUrl}/users/api/kakao/`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
-            Accept: "application/json",
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
             'X-CSRFToken': csrftoken,
         },
-        body: JSON.stringify(reviewData)
+        body: JSON.stringify(kakaoUserData),
     }
     )
     response_json = await response.json()
 
     if (response.status == 200) {
-        alert("리뷰 작성 완료!")
+        setLocalStorageItems()
         window.location.reload()
-    } else {
-        console.log(response_json)
+
     }
-}
-
-function dhm(ms) {
-    const days = Math.floor(ms / (24 * 60 * 60 * 1000));
-    const daysms = ms % (24 * 60 * 60 * 1000);
-    const hours = Math.floor(daysms / (60 * 60 * 1000));
-    const hoursms = ms % (60 * 60 * 1000);
-    const minutes = Math.floor(hoursms / (60 * 1000));
-    return days + "days: " + hours + "hr: " + minutes + "min"
-}
-
-async function onRentalSubmit() {
-    const token = localStorage.getItem("access_token");
-
-    if (rentalStartTime.value > rentalEndTime.value) {
-        alert('대여 종료일을 대여 시작일 이전으로 설정할 수 없습니다.')
+    else if (response.status == 201) {
+        setLocalStorageItems()
+        alert("원활한 서비스 이용을 위해 주소를 입력해주세요.")
+        addressModalView();
     }
     else {
-        const rentalSubmitData = {
-            rentalStartTime: rentalStartTime.value,
-            rentalEndTime: rentalEndTime.value
-        }
-
-        const response = await fetch(`${backEndBaseUrl}/items/contracts/start/1`, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                Accept: "application/json",
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token,
-                'X-CSRFToken': csrftoken,
-            },
-            body: JSON.stringify(rentalSubmitData)
-        }
-        )
-        response_json = await response.json()
-
-        if (response.status == 200) {
-            alert("리뷰 작성 완료!")
-            window.location.reload()
-        } else {
-            console.log(response_json)
-        }
+        alert(response_json['error'])
     }
-
 }
 
-// 카카오 주소 API(일반유저)
-document.getElementById("address-kakao").addEventListener("click", function () {
-    new daum.Postcode({
-        oncomplete: function (data) { //선택시 입력값 세팅
-            document.getElementById("address-kakao").value = data.address;
-            document.querySelector("#address-kakao").focus();
-        }
-    }).open();
-});
+async function onAddressEnter() {
 
-// 카카오 주소 API(소셜유저)
-document.getElementById("address-kakao2").addEventListener("click", function () {
-    new daum.Postcode({
-        oncomplete: function (data) { //선택시 입력값 세팅
-            document.getElementById("address-kakao2").value = data.address;
-            document.querySelector("#address-kakao2").focus();
-        }
-    }).open();
-});
+    const token = localStorage.getItem("access_token");
+    const address = document.getElementById("address-kakao2").value;
+
+    const response = await fetch(`${backEndBaseUrl}/users/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+            "address": address
+        })
+    })
+
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        alert("주소 등록 완료.")
+        window.location.reload()
+    }
+}
+
 
 // 페이지를 다시 로딩 하면 벌어지는 일들!
 window.onload = () => {
@@ -292,7 +249,6 @@ window.onload = () => {
             const requestRefreshToken = async (url) => {
                 const response = await fetch(url, {
                     headers: {
-                        Accept: "application/json",
                         'Content-Type': 'application/json',
                     },
                     method: "POST",
@@ -314,6 +270,7 @@ window.onload = () => {
     }
 };
 
+
 // 로컬 스트로지에 토근값들과 페이로드에 정보 담아주기
 function setLocalStorageItems() {
     localStorage.setItem("access_token", response_json.access)
@@ -330,6 +287,7 @@ function setLocalStorageItems() {
     localStorage.setItem("payload", jsonPayload);
 }
 
+
 function onLogout() {
     localStorage.removeItem("access_token")
     localStorage.removeItem("refresh_token")
@@ -338,30 +296,15 @@ function onLogout() {
     window.location.reload()
 }
 
-async function getUserView() {
 
-    const mypageImage = document.getElementsByClassName('mypage-image')[0]
+async function getUserView(payload) {
 
-    try {
-        userId = JSON.parse(localStorage.getItem('payload')).user_id
-
-        const response = await fetch(`${backEndBaseUrl}/users/${userId}/`, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'X-CSRFToken': csrftoken,
-            },
-        })
-        userData = await response.json()
-        profileImage = userData['user_image']
-
-        mypageImage.setAttribute('src', profileImage)
-
-        return userData
-    }
-    catch {
-        mypageImage.style.display = 'none'
-    }
-
+    const response = await fetch(`${backEndBaseUrl}/users/${payload.user_id}/`, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': csrftoken,
+        },
+    })
+    userData = await response.json()
+    return userData
 }
-getUserView()

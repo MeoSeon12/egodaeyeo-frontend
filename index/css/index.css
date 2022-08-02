@@ -1,4 +1,4 @@
-h1,
+/* h1,
 h2,
 h3,
 h4 {
@@ -7,8 +7,7 @@ h4 {
     color: black;
     line-height: 1.2;
 }
-
-h1 {
+.item-box__text h1 {
     font-size: 2.9rem;
 }
 
@@ -22,16 +21,38 @@ h3 {
 
 p {
     font-size: 1rem;
+} */
+.item-box__text h1 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: black;
+    line-height: 1.2;
+    font-size: 2.9rem;
 }
 
-* {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
+.item-box__text h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: black;
+    line-height: 1.2;
+    font-size: 2.5rem;
 }
+
+.item-box__text h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: black;
+    line-height: 1.2;
+    font-size: 0.9rem;
+}
+
+.item-box__text p {
+    margin-top: 0;
+    color: black;
+    line-height: 1.2;
+    font-size: 1rem;
+}
+
 
 @media all and (max-width: 992px) {
     * {
@@ -45,17 +66,13 @@ body {
     overflow-x: hidden;
 }
 
-body button {
+section button {
     font-weight: bold;
     font-size: 1rem;
     background-color: #00000000;
     border: none;
 }
 
-body input {
-    border: none;
-    outline: none;
-}
 
 .index-main .background-beige {
     background-color: #fbf7f2;

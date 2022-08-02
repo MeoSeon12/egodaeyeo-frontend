@@ -1,103 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이거대여.</title>
-    <link rel="stylesheet" href="../index/css/nav.css">
+    <link rel="stylesheet" href="../index/css/base.css">
     <link rel="stylesheet" href="css/detail.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- bxslider -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
 
 </head>
+
 <body>
-    <nav>
-        <div class="nav-wrap">
-            <div class="nav-container">
-                <div class="logo">이거대여.</div>
-                <input class="search" placeholder="검색">
-                <div class="nav-btns">
-                    <a class="mypage">
-                        <img class="mypage-image">
-                    </a>
-                    <button class="item-upload-btn" onclick="rentalDateModalView()">물품 등록</button>
-                    <button class="login-btn" onclick="loginModalView()">로그인</button>
-                    <button class="logout-btn">로그아웃</button>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- 로그인 / 회원가입 모달 -->
-    <div class="login-modal-body">
-        <div class="modal-container" id="login-modal-container">
-            <h2>이거대여.</h2>
-            <div class="modal-inputs">
-                <input id="loginEmail" placeholder="이메일">
-                <input type='password' id="loginPassword" placeholder="비밀번호">
-            </div>
-            <div class="wrap" id="login-wrap">
-                <button class="login-submit-btn">로그인</button>
-                <div class="ask-sign"> 계정이 없으신가요? <a class="go-to-signup" onclick="signupContainerView()">회원가입</a></div>
-                <img class="kakao-btn" src="../media/kakao-btn.png">
-            </div>
-        </div>
-        <div class="modal-container" id="signup-modal-container">
-            <h2>이거대여.</h2>
-            <div class="modal-inputs">
-                <h5>이메일</h5>
-                <input id="inputEmail">
-                <h5>닉네임</h5>
-                <input id="inputNickname">
-                <h5>비밀번호</h5>
-                <input type='password' id="inputPassword">
-                <h5>비밀번호 재입력</h5>
-                <input type='password' id="inputPassword2">
-                <h5>주소</h5>
-                <input id="address-kakao" name="address" placeholder="주소 검색" readonly />
-            </div>
-            <button class="signup-submit-btn">회원가입</button>
-            <div class="ask-sign"> 이미 계정이 있으신가요? <a class="go-to-login" onclick="loginContainerView()">로그인</a></div>
-        </div>
-    </div>
-    <div class="address-modal-body">
-        <div class="address-modal-container" id="address-modal-container">
-            <h2>이거대여.</h2>
-            <div class="modal-inputs">
-                <input id="address-kakao2" name="address" placeholder="주소 검색" readonly />
-                <button class="address-submit-btn">주소 등록</button>
-            </div>
-        </div>
-    </div>
-    <div class="review-modal-body">
-        <div class="review-modal-container" id="review-modal-container">
-            <h2 class="review-write">리뷰작성</h2>
-                <div class="rating">
-                    <span><input type="radio" name="rating" id="str5" value="5"><label for="str5">★</label></span>
-                    <span><input type="radio" name="rating" id="str4" value="4"><label for="str4">★</label></span>
-                    <span><input type="radio" name="rating" id="str3" value="3"><label for="str3">★</label></span>
-                    <span><input type="radio" name="rating" id="str2" value="2"><label for="str2">★</label></span>
-                    <span><input type="radio" name="rating" id="str1" value="1"><label for="str1">★</label></span>
-                </div>
-                    <textarea id="review" name="review" rows="5" cols="33" placeholder="리뷰를 작성해주세요."></textarea>
-                    <button class="review-submit-btn">작성하기</button>
-            <div class="ask-sign"> <a class="skip-review" onclick="">건너 뛰기</a></div>
-        </div>
-    </div>
-    <div class="rental-date-modal-body">
-        <div class="rental-date-modal-container" id="rental-date-modal-container">
-            <h2 class="rental-apply">대여신청</h2>
-                <h5>대여 시작일</h5>
-                <input type="datetime-local" id="rental-start-time" name="rental-start-time">
-                <h5>대여 종료일</h5>
-                <input type="datetime-local" id="rental-end-time" name="rental-end-time"  min="timezoneNow">              
-                <button class="rental-date-submit-btn">신청하기</button>
-            <div class="ask-sign"> <a class="cancel-rental" onclick="rentalDateModalUnview()">취소</a></div>
-        </div>
-    </div>
     <!-- 본문 -->
     <div class="item-wrap">
         <!-- 아이템 섹션 -->
@@ -134,10 +56,7 @@
                 </div>
             </div>
             <!-- 커뮤니케이션 버튼 -->
-            <div class="communication-container">
-                <button class="bookmark-btn" onclick="bookmark()"></button>
-                <button onclick="inquiry()">문의하기</button>
-            </div>
+            <div class="communication-container"></div>
         </div>
         <!-- 리뷰 섹션 -->
         <div class="review-section">
@@ -146,13 +65,13 @@
     </div>
 </body>
 
-<script type="text/javascript" src="../index/js/nav.js"></script>
-<script type="text/javascript" src="../index/js/nav_api.js"></script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript" src="../index/js/kakao_api.js"></script>
+<script type="text/javascript" src="../index/js/base_api.js"></script> 
+<script type="text/javascript" src="../index/js/base.js"></script>
+<script type="text/javascript" src="../index/js/chat_api.js"></script> 
+<script type="text/javascript" src="../index/js/chat.js"></script>
 <script type="text/javascript" src="js/detail_api.js"></script>
 <script type="text/javascript" src="js/detail.js"></script>
 <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 
 </html>
