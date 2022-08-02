@@ -1,4 +1,4 @@
-// 읽지 않은 메시지 API
+// 읽지 않은 메세지 API
 async function getUnreadMessageApi(userId) {
 
     const token = localStorage.getItem('access_token')
@@ -10,15 +10,15 @@ async function getUnreadMessageApi(userId) {
             'Authorization': 'Bearer ' + token
         },
     })
-    response_json = await response.json()
     if (response.status == 200) {
-        return response_json
+        return response.json()
     }
     else if (response.status == 204) {
-        console.log(response_json)
+        console.log('참가중인 채팅방이 없습니다')
+        return []
     }
     else {
-        console.log(response_json["error"])
+        console.log(response.json()["error"])
     }
 }
 
@@ -69,7 +69,7 @@ async function chatRoomApi(room_id) {
 }
 
 
-// 실시간으로 바로 읽은 메시지 처리
+// 실시간으로 바로 읽은 메세지 처리
 async function liveReadApi(room_id) {
     const token = localStorage.getItem('access_token')
 

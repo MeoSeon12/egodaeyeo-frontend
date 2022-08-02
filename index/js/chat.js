@@ -544,9 +544,7 @@ class Websocket {
         chatAlertSocket.onmessage = function (e) {
             // 알람 데이터
             let data = JSON.parse(e.data)
-            console.log(chatSocket['url'])
             if (chatSocket.url != `ws://127.0.0.1:8000/chats/${data.room_id}`) {
-                console.log('알람 메시지 생성')
                 // 알람 메시지 및 효과생성
                 new CreateElement().alertMessage(data)
                 new Alert().MessageInnerText(data)

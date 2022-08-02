@@ -73,6 +73,9 @@ async function myInfo() {
     //페이지 로딩시 유저정보
     Profilecheck(userData)
 }
+myInfo()
+
+
 
 //각종 내역 불러오는 함수
 async function myPageTabInfo(tab) {
@@ -432,6 +435,10 @@ async function userDeleteModal() {
             deleteModalBody.style.display = 'none'
         }
     })
+<<<<<<< HEAD
 }
 
 myInfo();
+=======
+}
+>>>>>>> develop
