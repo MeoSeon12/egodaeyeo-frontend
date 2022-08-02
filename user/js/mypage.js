@@ -435,10 +435,5 @@ async function userDeleteModal() {
             deleteModalBody.style.display = 'none'
         }
     })
-<<<<<<< HEAD
 }
 
-myInfo();
-=======
-}
->>>>>>> develop
