@@ -368,7 +368,6 @@ class NavModalView {
 
 
 var payload = JSON.parse(localStorage.getItem('payload'))
-var userData = ""
 
 // 페이지 로드 시 실행되는 기능
 document.addEventListener("DOMContentLoaded", async function () {
