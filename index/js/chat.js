@@ -204,6 +204,7 @@ class CreateElement {
 
         const messages = document.getElementById('messages')
         const chatMessages = roomData.chat_messages
+        console.log(chatMessages)
         // 이전 채팅 메시지
         for (let i = 0; i < chatMessages.length; i++) {
             let isApplication = chatMessages[i].application
