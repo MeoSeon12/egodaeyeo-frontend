@@ -36,7 +36,7 @@ async function showAllItems(selectedSection) {
     const items = await itemApiView();
     const categories = items['categories']
     const itemsInfo = items['items']['results']
-    const userAddress = itemsInfo[0]['user_address']
+    const userAddress = items['user_address']
     pageUrl = items['items']['next']
 
     categoryText.innerText = "#전체";
