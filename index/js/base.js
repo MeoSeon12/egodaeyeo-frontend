@@ -264,8 +264,13 @@ class CreateNavElement {
     createAddressModal() {
         const addressModalBody = document.createElement('div')
         addressModalBody.setAttribute('class', 'address-modal-body')
-        addressModalBody.setAttribute('onclick', 'alert("주소를 입력해주세요.")')
         this.body.append(addressModalBody)
+
+        addEventListener('click', (e) => {
+            if (e.target == addressModalBody) {
+                alert("주소를 입력해주세요")
+            }
+        })
 
         const addressContainer = document.createElement('div')
         addressContainer.setAttribute('class', 'address-modal-container')
@@ -367,7 +372,6 @@ class NavModalView {
 
 
 var payload = JSON.parse(localStorage.getItem('payload'))
-var userData = ""
 
 // 페이지 로드 시 실행되는 기능
 async function baseLoad() {

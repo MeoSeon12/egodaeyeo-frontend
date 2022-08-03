@@ -11,7 +11,6 @@ for (let i = 0; i < tabButton.length; i++) {
     })
 }
 
-
 async function myInfo() {
     const userData = await getUserView(payload);
     if (userData == undefined) {
@@ -437,3 +436,4 @@ async function userDeleteModal() {
         }
     })
 }
+
