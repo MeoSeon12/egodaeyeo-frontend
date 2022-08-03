@@ -23,11 +23,11 @@ async function itemApiView() {
     }
 }
 
-// Query parameter로 카테고리별 아이템정보 조회
+// Query parameter로 카테고리별 아이템정보 조회 - ItemListView
 async function selectedItemApiView(category, section) {
     const token = localStorage.getItem("access_token");
     if (token == null) {
-        const response = await fetch(`${backEndBaseUrl}/items?category=${category}&section=${section}`, {
+        const response = await fetch(`${backEndBaseUrl}/items/?category=${category}&section=${section}`, {
             method: 'GET',
             headers: {
                 'X-CSRFToken': csrftoken,
@@ -37,7 +37,7 @@ async function selectedItemApiView(category, section) {
         return apiResponse(response)
     }
     else {
-        const response = await fetch(`${backEndBaseUrl}/items?category=${category}&section=${section}`, {
+        const response = await fetch(`${backEndBaseUrl}/items/?category=${category}&section=${section}`, {
             method: 'GET',
             headers: {
                 'X-CSRFToken': csrftoken,

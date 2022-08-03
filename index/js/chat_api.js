@@ -14,7 +14,6 @@ async function getUnreadMessageApi(userId) {
         return response.json()
     }
     else if (response.status == 204) {
-        console.log('참가중인 채팅방이 없습니다')
         return []
     }
     else {
@@ -46,7 +45,7 @@ async function chatModalApi() {
 }
 
 
-// 채팅룸 데이터 API (채팅룸 선택 시)
+// 채팅룸 데이터 API (채팅룸 선택 시) - ChatRoomView
 async function chatRoomApi(room_id) {
 
     const token = localStorage.getItem('access_token')
