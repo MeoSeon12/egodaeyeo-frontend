@@ -31,10 +31,10 @@
 <br><br><br>
 
 ## 🤷🏻‍♂️🤷🏻‍♀️ 머선12조 팀원 및 역할분담
-<b>김규민</b><br>물품 목록 페이지<br> 마이페이지<br> 소셜로그인<br>검색 기능<br><br>
-<b>김철현</b><br>회원가입/로그인<br> 소셜로그인<br>리뷰 모달, 채팅 모달<br><br>
+<b>김규민</b><br>물품 목록 페이지<br> 마이페이지<br> 소셜로그인<br>검색 기능<br>Contract 기능<br>채팅 기능<br>백엔드 배포<br><br>
+<b>김철현</b><br>회원가입/로그인<br> 소셜로그인<br>리뷰 모달, 채팅 모달<br>채팅 기능<br>백엔드 배포<br><br>
+<b>최재완</b><br>물품 상세페이지<br>물품 등록 페이지<br>알람 기능<br>채팅 기능<br>프론트 배포<br>프론트 JS리팩토링<br><br>
 <b>김성호</b><br>메인 페이지<br><br><br>
-<b>최재완</b><br>물품 상세페이지<br>물품 등록 페이지<br><br>
 <br><br><br>
 
 ## 🕘 프로젝트 일정
@@ -42,7 +42,7 @@
 <br><br><br>
 
 ## 🐲 배포 사이트  
-<a href="" target="_blank">이거대여. 바로가기</a>  
+<a href="https://www.egorental.com/" target="_blank">이거대여. 바로가기</a>  
 <br><br><br>
 
 ## 📂 Starting Assignment
