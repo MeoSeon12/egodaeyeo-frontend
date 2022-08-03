@@ -12,66 +12,69 @@ for (let i = 0; i < tabButton.length; i++) {
 }
 
 async function myInfo() {
-    const userData = await getUserView(payload);
-    if (userData == undefined) {
+    if (payload == null) {
         alert("회원 정보가 없어 메인페이지로 돌아갑니다.")
         window.location.replace("../index.html")
     }
-    profileInfoBox.replaceChildren();
-
-    //프로필 이미지
-    const newProfileImage = document.createElement('img')
-    newProfileImage.setAttribute('class', 'profile-info-image')
-    newProfileImage.setAttribute('src', userData['image'])
-    profileInfoBox.append(newProfileImage)
-
-    const newProfileInfoText = document.createElement('div')
-    newProfileInfoText.setAttribute('class', 'profile-info-text')
-    profileInfoBox.append(newProfileInfoText)
-
-    //닉네임
-    const newMyNickname = document.createElement('div')
-    newMyNickname.setAttribute('class', 'info-text-nickname')
-    newMyNickname.innerText = userData['nickname']
-    newProfileInfoText.append(newMyNickname)
-
-    //유저 점수
-    const newMyScore = document.createElement('div')
-    newMyScore.setAttribute('class', 'info-text-score')
-
-    if (userData['score'] == null) {
-        newMyScore.innerText = "유저점수 없음"
-        newProfileInfoText.append(newMyScore)
-    }
     else {
-        //유저 점수에 따른 색
-        if (userData['score'] >= 80) {
-            //초록색
-            newMyScore.innerText = "유저점수 " + userData['score'] + " 😄"
-            newMyScore.style.color = "rgb(6, 190, 0)"
+        const userData = await getUserView(payload);
+    
+        profileInfoBox.replaceChildren();
+    
+        //프로필 이미지
+        const newProfileImage = document.createElement('img')
+        newProfileImage.setAttribute('class', 'profile-info-image')
+        newProfileImage.setAttribute('src', userData['image'])
+        profileInfoBox.append(newProfileImage)
+    
+        const newProfileInfoText = document.createElement('div')
+        newProfileInfoText.setAttribute('class', 'profile-info-text')
+        profileInfoBox.append(newProfileInfoText)
+    
+        //닉네임
+        const newMyNickname = document.createElement('div')
+        newMyNickname.setAttribute('class', 'info-text-nickname')
+        newMyNickname.innerText = userData['nickname']
+        newProfileInfoText.append(newMyNickname)
+    
+        //유저 점수
+        const newMyScore = document.createElement('div')
+        newMyScore.setAttribute('class', 'info-text-score')
+    
+        if (userData['score'] == null) {
+            newMyScore.innerText = "유저점수 없음"
+            newProfileInfoText.append(newMyScore)
         }
-        else if (userData['score'] < 80 && userData['score'] >= 60) {
-            //파란색
-            newMyScore.innerText = "유저점수 " + userData['score'] + " 🙂"
-            newMyScore.style.color = "rgb(0, 104, 190)"
+        else {
+            //유저 점수에 따른 색
+            if (userData['score'] >= 80) {
+                //초록색
+                newMyScore.innerText = "유저점수 " + userData['score'] + " 😄"
+                newMyScore.style.color = "rgb(6, 190, 0)"
+            }
+            else if (userData['score'] < 80 && userData['score'] >= 60) {
+                //파란색
+                newMyScore.innerText = "유저점수 " + userData['score'] + " 🙂"
+                newMyScore.style.color = "rgb(0, 104, 190)"
+            }
+            else if (userData['score'] < 60 && userData['score'] > 30) {
+                //주황색
+                newMyScore.innerText = "유저점수 " + userData['score'] + " 😐"
+                newMyScore.style.color = "rgb(255, 201, 101)"
+            }
+            else if (userData['score'] <= 30) {
+                //빨간색
+                newMyScore.innerText = "유저점수 " + userData['score'] + " 👿"
+                newMyScore.style.color = "rgb(255, 0, 0)"
+            }
+    
+            newMyScore.style.fontWeight = "bold"
+            newProfileInfoText.append(newMyScore)
         }
-        else if (userData['score'] < 60 && userData['score'] > 30) {
-            //주황색
-            newMyScore.innerText = "유저점수 " + userData['score'] + " 😐"
-            newMyScore.style.color = "rgb(255, 201, 101)"
-        }
-        else if (userData['score'] <= 30) {
-            //빨간색
-            newMyScore.innerText = "유저점수 " + userData['score'] + " 👿"
-            newMyScore.style.color = "rgb(255, 0, 0)"
-        }
-
-        newMyScore.style.fontWeight = "bold"
-        newProfileInfoText.append(newMyScore)
+    
+        //페이지 로딩시 유저정보
+        Profilecheck(userData)
     }
-
-    //페이지 로딩시 유저정보
-    Profilecheck(userData)
 }
 myInfo()
 
