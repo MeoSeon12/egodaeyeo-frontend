@@ -41,7 +41,7 @@ async function showAllItems(selectedSection) {
 
     categoryText.innerText = "#전체";
 
-    if (userAddress == null) {
+    if (userAddress == "") {
         addressText.innerText = "";
     }
     else {
