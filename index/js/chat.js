@@ -544,13 +544,13 @@ class Websocket {
     // 알람 웹소켓 연결 및 온메시지
     alertWebsocket(userId) {
 
-        chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${userId}`)
+        chatAlertSocket = new WebSocket(`${webSocketBaseUrl}/chats/alerts/${userId}`)
 
         // 알람 수신
         chatAlertSocket.onmessage = function (e) {
             // 알람 데이터
             let data = JSON.parse(e.data)
-            if (chatSocket.url != `ws://127.0.0.1:8000/chats/${data.room_id}`) {
+            if (chatSocket.url != `${webSocketBaseUrl}/chats/${data.room_id}`) {
                 // 알람 메시지 및 효과생성
                 new CreateElement().alertMessage(data)
                 new Alert().MessageInnerText(data)
@@ -573,7 +573,7 @@ class Websocket {
     // 채팅 웹소켓 연결 및 온메시지
     chatWebsocket(roomId) {
 
-        chatSocket = new WebSocket(`ws://127.0.0.1:8000/chats/${roomId}`)
+        chatSocket = new WebSocket(`${webSocketBaseUrl}/chats/${roomId}`)
 
         // 채팅 수신
         chatSocket.onmessage = async function (e) {
@@ -628,7 +628,7 @@ class Websocket {
     // 거래 웹소켓 연결 및 온메시지
     contractWebsocket(roomId, roomData) {
 
-        contractSocket = new WebSocket(`ws://127.0.0.1:8000/chats/contracts/${roomId}`)
+        contractSocket = new WebSocket(`${webSocketBaseUrl}/chats/contracts/${roomId}`)
 
         // room데이터
         let itemId = roomData.item
@@ -967,7 +967,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
             }))
 
             // 채팅 알림 웹소켓 통신
-            chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${authorId}`)
+            chatAlertSocket = new WebSocket(`${webSocketBaseUrl}/chats/alerts/${authorId}`)
 
             // 메시지 작성 시간
             let now = new Date()
