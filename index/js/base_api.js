@@ -1,5 +1,5 @@
 const frontEndBaseUrl = "https://egodaeyeo.netlify.app"
-const backEndBaseUrl = "http://127.0.0.1:8000"
+const backEndBaseUrl = "http://3.39.128.176"
 
 function getCookie(name) {
     var cookieValue = null;
