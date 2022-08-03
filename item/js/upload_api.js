@@ -71,6 +71,7 @@ async function submitForm() {
     const response = await fetch(`${backEndBaseUrl}/items/upload`, {
         method: 'POST',
         headers: {
+            'Access-Control-Allow-Origin': '*',
             'Authorization': 'Bearer ' + token
         },
         body: formData
