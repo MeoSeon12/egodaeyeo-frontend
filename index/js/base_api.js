@@ -1,4 +1,4 @@
-const frontEndBaseUrl = "https://egodaeyeo.netlify.app"
+const frontEndBaseUrl = "https://egorental.com"
 const backEndBaseUrl = "http://3.37.128.154"
 const webSocketBaseUrl = "ws://3.37.128.154:8001"
 
