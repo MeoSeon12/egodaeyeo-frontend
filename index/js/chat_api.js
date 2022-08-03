@@ -95,7 +95,6 @@ async function rentalSubmitApi(itemId) {
         "endTime": endTime.value,
         "status": "검토 중"
     }
-    console.log(rentalSubmitData)
 
     const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'POST',
@@ -166,7 +165,7 @@ async function contractAcceptAndEndApi(itemId, status) {
 }
 
 
-// 대여 거절 API
+// 대여 거절 API 
 async function contractRefuseApi(itemId) {
 
     const token = localStorage.getItem("access_token");
