@@ -409,7 +409,7 @@ function displayLoginLogoutBtn(payload) {
 
 // 물품 목록 버튼
 function goItemListPage() {
-    location.href = '../item/list.html'
+    location.href = '../item/index.html'
 }
 
 
