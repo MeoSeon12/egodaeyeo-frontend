@@ -204,16 +204,13 @@ function itemDataAppend(itemsInfo) {
     for (let i = 0; i < itemsInfo.length; i++) {
         const item = itemsInfo[i]
         const itemId = item['id']
-        const newItemLink = document.createElement('a')
-        newItemLink.setAttribute("class", "item-link")
-        newItemLink.addEventListener('click', () => {
-            location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
-        })
-        itemWrap.append(newItemLink)
-
+        
         const newItemBox = document.createElement('div')
         newItemBox.setAttribute("class", "item-link-box")
-        newItemLink.append(newItemBox)
+        newItemBox.addEventListener('click', () => {
+            location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+        })
+        itemWrap.append(newItemBox)
 
         if (item['image'] == null) {
             //이미지 없을시

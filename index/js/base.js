@@ -79,22 +79,23 @@ class CreateNavElement {
         const itemUploadBtn = document.createElement('span')
         itemUploadBtn.setAttribute('class', 'material-symbols-outlined')
         itemUploadBtn.setAttribute('onclick', 'goUploadPage()')
+        itemUploadBtn.setAttribute('title', '물품등록')
         itemUploadBtn.innerText = "file_upload"
         navBtns.append(itemUploadBtn)
+        
+        const loginLogoutBtn = document.createElement('span')
+        loginLogoutBtn.setAttribute('class', 'material-symbols-outlined')
+        loginLogoutBtn.setAttribute('id', 'login-logout-btn')
+        loginLogoutBtn.innerText = "power_settings_new"
+        navBtns.append(loginLogoutBtn)
+        
+        loginLogoutBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
+        loginLogoutBtn.style.color = 'green'
+        
+        loginLogoutBtn.setAttribute('onclick', 'onLogout()')
+        loginLogoutBtn.style.color = 'red'
 
-        const loginBtn = document.createElement('span')
-        loginBtn.setAttribute('class', 'material-symbols-outlined')
-        loginBtn.setAttribute('id', 'login-btn')
-        loginBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
-        loginBtn.innerText = "power_settings_new"
-        navBtns.append(loginBtn)
 
-        const logoutBtn = document.createElement('span')
-        logoutBtn.setAttribute('class', 'material-symbols-outlined')
-        logoutBtn.setAttribute('id', 'logout-btn')
-        logoutBtn.setAttribute('onclick', 'onLogout()')
-        logoutBtn.innerText = "power_settings_new"
-        navBtns.append(logoutBtn)
     }
 
     createLoginSignupModal() {
@@ -395,15 +396,17 @@ async function baseLoad() {
 
 // 로그인 여부에 따라 로그인 로그아웃 display
 function displayLoginLogoutBtn(payload) {
-    const loginBtn = document.querySelector('#login-btn')
-    const logoutBtn = document.querySelector('#logout-btn')
+    const loginLogoutBtn = document.querySelector('#login-logout-btn')
+
     if (payload !== null) {
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "block";
+        loginLogoutBtn.setAttribute('onclick', 'onLogout()')
+        loginLogoutBtn.setAttribute('title', '로그아웃')
+        loginLogoutBtn.style.color = 'red'
     }
     else {
-        loginBtn.style.display = "block";
-        logoutBtn.style.display = "none";
+        loginLogoutBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
+        loginLogoutBtn.setAttribute('title', '로그인')
+        loginLogoutBtn.style.color = 'green'
     }
 }
 

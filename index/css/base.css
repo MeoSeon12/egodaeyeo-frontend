@@ -175,7 +175,7 @@ nav {
 .nav-btns > span {
     padding: 10px 15px;
     cursor: pointer;
-    color: gray;
+    color: rgb(0, 0, 0);
     transform:scale(1.2)
 }
 

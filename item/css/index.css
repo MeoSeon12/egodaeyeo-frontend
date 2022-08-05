@@ -61,7 +61,9 @@
     animation: fadein-text 3.2s;
 }
 
-.welcome-wrap > img {
+.welcome-wrap > i {
+    font-size: 60px;
+    color: rgb(0, 255, 98);
     margin: 70px 0 0 0;
     width: 100px;
     cursor: pointer;
@@ -74,7 +76,7 @@
     transition-duration: 0.3s;
 }
 
-.welcome-wrap > img:hover {
+.welcome-wrap > i:hover {
     -webkit-animation-name: hvr-icon-hang-sink, hvr-icon-hang;
     animation-name: hvr-icon-hang-sink, hvr-icon-hang;
     -webkit-animation-duration: .3s, 1.5s;
@@ -252,14 +254,13 @@
 }
 
 .item-link-box {
-    height: 321px;
+    height: 295px;
     max-width: 200px;
     width: 100%;
     margin: 20px 15px;
     cursor: pointer;
     overflow: hidden;
 }
-
 
 .item-image {
     height: 200px;
@@ -285,6 +286,9 @@
 .item-title {
     font-size: 17px;
     margin: 5px 0;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-price {
