@@ -6,6 +6,42 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein-title {
+    from {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes fadein-text {
+    from {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+.welcome-wrap > div {
+    animation: fadein-title 3s;
 }
 
 .welcome-wrap > div > h1 {
@@ -18,17 +54,80 @@
 
 .welcome-wrap > div > p {
     margin: 0;
+    animation: fadein-text 3.2s;
 }
 
 .welcome-wrap > img {
     margin: 100px;
     width: 100px;
     cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 .welcome-wrap > img:hover {
-    opacity: 0.5;
+    -webkit-animation-name: hvr-icon-hang-sink, hvr-icon-hang;
+    animation-name: hvr-icon-hang-sink, hvr-icon-hang;
+    -webkit-animation-duration: .3s, 1.5s;
+    animation-duration: .3s, 1.5s;
+    -webkit-animation-delay: 0s, .3s;
+    animation-delay: 0s, .3s;
+    -webkit-animation-timing-function: ease-out, ease-in-out;
+    animation-timing-function: ease-out, ease-in-out;
+    -webkit-animation-iteration-count: 1, infinite;
+    animation-iteration-count: 1, infinite;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-direction: normal, alternate;
+    animation-direction: normal, alternate;
 }
+
+/* Icon Hang */
+@-webkit-keyframes hvr-icon-hang {
+    0% {
+      -webkit-transform: translateY(6px);
+      transform: translateY(6px);
+    }
+    50% {
+      -webkit-transform: translateY(2px);
+      transform: translateY(2px);
+    }
+    100% {
+      -webkit-transform: translateY(6px);
+      transform: translateY(6px);
+    }
+  }
+  @keyframes hvr-icon-hang {
+    0% {
+      -webkit-transform: translateY(6px);
+      transform: translateY(6px);
+    }
+    50% {
+      -webkit-transform: translateY(2px);
+      transform: translateY(2px);
+    }
+    100% {
+      -webkit-transform: translateY(6px);
+      transform: translateY(6px);
+    }
+  }
+  @-webkit-keyframes hvr-icon-hang-sink {
+    100% {
+      -webkit-transform: translateY(6px);
+      transform: translateY(6px);
+    }
+  }
+  @keyframes hvr-icon-hang-sink {
+    100% {
+      -webkit-transform: translateY(6px);
+      transform: translateY(6px);
+    }
+  }
 
 .menu-icon-wrap {
     display: flex;
@@ -41,7 +140,7 @@
 
 .menu-modal-icon {
     color: rgb(175, 175, 175);
-    background-color: transparent;
+    background-color: white;
     font-size: 33px;
     height: 33px;
     width: 33px;
