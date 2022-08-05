@@ -466,10 +466,10 @@ class Alert {
             pastTime = `${pastTime}분 전`
         }
         else if ((pastTime / 60) <= 24) {
-            pastTime = `${pastTime / 60}시간 전`
+            pastTime = `${parseint(pastTime / 60)}시간 전`
         }
         else {
-            pastTime = `${pastTime / 60 / 24}일 전`
+            pastTime = `${parseint(pastTime / 60 / 24)}일 전`
         }
 
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${data.room_id}`)[0]
