@@ -458,7 +458,7 @@ class Alert {
         }
 
         // 지난 시간 계산
-        let pastTime = String((new Date - new Date(data.created_at)) / 1000 / 60).split('.')[0]
+        let pastTime = parseInt((new Date - new Date(data.created_at)) / 1000 / 60)
         if (pastTime < 1) {
             pastTime = '방금'
         }
@@ -466,10 +466,10 @@ class Alert {
             pastTime = `${pastTime}분 전`
         }
         else if ((pastTime / 60) <= 24) {
-            pastTime = `${parseint(pastTime / 60)}시간 전`
+            pastTime = `${parseInt(pastTime / 60)}시간 전`
         }
         else {
-            pastTime = `${parseint(pastTime / 60 / 24)}일 전`
+            pastTime = `${parseInt(pastTime / 60 / 24)}일 전`
         }
 
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${data.room_id}`)[0]
