@@ -291,11 +291,7 @@ window.addEventListener('wheel', function (event) {
     if (event.deltaY > 0 && useScrollFunction == false) {
         if (checkVisible($('.welcome-wrap'))) {
             moveToScroll('.menu-icon-wrap', 30)
-        }
-    }
-    if (event.deltaY < 0 && useScrollFunction == true) {
-        if (checkVisible($('.welcome-wrap'))) {
-            moveToScroll('.welcome-wrap', 90)
+            useScrollFunction = true
         }
     }
 })
@@ -313,13 +309,7 @@ function checkVisible(elm, eval) {
 // 스크롤 자동 이동
 function moveToScroll(tagName, num) {
     var offset = $(`${tagName}`).offset()
-    $("html, body").animate({ scrollTop: offset.top - num}, 1500)
-    if (useScrollFunction == false) {
-        useScrollFunction = true
-    }
-    else {
-        useScrollFunction = false
-    }
+    $("html, body").animate({scrollTop: offset.top - num}, 1500)
 }
 
 showAllItems(selectedSection)
