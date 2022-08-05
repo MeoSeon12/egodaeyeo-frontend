@@ -51,7 +51,6 @@
 }
 
 .welcome-wrap > i {
-    animation: fadein-from-right 3.4s;
     font-size: 60px;
     color: rgb(0, 255, 98);
     margin: 70px 0 0 0;
@@ -377,7 +376,7 @@
     .item-wrap {
         flex-grow: inherit;
     }
-    
+
     .item-link-box {
         max-width: 226px;
     }
