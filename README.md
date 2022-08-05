@@ -53,14 +53,11 @@
 <br><br>
 ![image](https://user-images.githubusercontent.com/104349901/177922961-e16b4030-ba7a-4a69-be7f-76509f629abf.png)
 <br><br>
-## 📕 API 설계
-<a href="https://www.notion.so/91b31259354248b0943c80d659eb5cec?v=ea9ec0a1087548c0abfbd6e7a4c28fb0">노션 바로가기</a>
-<br><br><br>
 
 ## ⚙ DB 설계 ERD
 <a href="https://docs.google.com/spreadsheets/d/1ZLFdnhCmHF1gWQ0VjzHNtW1nglS0MMpMtOdWKkzBeQo/edit?usp=sharing">구글 시트 바로가기</a>  
 <br>
-![image](https://user-images.githubusercontent.com/104349901/178718045-dff3343b-d75e-4a09-af1d-a2403a581261.png)
+![image](https://user-images.githubusercontent.com/104349901/182680927-f7adaca9-783c-4321-a533-a198ede6c8c8.png)
 
 <br><br><br>
 
