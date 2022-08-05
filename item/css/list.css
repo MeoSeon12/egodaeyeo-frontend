@@ -30,24 +30,24 @@
     opacity: 0.5;
 }
 
-.menu-icon-wrap, .main-body-top {
+.menu-icon-wrap {
     display: flex;
-    margin: 10px 0 0 10px;
+    margin: 0 0 0 15px;
     top: 0;
-    height: 58px;
-    max-width: 58px;
+    height: 40px;
+    max-width: 40px;
     width: 100%;
 }
 
 .menu-modal-icon {
     color: rgb(175, 175, 175);
-    background-color: white;
-    font-size: 40px;
-    height: 40px;
-    width: 40px;
+    background-color: transparent;
+    font-size: 33px;
+    height: 33px;
+    width: 33px;
     padding: 8px;
     position: fixed;
-    top: 90px;
+    top: 95px;
     border-radius: 10px;
     box-shadow: 0 1px 1px 1px rgb(189, 189, 189);
     cursor: pointer;
