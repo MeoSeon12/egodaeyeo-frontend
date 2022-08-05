@@ -82,7 +82,7 @@ async function apiResponse(response) {
         return items
     }
     else if (response.status == 401) {
-        customAlert("인증 에러가 발생했습니다. 새로고침 해주세요")
+        customAlert("로그인 인증에 실패했습니다. 새로고침 해주세요")
     }
     else {
         customAlert("페이지를 불러오는데 실패했습니다. 메인 페이지로 돌아갑니다")
@@ -92,7 +92,7 @@ async function apiResponse(response) {
 
 function customAlert(text) {
     Swal.fire({
-        icon: 'fail',
+        icon: 'error',
         text: text
     });
 }
