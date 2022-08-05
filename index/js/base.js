@@ -422,4 +422,3 @@ $("#loginPassword").keyup(function (event) {
         $(".login-submit-btn").click();
     }
 });
-
