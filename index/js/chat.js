@@ -145,7 +145,7 @@ class CreateElement {
                     }
                     else {
                         requestContractBtn.innerText = "리뷰 쓰기"
-                        requestContractBtn.style.cssText = "background-color: #bae1ff;"
+                        requestContractBtn.style.cssText = "background-color: #bae1ff; cursor: pointer;"
                         //리뷰 모달 열리는 함수 실행
                         requestContractBtn.setAttribute("onclick", `reviewModalView(${itemId})`)
                         contractBtnContainer.append(requestContractBtn)
@@ -661,9 +661,7 @@ class Websocket {
                         new CreateElement().contractMessage(messages, "대여 신청을 보냈습니다", cssText)
 
                         requestContractBtn.innerText = "대여 신청중"
-                        requestContractBtn.style.cursor = 'auto'
-                        requestContractBtn.style.backgroundColor = "#b6faf6"
-
+                        requestContractBtn.style.cssText = "background-color: #b6faf6; cursor: auto;"
                         requestContractBtn.setAttribute("onclick", "")
 
                         // hover 색변경 기능해제
@@ -680,8 +678,7 @@ class Websocket {
                     //수신자
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "대여 중인 물품"
-                        requestContractBtn.style.cursor = "auto"
-                        requestContractBtn.style.backgroundColor = "#fcffb3"
+                        requestContractBtn.style.cssText = "background-color: #fcffb3; cursor: auto;"
                         contractBtnContainer.append(requestContractBtn)
 
                         // hover 색변경 기능해제
@@ -698,8 +695,7 @@ class Websocket {
                     // 수신자
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "대여 신청"
-                        requestContractBtn.style.cursor = "pointer"
-                        requestContractBtn.style.backgroundColor = "rgb(153, 250, 158)"
+                        requestContractBtn.style.cssText = "background-color: rgb(153, 250, 158); cursor: pointer;"
                         contractBtnContainer.append(requestContractBtn)
 
                         // 대여 신청 버튼 클릭 이벤트
@@ -723,7 +719,7 @@ class Websocket {
 
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "리뷰 쓰기"
-                        requestContractBtn.style.backgroundColor = "#bae1ff"
+                        requestContractBtn.style.cssText = "background-color: #bae1ff; cursor: pointer;"
                         contractBtnContainer.append(requestContractBtn)
 
                         // hover 색변경 기능해제
@@ -1209,8 +1205,7 @@ function reviewModalView(itemId) {
         //리뷰 작성 하고, 리뷰 쓰기 버튼 -> 대여 종료된 물품으로 변경
         const requestContractBtn = document.querySelector('.request-contract-btn')
         requestContractBtn.innerText = "대여 종료된 물품"
-        requestContractBtn.style.cursor = "auto"
-        requestContractBtn.style.backgroundColor = "#fac7aa"
+        requestContractBtn.style.cssText = "background-color: #fac7aa; cursor: auto;"
         requestContractBtn.setAttribute("onclick", "");
     })
 
