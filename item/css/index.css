@@ -18,18 +18,7 @@
     }
 }
 
-@keyframes fadein-title {
-    from {
-        transform: translateX(-30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0px);
-        opacity: 1;
-    }
-}
-
-@keyframes fadein-text {
+@keyframes fadein-from-right {
     from {
         transform: translateX(-30px);
         opacity: 0;
@@ -41,7 +30,7 @@
 }
 
 .welcome-wrap > div {
-    animation: fadein-title 3s;
+    animation: fadein-from-right 3s;
 }
 
 .welcome-wrap > div > h1 {
@@ -58,10 +47,13 @@
 .welcome-wrap > div > p {
     margin: 0;
     font-size: 20px;
-    animation: fadein-text 3.2s;
+    animation: fadein-from-right 3.2s;
 }
 
-.welcome-wrap > img {
+.welcome-wrap > i {
+    animation: fadein-from-right 3.4s;
+    font-size: 60px;
+    color: rgb(0, 255, 98);
     margin: 70px 0 0 0;
     width: 100px;
     cursor: pointer;
@@ -74,7 +66,7 @@
     transition-duration: 0.3s;
 }
 
-.welcome-wrap > img:hover {
+.welcome-wrap > i:hover {
     -webkit-animation-name: hvr-icon-hang-sink, hvr-icon-hang;
     animation-name: hvr-icon-hang-sink, hvr-icon-hang;
     -webkit-animation-duration: .3s, 1.5s;
@@ -255,14 +247,13 @@
 }
 
 .item-link-box {
-    height: 321px;
+    height: 295px;
     max-width: 200px;
     width: 100%;
     margin: 20px 15px;
     cursor: pointer;
     overflow: hidden;
 }
-
 
 .item-image {
     height: 200px;
@@ -288,6 +279,9 @@
 .item-title {
     font-size: 17px;
     margin: 5px 0;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-price {
@@ -386,6 +380,7 @@
     .item-wrap {
         flex-grow: inherit;
     }
+    
     .item-link-box {
         max-width: 226px;
     }
@@ -414,7 +409,7 @@
 
 @media screen and (max-width: 430px) {
     .item-link-box {
-        max-width: 182px;
+        max-width: 172px;
     }
 
     .item-image {
@@ -437,7 +432,7 @@
 
 @media screen and (max-width: 376px) {
     .item-link-box {
-        max-width: 156px;
+        max-width: 146px;
     }
 
     .item-image {

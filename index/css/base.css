@@ -64,7 +64,7 @@ nav {
     max-width: 1200px;
     width: 100%;
     height: 80px;
-    margin: 0 10px;
+    margin: 0 30px;
 }
 
 .nav-container > .logo {
@@ -129,6 +129,19 @@ nav {
     padding: 0 10px;
 }
 
+@media screen and (max-width: 770px) {
+    .nav-wrap {
+        height: 160px;
+        align-items: none;
+    }
+    .search-container {
+        position: absolute;
+        margin-top: 90px;
+        margin-left: 136px;
+        width: 200px;
+    }
+}
+
 .search {
     height: 30px;
     width: 100%;
@@ -175,7 +188,7 @@ nav {
 .nav-btns > span {
     padding: 10px 15px;
     cursor: pointer;
-    color: gray;
+    color: rgb(0, 0, 0);
     transform:scale(1.2)
 }
 
