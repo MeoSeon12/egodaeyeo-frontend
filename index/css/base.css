@@ -160,7 +160,7 @@ nav {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    margin: 5px;
+    margin: 15px;
     cursor: pointer;
     object-fit: cover;
 }
@@ -172,15 +172,23 @@ nav {
     justify-content: flex-end
 }
 
-.nav-btns > button {
-    margin: 10px 7px;
-    font-size: 15px;
-    font-weight: bold;
-    border: 0;
-    border-radius: 7px;
-    height: 40px;
-    width: 81px;
+.nav-btns > span {
+    margin: 10px 15px;
     cursor: pointer;
+    color: gray;
+    transform:scale(1.2)
+}
+
+.nav-btns > span:hover {
+    opacity: 0.5;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
 }
 
 /* 채팅 알람 효과와 모달 */
@@ -191,7 +199,7 @@ nav {
     border-radius: 50%;
     background-color: rgb(255, 60, 0);
     margin-top: -38px;
-    margin-right: 318px;
+    margin-right: 150px;
     display: none;
 }
 
@@ -201,7 +209,7 @@ nav {
     flex-direction: column;
     overflow-y: auto;
     margin-top: 170px;
-    margin-right: 100px;
+    margin-right: 30px;
     height: 120px;
     z-index: 2;
 }
@@ -241,7 +249,7 @@ nav {
     background-color: #3ffff2;
 }
 
-.upload-btn {
+/* .upload-btn {
     margin: 10px 13px;
     font-size: 15px;
     font-weight: bold;
@@ -264,7 +272,7 @@ nav {
 .login-btn:hover,
 .logout-btn:hover {
     background-color: #ffe398;
-}
+} */
 
 .login-modal-body,
 .address-modal-body {
