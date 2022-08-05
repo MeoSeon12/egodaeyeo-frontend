@@ -458,7 +458,7 @@ class Alert {
         }
 
         // 지난 시간 계산
-        let pastTime = String((new Date - new Date(data.created_at)) / 1000 / 60).split('.')[0]
+        let pastTime = parseInt((new Date - new Date(data.created_at)) / 1000 / 60)
         if (pastTime < 1) {
             pastTime = '방금'
         }
