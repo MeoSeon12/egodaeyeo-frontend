@@ -381,8 +381,8 @@ class CreateElement {
         chatAlertModalWrap.append(chatAlertModalMessageNotting)
 
         // 마우스 호버
-        const mypage = document.getElementsByClassName('mypage')[0]
-        mypage.addEventListener('mouseenter', function () {
+        const alarmIcon = document.getElementById('alarm-icon')
+        alarmIcon.addEventListener('mouseenter', function () {
             chatAlertModalWrap.style.display = 'flex'
             this.addEventListener('mouseleave', function () {
                 chatAlertModalWrap.style.display = 'none'
@@ -466,10 +466,10 @@ class Alert {
             pastTime = `${pastTime}분 전`
         }
         else if ((pastTime / 60) <= 24) {
-            pastTime = `${parseint(pastTime / 60)}시간 전`
+            pastTime = `${parseInt(pastTime / 60)}시간 전`
         }
         else {
-            pastTime = `${parseint(pastTime / 60 / 24)}일 전`
+            pastTime = `${parseInt(pastTime / 60 / 24)}일 전`
         }
 
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${data.room_id}`)[0]

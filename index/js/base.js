@@ -70,9 +70,14 @@ class CreateNavElement {
         myImage.setAttribute('class', 'mypage-image')
         myPageBtn.append(myImage)
 
+        const chatAlarmIcon = document.createElement('span')
+        chatAlarmIcon.setAttribute('class', 'material-symbols-outlined')
+        chatAlarmIcon.setAttribute('id', 'alarm-icon')
+        chatAlarmIcon.innerText = "notifications"
+        navBtns.append(chatAlarmIcon)
+
         const itemUploadBtn = document.createElement('span')
         itemUploadBtn.setAttribute('class', 'material-symbols-outlined')
-        // itemUploadBtn.innerHTML = '<span class="material-symbols-outlined">file_upload</span>'
         itemUploadBtn.setAttribute('onclick', 'goUploadPage()')
         itemUploadBtn.innerText = "file_upload"
         navBtns.append(itemUploadBtn)

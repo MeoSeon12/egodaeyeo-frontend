@@ -173,7 +173,7 @@ nav {
 }
 
 .nav-btns > span {
-    margin: 10px 15px;
+    padding: 10px 15px;
     cursor: pointer;
     color: gray;
     transform:scale(1.2)
@@ -198,8 +198,8 @@ nav {
     height: 10px;
     border-radius: 50%;
     background-color: rgb(255, 60, 0);
-    margin-top: -38px;
-    margin-right: 150px;
+    margin-top: -20px;
+    margin-right: 127px;
     display: none;
 }
 
@@ -209,8 +209,8 @@ nav {
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-top: 170px;
-    margin-right: 30px;
+    margin-top: 168px;
+    margin-right: 18px;
     height: 120px;
     z-index: 2;
 }
