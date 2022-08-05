@@ -462,13 +462,13 @@ class Alert {
         if (pastTime < 1) {
             pastTime = '방금'
         }
-        else if (1 <= pastTime < 60) {
+        else if (pastTime <= 60) {
             pastTime = `${pastTime}분 전`
         }
-        else if (1 <= (pastTime / 60) < 24) {
+        else if ((pastTime / 60) <= 24) {
             pastTime = `${pastTime / 60}시간 전`
         }
-        else if (1 <= (pastTime / 60 / 24) < 31) {
+        else {
             pastTime = `${pastTime / 60 / 24}일 전`
         }
 

@@ -70,23 +70,25 @@ class CreateNavElement {
         myImage.setAttribute('class', 'mypage-image')
         myPageBtn.append(myImage)
 
-        const itemUploadBtn = document.createElement('button')
-        itemUploadBtn.setAttribute('class', 'upload-btn')
+        const itemUploadBtn = document.createElement('span')
+        itemUploadBtn.setAttribute('class', 'material-symbols-outlined')
+        // itemUploadBtn.innerHTML = '<span class="material-symbols-outlined">file_upload</span>'
         itemUploadBtn.setAttribute('onclick', 'goUploadPage()')
-        itemUploadBtn.innerText = "물품 등록"
+        itemUploadBtn.innerText = "file_upload"
         navBtns.append(itemUploadBtn)
 
-        const loginBtn = document.createElement('button')
-        loginBtn.setAttribute('class', 'login-btn')
+        const loginBtn = document.createElement('span')
+        loginBtn.setAttribute('class', 'material-symbols-outlined')
+        loginBtn.setAttribute('id', 'login-btn')
         loginBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
-        loginBtn.innerText = "로그인"
+        loginBtn.innerText = "power_settings_new"
         navBtns.append(loginBtn)
 
-        const logoutBtn = document.createElement('button')
-        logoutBtn.setAttribute('class', 'logout-btn')
+        const logoutBtn = document.createElement('span')
+        logoutBtn.setAttribute('class', 'material-symbols-outlined')
         logoutBtn.setAttribute('id', 'logout-btn')
         logoutBtn.setAttribute('onclick', 'onLogout()')
-        logoutBtn.innerText = "로그아웃"
+        logoutBtn.innerText = "power_settings_new"
         navBtns.append(logoutBtn)
     }
 
@@ -388,8 +390,8 @@ async function baseLoad() {
 
 // 로그인 여부에 따라 로그인 로그아웃 display
 function displayLoginLogoutBtn(payload) {
-    const loginBtn = document.querySelector('.login-btn')
-    const logoutBtn = document.querySelector('.logout-btn')
+    const loginBtn = document.querySelector('#login-btn')
+    const logoutBtn = document.querySelector('#logout-btn')
     if (payload !== null) {
         loginBtn.style.display = "none";
         logoutBtn.style.display = "block";
