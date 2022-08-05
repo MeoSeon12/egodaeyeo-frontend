@@ -284,7 +284,45 @@ function itemDataAppend(itemsInfo) {
     }
 }
 
-showAllItems(selectedSection);
+
+// 웰컴 박스에서 스크롤 시
+var useScrollFunction = false
+window.addEventListener('wheel', function (event) {
+    if (event.deltaY > 0 && useScrollFunction == false) {
+        if (checkVisible($('.welcome-wrap'))) {
+            moveToScroll('.menu-icon-wrap', 30)
+        }
+    }
+    if (event.deltaY < 0 && useScrollFunction == true) {
+        if (checkVisible($('.welcome-wrap'))) {
+            moveToScroll('.welcome-wrap', 90)
+        }
+    }
+})
+// 웰컴 박스 보이는지 체크
+function checkVisible(elm, eval) {
+    eval = eval || "object visible"
+    var viewportHeight = $(window).height()
+        scrolltop = $(window).scrollTop()
+        y = $(elm).offset().top,
+        elementHeight = $(elm).height() - 150
+
+    if (eval == "object visible") return ((y < (viewportHeight + scrolltop)) && (y > (scrolltop - elementHeight)))
+    if (eval == "above") return ((y < (viewportHeight + scrolltop)))
+}
+// 스크롤 자동 이동
+function moveToScroll(tagName, num) {
+    var offset = $(`${tagName}`).offset()
+    $("html, body").animate({ scrollTop: offset.top - num}, 1500)
+    if (useScrollFunction == false) {
+        useScrollFunction = true
+    }
+    else {
+        useScrollFunction = false
+    }
+}
+
+showAllItems(selectedSection)
 
 
 
