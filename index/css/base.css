@@ -167,7 +167,7 @@ nav {
 .nav-btns {
     display: flex;
     align-items: center;
-    flex-grow: 0.4;
+    flex-grow: 0.8;
     justify-content: flex-end
 }
 
@@ -199,8 +199,8 @@ nav {
     display: none;
     flex-direction: column;
     overflow-y: auto;
-    margin-top: 165px;
-    margin-right: 203px;
+    margin-top: 170px;
+    margin-right: 100px;
     height: 120px;
     z-index: 2;
 }

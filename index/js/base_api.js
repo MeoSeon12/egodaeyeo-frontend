@@ -208,7 +208,6 @@ async function kakaoLoginApi(kakaoUserData) {
         new NavModalView().addressModalView();
     }
     else {
-        alert(response_json['error'])
     }
 }
 

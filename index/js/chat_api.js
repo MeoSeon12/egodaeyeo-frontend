@@ -40,7 +40,6 @@ async function chatModalApi() {
         return response_json
     }
     else {
-        alert(response_json["error"])
     }
 }
 

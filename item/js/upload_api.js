@@ -5,7 +5,7 @@ async function getUploadPageViewData() {
 
     if (token == null) {
         alert('로그인 후 사용 가능합니다. 메인 페이지로 돌아갑니다')
-        location.href = '../index.html'
+        location.href = `${frontEndBaseUrl}`
     }
 
     const response = await fetch(`${backEndBaseUrl}/items/upload`, {
