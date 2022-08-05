@@ -1,5 +1,5 @@
 const frontEndBaseUrl = "https://egorental.com"
-const backEndBaseUrl = "http://3.37.128.154"
+const backEndBaseUrl = "https://egorentalback.link"
 const webSocketBaseUrl = "ws://3.37.128.154:8001"
 
 function getCookie(name) {
