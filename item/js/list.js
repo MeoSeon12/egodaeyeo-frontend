@@ -294,6 +294,14 @@ window.addEventListener('wheel', function (event) {
             useScrollFunction = true
         }
     }
+    // console.log(window.scrollY)
+    // const menuModalIcon = document.querySelector('.menu-modal-icon')
+    // if (window.scrollY >= $('.menu-icon-wrap').offset()['top'] - 100) {
+    //     menuModalIcon.style.display = 'block'
+    // }
+    // else {
+    //     menuModalIcon.style.display = 'none'
+    // }
 })
 // 웰컴 박스 보이는지 체크
 function checkVisible(elm, eval) {
@@ -309,7 +317,7 @@ function checkVisible(elm, eval) {
 // 스크롤 자동 이동
 function moveToScroll(tagName, num) {
     var offset = $(`${tagName}`).offset()
-    $("html, body").animate({scrollTop: offset.top - num}, 1500)
+    $("html, body").animate({scrollTop: offset.top - num}, 750)
 }
 
 showAllItems(selectedSection)

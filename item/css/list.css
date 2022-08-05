@@ -46,6 +46,9 @@
 
 .welcome-wrap > div > h1 {
     margin: 0;
+    font-size: 45px;
+    font-family: 'GangwonEduPowerExtraBoldA';
+    color: rgb(35, 255, 101);
 }
 
 .welcome-wrap > div > h1:nth-child(3) {
@@ -54,11 +57,12 @@
 
 .welcome-wrap > div > p {
     margin: 0;
+    font-size: 20px;
     animation: fadein-text 3.2s;
 }
 
 .welcome-wrap > img {
-    margin: 100px;
+    margin: 70px 0 0 0;
     width: 100px;
     cursor: pointer;
     display: inline-block;
@@ -131,11 +135,13 @@
 
 .menu-icon-wrap {
     display: flex;
-    margin: 0 0 0 15px;
-    top: 0;
+    margin: 15px 0 0 15px;
+    top: 90px;
     height: 40px;
     max-width: 40px;
     width: 100%;
+    position: sticky;
+    z-index: 1;
 }
 
 .menu-modal-icon {
@@ -145,8 +151,6 @@
     height: 33px;
     width: 33px;
     padding: 8px;
-    position: fixed;
-    top: 95px;
     border-radius: 10px;
     box-shadow: 0 1px 1px 1px rgb(189, 189, 189);
     cursor: pointer;
@@ -314,6 +318,7 @@
     background-color: rgba(0, 0, 0, 0.1);
     width: 100%;
     height: 100%;
+    z-index: 1;
 }
 
 .category-modal-container {
