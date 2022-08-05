@@ -22,7 +22,7 @@ class CreateNavElement {
         navContainer.append(logo)
 
         const mainPageLink = document.createElement('a')
-        mainPageLink.setAttribute('href', '../index.html')
+        mainPageLink.setAttribute('href', `${frontEndBaseUrl}`)
         mainPageLink.innerText = "이거대여."
         logo.append(mainPageLink)
 
@@ -69,12 +69,6 @@ class CreateNavElement {
         const myImage = document.createElement('img')
         myImage.setAttribute('class', 'mypage-image')
         myPageBtn.append(myImage)
-
-        const itemListBtn = document.createElement('button')
-        itemListBtn.setAttribute('class', 'item-list-btn')
-        itemListBtn.setAttribute('onclick', 'goItemListPage()')
-        itemListBtn.innerText = "물품 목록"
-        navBtns.append(itemListBtn)
 
         const itemUploadBtn = document.createElement('button')
         itemUploadBtn.setAttribute('class', 'upload-btn')
@@ -405,13 +399,6 @@ function displayLoginLogoutBtn(payload) {
         logoutBtn.style.display = "none";
     }
 }
-
-
-// 물품 목록 버튼
-function goItemListPage() {
-    location.href = '../item/index.html'
-}
-
 
 // 물품 등록 버튼
 function goUploadPage() {

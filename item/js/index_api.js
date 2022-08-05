@@ -83,10 +83,9 @@ async function apiResponse(response) {
     }
     else if (response.status == 401) {
         alert("인증 에러가 발생했습니다. 다시 로그인 해주세요.")
-        window.location.replace("../index.html")
     }
     else {
         alert("페이지를 불러오는데 실패했습니다. 다시 접속 해주세요.")
-        window.location.replace("../index.html")
+        window.location.replace(`${frontEndBaseUrl}`)
     }
 }

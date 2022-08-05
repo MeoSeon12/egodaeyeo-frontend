@@ -14,7 +14,7 @@ for (let i = 0; i < tabButton.length; i++) {
 async function myInfo() {
     if (payload == null) {
         alert("회원 정보가 없어 메인페이지로 돌아갑니다.")
-        window.location.replace("../index.html")
+        window.location.replace(`${frontEndBaseUrl}`)
     }
     else {
         const userData = await getUserView(payload);
