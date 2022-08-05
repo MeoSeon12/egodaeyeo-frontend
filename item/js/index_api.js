@@ -78,15 +78,21 @@ async function scrollItemApiView(url) {
 async function apiResponse(response) {
     response_json = await response.json()
     if (response.status == 200) {
-        customAlert()
         items = response_json
         return items
     }
     else if (response.status == 401) {
-        alert("인증 에러가 발생했습니다. 새로고침 해주세요")
+        customAlert("인증 에러가 발생했습니다. 새로고침 해주세요")
     }
     else {
-        alert("페이지를 불러오는데 실패했습니다. 다시 접속 해주세요.")
+        customAlert("페이지를 불러오는데 실패했습니다. 메인 페이지로 돌아갑니다")
         window.location.replace(`${frontEndBaseUrl}`)
     }
+}
+
+function customAlert(text) {
+    Swal.fire({
+        icon: 'fail',
+        text: text
+    });
 }
