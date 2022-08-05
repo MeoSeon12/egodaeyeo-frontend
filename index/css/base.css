@@ -250,31 +250,6 @@ nav {
     background-color: #3ffff2;
 }
 
-/* .upload-btn {
-    margin: 10px 13px;
-    font-size: 15px;
-    font-weight: bold;
-    border: 0;
-    border-radius: 7px;
-    height: 40px;
-    width: 80px;
-    background-color: rgb(191, 255, 194);
-}
-
-.upload-btn:hover {
-    background-color: rgb(153, 250, 158);
-}
-
-.login-btn,
-.logout-btn {
-    background-color: #ffefc2;
-}
-
-.login-btn:hover,
-.logout-btn:hover {
-    background-color: #ffe398;
-} */
-
 .login-modal-body,
 .address-modal-body {
     display: none;
