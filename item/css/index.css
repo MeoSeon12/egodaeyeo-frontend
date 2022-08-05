@@ -173,7 +173,6 @@
     min-width: 300px;
     width: 100%;
     height: 50px;
-    margin: 0 10px;
     margin-top: 25px;
 }
 
@@ -188,6 +187,7 @@
     width: 100%;
     height: 50px;
     border-radius: 10px;
+    margin-left: 20px;
 }
 
 .item-section-btn {
@@ -224,9 +224,12 @@
     max-width: 920px;
     width: 100%;
     height: 70px;
-    margin: 0 10px;
     font-weight: bold;
     font-size: 30px;
+}
+
+.list-category {
+    margin-left: 20px;
 }
 
 .list-search {
