@@ -968,6 +968,17 @@ nav {
         font-size: 17px;
     }
 
+    .chat-room {
+        width: 38px;
+        min-height: 38px;
+    }
+
+    .chat-room span {
+        font-size: 10px;
+        margin-top: 9px;
+        margin-left: 6px;
+    }
+
     @keyframes moveUp {
         /* 하단에서 */
         0% {
