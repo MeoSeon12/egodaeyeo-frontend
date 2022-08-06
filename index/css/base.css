@@ -129,18 +129,19 @@ nav {
     padding: 0 10px;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 430px) {
     .nav-wrap {
-        height: 160px;
-        align-items: none;
+        height: 120px;
+        align-items: normal;
     }
     .search-container {
         position: absolute;
         margin-top: 90px;
-        margin-left: 136px;
-        width: 200px;
+        margin-left: 116px;
+        width: 50%;
     }
 }
+
 
 .search {
     height: 30px;
