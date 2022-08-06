@@ -39,7 +39,6 @@ class CreateElement {
         const selectSpan = document.createElement('div')
         selectSpan.setAttribute("class", "select-chat-room")
         selectSpan.innerText = "문의를 통해 채팅방을 생성해주세요"
-        selectSpan.style.fontSize = "25px"
         chatAreaBox.append(selectSpan)
     }
 

@@ -1,5 +1,4 @@
-const categoryModalBody = document.querySelector('.category-modal-wrap')
-const modalWrap = document.getElementsByClassName('category-modal-wrap')[0]
+const categoryModalWrap = document.querySelector('.category-modal-wrap')
 const modalContainer = document.getElementsByClassName('category-modal-container')[0]
 
 const itemWrap = document.getElementsByClassName("item-wrap")[0];
@@ -15,18 +14,16 @@ let selectedSection = ""
 
 
 function openModal(){
-    modalContainer.style.animation = 'roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.animation = 'fadeIn 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.display = 'flex'
+    categoryModalWrap.style.animation = 'fadeIn 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    categoryModalWrap.style.display = 'flex'
 }
 
 function closeModal(){
-    modalContainer.style.animation = 'scaleLeft 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.animation = 'wrapRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    categoryModalWrap.style.display = 'none'
 }
 
-categoryModalBody.addEventListener('mouseover', (e) => {
-    if (e.target == categoryModalBody) {
+categoryModalWrap.addEventListener('mouseover', (e) => {
+    if (e.target == categoryModalWrap) {
         closeModal()
     }
 })

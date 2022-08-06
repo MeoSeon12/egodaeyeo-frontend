@@ -129,20 +129,6 @@ nav {
     padding: 0 10px;
 }
 
-@media screen and (max-width: 430px) {
-    .nav-wrap {
-        height: 120px;
-        align-items: normal;
-    }
-    .search-container {
-        position: absolute;
-        margin-top: 90px;
-        margin-left: 116px;
-        width: 50%;
-    }
-}
-
-
 .search {
     height: 30px;
     width: 100%;
@@ -648,8 +634,9 @@ nav {
 }
 
 .select-chat-room {
-    font-size: 34px;
+    font-size: 25px;
 }
+
 .chat-room span {
     margin: 5px;
     max-width: 60px;
@@ -929,4 +916,58 @@ nav {
     border-radius: 10px;
     padding: 0 5px;
     margin-left: 3px;
+}
+@media screen and (max-width: 770px) {
+
+}
+
+@media screen and (max-width: 470px) {
+    .nav-wrap {
+        height: 120px;
+        align-items: normal;
+    }
+    .search-container {
+        position: absolute;
+        margin-top: 90px;
+        margin-left: 70px;
+        width: 50%;
+    }
+
+    .chat-btn {
+        right: 10px;
+        bottom: 10px;
+        height: 40px;
+        width: 40px;
+    }
+
+    #chat-icon {
+        transform: scale(1);
+    }
+
+    .chat-modal-body {
+        right: 5px;
+        bottom: 80px;
+        height: 400px;
+        width: 350px;
+    }
+
+    .chat-modal-body:after {
+        margin-bottom: 0px;
+    }
+
+    .chat-rooms-container {
+        width: 50px;
+    }
+
+    .chat-area-box {
+        width: 270px;
+    }
+
+    .select-chat-room {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+
 }
