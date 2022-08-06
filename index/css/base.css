@@ -975,8 +975,6 @@ nav {
 
     .chat-room span {
         font-size: 10px;
-        margin-top: 9px;
-        margin-left: 6px;
     }
 
     @keyframes moveUp {

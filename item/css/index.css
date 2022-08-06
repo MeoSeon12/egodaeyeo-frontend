@@ -442,6 +442,10 @@
         padding: 6px;
     }
 
+    .item-section-wrap {
+        margin-top: 60px;
+    }
+
     .item-section-btn {
         font-size: 12px;
     }
