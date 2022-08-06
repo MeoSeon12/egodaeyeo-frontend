@@ -952,7 +952,8 @@ nav {
     }
 
     .chat-modal-body:after {
-        margin-bottom: 0px;
+       margin-bottom: -35px;
+       margin-left: 100px;
     }
 
     .chat-rooms-container {
@@ -965,6 +966,28 @@ nav {
 
     .select-chat-room {
         font-size: 17px;
+    }
+
+    @keyframes moveUp {
+        /* 하단에서 */
+        0% {
+            transform: translateY(240px) translateX(140px) scale(0.03);
+        }
+        /* 중앙으로 위치 */
+        100% {
+            transform: translateY(0) translateX(0) scale(1);
+        }
+    }
+    
+    @keyframes moveDown {
+        /*모달 콘텐츠를 */
+        0% {
+            transform: translateY(0) translateX(0) scale(1);
+        }
+        /* 하단으로 위치 */
+        100% {
+            transform: translateY(240px) translateX(140px) scale(0);
+        }
     }
 }
 
