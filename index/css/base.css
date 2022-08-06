@@ -18,7 +18,8 @@ a {
 
 body {
     margin: 0;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -947,7 +948,7 @@ nav {
     .chat-modal-body {
         right: 5px;
         bottom: 80px;
-        height: 400px;
+        height: 440px;
         width: 350px;
     }
 
@@ -969,8 +970,8 @@ nav {
     }
 
     .chat-room {
-        width: 38px;
-        min-height: 38px;
+        width: 37px;
+        min-height: 37px;
     }
 
     .chat-room span {
