@@ -121,11 +121,11 @@ async function rentalSubmitApi(itemId) {
 
 
 // 대여 정보 조회 API (대여 신청 수신 버튼 클릭 시)
-async function contractDetailApi(itemId) {
+async function contractDetailApi(itemId, roomId) {
 
     const token = await refreshToken(payload)
 
-    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}?room_id=${roomId}`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -144,10 +144,10 @@ async function contractDetailApi(itemId) {
 
 
 // 대여 상태 변경 API (대여 수락, 종료 버튼 클릭 시)
-async function contractAcceptAndEndApi(itemId, status) {
+async function contractAcceptAndEndApi(itemId, status, roomId) {
     const token = await refreshToken(payload)
 
-    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}?room_id=${roomId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -170,11 +170,11 @@ async function contractAcceptAndEndApi(itemId, status) {
 
 
 // 대여 거절 API 
-async function contractRefuseApi(itemId) {
-
+async function contractRefuseApi(itemId, roomId) {
+    
     const token = await refreshToken(payload)
 
-    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
+    const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}?room_id=${roomId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': 'Bearer ' + token,

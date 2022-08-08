@@ -166,7 +166,7 @@ class CreateElement {
                     endContractBtn.addEventListener('click', async (e) => {
                         alert("대여가 종료 되었습니다.")
                         // 대여 상태 변경 API
-                        let endData = await contractAcceptAndEndApi(itemId, "대여 종료")
+                        let endData = await contractAcceptAndEndApi(itemId, "대여 종료", roomId)
                         let roomId = endData.room_id
 
                         let contractType = "종료"
@@ -191,7 +191,7 @@ class CreateElement {
                     contractBtnContainer.append(endContractBtn)
                     // 다시 등록하기 버튼을 누르면 물품 등록 페이지로 이동
                     endContractBtn.addEventListener('click', (e) => {
-                        window.location.href = "../item/upload.html"
+                        window.location.href = "../item/update.html"
                     })
             }
         }
@@ -237,7 +237,7 @@ class CreateElement {
                             // 대여 신청 [수신자]
                             else {
                                 let contractLook = new CreateElement().contractMessage(messages, "대여 신청이 도착했습니다")
-                                contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId})`)
+                                contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId}, ${roomId})`)
                             }
                             break
 
@@ -670,7 +670,7 @@ class Websocket {
                     // 대여 신청 수신자
                     else {
                         let contractLook = new CreateElement().contractMessage(messages, "대여 신청이 도착했습니다")
-                        contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId})`)
+                        contractLook.setAttribute('onclick', `checkRentalDateModal(${itemId}, ${roomId})`)
                     }
                     break
                 case "수락":
@@ -984,11 +984,11 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
 
 
 // 대여 신청 수신자 버튼 모달
-async function checkRentalDateModal(itemId) {
+async function checkRentalDateModal(itemId, roomId) {
     const body = document.querySelector('body')
 
     // 대여 정보 조회 API
-    const contractDetailData = await contractDetailApi(itemId)
+    const contractDetailData = await contractDetailApi(itemId, roomId)
 
     const startDate = timeFormat(contractDetailData['start_date'])
     const endDate = timeFormat(contractDetailData['end_date'])
@@ -1046,7 +1046,7 @@ async function checkRentalDateModal(itemId) {
     // 대여 신청 거절 버튼
     cancelRental.addEventListener('click', async (e) => {
         // 대여 거절 API
-        let refuseData = await contractRefuseApi(itemId)
+        let refuseData = await contractRefuseApi(itemId, roomId)
         let contractType = "거절"
         // // 거래 상태 웹소켓 요청 (거절)
         contractSocket.send(JSON.stringify({
@@ -1079,7 +1079,7 @@ async function checkRentalDateModal(itemId) {
 
         // 대여 상태 변경 API
         // 물품 상태를 대여 가능 -> 대여 중으로 바꿈
-        let acceptData = await contractAcceptAndEndApi(itemId, "대여 중")
+        let acceptData = await contractAcceptAndEndApi(itemId, "대여 중", roomId)
         let contractType = "수락"
 
         // 거래 상태 웹소켓 요청 (수락)
