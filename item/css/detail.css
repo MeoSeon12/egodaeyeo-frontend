@@ -308,3 +308,14 @@
 .cancel-ok-btn:hover {
     background-color: rgb(191, 255, 194) !important;
 }
+
+@media screen and (max-width: 475px) {
+    .bx-wrapper {
+        margin-top: 40px;
+        height: 372px;
+    }
+
+    .bx-viewport {
+        height: 372px !important;
+    }
+}

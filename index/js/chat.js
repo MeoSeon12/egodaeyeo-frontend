@@ -39,7 +39,6 @@ class CreateElement {
         const selectSpan = document.createElement('div')
         selectSpan.setAttribute("class", "select-chat-room")
         selectSpan.innerText = "문의를 통해 채팅방을 생성해주세요"
-        selectSpan.style.fontSize = "25px"
         chatAreaBox.append(selectSpan)
     }
 
@@ -145,7 +144,7 @@ class CreateElement {
                     }
                     else {
                         requestContractBtn.innerText = "리뷰 쓰기"
-                        requestContractBtn.style.cssText = "background-color: #bae1ff;"
+                        requestContractBtn.style.cssText = "background-color: #bae1ff; cursor: pointer;"
                         //리뷰 모달 열리는 함수 실행
                         requestContractBtn.setAttribute("onclick", `reviewModalView(${itemId})`)
                         contractBtnContainer.append(requestContractBtn)
@@ -381,8 +380,8 @@ class CreateElement {
         chatAlertModalWrap.append(chatAlertModalMessageNotting)
 
         // 마우스 호버
-        const mypage = document.getElementsByClassName('mypage')[0]
-        mypage.addEventListener('mouseenter', function () {
+        const alarmIcon = document.getElementById('alarm-icon')
+        alarmIcon.addEventListener('mouseenter', function () {
             chatAlertModalWrap.style.display = 'flex'
             this.addEventListener('mouseleave', function () {
                 chatAlertModalWrap.style.display = 'none'
@@ -458,18 +457,18 @@ class Alert {
         }
 
         // 지난 시간 계산
-        let pastTime = String((new Date - new Date(data.created_at)) / 1000 / 60).split('.')[0]
+        let pastTime = parseInt((new Date - new Date(data.created_at)) / 1000 / 60)
         if (pastTime < 1) {
             pastTime = '방금'
         }
-        else if (1 <= pastTime < 60) {
+        else if (pastTime <= 60) {
             pastTime = `${pastTime}분 전`
         }
-        else if (1 <= (pastTime / 60) < 24) {
-            pastTime = `${pastTime / 60}시간 전`
+        else if ((pastTime / 60) <= 24) {
+            pastTime = `${parseInt(pastTime / 60)}시간 전`
         }
-        else if (1 <= (pastTime / 60 / 24) < 31) {
-            pastTime = `${pastTime / 60 / 24}일 전`
+        else {
+            pastTime = `${parseInt(pastTime / 60 / 24)}일 전`
         }
 
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${data.room_id}`)[0]
@@ -544,13 +543,13 @@ class Websocket {
     // 알람 웹소켓 연결 및 온메시지
     alertWebsocket(userId) {
 
-        chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${userId}`)
+        chatAlertSocket = new WebSocket(`${webSocketBaseUrl}/chats/alerts/${userId}`)
 
         // 알람 수신
         chatAlertSocket.onmessage = function (e) {
             // 알람 데이터
             let data = JSON.parse(e.data)
-            if (chatSocket.url != `ws://127.0.0.1:8000/chats/${data.room_id}`) {
+            if (chatSocket.url != `${webSocketBaseUrl}/chats/${data.room_id}`) {
                 // 알람 메시지 및 효과생성
                 new CreateElement().alertMessage(data)
                 new Alert().MessageInnerText(data)
@@ -573,7 +572,7 @@ class Websocket {
     // 채팅 웹소켓 연결 및 온메시지
     chatWebsocket(roomId) {
 
-        chatSocket = new WebSocket(`ws://127.0.0.1:8000/chats/${roomId}`)
+        chatSocket = new WebSocket(`${webSocketBaseUrl}/chats/${roomId}`)
 
         // 채팅 수신
         chatSocket.onmessage = async function (e) {
@@ -628,7 +627,7 @@ class Websocket {
     // 거래 웹소켓 연결 및 온메시지
     contractWebsocket(roomId, roomData) {
 
-        contractSocket = new WebSocket(`ws://127.0.0.1:8000/chats/contracts/${roomId}`)
+        contractSocket = new WebSocket(`${webSocketBaseUrl}/chats/contracts/${roomId}`)
 
         // room데이터
         let itemId = roomData.item
@@ -661,9 +660,7 @@ class Websocket {
                         new CreateElement().contractMessage(messages, "대여 신청을 보냈습니다", cssText)
 
                         requestContractBtn.innerText = "대여 신청중"
-                        requestContractBtn.style.cursor = 'auto'
-                        requestContractBtn.style.backgroundColor = "#b6faf6"
-
+                        requestContractBtn.style.cssText = "background-color: #b6faf6; cursor: auto;"
                         requestContractBtn.setAttribute("onclick", "")
 
                         // hover 색변경 기능해제
@@ -680,8 +677,7 @@ class Websocket {
                     //수신자
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "대여 중인 물품"
-                        requestContractBtn.style.cursor = "auto"
-                        requestContractBtn.style.backgroundColor = "#fcffb3"
+                        requestContractBtn.style.cssText = "background-color: #fcffb3; cursor: auto;"
                         contractBtnContainer.append(requestContractBtn)
 
                         // hover 색변경 기능해제
@@ -698,8 +694,7 @@ class Websocket {
                     // 수신자
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "대여 신청"
-                        requestContractBtn.style.cursor = "pointer"
-                        requestContractBtn.style.backgroundColor = "rgb(153, 250, 158)"
+                        requestContractBtn.style.cssText = "background-color: rgb(153, 250, 158); cursor: pointer;"
                         contractBtnContainer.append(requestContractBtn)
 
                         // 대여 신청 버튼 클릭 이벤트
@@ -723,7 +718,7 @@ class Websocket {
 
                     if (contractSender != userId) {
                         requestContractBtn.innerText = "리뷰 쓰기"
-                        requestContractBtn.style.backgroundColor = "#bae1ff"
+                        requestContractBtn.style.cssText = "background-color: #bae1ff; cursor: pointer;"
                         contractBtnContainer.append(requestContractBtn)
 
                         // hover 색변경 기능해제
@@ -967,7 +962,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
             }))
 
             // 채팅 알림 웹소켓 통신
-            chatAlertSocket = new WebSocket(`ws://127.0.0.1:8000/chats/alerts/${authorId}`)
+            chatAlertSocket = new WebSocket(`${webSocketBaseUrl}/chats/alerts/${authorId}`)
 
             // 메시지 작성 시간
             let now = new Date()
@@ -1209,8 +1204,7 @@ function reviewModalView(itemId) {
         //리뷰 작성 하고, 리뷰 쓰기 버튼 -> 대여 종료된 물품으로 변경
         const requestContractBtn = document.querySelector('.request-contract-btn')
         requestContractBtn.innerText = "대여 종료된 물품"
-        requestContractBtn.style.cursor = "auto"
-        requestContractBtn.style.backgroundColor = "#fac7aa"
+        requestContractBtn.style.cssText = "background-color: #fac7aa; cursor: auto;"
         requestContractBtn.setAttribute("onclick", "");
     })
 

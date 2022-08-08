@@ -20,7 +20,7 @@ async function showSearchedItems(searchValue) {
     searchText.innerText = "#" + searchValue
     //유저의 주소 #태그
     if (itemsInfo != "") {
-        const userAddress = itemsInfo[0]['user_address']
+        const userAddress = items['user_address']
         if (userAddress == null) {
             addressText.innerText = "";
         }

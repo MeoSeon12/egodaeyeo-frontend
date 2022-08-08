@@ -1,5 +1,4 @@
-const categoryModalBody = document.querySelector('.category-modal-wrap')
-const modalWrap = document.getElementsByClassName('category-modal-wrap')[0]
+const categoryModalWrap = document.querySelector('.category-modal-wrap')
 const modalContainer = document.getElementsByClassName('category-modal-container')[0]
 
 const itemWrap = document.getElementsByClassName("item-wrap")[0];
@@ -15,18 +14,16 @@ let selectedSection = ""
 
 
 function openModal(){
-    modalContainer.style.animation = 'roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.animation = 'fadeIn 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.display = 'flex'
+    categoryModalWrap.style.animation = 'fadeIn 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    categoryModalWrap.style.display = 'flex'
 }
 
 function closeModal(){
-    modalContainer.style.animation = 'scaleLeft 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    modalWrap.style.animation = 'wrapRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    categoryModalWrap.style.display = 'none'
 }
 
-categoryModalBody.addEventListener('mouseover', (e) => {
-    if (e.target == categoryModalBody) {
+categoryModalWrap.addEventListener('mouseover', (e) => {
+    if (e.target == categoryModalWrap) {
         closeModal()
     }
 })
@@ -36,12 +33,12 @@ async function showAllItems(selectedSection) {
     const items = await itemApiView();
     const categories = items['categories']
     const itemsInfo = items['items']['results']
-    const userAddress = itemsInfo[0]['user_address']
+    const userAddress = items['user_address']
     pageUrl = items['items']['next']
 
     categoryText.innerText = "#전체";
 
-    if (userAddress == null) {
+    if (userAddress == "") {
         addressText.innerText = "";
     }
     else {
@@ -204,16 +201,13 @@ function itemDataAppend(itemsInfo) {
     for (let i = 0; i < itemsInfo.length; i++) {
         const item = itemsInfo[i]
         const itemId = item['id']
-        const newItemLink = document.createElement('a')
-        newItemLink.setAttribute("class", "item-link")
-        newItemLink.addEventListener('click', () => {
-            location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
-        })
-        itemWrap.append(newItemLink)
-
+        
         const newItemBox = document.createElement('div')
         newItemBox.setAttribute("class", "item-link-box")
-        newItemLink.append(newItemBox)
+        newItemBox.addEventListener('click', () => {
+            location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+        })
+        itemWrap.append(newItemBox)
 
         if (item['image'] == null) {
             //이미지 없을시
@@ -284,7 +278,43 @@ function itemDataAppend(itemsInfo) {
     }
 }
 
-showAllItems(selectedSection);
+
+// 웰컴 박스에서 스크롤 시
+var useScrollFunction = false
+window.addEventListener('wheel', function (event) {
+    if (event.deltaY > 0 && useScrollFunction == false) {
+        if (checkVisible($('.welcome-wrap'))) {
+            moveToScroll('.menu-icon-wrap', 30)
+            useScrollFunction = true
+        }
+    }
+    // console.log(window.scrollY)
+    // const menuModalIcon = document.querySelector('.menu-modal-icon')
+    // if (window.scrollY >= $('.menu-icon-wrap').offset()['top'] - 100) {
+    //     menuModalIcon.style.display = 'block'
+    // }
+    // else {
+    //     menuModalIcon.style.display = 'none'
+    // }
+})
+// 웰컴 박스 보이는지 체크
+function checkVisible(elm, eval) {
+    eval = eval || "object visible"
+    var viewportHeight = $(window).height()
+        scrolltop = $(window).scrollTop()
+        y = $(elm).offset().top,
+        elementHeight = $(elm).height() - 150
+
+    if (eval == "object visible") return ((y < (viewportHeight + scrolltop)) && (y > (scrolltop - elementHeight)))
+    if (eval == "above") return ((y < (viewportHeight + scrolltop)))
+}
+// 스크롤 자동 이동
+function moveToScroll(tagName, num) {
+    var offset = $(`${tagName}`).offset()
+    $("html, body").animate({scrollTop: offset.top - num}, 750)
+}
+
+showAllItems(selectedSection)
 
 
 

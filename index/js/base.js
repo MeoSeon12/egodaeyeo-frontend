@@ -22,7 +22,7 @@ class CreateNavElement {
         navContainer.append(logo)
 
         const mainPageLink = document.createElement('a')
-        mainPageLink.setAttribute('href', '../index.html')
+        mainPageLink.setAttribute('href', `${frontEndBaseUrl}`)
         mainPageLink.innerText = "이거대여."
         logo.append(mainPageLink)
 
@@ -70,30 +70,32 @@ class CreateNavElement {
         myImage.setAttribute('class', 'mypage-image')
         myPageBtn.append(myImage)
 
-        const itemListBtn = document.createElement('button')
-        itemListBtn.setAttribute('class', 'item-list-btn')
-        itemListBtn.setAttribute('onclick', 'goItemListPage()')
-        itemListBtn.innerText = "물품 목록"
-        navBtns.append(itemListBtn)
+        const chatAlarmIcon = document.createElement('span')
+        chatAlarmIcon.setAttribute('class', 'material-symbols-outlined')
+        chatAlarmIcon.setAttribute('id', 'alarm-icon')
+        chatAlarmIcon.innerText = "notifications"
+        navBtns.append(chatAlarmIcon)
 
-        const itemUploadBtn = document.createElement('button')
-        itemUploadBtn.setAttribute('class', 'upload-btn')
+        const itemUploadBtn = document.createElement('span')
+        itemUploadBtn.setAttribute('class', 'material-symbols-outlined')
         itemUploadBtn.setAttribute('onclick', 'goUploadPage()')
-        itemUploadBtn.innerText = "물품 등록"
+        itemUploadBtn.setAttribute('title', '물품등록')
+        itemUploadBtn.innerText = "file_upload"
         navBtns.append(itemUploadBtn)
+        
+        const loginLogoutBtn = document.createElement('span')
+        loginLogoutBtn.setAttribute('class', 'material-symbols-outlined')
+        loginLogoutBtn.setAttribute('id', 'login-logout-btn')
+        loginLogoutBtn.innerText = "power_settings_new"
+        navBtns.append(loginLogoutBtn)
+        
+        loginLogoutBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
+        loginLogoutBtn.style.color = 'green'
+        
+        loginLogoutBtn.setAttribute('onclick', 'onLogout()')
+        loginLogoutBtn.style.color = 'red'
 
-        const loginBtn = document.createElement('button')
-        loginBtn.setAttribute('class', 'login-btn')
-        loginBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
-        loginBtn.innerText = "로그인"
-        navBtns.append(loginBtn)
 
-        const logoutBtn = document.createElement('button')
-        logoutBtn.setAttribute('class', 'logout-btn')
-        logoutBtn.setAttribute('id', 'logout-btn')
-        logoutBtn.setAttribute('onclick', 'onLogout()')
-        logoutBtn.innerText = "로그아웃"
-        navBtns.append(logoutBtn)
     }
 
     createLoginSignupModal() {
@@ -264,8 +266,13 @@ class CreateNavElement {
     createAddressModal() {
         const addressModalBody = document.createElement('div')
         addressModalBody.setAttribute('class', 'address-modal-body')
-        addressModalBody.setAttribute('onclick', 'alert("주소를 입력해주세요.")')
         this.body.append(addressModalBody)
+
+        addEventListener('click', (e) => {
+            if (e.target == addressModalBody) {
+                alert("주소를 입력해주세요")
+            }
+        })
 
         const addressContainer = document.createElement('div')
         addressContainer.setAttribute('class', 'address-modal-container')
@@ -367,7 +374,6 @@ class NavModalView {
 
 
 var payload = JSON.parse(localStorage.getItem('payload'))
-var userData = ""
 
 // 페이지 로드 시 실행되는 기능
 async function baseLoad() {
@@ -390,24 +396,19 @@ async function baseLoad() {
 
 // 로그인 여부에 따라 로그인 로그아웃 display
 function displayLoginLogoutBtn(payload) {
-    const loginBtn = document.querySelector('.login-btn')
-    const logoutBtn = document.querySelector('.logout-btn')
+    const loginLogoutBtn = document.querySelector('#login-logout-btn')
+
     if (payload !== null) {
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "block";
+        loginLogoutBtn.setAttribute('onclick', 'onLogout()')
+        loginLogoutBtn.setAttribute('title', '로그아웃')
+        loginLogoutBtn.style.color = 'red'
     }
     else {
-        loginBtn.style.display = "block";
-        logoutBtn.style.display = "none";
+        loginLogoutBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
+        loginLogoutBtn.setAttribute('title', '로그인')
+        loginLogoutBtn.style.color = 'green'
     }
 }
-
-
-// 물품 목록 버튼
-function goItemListPage() {
-    location.href = '../item/list.html'
-}
-
 
 // 물품 등록 버튼
 function goUploadPage() {
@@ -429,4 +430,3 @@ $("#loginPassword").keyup(function (event) {
         $(".login-submit-btn").click();
     }
 });
-
