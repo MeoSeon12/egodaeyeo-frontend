@@ -24,7 +24,9 @@ async function getUnreadMessageApi(userId) {
 
 // 채팅 모달 데이터 요청 API
 async function chatModalApi() {
-    const token = localStorage.getItem('access_token')
+    // const token = localStorage.getItem('access_token')
+    const token = await refreshToken()
+    console.log(token)
 
     const response = await fetch(`${backEndBaseUrl}/chats/`, {
         method: 'GET',
@@ -39,8 +41,9 @@ async function chatModalApi() {
         return response_json
     }
     else if(response_json.code == "token_not_valid"){
-        console.log("아아아")
-        window.location.reload()
+        console.log(payload.exp)
+        console.log(Date.now() / 1000)
+        // window.location.reload()
     }
 }
 
@@ -62,6 +65,10 @@ async function chatRoomApi(room_id) {
     if (response.status == 200) {
         return response_json
     }
+    else if(response_json.code == "token_not_valid"){
+        
+        window.location.reload()
+    }
     else {
         console.log(response_json["error"])
     }
@@ -79,6 +86,9 @@ async function liveReadApi(room_id) {
             'Authorization': 'Bearer ' + token
         },
     })
+    if (response_json.code == "token_not_valid") {
+        window.location.reload()
+    }
 }
 
 
@@ -113,6 +123,9 @@ async function rentalSubmitApi(itemId) {
     else if (response.status == 400) {
         console.log(response_json)
     }
+    else if(response_json.code == "token_not_valid"){
+        window.location.reload()
+    }
 }
 
 
@@ -132,6 +145,9 @@ async function contractDetailApi(itemId) {
 
     if (response.status == 200) {
         return response_json
+    }
+    else if(response_json.code == "token_not_valid"){
+        window.location.reload()
     }
     else {
         console.log(response_json)
@@ -159,6 +175,9 @@ async function contractAcceptAndEndApi(itemId, status) {
     if (response.status == 200) {
         return response_json
     }
+    else if(response_json.code == "token_not_valid"){
+        window.location.reload()
+    }
     else {
         console.log(response_json)
     }
@@ -181,6 +200,9 @@ async function contractRefuseApi(itemId) {
 
     if (response.status == 200) {
         return response_json
+    }
+    else if(response_json.code == "token_not_valid"){
+        window.location.reload()
     }
     else {
         console.log(response_json)
@@ -212,7 +234,11 @@ async function onReviewSubmit(itemId) {
     if (response.status == 200) {
         alert('리뷰가 작성되었습니다.')
         reviewModalUnview()
-    } else {
+    } 
+    else if(response_json.code == "token_not_valid"){
+        window.location.reload()
+    }
+    else {
         console.log(response_json)
     }
 }

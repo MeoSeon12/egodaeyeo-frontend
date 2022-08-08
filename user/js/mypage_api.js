@@ -22,6 +22,9 @@ async function myPageApiView(param) {
             alert("컨텐츠가 존재하지 않습니다.")
             window.location.replace(`${frontEndBaseUrl}`)
         }
+        else if(response_json.code == "token_not_valid"){
+            window.location.reload()
+        }
         else {
             alert("페이지를 불러오는데 실패했습니다. 다시 접속 해주세요.")
             window.location.replace(`${frontEndBaseUrl}`)
@@ -117,6 +120,9 @@ async function profileApiView() {
                     $('#check-pw').val('')
                 }
             }
+            else if(response_json.code == "token_not_valid"){
+                window.location.reload()
+            }
             else {
                 alert("정보를 불러오는데 실패했습니다. 다시 접속 해주세요.")
                 window.location.replace(`${frontEndBaseUrl}`)
@@ -146,7 +152,11 @@ async function userDeleteApiView() {
             localStorage.removeItem("refresh_token")
             localStorage.removeItem("payload")
             window.location.replace(`${frontEndBaseUrl}`)
-        }else if (response.status == 400) {
+        }
+        else if(response_json.code == "token_not_valid"){
+            window.location.reload()
+        }
+        else if (response.status == 400) {
             alert("지금은 회원 탈퇴가 불가능합니다. 다시 시도 해주세요.")
         }
     }
@@ -180,7 +190,11 @@ async function feedbackApiView() {
         if (response.status == 200) {
             alert("소중한 의견 감사합니다.")
             window.location.reload()
-        }else if (response.status == 400) {
+        }
+        else if(response_json.code == "token_not_valid"){
+            window.location.reload()
+        }
+        else if (response.status == 400) {
             alert("제목과 내용은 필수 입니다.")
         }
     }
