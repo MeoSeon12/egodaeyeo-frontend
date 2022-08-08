@@ -193,7 +193,7 @@ class CreateElement {
                     contractBtnContainer.append(endContractBtn)
                     // 다시 등록하기 버튼을 누르면 물품 등록 페이지로 이동
                     endContractBtn.addEventListener('click', (e) => {
-                        window.location.href = "../item/update.html"
+                        window.location.href = `../item/update.html?item=${itemId}?user=${userId}`
                     })
             }
         }
