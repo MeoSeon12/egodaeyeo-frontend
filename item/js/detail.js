@@ -100,7 +100,7 @@ async function getDetailView() {
     // 시간 당 대여료 (가격 설정이 되어있지않으면 숨김)
     const price = document.getElementById('price')
     const timeUnit = document.getElementById('time-unit')
-    if (data.price == null) {
+    if (data.price == null || data.price == 0) {
         price.style.display = 'none'
     }
     else {
