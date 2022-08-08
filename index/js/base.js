@@ -82,16 +82,16 @@ class CreateNavElement {
         itemUploadBtn.setAttribute('title', '물품등록')
         itemUploadBtn.innerText = "file_upload"
         navBtns.append(itemUploadBtn)
-        
+
         const loginLogoutBtn = document.createElement('span')
         loginLogoutBtn.setAttribute('class', 'material-symbols-outlined')
         loginLogoutBtn.setAttribute('id', 'login-logout-btn')
         loginLogoutBtn.innerText = "power_settings_new"
         navBtns.append(loginLogoutBtn)
-        
+
         loginLogoutBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
         loginLogoutBtn.style.color = 'green'
-        
+
         loginLogoutBtn.setAttribute('onclick', 'onLogout()')
         loginLogoutBtn.style.color = 'red'
 
@@ -397,6 +397,7 @@ async function baseLoad() {
 // 로그인 여부에 따라 로그인 로그아웃 display
 function displayLoginLogoutBtn(payload) {
     const loginLogoutBtn = document.querySelector('#login-logout-btn')
+    const alertBtn = document.querySelector('#alarm-icon')
 
     if (payload !== null) {
         loginLogoutBtn.setAttribute('onclick', 'onLogout()')
@@ -407,6 +408,7 @@ function displayLoginLogoutBtn(payload) {
         loginLogoutBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
         loginLogoutBtn.setAttribute('title', '로그인')
         loginLogoutBtn.style.color = 'green'
+        alertBtn.styly.display = 'none'
     }
 }
 
