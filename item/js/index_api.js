@@ -48,10 +48,3 @@ async function apiResponse(response) {
         return items
     }
 }
-
-function customAlert(text) {
-    Swal.fire({
-        icon: 'error',
-        text: text
-    });
-}
