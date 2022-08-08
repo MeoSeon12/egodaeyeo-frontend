@@ -82,16 +82,16 @@ class CreateNavElement {
         itemUploadBtn.setAttribute('title', '물품등록')
         itemUploadBtn.innerText = "file_upload"
         navBtns.append(itemUploadBtn)
-        
+
         const loginLogoutBtn = document.createElement('span')
         loginLogoutBtn.setAttribute('class', 'material-symbols-outlined')
         loginLogoutBtn.setAttribute('id', 'login-logout-btn')
         loginLogoutBtn.innerText = "power_settings_new"
         navBtns.append(loginLogoutBtn)
-        
+
         loginLogoutBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
         loginLogoutBtn.style.color = 'green'
-        
+
         loginLogoutBtn.setAttribute('onclick', 'onLogout()')
         loginLogoutBtn.style.color = 'red'
 
@@ -142,14 +142,14 @@ class CreateNavElement {
         loginSubmitBtn.innerText = "로그인"
         loginWrap.append(loginSubmitBtn)
 
-        loginSubmitBtn.addEventListener('click', (e) => {
+        loginSubmitBtn.addEventListener('click', () => {
             onLogin()
         })
 
         // 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
         $("#loginPassword").keyup(function (event) {
             if (event.keyCode === 13) {
-                $(".login-submit-btn").click();
+                onLogin()
             }
         });
 
@@ -425,10 +425,3 @@ function goUploadPage() {
         location.href = '../item/upload.html'
     }
 }
-
-// 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
-$("#loginPassword").keyup(function (event) {
-    if (event.keyCode === 13) {
-        $(".login-submit-btn").click();
-    }
-});

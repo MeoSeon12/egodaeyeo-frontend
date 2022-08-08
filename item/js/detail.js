@@ -100,8 +100,11 @@ async function getDetailView() {
     // 시간 당 대여료 (가격 설정이 되어있지않으면 숨김)
     const price = document.getElementById('price')
     const timeUnit = document.getElementById('time-unit')
-    if (data.price == null || data.price == 0) {
+    if (data.price == null) {
         price.style.display = 'none'
+    }
+    else if (data.price == 0) {
+        price.innerText = '무료 대여'
     }
     else {
         price.innerText = `${data.price.toLocaleString('ko-KR')}원 /`
