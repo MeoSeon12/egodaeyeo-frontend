@@ -1,7 +1,7 @@
 // 읽지 않은 메세지 API
 async function getUnreadMessageApi(userId) {
 
-    const token = localStorage.getItem('access_token')
+    const token = await refreshToken(payload)
     // views.py - ChatAlertView
     const response = await fetch(`${backEndBaseUrl}/chats/alerts/${userId}`, {
         method: 'GET',
@@ -24,9 +24,8 @@ async function getUnreadMessageApi(userId) {
 
 // 채팅 모달 데이터 요청 API
 async function chatModalApi() {
-    // const token = localStorage.getItem('access_token')
-    const token = await refreshToken()
-    console.log(token)
+
+    const token = await refreshToken(payload)
 
     const response = await fetch(`${backEndBaseUrl}/chats/`, {
         method: 'GET',
@@ -40,18 +39,13 @@ async function chatModalApi() {
     if (response.status == 200) {
         return response_json
     }
-    else if(response_json.code == "token_not_valid"){
-        console.log(payload.exp)
-        console.log(Date.now() / 1000)
-        // window.location.reload()
-    }
 }
 
 
 // 채팅룸 데이터 API (채팅룸 선택 시) - ChatRoomView
 async function chatRoomApi(room_id) {
 
-    const token = localStorage.getItem('access_token')
+    const token = await refreshToken(payload)
 
     const response = await fetch(`${backEndBaseUrl}/chats/${room_id}`, {
         method: 'GET',
@@ -77,7 +71,7 @@ async function chatRoomApi(room_id) {
 
 // 실시간으로 바로 읽은 메세지 처리
 async function liveReadApi(room_id) {
-    const token = localStorage.getItem('access_token')
+    const token = await refreshToken(payload)
 
     await fetch(`${backEndBaseUrl}/chats/${room_id}`, {
         method: 'PUT',
@@ -98,7 +92,7 @@ async function rentalSubmitApi(itemId) {
     const startTime = document.querySelector('#rental-start-time')
     const endTime = document.querySelector('#rental-end-time')
 
-    const token = localStorage.getItem("access_token");
+    const token = await refreshToken(payload)
 
     const rentalSubmitData = {
         "startTime": startTime.value,
@@ -123,16 +117,13 @@ async function rentalSubmitApi(itemId) {
     else if (response.status == 400) {
         console.log(response_json)
     }
-    else if(response_json.code == "token_not_valid"){
-        window.location.reload()
-    }
 }
 
 
 // 대여 정보 조회 API (대여 신청 수신 버튼 클릭 시)
 async function contractDetailApi(itemId) {
 
-    const token = localStorage.getItem("access_token");
+    const token = await refreshToken(payload)
 
     const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'GET',
@@ -146,9 +137,6 @@ async function contractDetailApi(itemId) {
     if (response.status == 200) {
         return response_json
     }
-    else if(response_json.code == "token_not_valid"){
-        window.location.reload()
-    }
     else {
         console.log(response_json)
     }
@@ -157,7 +145,7 @@ async function contractDetailApi(itemId) {
 
 // 대여 상태 변경 API (대여 수락, 종료 버튼 클릭 시)
 async function contractAcceptAndEndApi(itemId, status) {
-    const token = localStorage.getItem("access_token");
+    const token = await refreshToken(payload)
 
     const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'PUT',
@@ -175,9 +163,6 @@ async function contractAcceptAndEndApi(itemId, status) {
     if (response.status == 200) {
         return response_json
     }
-    else if(response_json.code == "token_not_valid"){
-        window.location.reload()
-    }
     else {
         console.log(response_json)
     }
@@ -187,7 +172,7 @@ async function contractAcceptAndEndApi(itemId, status) {
 // 대여 거절 API 
 async function contractRefuseApi(itemId) {
 
-    const token = localStorage.getItem("access_token");
+    const token = await refreshToken(payload)
 
     const response = await fetch(`${backEndBaseUrl}/contracts/${itemId}`, {
         method: 'DELETE',
@@ -201,9 +186,6 @@ async function contractRefuseApi(itemId) {
     if (response.status == 200) {
         return response_json
     }
-    else if(response_json.code == "token_not_valid"){
-        window.location.reload()
-    }
     else {
         console.log(response_json)
     }
@@ -214,7 +196,7 @@ async function contractRefuseApi(itemId) {
 async function onReviewSubmit(itemId) {
     const reviewContent = document.querySelector('#review').value
     const starRating = document.querySelector('input[name="rating"]:checked').value
-    const token = localStorage.getItem("access_token");
+    const token = await refreshToken(payload)
 
     const reviewData = {
         content: reviewContent,
@@ -235,9 +217,6 @@ async function onReviewSubmit(itemId) {
         alert('리뷰가 작성되었습니다.')
         reviewModalUnview()
     } 
-    else if(response_json.code == "token_not_valid"){
-        window.location.reload()
-    }
     else {
         console.log(response_json)
     }

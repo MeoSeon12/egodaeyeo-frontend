@@ -31,10 +31,6 @@ async function selectedItemApiView(category, section) {
 
 // Query parameter로 카테고리별 아이템정보 조회
 async function scrollItemApiView(url) {
-    var userId = ""
-    if (payload != null) {
-        userId = payload.user_id
-    }
     const response = await fetch(url, {
         method: 'GET',
         headers: {

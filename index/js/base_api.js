@@ -35,10 +35,9 @@ $.ajaxSetup({
 });
 
 // 페이지로딩시 access토큰의 인가 유효시간이 얼마남지않거나 끝났을 경우 refresh
-async function refreshToken() {
-    const payload = JSON.parse(localStorage.getItem("payload"));
+async function refreshToken(payload) {
     if (payload != null) {
-        // 아직 access 토큰의 인가 유효시간이 남은 경우
+        // access 토큰의 인가 유효시간 5분 미만 남은 경우
         if (payload.exp < (Date.now() / 1000) + 300) {
             // 인증 시간이 지났기 때문에 다시 refreshToken으로 다시 요청을 해야 한다.
             const response = await fetch(`${backEndBaseUrl}/users/api/token/refresh`, {
@@ -57,6 +56,9 @@ async function refreshToken() {
             localStorage.setItem("access_token", accessToken);
 
             return accessToken
+        }
+        else {
+            return localStorage.getItem("access_token")
         }
     }
 };

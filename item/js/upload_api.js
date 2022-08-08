@@ -85,6 +85,5 @@ async function submitForm() {
     // 요청 실패
     else if (response.status == 400) {
         error = await response.json()
-        console.log(error.title)
     }
 }
