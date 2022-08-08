@@ -1,78 +1,48 @@
 async function itemApiView() {
-    const token = localStorage.getItem("access_token");
-    if (token == null) {
-        const response = await fetch(`${backEndBaseUrl}/items`, {
-            method: 'GET',
-            headers: {
-                'X-CSRFToken': csrftoken,
-            }
-        }
-        )
-        return apiResponse(response)
+    var userId = ""
+    if (payload != null) {
+        userId = payload.user_id
     }
-    else {
-        const response = await fetch(`${backEndBaseUrl}/items`, {
-            method: 'GET',
-            headers: {
-                'X-CSRFToken': csrftoken,
-                'Authorization': 'Bearer ' + token,
-            }
+    const response = await fetch(`${backEndBaseUrl}/items?user=${userId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': csrftoken,
         }
-        )
-        return apiResponse(response)
     }
+    )
+    return apiResponse(response)
 }
 
 // Query parameter로 카테고리별 아이템정보 조회 - ItemListView
 async function selectedItemApiView(category, section) {
-    const token = localStorage.getItem("access_token");
-    if (token == null) {
-        const response = await fetch(`${backEndBaseUrl}/items/?category=${category}&section=${section}`, {
-            method: 'GET',
-            headers: {
-                'X-CSRFToken': csrftoken,
-            }
-        }
-        )
-        return apiResponse(response)
+    var userId = ""
+    if (payload != null) {
+        userId = payload.user_id
     }
-    else {
-        const response = await fetch(`${backEndBaseUrl}/items/?category=${category}&section=${section}`, {
-            method: 'GET',
-            headers: {
-                'X-CSRFToken': csrftoken,
-                'Authorization': 'Bearer ' + token,
-            }
+    const response = await fetch(`${backEndBaseUrl}/items/?category=${category}&section=${section}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': csrftoken,
         }
-        )
-        return apiResponse(response)
     }
+    )
+    return apiResponse(response)
 }
 
 // Query parameter로 카테고리별 아이템정보 조회
 async function scrollItemApiView(url) {
-    const token = localStorage.getItem("access_token");
-    if (token == null) {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'X-CSRFToken': csrftoken,
-            }
-        }
-        )
-        return apiResponse(response)
+    var userId = ""
+    if (payload != null) {
+        userId = payload.user_id
     }
-    else {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'X-CSRFToken': csrftoken,
-                'Authorization': 'Bearer ' + token,
-            }
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': csrftoken,
         }
-        )
-        return apiResponse(response)
     }
+    )
+    return apiResponse(response)
 }
 
 async function apiResponse(response) {

@@ -24,7 +24,8 @@ async function getUnreadMessageApi(userId) {
 
 // 채팅 모달 데이터 요청 API
 async function chatModalApi() {
-
+    await refreshToken()
+    console.log(localStorage.getItem('access_token'))
     const token = localStorage.getItem('access_token')
 
     const response = await fetch(`${backEndBaseUrl}/chats/`, {
@@ -35,11 +36,12 @@ async function chatModalApi() {
         },
     })
     response_json = await response.json()
-
+    console.log(response)
     if (response.status == 200) {
         return response_json
     }
     else {
+        // window.location.reload()
     }
 }
 
