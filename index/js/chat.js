@@ -380,18 +380,17 @@ class CreateElement {
         chatAlertModalWrap.append(chatAlertModalMessageNotting)
 
         // 마우스 호버
+        let clickStatus = false
         const alarmIcon = document.getElementById('alarm-icon')
-        alarmIcon.addEventListener('mouseenter', function () {
-            chatAlertModalWrap.style.display = 'flex'
-            this.addEventListener('mouseleave', function () {
+        alarmIcon.addEventListener('click', function () {
+            if (clickStatus == false) {
+                clickStatus = true
+                chatAlertModalWrap.style.display = 'flex'
+            }
+            else {
+                clickStatus = false
                 chatAlertModalWrap.style.display = 'none'
-            })
-        })
-        chatAlertModalWrap.addEventListener('mouseenter', function () {
-            this.style.display = 'flex'
-            this.addEventListener('mouseleave', function () {
-                this.style.display = 'none'
-            })
+            }
         })
     }
 
