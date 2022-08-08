@@ -142,14 +142,14 @@ class CreateNavElement {
         loginSubmitBtn.innerText = "로그인"
         loginWrap.append(loginSubmitBtn)
 
-        loginSubmitBtn.addEventListener('click', (e) => {
+        loginSubmitBtn.addEventListener('click', () => {
             onLogin()
         })
 
         // 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
         $("#loginPassword").keyup(function (event) {
             if (event.keyCode === 13) {
-                $(".login-submit-btn").click();
+                onLogin()
             }
         });
 
@@ -394,7 +394,7 @@ async function baseLoad() {
 } baseLoad()
 
 
-// 로그인 여부에 따라 로그인 로그아웃 display
+// 로그인 여부에 따라 알람, 로그인, 로그아웃 display
 function displayLoginLogoutBtn(payload) {
     const loginLogoutBtn = document.querySelector('#login-logout-btn')
     const alarmBtn = document.querySelector('#alarm-icon')
@@ -425,10 +425,3 @@ function goUploadPage() {
         location.href = '../item/upload.html'
     }
 }
-
-// 로그인 모달 비밀번호 잇풋창에서 엔터 누르면 로그인 버튼 트리거 가능하게 하기
-$("#loginPassword").keyup(function (event) {
-    if (event.keyCode === 13) {
-        $(".login-submit-btn").click();
-    }
-});

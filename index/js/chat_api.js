@@ -22,9 +22,8 @@ async function getUnreadMessageApi(userId) {
 }
 
 
-// 채팅 모달 데이터 요청 API
+// 채팅 모달 데이터 요청 API - ChatView
 async function chatModalApi() {
-
     const token = await refreshToken(payload)
 
     const response = await fetch(`${backEndBaseUrl}/chats/`, {
@@ -35,7 +34,6 @@ async function chatModalApi() {
         },
     })
     response_json = await response.json()
-
     if (response.status == 200) {
         return response_json
     }
@@ -60,7 +58,6 @@ async function chatRoomApi(room_id) {
         return response_json
     }
     else if(response_json.code == "token_not_valid"){
-        
         window.location.reload()
     }
     else {

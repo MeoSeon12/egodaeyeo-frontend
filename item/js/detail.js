@@ -103,6 +103,9 @@ async function getDetailView() {
     if (data.price == null) {
         price.style.display = 'none'
     }
+    else if (data.price == 0) {
+        price.innerText = '무료 대여'
+    }
     else {
         price.innerText = `${data.price.toLocaleString('ko-KR')}원 /`
         timeUnit.innerText = data.time_unit

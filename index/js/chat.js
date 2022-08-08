@@ -118,6 +118,9 @@ class CreateElement {
             // contract status에 따른 문의자 버튼 텍스트,css 변경
             switch (contractStatus) {
                 case null:
+                    if (itemTitle == '삭제된 물품입니다') {
+                        requestContractBtn.style.display = 'none'
+                    }
                     requestContractBtn.innerText = "대여 신청"
                     // 대여 신청 버튼 클릭 이벤트
                     requestContractBtn.setAttribute("onclick", `rentalDateModalView(${itemId}, ${roomId}, ${inquirerId}, ${authorId})`)
@@ -380,18 +383,17 @@ class CreateElement {
         chatAlertModalWrap.append(chatAlertModalMessageNotting)
 
         // 마우스 호버
+        let clickStatus = false
         const alarmIcon = document.getElementById('alarm-icon')
-        alarmIcon.addEventListener('mouseenter', function () {
-            chatAlertModalWrap.style.display = 'flex'
-            this.addEventListener('mouseleave', function () {
+        alarmIcon.addEventListener('click', function () {
+            if (clickStatus == false) {
+                clickStatus = true
+                chatAlertModalWrap.style.display = 'flex'
+            }
+            else {
+                clickStatus = false
                 chatAlertModalWrap.style.display = 'none'
-            })
-        })
-        chatAlertModalWrap.addEventListener('mouseenter', function () {
-            this.style.display = 'flex'
-            this.addEventListener('mouseleave', function () {
-                this.style.display = 'none'
-            })
+            }
         })
     }
 
