@@ -397,7 +397,7 @@ async function baseLoad() {
 // 로그인 여부에 따라 로그인 로그아웃 display
 function displayLoginLogoutBtn(payload) {
     const loginLogoutBtn = document.querySelector('#login-logout-btn')
-    const alertBtn = document.querySelector('#alarm-icon')
+    const alarmBtn = document.querySelector('#alarm-icon')
 
     if (payload !== null) {
         loginLogoutBtn.setAttribute('onclick', 'onLogout()')
@@ -408,7 +408,7 @@ function displayLoginLogoutBtn(payload) {
         loginLogoutBtn.setAttribute('onclick', 'new NavModalView().loginSignupModalView()')
         loginLogoutBtn.setAttribute('title', '로그인')
         loginLogoutBtn.style.color = 'green'
-        alertBtn.styly.display = 'none'
+        alarmBtn.style.display = 'none'
     }
 }
 
