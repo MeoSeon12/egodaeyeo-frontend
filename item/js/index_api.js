@@ -19,7 +19,7 @@ async function selectedItemApiView(category, section) {
     if (payload != null) {
         userId = payload.user_id
     }
-    const response = await fetch(`${backEndBaseUrl}/items/?category=${category}&section=${section}`, {
+    const response = await fetch(`${backEndBaseUrl}/items/?user=${userId}&category=${category}&section=${section}`, {
         method: 'GET',
         headers: {
             'X-CSRFToken': csrftoken,
