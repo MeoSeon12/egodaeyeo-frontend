@@ -163,21 +163,20 @@ class CreateElement {
                 case "대여 중":
                     endContractBtn.innerText = "대여 종료"
                     contractBtnContainer.append(endContractBtn)
-
+    
                     // 대여 종료 버튼 클릭
                     // 물품 상태를 대여 중 -> 대여 종료로 바꿈
                     endContractBtn.addEventListener('click', async (e) => {
                         alert("대여가 종료 되었습니다.")
                         // 대여 상태 변경 API
-                        let endData = await contractAcceptAndEndApi(itemId, "대여 종료", roomId)
-                        let roomId = endData.room_id
+                        await contractAcceptAndEndApi(itemId, "대여 종료", roomId)
 
                         let contractType = "종료"
                         // 대여 거절 웹소켓 요청
                         contractSocket.send(JSON.stringify({
                             'item_id': itemId,
                             'sender': payload.user_id,
-                            'receiver': inquiryId,
+                            'receiver': inquirerId,
                             'room_id': roomId,
                             'contract_type': contractType
                         }))
@@ -1041,21 +1040,21 @@ async function checkRentalDateModal(itemId, roomId) {
     cancelRental.innerText = "거절"
     askSign.append(cancelRental)
 
-    const inquiryId = contractDetailData.user
+    const inquirerId = contractDetailData.user
     const contractLook = document.getElementsByClassName('contract-look')
     const LastcontractMessage = contractLook[contractLook.length - 1]
 
     // 대여 신청 거절 버튼
     cancelRental.addEventListener('click', async (e) => {
         // 대여 거절 API
-        let refuseData = await contractRefuseApi(itemId, roomId)
+        await contractRefuseApi(itemId, roomId)
         let contractType = "거절"
         // // 거래 상태 웹소켓 요청 (거절)
         contractSocket.send(JSON.stringify({
             'item_id': itemId,
             'sender': payload.user_id,
-            'receiver': inquiryId,
-            'room_id': refuseData.room_id,
+            'receiver': inquirerId,
+            'room_id': roomId,
             'contract_type': contractType,
         }))
 
@@ -1081,15 +1080,15 @@ async function checkRentalDateModal(itemId, roomId) {
 
         // 대여 상태 변경 API
         // 물품 상태를 대여 가능 -> 대여 중으로 바꿈
-        let acceptData = await contractAcceptAndEndApi(itemId, "대여 중", roomId)
+        await contractAcceptAndEndApi(itemId, "대여 중", roomId)
         let contractType = "수락"
 
         // 거래 상태 웹소켓 요청 (수락)
         contractSocket.send(JSON.stringify({
             'item_id': itemId,
             'sender': payload.user_id,
-            'receiver': inquiryId,
-            'room_id': acceptData.room_id,
+            'receiver': inquirerId,
+            'room_id': roomId,
             'contract_type': contractType
         }))
 
@@ -1114,15 +1113,14 @@ async function checkRentalDateModal(itemId, roomId) {
         endContractBtn.addEventListener('click', async (e) => {
             alert("대여가 종료 되었습니다.")
             // 대여 상태 변경 API
-            let endData = await contractAcceptAndEndApi(itemId, "대여 종료")
-            let roomId = endData.room_id
+            await contractAcceptAndEndApi(itemId, "대여 종료", roomId)
 
             let contractType = "종료"
             // 거래 상태 웹소켓 요청 (종료)
             contractSocket.send(JSON.stringify({
                 'item_id': itemId,
                 'sender': payload.user_id,
-                'receiver': inquiryId,
+                'receiver': inquirerId,
                 'room_id': roomId,
                 'contract_type': contractType
             }))
