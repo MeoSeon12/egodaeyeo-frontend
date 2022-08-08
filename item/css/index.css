@@ -52,7 +52,6 @@
 }
 
 .welcome-wrap > i {
-    animation: fadein 3.5s;
     font-size: 60px;
     color: rgb(0, 255, 98);
     margin: 70px 0 0 10px;
