@@ -58,7 +58,6 @@ async function chatRoomApi(room_id) {
         return response_json
     }
     else if(response_json.code == "token_not_valid"){
-        
         window.location.reload()
     }
     else {

@@ -118,6 +118,9 @@ class CreateElement {
             // contract status에 따른 문의자 버튼 텍스트,css 변경
             switch (contractStatus) {
                 case null:
+                    if (itemTitle == '삭제된 물품입니다') {
+                        requestContractBtn.style.display = 'none'
+                    }
                     requestContractBtn.innerText = "대여 신청"
                     // 대여 신청 버튼 클릭 이벤트
                     requestContractBtn.setAttribute("onclick", `rentalDateModalView(${itemId}, ${roomId}, ${inquirerId}, ${authorId})`)
