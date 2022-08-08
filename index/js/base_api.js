@@ -1,9 +1,9 @@
-// const frontEndBaseUrl = "https://egorental.com"
 const frontEndBaseUrl = "http://127.0.0.1:5500"
-// const backEndBaseUrl = "https://egorentalback.link"
 const backEndBaseUrl = "http://127.0.0.1:8000"
-// const webSocketBaseUrl = "wss://egorentalback.link"
 const webSocketBaseUrl = "ws://127.0.0.1:8000"
+// const frontEndBaseUrl = "https://egorental.com"
+// const backEndBaseUrl = "https://egorentalback.link"
+// const webSocketBaseUrl = "wss://egorentalback.link"
 
 function getCookie(name) {
     var cookieValue = null;
@@ -35,8 +35,7 @@ $.ajaxSetup({
 });
 
 // 페이지로딩시 access토큰의 인가 유효시간이 얼마남지않거나 끝났을 경우 refresh
-async function refreshToken() {
-    const payload = JSON.parse(localStorage.getItem("payload"));
+async function refreshToken(payload) {
     if (payload != null) {
         // 아직 access 토큰의 인가 유효시간이 남은 경우
         if (payload.exp < (Date.now() / 1000) + 300) {
@@ -242,9 +241,8 @@ async function kakaoLoginApi(kakaoUserData) {
 }
 
 async function onAddressEnter() {
-
-    const token = localStorage.getItem("access_token");
-    const address = document.getElementById("address-kakao2").value;
+    const token = await refreshToken(payload)
+    const address = document.getElementById("address-kakao2").value
 
     const response = await fetch(`${backEndBaseUrl}/users/`, {
         method: 'PUT',

@@ -1,9 +1,9 @@
 // 물품 수정 페이지 로드 데이터 얻기
 async function getUpdatePageLoadData() {
+    const token = await refreshToken(payload)
 
     const itemId = location.href.split('?')[1].split('=')[1]
     const itemUserId = location.href.split('?')[2].split('=')[1]
-    const payload = JSON.parse(localStorage.getItem('payload'))
 
     // 비로그인 혹은 본인 게시글이 아닌 경우
     if (payload == null || itemUserId != payload.user_id) {
@@ -14,7 +14,6 @@ async function getUpdatePageLoadData() {
     // 본인 게시글인 경우
     else {
         // 데이터 얻기 위한 API 요청
-        const token = localStorage.getItem('access_token')
         const response = await fetch(`${backEndBaseUrl}/items/update/${itemId}`, {
             method: 'GET',
             headers: {
@@ -32,8 +31,7 @@ async function getUpdatePageLoadData() {
 
 // 폼 전송
 async function submitForm() {
-    
-    const token = localStorage.getItem('access_token')
+    const token = await refreshToken(payload)
     
     // 비 로그인 유저
     if (token == undefined) {

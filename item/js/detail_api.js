@@ -30,8 +30,7 @@ async function DetailViewGetApi() {
 
 // 백엔드로 북마크 저장 & 삭제
 async function DetailViewPostApi() {
-
-    const token = localStorage.getItem('access_token')
+    const token = await refreshToken(payload)
     const response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
         method: 'POST',
         headers: {
@@ -52,8 +51,7 @@ async function DetailViewPostApi() {
 
 // 게시글 삭제
 async function deleteItem() {
-
-    const token = localStorage.getItem('access_token')
+    const token = await refreshToken(payload)
     const response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
         method: 'DELETE',
         headers: {
@@ -70,8 +68,7 @@ async function deleteItem() {
 
 // 채팅방 생성 및 이동 API
 async function chatStartApi() {
-
-    const token = localStorage.getItem('access_token')
+    const token = await refreshToken(payload)
     const response = await fetch(`${backEndBaseUrl}/chats/rooms/${itemId}`, {
         method: 'POST',
         headers: {
