@@ -1,7 +1,6 @@
 // 페이지 뷰 데이터 얻기 (카테고리)
 async function getUploadPageViewData() {
-
-    const token = localStorage.getItem('access_token')  // 비 로그인 유저는 null
+    const token = await refreshToken(payload)
 
     if (token == null) {
         alert('로그인 후 사용 가능합니다. 메인 페이지로 돌아갑니다')
@@ -24,8 +23,7 @@ async function getUploadPageViewData() {
 
 // 폼 전송
 async function submitForm() {
-
-    const token = localStorage.getItem('access_token')
+    const token = await refreshToken(payload)
 
     // 비 로그인 유저
     if (token == undefined) {
@@ -85,6 +83,5 @@ async function submitForm() {
     // 요청 실패
     else if (response.status == 400) {
         error = await response.json()
-        console.log(error.title)
     }
 }

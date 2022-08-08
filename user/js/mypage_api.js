@@ -1,5 +1,5 @@
 async function myPageApiView(param) {
-    const token = localStorage.getItem("access_token");
+    const token = await refreshToken(payload)
     if (token == null) {
         alert("회원 인증에 실패했습니다. 잠시 후 다시 접속해주세요.")
     }
@@ -21,6 +21,9 @@ async function myPageApiView(param) {
         else if (response.status == 204) {
             alert("컨텐츠가 존재하지 않습니다.")
             window.location.replace(`${frontEndBaseUrl}`)
+        }
+        else if(response_json.code == "token_not_valid"){
+            window.location.reload()
         }
         else {
             alert("페이지를 불러오는데 실패했습니다. 다시 접속 해주세요.")
@@ -76,7 +79,7 @@ async function profileApiView() {
         formDataUser.append('current_password', currentPassword)
         formDataUser.append('password', newPassword)
     
-        const token = localStorage.getItem("access_token");
+        const token = await refreshToken(payload)
         if (token == null) {
             alert("회원 인증에 실패했습니다. 잠시 후 다시 접속해주세요.")
         }
@@ -126,7 +129,7 @@ async function profileApiView() {
 }
 
 async function userDeleteApiView() {
-    const token = localStorage.getItem("access_token");
+    const token = await refreshToken(payload)
     if (token == null) {
         alert("회원 인증에 실패했습니다. 잠시 후 다시 접속해주세요.")
     }else {
@@ -146,7 +149,8 @@ async function userDeleteApiView() {
             localStorage.removeItem("refresh_token")
             localStorage.removeItem("payload")
             window.location.replace(`${frontEndBaseUrl}`)
-        }else if (response.status == 400) {
+        }
+        else if (response.status == 400) {
             alert("지금은 회원 탈퇴가 불가능합니다. 다시 시도 해주세요.")
         }
     }
@@ -155,7 +159,7 @@ async function userDeleteApiView() {
 async function feedbackApiView() {
     const feedbackTitle = document.querySelector('.feedback-title').value
     const feedbackContent = document.querySelector('.feedback-textarea').value
-    const token = localStorage.getItem("access_token");
+    const token = await refreshToken(payload)
     
     const feedbackData = {
         title: feedbackTitle,
@@ -180,7 +184,8 @@ async function feedbackApiView() {
         if (response.status == 200) {
             alert("소중한 의견 감사합니다.")
             window.location.reload()
-        }else if (response.status == 400) {
+        }
+        else if (response.status == 400) {
             alert("제목과 내용은 필수 입니다.")
         }
     }

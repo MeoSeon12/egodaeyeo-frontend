@@ -1040,6 +1040,8 @@ async function checkRentalDateModal(itemId) {
     askSign.append(cancelRental)
 
     const inquiryId = contractDetailData.user
+    const contractLook = document.getElementsByClassName('contract-look')
+    const LastcontractMessage = contractLook[contractLook.length - 1]
 
     // 대여 신청 거절 버튼
     cancelRental.addEventListener('click', async (e) => {
@@ -1055,12 +1057,11 @@ async function checkRentalDateModal(itemId) {
             'contract_type': contractType,
         }))
 
-        const contractLook = document.getElementsByClassName('contract-look')
         // 대여 신청 수락시, 신청서 버튼 비활성화
-        contractLook[contractLook.length - 1].style.backgroundColor = '#f0f0f0'
-        contractLook[contractLook.length - 1].style.cursor = 'auto'
-        contractLook[contractLook.length - 1].setAttribute('onclick', "")
-        contractLook[contractLook.length - 1].innerText = "대여 신청을 확인했습니다"
+        LastcontractMessage.style.backgroundColor = '#f0f0f0'
+        LastcontractMessage.style.cursor = 'auto'
+        LastcontractMessage.setAttribute('onclick', "")
+        LastcontractMessage.innerText = "대여 신청을 확인했습니다"
         body.style.overflow = 'auto'
         rentalDateModalBody.style.display = 'none'
     })
@@ -1090,15 +1091,14 @@ async function checkRentalDateModal(itemId) {
             'contract_type': contractType
         }))
 
-        const contractLook = document.getElementsByClassName('contract-look')
         // 대여 신청 수락시, 신청서 버튼 비활성화
-        contractLook[contractLook.length - 1].style.backgroundColor = '#f0f0f0'
-        contractLook[contractLook.length - 1].style.cursor = 'auto'
-        contractLook[contractLook.length - 1].setAttribute('onclick', "")
-        contractLook[contractLook.length - 1].innerText = "대여 신청을 확인했습니다"
-
+        LastcontractMessage.style.backgroundColor = '#f0f0f0'
+        LastcontractMessage.style.cursor = 'auto'
+        LastcontractMessage.setAttribute('onclick', "")
+        LastcontractMessage.innerText = "대여 신청을 확인했습니다"
         body.style.overflow = 'auto'
         rentalDateModalBody.style.display = 'none'
+       
 
         const contractBtnContainer = document.querySelector('.contract-btn-container')
         contractBtnContainer.replaceChildren()
