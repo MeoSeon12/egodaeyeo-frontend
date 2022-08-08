@@ -59,14 +59,13 @@ refreshToken = () => {
             requestRefreshToken(`${backEndBaseUrl}/users/api/token/refresh`).then((data) => {
                 // 새롭게 발급 받은 accessToken을 localStorage에 저장
                 const accessToken = data.access;
-                console.log(accessToken, "새로고침")
                 localStorage.setItem("access_token", accessToken);
             });
         }
     }
 };
 
-// refreshToken();
+refreshToken();
 
 //정규표현식 아이디 한글, 영문, 숫자
 function checkID(asValue) {
