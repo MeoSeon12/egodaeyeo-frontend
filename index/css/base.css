@@ -845,7 +845,7 @@ nav {
     justify-content: center;
     margin: 5px;
     padding: 5px;
-    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .other-chat {
@@ -861,7 +861,7 @@ nav {
     justify-content: center;
     margin: 5px 10px;
     padding: 5px;
-    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .contract-wrap {
