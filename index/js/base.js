@@ -394,7 +394,7 @@ async function baseLoad() {
 } baseLoad()
 
 
-// 로그인 여부에 따라 알람, 로그인, 로그아웃 display
+// 로그인 여부에 따라 알림, 로그인, 로그아웃 display
 function displayLoginLogoutBtn(payload) {
     const loginLogoutBtn = document.querySelector('#login-logout-btn')
     const alarmBtn = document.querySelector('#alarm-icon')

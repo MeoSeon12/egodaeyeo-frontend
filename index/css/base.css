@@ -192,7 +192,7 @@ nav {
         'opsz' 48
 }
 
-/* 채팅 알람 효과와 모달 */
+/* 채팅 알림 효과와 모달 */
 .chat-alert-effect {
     position: absolute;
     width: 10px;
