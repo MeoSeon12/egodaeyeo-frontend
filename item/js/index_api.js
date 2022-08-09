@@ -6,6 +6,7 @@ async function itemApiView() {
     const response = await fetch(`${backEndBaseUrl}/items?user=${userId}`, {
         method: 'GET',
         headers: {
+            'Accept': 'application/json',
             'X-CSRFToken': csrftoken,
         }
     }
