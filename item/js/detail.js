@@ -63,7 +63,27 @@ async function getDetailView() {
         score.style.color = 'gray'
     }
     else {
-        score.innerText = `유저점수 ${data.user.score}`
+        //유저 점수에 따른 색
+        if (data.user.score >= 80) {
+            //초록색
+            score.innerText = "유저점수 " + data.user.score + " 😄"
+            score.style.color = "rgb(6, 190, 0)"
+        }
+        else if (data.user.score < 80 && data.user.score >= 60) {
+            //파란색
+            score.innerText = "유저점수 " + data.user.score + " 🙂"
+            score.style.color = "rgb(0, 104, 190)"
+        }
+        else if (data.user.score < 60 && data.user.score > 30) {
+            //주황색
+            score.innerText = "유저점수 " + data.user.score + " 😐"
+            score.style.color = "rgb(255, 201, 101)"
+        }
+        else if (data.user.score <= 30) {
+            //빨간색
+            score.innerText = "유저점수 " + data.user.score + " 👿"
+            score.style.color = "rgb(255, 0, 0)"
+        }
         score.style.fontWeight = 'bold'
     }
 
