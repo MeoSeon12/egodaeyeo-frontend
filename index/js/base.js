@@ -73,6 +73,7 @@ class CreateNavElement {
         const chatAlarmIcon = document.createElement('span')
         chatAlarmIcon.setAttribute('class', 'material-symbols-outlined')
         chatAlarmIcon.setAttribute('id', 'alarm-icon')
+        chatAlarmIcon.setAttribute('onclick', 'new Alert().showAlarmModal()')
         chatAlarmIcon.innerText = "notifications"
         navBtns.append(chatAlarmIcon)
 

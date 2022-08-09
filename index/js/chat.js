@@ -372,29 +372,13 @@ class CreateElement {
         const chatAlertEffect = document.createElement('section')
         chatAlertEffect.setAttribute('class', 'chat-alert-effect')
         navBtns.append(chatAlertEffect)
-
         const chatAlertModalWrap = document.createElement('div')
         chatAlertModalWrap.setAttribute('class', 'chat-alert-modal-wrap')
         navBtns.append(chatAlertModalWrap)
-
         const chatAlertModalMessageNotting = document.createElement('section')
         chatAlertModalMessageNotting.setAttribute('class', 'chat-alert-modal-message-notting')
         chatAlertModalMessageNotting.innerText = '알림이 없습니다'
         chatAlertModalWrap.append(chatAlertModalMessageNotting)
-
-        // 마우스 호버
-        let clickStatus = false
-        const alarmIcon = document.getElementById('alarm-icon')
-        alarmIcon.addEventListener('click', function () {
-            if (clickStatus == false) {
-                clickStatus = true
-                chatAlertModalWrap.style.display = 'flex'
-            }
-            else {
-                clickStatus = false
-                chatAlertModalWrap.style.display = 'none'
-            }
-        })
     }
 
     // 알림 메시지 생성
@@ -407,6 +391,7 @@ class CreateElement {
             chatAlertModalMessageButton.setAttribute('onclick', `openDirectChatRoom(${data.room_id})`)
             const chatAlertModalWrap = document.getElementsByClassName('chat-alert-modal-wrap')[0]
             chatAlertModalWrap.append(chatAlertModalMessageButton)
+            new Alert().showAlarmModal()
         }
     }
 }
@@ -414,6 +399,22 @@ class CreateElement {
 
 // 알림 관련 기능
 class Alert {
+
+    // 알림 모달 show
+    showAlarmModal() {
+        const chatAlertModalWrap = document.querySelector('.chat-alert-modal-wrap')
+        chatAlertModalWrap.style.display = 'flex'
+        const alarmBtn = document.querySelector('#alarm-icon')
+        alarmBtn.setAttribute('onclick', 'new Alert().hideAlarmModal()')
+    }
+    
+    // 알림 모달 hide
+    hideAlarmModal() {
+        const chatAlertModalWrap = document.querySelector('.chat-alert-modal-wrap')
+        chatAlertModalWrap.style.display = 'none'
+        const alarmBtn = document.querySelector('#alarm-icon')
+        alarmBtn.setAttribute('onclick', 'new Alert().showAlarmModal()')
+    }
 
     // 알림 효과 (알림 모달)
     navAlertEffect() {
@@ -433,22 +434,23 @@ class Alert {
 
     // 알림 효과 끄기
     offAlertEffect(roomId) {
-        // 알림 모달 메시지 삭제
+        // 알림창의 해당 채팅방 메시지 삭제
         const chatAlertModalMessageButton = document.getElementsByName(`chat-alert-modal-message-button-${roomId}`)[0]
         if (chatAlertModalMessageButton) {
             chatAlertModalMessageButton.remove()
         }
-        // 알림 모달 알림 끄기
+        // 모든 알림 확인 시
         const chatAlertModalMessageButton_list = document.getElementsByClassName('chat-alert-modal-message-button')
         if (chatAlertModalMessageButton_list.length == 0) {
+            this.hideAlarmModal()
             const chatAlertEffect = document.getElementsByClassName('chat-alert-effect')[0]
             const chatAlertModalMessageNotting = document.getElementsByClassName('chat-alert-modal-message-notting')[0]
             const chatAlarmBtn = document.querySelector('#alarm-icon')
             chatAlertEffect.style.display = 'none'
-            chatAlarmBtn.style.color = 'black'
             chatAlertModalMessageNotting.style.display = 'block'
+            chatAlarmBtn.style.color = 'black'
         }
-        // 채팅방 알림 끄기
+        // 채팅 모달의 채팅방 알림 끄기
         const chatRoom = document.getElementById(`chat-room-${roomId}`)
         if (chatRoom) {
             chatRoom.children[0].style.display = 'none'
@@ -557,10 +559,10 @@ class Websocket {
                 new CreateElement().alertMessage(data)
                 new Alert().alertNotReadMessage(data)
                 new Alert().navAlertEffect()
+                new Alert().chatModalAlertEffect(data)
                 // 처음 온 채팅이면 채팅방을 새로 만듬
                 const selectedChatRoom = document.querySelector(`#chat-room-${data.room_id}`)
                 if (selectedChatRoom == null) {
-                    console.log('처음 온 채팅')
                     console.log(selectedChatRoom)
                     const chatRoom = document.createElement('div')
                     chatRoom.setAttribute("class", "chat-room")
@@ -852,31 +854,26 @@ function openDirectChatRoom(roomId) {
 var chatSocket = ''
 var contractSocket = ''
 async function openChatRoom(roomId) {
-
     // 이미 접속한 채팅, 거래 웹소켓이 있다면 종료
     if (chatSocket != '' && contractSocket != '') {
         chatSocket.close()
         contractSocket.close()
+        chatSocket = ''
+        contractSocket = ''
     }
-
     // 선택한 채팅방 스타일 효과
     $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
     $('.borrow-room').attr('style', 'background-color: rgb(191, 255, 194)')
     const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
     selectedChatRoom.style.boxShadow = '5px 5px 5px yellowgreen'
-
     // 선택한 채팅방 알림 효과 끄기
     new Alert().offAlertEffect(roomId)
-
     // 채팅 웹소켓
     new Websocket().chatWebsocket(roomId)
-
     // 채팅룸 데이터 API
     const roomData = await chatRoomApi(roomId)
-
     // 거래 웹소켓
     new Websocket().contractWebsocket(roomId, roomData)
-
     // 채팅방 내용 생성
     new CreateElement().chatRoomElements(roomId, roomData)
 }
