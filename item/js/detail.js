@@ -345,7 +345,7 @@ async function inquiry() {
         })
 
         // 모달 박스 바깥 클릭시
-        inquiryModalBody.addEventListener('click', function (e) {
+        inquiryModalBody.addEventListener('mousedown', function (e) {
             if (e.target == inquiryModalBody) {
                 body.style.overflow = 'auto'
                 inquiryModalBody.style.display = 'none'
@@ -405,7 +405,7 @@ function showDeleteCheckModal() {
     })
 
     // 모달 박스 바깥 클릭시
-    inquiryModalBody.addEventListener('click', function (e) {
+    inquiryModalBody.addEventListener('mousedown', function (e) {
         if (e.target == inquiryModalBody) {
             body.style.overflow = 'auto'
             inquiryModalBody.style.display = 'none'

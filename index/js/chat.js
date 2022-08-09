@@ -928,7 +928,7 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
     rentalDateModalBody.style.display = 'flex'
 
     // 대여 신청 모달 unview
-    addEventListener('click', (e) => {
+    addEventListener('mousedown', (e) => {
         if (e.target == rentalDateModalBody || e.target == cancelRental) {
             body.style.overflow = 'auto'
             rentalDateModalBody.style.display = 'none'
@@ -1068,7 +1068,7 @@ async function checkRentalDateModal(itemId, roomId) {
     })
 
     // 대여 신청 수신 모달 unview
-    addEventListener('click', (e) => {
+    addEventListener('mousedown', (e) => {
         if (e.target == rentalDateModalBody) {
             body.style.overflow = 'auto'
             rentalDateModalBody.remove()
@@ -1217,7 +1217,7 @@ function reviewModalView(itemId) {
     skipReview.innerText = '건너 뛰기'
     askSign.append(skipReview)
 
-    addEventListener('click', (e) => {
+    addEventListener('mousedown', (e) => {
         if (e.target == reviewModalBody | e.target == skipReview) {
             reviewModalUnview()
         }

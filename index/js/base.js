@@ -101,18 +101,18 @@ class CreateNavElement {
     createLoginSignupModal() {
         const loginSignupModalBody = document.createElement('div')
         loginSignupModalBody.setAttribute('class', 'login-modal-body')
-        loginSignupModalBody.addEventListener('click', function (e) {
-            if (e.target == loginSignupModalBody) {
+        loginSignupModalBody.addEventListener('mousedown', function (e) {
+            if (e.target === loginSignupModalBody) {
                 new NavModalView().loginSignupModalUnview()
             }
         })
         this.body.append(loginSignupModalBody)
-
+        
         const loginContainer = document.createElement('div')
         loginContainer.setAttribute('class', 'modal-container')
         loginContainer.setAttribute('id', 'login-modal-container')
         loginSignupModalBody.append(loginContainer)
-
+        
         const loginModalLogo = document.createElement('h2')
         loginModalLogo.innerText = "이거대여."
         loginContainer.append(loginModalLogo)

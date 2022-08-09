@@ -432,7 +432,7 @@ async function userDeleteModal() {
     })
 
     // 모달 박스 바깥 클릭시
-    deleteModalBody.addEventListener('click', function (e) {
+    deleteModalBody.addEventListener('mousedown', function (e) {
         if (e.target == deleteModalBody) {
             body.style.overflow = 'auto'
             deleteModalBody.style.display = 'none'
