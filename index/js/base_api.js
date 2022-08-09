@@ -2,6 +2,7 @@ const frontEndBaseUrl = "https://egorental.com"
 const backEndBaseUrl = "https://egorentalback.link"
 const webSocketBaseUrl = "wss://egorentalback.link"
 
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -51,7 +52,6 @@ async function refreshToken(payload) {
 
             const accessToken = response_json.access
             localStorage.setItem("access_token", accessToken);
-
             return accessToken
         }
         else {
@@ -241,7 +241,9 @@ async function kakaoLoginApi(kakaoUserData) {
 }
 
 async function onAddressEnter() {
+    var payload = JSON.parse(localStorage.getItem('payload'))
     const token = await refreshToken(payload)
+
     const address = document.getElementById("address-kakao2").value
 
     const response = await fetch(`${backEndBaseUrl}/users/`, {

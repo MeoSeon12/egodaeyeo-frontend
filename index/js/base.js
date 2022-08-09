@@ -372,7 +372,6 @@ class NavModalView {
     }
 }
 
-
 var payload = JSON.parse(localStorage.getItem('payload'))
 
 // 페이지 로드 시 실행되는 기능
