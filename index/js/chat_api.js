@@ -6,6 +6,7 @@ async function getUnreadMessageApi(userId) {
     const response = await fetch(`${backEndBaseUrl}/chats/alerts/${userId}`, {
         method: 'GET',
         headers: {
+            'Accept': 'application/json',
             'X-CSRFToken': csrftoken,
             'Authorization': 'Bearer ' + token
         },
@@ -29,6 +30,7 @@ async function chatModalApi() {
     const response = await fetch(`${backEndBaseUrl}/chats/`, {
         method: 'GET',
         headers: {
+            'Accept': 'application/json',
             'X-CSRFToken': csrftoken,
             'Authorization': 'Bearer ' + token
         },
@@ -36,6 +38,9 @@ async function chatModalApi() {
     response_json = await response.json()
     if (response.status == 200) {
         return response_json
+    }
+    else if(response_json.code == "token_not_valid"){
+        window.location.reload()
     }
 }
 
