@@ -1,6 +1,9 @@
 const frontEndBaseUrl = "https://egorental.com"
 const backEndBaseUrl = "https://egorentalback.link"
 const webSocketBaseUrl = "wss://egorentalback.link"
+// const frontEndBaseUrl = "http://127.0.0.1:5500"
+// const backEndBaseUrl = "http://127.0.0.1:8000"
+// const webSocketBaseUrl = "ws://127.0.0.1:8000"
 
 function getCookie(name) {
     var cookieValue = null;
@@ -150,6 +153,7 @@ async function onSignUp() {
     }
 }
 
+// user/EgoTokenObtainPairView
 async function onLogin() {
     const email = document.getElementById("loginEmail").value
     const password = document.getElementById("loginPassword").value
@@ -241,6 +245,7 @@ async function kakaoLoginApi(kakaoUserData) {
 }
 
 async function onAddressEnter() {
+    var payload = JSON.parse(localStorage.getItem('payload'))
     const token = await refreshToken(payload)
     const address = document.getElementById("address-kakao2").value
 
@@ -290,6 +295,7 @@ function onLogout() {
 }
 
 
+// 로그인 유저 정보 api - user/UserView
 async function getUserView(payload) {
 
     const response = await fetch(`${backEndBaseUrl}/users/${payload.user_id}/`, {

@@ -556,6 +556,31 @@ class Websocket {
                 new CreateElement().alertMessage(data)
                 new Alert().MessageInnerText(data)
                 new Alert().navAlertEffect()
+
+                // 처음 온 채팅이면 채팅방을 새로 만듬
+                const selectedChatRoom = document.querySelector(`chat-room-${data.room_id}`)
+                if (selectedChatRoom == null) {
+                    console.log(data)
+                    const chatRoom = document.createElement('div')
+                    chatRoom.setAttribute("class", "chat-room")
+                    chatRoom.setAttribute("id", `chat-room-${data.room_id}`)
+                    chatRoom.setAttribute("onclick", `openChatRoom(${data.room_id})`)
+
+                    const chatRoomsContainer = document.getElementsByClassName('chat-rooms-container')[0]
+                    chatRoomsContainer.append(chatRoom)
+
+                    const spanNickname = document.createElement('span')
+                    spanNickname.setAttribute("class", "nickname")
+
+                    const chatRoomAlertEffect = document.createElement('section')
+                    chatRoomAlertEffect.setAttribute('class', 'chat-room-alert-effect')
+                    chatRoom.append(chatRoomAlertEffect)
+
+                    spanNickname.innerText = data.sender
+                    chatRoom.style.backgroundColor = "rgb(255, 239, 194)"
+                    chatRoom.setAttribute("class", "chat-room lend-room")
+                    chatRoom.append(spanNickname)
+                }
             }
         }
     }
@@ -808,8 +833,8 @@ function closeChatModal() {
 
 // 알람 메시지 및 문의하기 확인 버튼 클릭
 function openDirectChatRoom(roomId) {
-    const chatBody = document.getElementsByClassName('chat-modal-body')[0]
-    if (getComputedStyle(chatBody).display == 'none') {
+    const chatBtn = document.querySelector('.chat-btn')
+    if (chatBtn.attributes[1].value == 'openChatModal()') {
         openChatModal()
         openChatRoom(roomId)
     }
@@ -817,6 +842,7 @@ function openDirectChatRoom(roomId) {
         openChatRoom(roomId)
     }
 }
+
 
 // 채팅방 열기
 // 선택된 채팅방 웹소켓 주소 저장
@@ -1100,7 +1126,7 @@ async function checkRentalDateModal(itemId) {
         LastcontractMessage.innerText = "대여 신청을 확인했습니다"
         body.style.overflow = 'auto'
         rentalDateModalBody.style.display = 'none'
-       
+
 
         const contractBtnContainer = document.querySelector('.contract-btn-container')
         contractBtnContainer.replaceChildren()
