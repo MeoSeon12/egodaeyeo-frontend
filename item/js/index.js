@@ -241,6 +241,10 @@ function itemDataAppend(itemsInfo) {
             newItemPrice.innerText = "가격 협의"
             newItemDesc.append(newItemPrice)
         }
+        else if (item['price'] == 0) {
+            newItemPrice.innerText = '무료 대여'
+            newItemDesc.append(newItemPrice)
+        }
         else {
             newItemPrice.innerText = item['price'].toLocaleString()+ "원" + " / "
             newItemDesc.append(newItemPrice)

@@ -193,6 +193,32 @@ async function contractRefuseApi(itemId, roomId) {
     }
 }
 
+// 아이템 재등록 API
+async function reUploadItemApi(itemId, status) {
+    const token = await refreshToken(payload)
+
+    const response = await fetch(`${backEndBaseUrl}/items/reupload/${itemId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+            "status": status
+        })
+    })
+    response_json = await response.json()
+
+    if (response.status == 200) {
+        alert(response_json.msg)
+        location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+    }
+    else if (response.status == 404){
+        alert(response_json.msg)
+    }
+}
+
 
 //리뷰 작성 API
 async function onReviewSubmit(itemId) {

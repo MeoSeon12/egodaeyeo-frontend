@@ -1,5 +1,5 @@
 // 페이지 뷰
-async function UploadPageView() {
+async function uploadPageView() {
 
     const data = await getUploadPageViewData()
 
@@ -88,4 +88,4 @@ function deleteFile(num) {
 }
 
 
-UploadPageView()    // 페이지 뷰
+uploadPageView()    // 페이지 뷰
