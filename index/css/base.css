@@ -860,6 +860,7 @@ nav {
     justify-content: center;
     margin: 5px 10px;
     padding: 5px;
+    word-wrap: break-word;
 }
 
 .contract-wrap {
