@@ -845,6 +845,7 @@ nav {
     justify-content: center;
     margin: 5px;
     padding: 5px;
+    word-wrap: break-word;
 }
 
 .other-chat {
