@@ -73,6 +73,7 @@ class CreateNavElement {
         const chatAlarmIcon = document.createElement('span')
         chatAlarmIcon.setAttribute('class', 'material-symbols-outlined')
         chatAlarmIcon.setAttribute('id', 'alarm-icon')
+        chatAlarmIcon.setAttribute('onclick', 'new Alert().showAlarmModal()')
         chatAlarmIcon.innerText = "notifications"
         navBtns.append(chatAlarmIcon)
 
@@ -393,7 +394,7 @@ async function baseLoad() {
 } baseLoad()
 
 
-// 로그인 여부에 따라 알람, 로그인, 로그아웃 display
+// 로그인 여부에 따라 알림, 로그인, 로그아웃 display
 function displayLoginLogoutBtn(payload) {
     const loginLogoutBtn = document.querySelector('#login-logout-btn')
     const alarmBtn = document.querySelector('#alarm-icon')

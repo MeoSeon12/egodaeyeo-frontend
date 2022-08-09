@@ -21,6 +21,7 @@ async function getDetailView() {
     // 이미지가 없는 경우
     if (data.images.length == 0) {
         let sliderLi = document.createElement('li')
+        slider.append(sliderLi)
         let sliderPicture = document.createElement('img')
         sliderPicture.setAttribute('src', 'https://egodaeyeo.s3.amazonaws.com/static/default_item.jpg')
         sliderLi.append(sliderPicture)

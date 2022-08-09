@@ -150,6 +150,7 @@ async function onSignUp() {
     }
 }
 
+// user/EgoTokenObtainPairView
 async function onLogin() {
     const email = document.getElementById("loginEmail").value
     const password = document.getElementById("loginPassword").value
@@ -292,6 +293,7 @@ function onLogout() {
 }
 
 
+// 로그인 유저 정보 api - user/UserView
 async function getUserView(payload) {
 
     const response = await fetch(`${backEndBaseUrl}/users/${payload.user_id}/`, {

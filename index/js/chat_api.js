@@ -1,6 +1,5 @@
 // 읽지 않은 메세지 API
 async function getUnreadMessageApi(userId) {
-
     const token = await refreshToken(payload)
     // views.py - ChatAlertView
     const response = await fetch(`${backEndBaseUrl}/chats/alerts/${userId}`, {
@@ -62,7 +61,7 @@ async function chatRoomApi(room_id) {
     if (response.status == 200) {
         return response_json
     }
-    else if(response_json.code == "token_not_valid"){
+    else if (response_json.code == "token_not_valid") {
         window.location.reload()
     }
     else {
@@ -244,7 +243,7 @@ async function onReviewSubmit(itemId) {
     if (response.status == 200) {
         alert('리뷰가 작성되었습니다.')
         reviewModalUnview()
-    } 
+    }
     else {
         console.log(response_json)
     }
