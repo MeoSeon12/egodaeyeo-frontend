@@ -1,8 +1,5 @@
-const categoryModalWrap = document.querySelector('.category-modal-wrap')
-const modalContainer = document.getElementsByClassName('category-modal-container')[0]
-
+const categoryWrap = document.querySelector('.category-wrap');
 const itemWrap = document.getElementsByClassName("item-wrap")[0];
-const categoryBox = document.getElementsByClassName("category-modal-box")[0];
 const categoryText = document.getElementsByClassName("list-category")[0];
 const searchText = document.getElementsByClassName("list-search")[0];
 const sectionText = document.getElementsByClassName("list-section")[0];
@@ -11,22 +8,6 @@ const addressText = document.getElementsByClassName("list-address")[0];
 let pageUrl = ""
 let selectedCategory = ""
 let selectedSection = ""
-
-
-function openModal(){
-    categoryModalWrap.style.animation = 'fadeIn 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
-    categoryModalWrap.style.display = 'flex'
-}
-
-function closeModal(){
-    categoryModalWrap.style.display = 'none'
-}
-
-categoryModalWrap.addEventListener('mouseover', (e) => {
-    if (e.target == categoryModalWrap) {
-        closeModal()
-    }
-})
 
 async function showAllItems(selectedSection) {
     //api에서 return한 json데이터
@@ -57,19 +38,15 @@ async function showAllItems(selectedSection) {
         sectionText.style.color = '#ffe18a';
     }
 
-    categoryBox.replaceChildren();
+    categoryWrap.replaceChildren();
     itemWrap.replaceChildren();
     
     //카테고리
     const categoryContainer = document.createElement("div")
     categoryContainer.setAttribute("class", "category-container")
-    categoryBox.append(categoryContainer)
-
-    const allCategory = document.createElement("div")
-    allCategory.setAttribute("class", "category-btn")
-    allCategory.setAttribute("onclick", "selectedAllItems()")
-    allCategory.innerHTML += "전체" + '<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'
-    categoryContainer.append(allCategory)
+    categoryContainer.setAttribute("onclick", "selectedAllItems()")
+    categoryContainer.innerText = "전체"
+    categoryWrap.append(categoryContainer)
     
     //json category 데이터 뽑기
     for (let i = 0; i < categories.length; i++) {
@@ -77,13 +54,9 @@ async function showAllItems(selectedSection) {
 
         const categoryContainer = document.createElement("div")
         categoryContainer.setAttribute("class", "category-container")
-        categoryBox.append(categoryContainer)
-
-        const newCategory = document.createElement("div")
-        newCategory.setAttribute("class", "category-btn")
-        newCategory.setAttribute("onclick", "selectedCategoryItems(this)")
-        newCategory.innerHTML += category + '<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'
-        categoryContainer.append(newCategory)
+        categoryContainer.setAttribute("onclick", "selectedCategoryItems(this)")
+        categoryContainer.innerText = category
+        categoryWrap.append(categoryContainer)
     }
     if (items['items']['count'] == 0) {
         itemWrap.innerText = "등록된 물품이 없습니다."
@@ -288,7 +261,7 @@ var useScrollFunction = false
 window.addEventListener('wheel', function (event) {
     if (event.deltaY > 0 && useScrollFunction == false) {
         if (checkVisible($('.welcome-wrap'))) {
-            moveToScroll('.menu-icon-wrap', 30)
+            moveToScroll('.main-body', 30)
             useScrollFunction = true
         }
     }
