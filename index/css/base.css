@@ -563,7 +563,7 @@ nav {
     padding: 7px;
     border-radius: 30px;
     right: 20px;
-    bottom: 10px;
+    bottom: 30px;
     position: fixed;
 }
 /* 등록 버튼 */
@@ -977,13 +977,6 @@ nav {
         margin-top: 90px;
         margin-left: 70px;
         width: 50%;
-    }
-
-    .chat-btn {
-        right: 10px;
-        bottom: 10px;
-        height: 40px;
-        width: 40px;
     }
 
     #chat-icon {
