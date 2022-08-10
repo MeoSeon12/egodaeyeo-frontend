@@ -59,6 +59,7 @@ class CreateElement {
 
     // 채팅방 생성
     chatRoom(data, userId) {
+        console.log(data)
         let authorId = data.author.id
         let authorNickname = data.author.nickname
         let inquirerNickname = data.inquirer.nickname
