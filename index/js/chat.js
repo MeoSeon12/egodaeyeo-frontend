@@ -20,6 +20,7 @@ class CreateElement {
         const uploadBtn = document.createElement('button')
         uploadBtn.setAttribute('id', 'upload-btn')
         uploadBtn.setAttribute('class', 'material-symbols-outlined')
+        uploadBtn.setAttribute('onclick', 'goUploadPage()')
         uploadBtn.innerText = 'add'
         modalBtnBox.append(uploadBtn)
         const uploadText = document.createElement('div')

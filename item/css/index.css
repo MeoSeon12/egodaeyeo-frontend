@@ -210,16 +210,14 @@
 }
 
 .category-wrap {
-    background-color: rgb(252, 252, 252);
     min-height: 140px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: space-evenly; */
     padding: 5px;
     margin: 10px 20px;
     border-radius: 10px;
-    border: 1px solid rgb(185, 185, 185);
+    border: 1px solid rgb(221, 221, 221);
 }
 
 .category-container {

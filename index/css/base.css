@@ -983,21 +983,10 @@ nav {
         margin-left: 70px;
         width: 50%;
     }
-
-    .chat-btn {
-        right: 10px;
-        bottom: 10px;
-        height: 40px;
-        width: 40px;
+    .modal-btn-box {
+        transform: scale(0.8);
     }
-
-    #chat-icon {
-        transform: scale(1);
-    }
-
     .chat-modal-body {
-        right: 5px;
-        bottom: 80px;
         height: 440px;
         width: 350px;
     }
