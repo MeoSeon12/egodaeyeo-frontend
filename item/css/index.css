@@ -442,6 +442,10 @@
         max-width: 152px;
         height: 152px;
     }
+
+    .category-container {
+        font-size: 12px;
+    }
 }
 @media screen and (max-width: 376px) {
 
