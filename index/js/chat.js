@@ -217,12 +217,17 @@ class CreateElement {
             if (i > 0 && chatMessages[i].date != chatMessages[i - 1].date) {
                 const dateWrap = document.createElement('div');
                 dateWrap.setAttribute("class", "date-wrap");
-                dateWrap.innerHTML =
-                    `<div class="chat-date-stamp">
-                            <i class="fa-regular fa-calendar"></i>
-                            ${chatMessages[i].date}
-                    </div>`
                 chatAreaWrap.append(dateWrap)
+
+                const chatDateStamp = document.createElement('div');
+                chatDateStamp.setAttribute("class", "chat-date-stamp");
+                dateWrap.append(chatDateStamp);
+
+                const calendarIcon = document.createElement('i');
+                calendarIcon.setAttribute("class", "fa-regular fa-calendar");
+                chatDateStamp.append(calendarIcon);
+
+                chatDateStamp.innerText = chatMessages[i].date
             }
 
             // isApplication true = 거래 상태 메시지, false = 일반 채팅 메시지
@@ -287,17 +292,37 @@ class CreateElement {
                     if (sender == userId) {
                         const myChatWrap = document.createElement('div');
                         myChatWrap.setAttribute("class", "my-chat-wrap");
-                        myChatWrap.innerHTML = `<div class="chat-time-stamp">${timeStamp}</div>
-                            <div class="my-chat">${message}</div>`
                         chatAreaWrap.append(myChatWrap)
+
+                        //채팅 타임스탬프
+                        const chatTimeStamp = document.createElement('div');
+                        chatTimeStamp.setAttribute("class", "chat-time-stamp");
+                        chatTimeStamp.innerText = timeStamp
+                        myChatWrap.append(chatTimeStamp);
+
+                        //채팅 메시지
+                        const myChat = document.createElement('div');
+                        myChat.setAttribute("class", "my-chat");
+                        myChat.innerText = message
+                        myChatWrap.append(myChat);
                     }
                     // 채팅 메시지 수신자
                     else {
                         const otherChatWrap = document.createElement('div');
                         otherChatWrap.setAttribute("class", "other-chat-wrap");
-                        otherChatWrap.innerHTML = `<div class="other-chat">${message}</div>
-                            <div class="chat-time-stamp">${timeStamp}</div>`
                         chatAreaWrap.append(otherChatWrap)
+                        
+                        //채팅 메시지
+                        const otherChat = document.createElement('div');
+                        otherChat.setAttribute("class", "other-chat");
+                        otherChat.innerText = message
+                        otherChatWrap.append(otherChat);
+
+                        //채팅 타임스탬프
+                        const chatTimeStamp = document.createElement('div');
+                        chatTimeStamp.setAttribute("class", "chat-time-stamp");
+                        chatTimeStamp.innerText = timeStamp
+                        otherChatWrap.append(chatTimeStamp);
                     }
             }
         }
@@ -615,24 +640,39 @@ class Websocket {
 
             // 채팅 발신자 화면
             if (chatSender == payload.user_id) {
-                messages.insertAdjacentHTML('beforeend',
-                    `<div class="my-chat-wrap">
-                <div class="chat-time-stamp">${timeStamp}</div>
-                <div class="my-chat">${message}</div>
-                </div>`
-                )
+                const myChatWrap = document.createElement('div');
+                myChatWrap.setAttribute('class', 'my-chat-wrap');
+                messages.append(myChatWrap);
+
+                const chatTimeStamp = document.createElement('div');
+                chatTimeStamp.setAttribute('class', 'chat-time-stamp');
+                chatTimeStamp.innerText = timeStamp
+                myChatWrap.append(chatTimeStamp);
+
+                const myChat = document.createElement('div');
+                myChat.setAttribute('class', 'my-chat');
+                myChat.innerText = message
+                myChatWrap.append(myChat);
             }
             // 채팅 수신자 화면
             else {
                 // 백엔드에 통신해서 is_read = True 로 바꿈
                 await liveReadApi(roomId)
 
-                messages.insertAdjacentHTML('beforeend',
-                    `<div class="other-chat-wrap">
-                <div class="other-chat">${message}</div>
-                <div class="chat-time-stamp">${timeStamp}</div>
-                </div>`
-                )
+                const otherChatWrap = document.createElement('div');
+                otherChatWrap.setAttribute('class', 'my-chat-wrap');
+                messages.append(otherChatWrap);
+
+                const otherChat = document.createElement('div');
+                otherChat.setAttribute('class', 'my-chat');
+                otherChat.innerText = message
+                otherChatWrap.append(otherChat);
+
+                const chatTimeStamp = document.createElement('div');
+                chatTimeStamp.setAttribute('class', 'chat-time-stamp');
+                chatTimeStamp.innerText = timeStamp
+                otherChatWrap.append(chatTimeStamp);
+
             }
             // 스크롤 가장 아래로 내림
             const chatAreaWrap = document.querySelector('.chat-area-wrap')
