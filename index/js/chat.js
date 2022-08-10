@@ -59,7 +59,6 @@ class CreateElement {
 
     // 채팅방 생성
     chatRoom(data, userId) {
-        console.log(data)
         let authorId = data.author.id
         let authorNickname = data.author.nickname
         let inquirerNickname = data.inquirer.nickname
@@ -603,7 +602,6 @@ class Websocket {
                 // 처음 온 채팅이면 채팅방을 새로 만듬
                 const selectedChatRoom = document.querySelector(`#chat-room-${data.room_id}`)
                 if (selectedChatRoom == null) {
-                    console.log(selectedChatRoom)
                     const chatRoom = document.createElement('div')
                     chatRoom.setAttribute("class", "chat-room")
                     chatRoom.setAttribute("id", `chat-room-${data.room_id}`)
