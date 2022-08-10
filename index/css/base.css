@@ -191,7 +191,6 @@ nav {
         'GRAD' 0,
         'opsz' 48
 }
-
 /* 채팅 알림 효과와 모달 */
 .chat-alert-effect {
     position: absolute;
@@ -558,27 +557,72 @@ nav {
     -webkit-text-fill-color: gold;
 }
 
+/* 모달 버튼 박스 */
+.modal-btn-box {
+    background-color: rgba(88, 194, 255, 0.3);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 7px;
+    border-radius: 30px;
+    right: 20px;
+    bottom: 10px;
+    position: fixed;
+}
+/* 등록 버튼 */
+#upload-btn {
+    background-color: #b0d2ff;
+    border: none;
+    border-radius: 30px;
+    width: 50px;
+    padding: 10px;
+    height: 70px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* 등록 텍스트 */
+#upload-btn > div {
+    font-size: 15px;
+    font-weight: bold;
+}
+/* 위로 가기 버튼 */
+#go-top-btn {
+    display: none;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+#upload-btn:hover, #go-top-btn:hover {
+    opacity: 0.5;
+}
 
 /* 채팅 */
 .chat-btn {
     background-color: #ffe398;
     display: block;
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
+    width: 50px;
+    padding: 10px;
+    border-radius: 30px;
     border: none;
-    right: 90px;
-    bottom: 30px;
     font-size: 20px;
+}
+
+.chat-btn > div {
+    font-size: 15px;
     font-weight: bold;
-    font-family: 'IBMPlexSansKR-Regular';
-    position: fixed;
-    z-index: 1;
 }
 
 .chat-btn:hover {
     cursor: pointer;
-    background-color: #F8FFA4;
+    opacity: 0.5;
 }
 
 #chat-icon {
@@ -590,10 +634,11 @@ nav {
     position: fixed;
     background-color: #e5ffd6;
     border-radius: 20px;
-    height: 700px;
+    height: 730px;
     width: 500px;
-    right: 100px;
-    bottom: 130px;
+    right: 33px;
+    bottom: 100px;
+    z-index: 1;
 }
 
 .chat-modal-body:after {
