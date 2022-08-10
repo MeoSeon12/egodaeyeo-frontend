@@ -4,13 +4,27 @@ class CreateElement {
         this.body = document.querySelector('body')
     }
 
-    // 채팅 모달 버튼 생성
-    chatModalBtn() {
+    // 채팅 모달 버튼, 등록 버튼 생성
+    modalBtnBox() {
+        const modalBtnBox = document.createElement('div')
+        modalBtnBox.setAttribute('class', 'modal-btn-box')
+        this.body.append(modalBtnBox)
         const chatBtn = document.createElement('button')
         chatBtn.setAttribute('class', 'chat-btn')
         chatBtn.setAttribute('onclick', 'openChatModal()')
         chatBtn.innerHTML = `<i class="fa-solid fa-comment" id="chat-icon"></i>`
-        this.body.append(chatBtn)
+        modalBtnBox.append(chatBtn)
+        const chatText = document.createElement('div')
+        chatText.innerText = '채팅'
+        chatBtn.append(chatText)
+        const uploadBtn = document.createElement('button')
+        uploadBtn.setAttribute('id', 'upload-btn')
+        uploadBtn.setAttribute('class', 'material-symbols-outlined')
+        uploadBtn.innerText = 'add'
+        modalBtnBox.append(uploadBtn)
+        const uploadText = document.createElement('div')
+        uploadText.innerText = '등록'
+        uploadBtn.append(uploadText)
     }
 
     // 채팅 모달 생성
@@ -769,7 +783,6 @@ class Websocket {
 }
 
 
-
 var chatAlertSocket = ''
 // 페이지 로드 시 실행되는 기능
 document.addEventListener("DOMContentLoaded", async function () {
@@ -779,7 +792,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const userId = payload.user_id
 
         // 채팅 모달과 알림 모달 생성
-        new CreateElement().chatModalBtn()
+        new CreateElement().modalBtnBox()
         new CreateElement().chatModal()
         new CreateElement().alertModal()
 
@@ -808,7 +821,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 })
 
-
 // 채팅 모달 열기
 function openChatModal() {
     const chatBody = document.getElementsByClassName('chat-modal-body')[0]
@@ -817,7 +829,6 @@ function openChatModal() {
     const chatBtn = document.getElementsByClassName('chat-btn')[0]
     chatBtn.setAttribute('onclick', 'closeChatModal()')
 }
-
 
 // 채팅 모달 닫기
 function closeChatModal() {
@@ -835,6 +846,8 @@ function closeChatModal() {
     }
 }
 
+// 페이지 상단으로 보내기
+
 
 // 알림 메시지 및 문의하기 확인 버튼 클릭
 function openDirectChatRoom(roomId) {
@@ -847,7 +860,6 @@ function openDirectChatRoom(roomId) {
         openChatRoom(roomId)
     }
 }
-
 
 // 채팅방 열기
 // 선택된 채팅방 웹소켓 주소 저장

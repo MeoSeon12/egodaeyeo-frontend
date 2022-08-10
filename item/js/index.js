@@ -284,7 +284,7 @@ var useScrollFunction = false
 window.addEventListener('wheel', function (event) {
     if (event.deltaY > 0 && useScrollFunction == false) {
         if (checkVisible($('.welcome-wrap'))) {
-            moveToScroll('.menu-icon-wrap', 30)
+            moveToScroll('.menu-icon-wrap', 90)
             useScrollFunction = true
         }
     }
@@ -305,6 +305,26 @@ function moveToScroll(tagName, num) {
     var offset = $(`${tagName}`).offset()
     $("html, body").animate({scrollTop: offset.top - num}, 750)
 }
+
+// 페이지 위로 버튼 생성
+window.onload = function() {
+    const modalBtnBox = document.querySelector('.modal-btn-box')
+    const goTopBtn = document.createElement('button')
+    goTopBtn.setAttribute('class', 'material-symbols-outlined')
+    goTopBtn.setAttribute('id', 'go-top-btn')
+    goTopBtn.setAttribute('onclick', `moveToScroll('.item-section-container', 160)`)
+    goTopBtn.innerText = 'expand_less'
+    modalBtnBox.append(goTopBtn)
+}
+window.addEventListener('wheel', function() {
+    const goTopBtn = document.querySelector('#go-top-btn')
+    if (checkVisible($('.welcome-wrap')) == false) {
+        goTopBtn.style.display = 'block'
+    }
+    else {
+        goTopBtn.style.display = 'none'
+    }
+})
 
 showAllItems(selectedSection)
 

@@ -81,7 +81,7 @@ class CreateNavElement {
         itemUploadBtn.setAttribute('class', 'material-symbols-outlined')
         itemUploadBtn.setAttribute('onclick', 'goUploadPage()')
         itemUploadBtn.setAttribute('title', '물품등록')
-        itemUploadBtn.innerText = "file_upload"
+        itemUploadBtn.innerText = "add"
         navBtns.append(itemUploadBtn)
 
         const loginLogoutBtn = document.createElement('span')
@@ -95,8 +95,6 @@ class CreateNavElement {
 
         loginLogoutBtn.setAttribute('onclick', 'onLogout()')
         loginLogoutBtn.style.color = 'red'
-
-
     }
 
     createLoginSignupModal() {
