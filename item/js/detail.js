@@ -32,8 +32,12 @@ async function getDetailView() {
             let sliderLi = document.createElement('li')
             slider.append(sliderLi)
             let sliderPicture = document.createElement('img')
-            sliderPicture.setAttribute('src', `${data.images[i]}`)
+            let url = data.images[i]
+            sliderPicture.setAttribute('src', `${url}`)
             sliderLi.append(sliderPicture)
+            sliderPicture.addEventListener('click', function() {
+                window.open(url)
+            })
         }
     }
 

@@ -37,7 +37,7 @@ function imgUpload(obj) {
         for (const file of obj.files) {
             const prImg = document.getElementById('pr-img')
             // 총 첨부된 이미지가 0, 3개 있을 시
-            if (attFileCnt + curFileCnt == 0 || attFileCnt + curFileCnt == 3) {
+            if (attFileCnt + curFileCnt == 0) {
                 prImg.style.justifyContent = 'center'
             } 
             else {
@@ -79,7 +79,7 @@ function deleteFile(num) {
     let attFileCnt = document.querySelectorAll('.filebox').length
     const prImg = document.getElementById('pr-img')
         // 총 첨부된 이미지가 0, 3개 있을 시
-        if (attFileCnt == 0 || attFileCnt == 3) {
+        if (attFileCnt == 0) {
             prImg.style.justifyContent = 'center'
         }
         else {
@@ -87,5 +87,4 @@ function deleteFile(num) {
         }
 }
 
-
-uploadPageView()    // 페이지 뷰
+UploadPageView()    // 페이지 뷰

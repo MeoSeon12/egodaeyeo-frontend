@@ -23,11 +23,12 @@
     background-color: rgb(145, 221, 168);
     border-radius: 20px;
     margin-bottom: 50px;
+    width: 630px;
 }
 
 #pr-img {
     display: flex;
-    width: 630px;
+    width: 100%;
     min-height: 210px;
     flex-wrap: wrap;
     justify-content: center;
@@ -111,7 +112,7 @@
 }
 
 .dropdown-box {
-    width: 100%;
+    width: 99%;
     margin-bottom: 10px;
 }
 
@@ -134,7 +135,7 @@
 }
 
 #title {
-    width: 614px;
+    width: 96%;
     border: 1px solid white;
     border-radius: 5px;
     padding: 10px;
@@ -151,11 +152,11 @@
     border: 1px solid white;
     height: 22px;
     outline: none;
-    width: 120px;
+    width: 18%;
 }
 
 #content {
-    width: 614px;
+    width: 96%;
     border: 1px solid white;
     border-radius: 5px;
     padding: 10px;
@@ -181,4 +182,28 @@
 #submit:hover {
     transition: all 0.5s ease;
     background-color: rgb(88, 206, 123);
+}
+
+@media screen and (max-width: 680px) {
+    #pr-img > img {
+        width: 47%;
+    }
+    .file-input-custom {
+        width: 47%;
+    }
+}
+@media screen and (max-width: 440px) {
+    #pr-img > img {
+        width: 100%;
+    }
+    .file-input-custom {
+        width: 100%;
+    }
+    .dropdown-box > * {
+        margin: 2px 0;
+        width: 100%;
+    }
+    #price {
+        width: 80%;
+    }
 }
