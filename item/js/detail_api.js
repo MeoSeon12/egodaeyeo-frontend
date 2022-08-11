@@ -23,12 +23,12 @@ async function DetailViewGetApi() {
 
     // 요청 실패 (아이템 DB 없음)
     else if (response.status == 404) {
-        return alert('아이템 정보가 없습니다')
+        return alert('아이템 정보가 없습니다.')
     }
 }
 
 
-// 백엔드로 북마크 저장 & 삭제
+// 백엔드로 북마크 저장 & 삭제 item/DetailView
 async function DetailViewPostApi() {
     const token = await refreshToken(payload)
     const response = await fetch(`${backEndBaseUrl}/items/details/${itemId}`, {
@@ -43,8 +43,8 @@ async function DetailViewPostApi() {
         bookmarkData = await response.json()
         return bookmarkData
     }
-    else {
-        alert('주소를 등록한 후 이용가능합니다')
+    else if (response.status == 401) {
+        alert('로그인 후 이용 가능합니다.')
     }
 }
 
@@ -84,5 +84,45 @@ async function chatStartApi() {
     }
     else {
         alert('현재 대여 가능한 물품이 아닙니다.')
+    }
+}
+
+async function onReportSubmit(itemId) {
+    const token = await refreshToken(payload)
+    const category = document.querySelector('.report-category').value
+    const content = document.querySelector('#report').value
+    if (category == "") {
+        alert('신고 사유를 선택해 주세요.')
+        return
+    }
+    if (category == "기타" && content == "") {
+        alert('기타 사유는 내용을 입력해 주세요.')
+        return
+    }
+    reportSubmitData = {
+        "category": category,
+        "content": content
+    }
+    const response = await fetch(`${backEndBaseUrl}/help/report/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(reportSubmitData)
+    })
+    
+    data = await response.json()
+    //  요청 성공
+    if (response.status == 200 || response.status == 201) {
+        alert('신고 접수 완료')
+        window.location.reload()
+    }
+    else if (response.status == 208) {
+        alert(data['msg'])
+    }
+    else if (response.status == 401) {
+        alert('로그인 후 이용 가능합니다.')
     }
 }
