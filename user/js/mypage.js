@@ -86,6 +86,7 @@ async function myPageTabInfo(tab) {
     const data = await myPageApiView(param) //data 전부다
 
     mypageTapWrap.replaceChildren();
+    
     if (data == "") {
         const noContent = document.createElement('div')
         noContent.setAttribute('class', 'no-content')
@@ -94,7 +95,6 @@ async function myPageTabInfo(tab) {
         const noContentText = document.createElement('h2')
         noContentText.innerText = "해당하는 내역이 없습니다."
         noContent.append(noContentText)
-
     }
     else {
         for (let i = 0; i < data.length; i++) {
@@ -102,6 +102,8 @@ async function myPageTabInfo(tab) {
             const rentalDate = data[i]['rental_date']
             const timeRemaining = data[i]['time_remaining']
             const itemId = item['id']
+            const roomId = data[i]['room_id']
+            const authorId = item['user']
 
             const newTabContainer = document.createElement('div')
             newTabContainer.setAttribute('class', 'tab-info-container')
@@ -109,13 +111,13 @@ async function myPageTabInfo(tab) {
 
             const newTabBox = document.createElement('div')
             newTabBox.setAttribute('class', 'tab-info-box')
-            newTabBox.addEventListener('click', () => {
-                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
-            })
             newTabContainer.append(newTabBox)
-
+            
             const newTabInner = document.createElement('div')
             newTabInner.setAttribute('class', 'tab-inner-box')
+            newTabInner.addEventListener('click', () => {
+                location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+            })
             newTabBox.append(newTabInner)
 
             if (item['image'] == null) {
@@ -160,6 +162,7 @@ async function myPageTabInfo(tab) {
             newTextTitle.innerText = item['title']
             newTabTextBox.append(newTextTitle)
 
+            
             if (param == "ongoing") {
                 //남은 기간
                 const newInfoData = document.createElement('div')
@@ -167,6 +170,21 @@ async function myPageTabInfo(tab) {
                 newInfoData.innerText = timeRemaining + " 남음"
                 newInfoData.style.textAlign = "center"
                 newTabBox.append(newInfoData)
+
+                //물품을 빌려주는 사람일경우 대여종료하는 버튼이 보이게
+                if (authorId == payload.user_id) {
+                    const rentalEndBtn = document.createElement('button')
+                    rentalEndBtn.setAttribute('class', 'rental-end-btn')
+                    rentalEndBtn.onclick = async function () {
+                        alert("대여가 종료 되었습니다.")
+                        // 대여 상태 변경 API
+                        await contractAcceptAndEndApi(itemId, "대여 종료", roomId)
+    
+                        window.location.reload()
+                    }
+                    rentalEndBtn.innerText = "대여 종료하기"
+                    newInfoData.append(rentalEndBtn)
+                }
             }
             else if (param == "closed") {
                 //날짜
@@ -175,6 +193,27 @@ async function myPageTabInfo(tab) {
                 newInfoData.innerText = rentalDate
                 newInfoData.style.textAlign = "left"
                 newTabBox.append(newInfoData)
+
+                //물품을 빌려주는 사람일경우 다시등록 버튼
+                if(authorId == payload.user_id) {
+                    const reUploadBtn = document.createElement('button')
+                    reUploadBtn.setAttribute('class', 'rental-end-btn')
+                    reUploadBtn.onclick = function() {
+                        reUploadItemApi(itemId, "대여 가능")
+                    }
+                    reUploadBtn.style.backgroundColor = 'rgb(167, 252, 247)'
+                    reUploadBtn.innerText = "다시 등록하기"
+                    newInfoData.append(reUploadBtn)
+                }
+                //빌린 글은 리뷰작성하기 버튼
+                else {
+                    const onReviewBtn = document.createElement('button')
+                    onReviewBtn.setAttribute('class', 'rental-end-btn')
+                    onReviewBtn.setAttribute('onclick', `reviewModalView(${itemId})`)
+                    onReviewBtn.style.backgroundColor = 'rgb(186, 225, 255)'
+                    onReviewBtn.innerText = "리뷰 작성하기"
+                    newInfoData.append(onReviewBtn)
+                }
             }
             else {
                 //스테이터스
