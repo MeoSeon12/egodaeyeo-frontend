@@ -29,11 +29,6 @@
     }
 }
 
-.welcome-wrap > div {
-    animation: fadein-from-right 3s;
-    margin-left: 10px;
-}
-
 .welcome-wrap > div > h1 {
     margin: 0;
     font-size: 45px;
@@ -51,11 +46,18 @@
     animation: fadein-from-right 3.2s;
 }
 
-.welcome-wrap > i {
+.arrow-wrap {
+    background-color: transparent;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    animation: none;
+}
+
+.welcome-wrap > div > i {
     font-size: 60px;
     color: rgb(0, 255, 98);
-    margin: 70px 0 0 10px;
-    width: 100px;
     cursor: pointer;
     display: inline-block;
     vertical-align: middle;
@@ -66,7 +68,7 @@
     transition-duration: 0.3s;
 }
 
-.welcome-wrap > i:hover {
+.arrow-wrap:hover {
     -webkit-animation-name: hvr-icon-hang-sink, hvr-icon-hang;
     animation-name: hvr-icon-hang-sink, hvr-icon-hang;
     -webkit-animation-duration: .3s, 1.5s;
@@ -193,14 +195,9 @@
     cursor: pointer;
 }
 
-#lend-btn {
+#lend-btn, #borrow-btn {
     background-color: rgb(236, 236, 236);
 }
-
-#borrow-btn {
-    background-color: rgb(236, 236, 236);
-}
-
 #lend-btn:hover {
     background-color: rgb(191, 255, 194);
 }
@@ -210,7 +207,6 @@
 }
 
 .category-wrap {
-    min-height: 140px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -231,7 +227,7 @@
 }
 
 .category-container:hover {
-    background-image: linear-gradient(to right top, #dcdcdc, #dedede, #dfe0df, #e1e1e1, #e3e3e3, #e6e6e6, #e8e8e8, #ebebeb, #efefef, #f2f2f2, #f6f6f6, #fafafa);
+    background-color: rgb(236, 236, 236);
     cursor: pointer;
 }
 
