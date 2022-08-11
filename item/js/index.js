@@ -10,7 +10,7 @@ let selectedCategory = ""
 let selectedSection = ""
 
 async function showAllItems(selectedSection) {
-    //api에서 return한 json데이터
+    // api에서 return한 json데이터
     const items = await itemApiView();
     const categories = items['categories']
     const itemsInfo = items['items']['results']
@@ -41,14 +41,15 @@ async function showAllItems(selectedSection) {
     categoryWrap.replaceChildren();
     itemWrap.replaceChildren();
     
-    //카테고리
+    // 카테고리
     const categoryContainer = document.createElement("div")
     categoryContainer.setAttribute("class", "category-container")
     categoryContainer.setAttribute("onclick", "selectedAllItems()")
+    categoryContainer.style.backgroundColor = '#fdc8c8'
     categoryContainer.innerText = "전체"
     categoryWrap.append(categoryContainer)
     
-    //json category 데이터 뽑기
+    // json category 데이터 뽑기
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i]['name']
 
@@ -69,22 +70,27 @@ async function showAllItems(selectedSection) {
         itemWrap.style.marginTop = "20px";
         itemDataAppend(itemsInfo)
     }
-}
+} showAllItems(selectedSection)
 
-//파라미터 저장을 위한 함수들
+// 파라미터 저장을 위한 함수들
 function selectedAllItems() {
     selectedCategory = ""
     showAllItems(selectedSection)
 }
 
 function selectedCategoryItems(e) {
-    //변수에 카테고리 저장
+    // 변수에 카테고리 저장
     selectedCategory = e.innerText
+    const categoryContainer = document.querySelectorAll('.category-container')
+    for (i = 0; i < categoryContainer.length; i++) {
+        categoryContainer[i].style.backgroundColor = 'rgb(236, 236, 236)'
+    }
+    e.style.backgroundColor = '#fdc8c8'
     showSelectedItems()
 }
 
 function selectedSectionItems(e) {
-    //변수에 빌려드려요, 빌려요 저장
+    // 변수에 빌려드려요, 빌려요 저장
     selectedSection = e.innerText
     showSelectedItems()
 
@@ -109,7 +115,6 @@ async function showSelectedItems() {
     const items = await selectedItemApiView(selectedCategory, selectedSection)
     const itemsInfo = items['items']['results']
     pageUrl = items['items']['next']
-    
 
     if (selectedCategory == "" && selectedSection == "빌려드려요") {
         categoryText.innerText = "#전체" + selectedCategory
@@ -151,9 +156,9 @@ async function showSelectedItems() {
     }
 }
 
-//스크롤 이벤트 함수
+// 스크롤 이벤트 함수
 window.onscroll = function () { 
-    //스크롤이 바닥에 닿았을때
+    // 스크롤이 바닥에 닿았을때
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         showScrollItems(); // 컨텐츠를 추가하는 함수를 불러온다.
     }
@@ -168,9 +173,9 @@ async function showScrollItems() {
     }
 }
 
-//HTML 데이터 붙이는 함수
+// HTML 데이터 붙이는 함수
 function itemDataAppend(itemsInfo) {
-    //json item 데이터 뽑기
+    // json item 데이터 뽑기
     for (let i = 0; i < itemsInfo.length; i++) {
         const item = itemsInfo[i]
         const itemId = item['id']
@@ -183,14 +188,14 @@ function itemDataAppend(itemsInfo) {
         itemWrap.append(newItemBox)
 
         if (item['image'] == null) {
-            //이미지 없을시
+            // 이미지 없을시
             const newItemImage = document.createElement('img')
             newItemImage.setAttribute("class", "item-image")
             newItemImage.setAttribute("src", "https://egodaeyeo.s3.amazonaws.com/static/default_item.jpg")
             newItemBox.append(newItemImage)
         }
         else {
-            //이미지 있을시
+            // 이미지 있을시
             const newItemImage = document.createElement('img')
             newItemImage.setAttribute("class", "item-image")
             newItemImage.setAttribute("src", item['image'])
@@ -201,13 +206,13 @@ function itemDataAppend(itemsInfo) {
         newItemDesc.setAttribute("class", "item-desc")
         newItemBox.append(newItemDesc)
 
-        //제목
+        // 제목
         const newItemTitle = document.createElement('div')
         newItemTitle.setAttribute("class", "item-title")
         newItemTitle.innerText = item['title']
         newItemDesc.append(newItemTitle)
 
-        //가격
+        // 가격
         const newItemPrice = document.createElement('div')
         newItemPrice.setAttribute("class", "item-price")
         if (item['price'] == null) {
@@ -222,7 +227,7 @@ function itemDataAppend(itemsInfo) {
             newItemPrice.innerText = item['price'].toLocaleString()+ "원" + " / "
             newItemDesc.append(newItemPrice)
             
-            //가격단위
+            // 가격단위
             const newPriceUnit = document.createElement('span')
             newPriceUnit.setAttribute("class", "price-time-unit")
             newPriceUnit.innerText = item['time_unit']
@@ -237,12 +242,12 @@ function itemDataAppend(itemsInfo) {
         newItemLike.setAttribute("class", "item-like")
         newItemLike.innerText = "찜"
         newItemInterest.append(newItemLike)
-        //찜 카운트
+        // 찜 카운트
         const newLikeCount = document.createElement('span')
         newLikeCount.setAttribute("class", "like-count")
         newLikeCount.innerText = item['item_bookmarks']
         newItemLike.append(newLikeCount)
-        //문의 카운트
+        // 문의 카운트
         const newItemInquiry = document.createElement('div')
         newItemInquiry.setAttribute("class", "item-inquiry")
         newItemInquiry.innerText = "문의"
@@ -302,5 +307,3 @@ window.addEventListener('wheel', function() {
         goTopBtn.style.display = 'none'
     }
 })
-
-showAllItems(selectedSection)
