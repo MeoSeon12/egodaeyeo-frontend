@@ -208,6 +208,7 @@ class CreateNavElement {
         const signupPasswordInput = document.createElement('input')
         signupPasswordInput.setAttribute('id', 'inputPassword')
         signupPasswordInput.setAttribute('type', 'password')
+        signupPasswordInput.setAttribute('placeholder', '최소 8자리 영문, 특수문자 포함')
         signupModalInputs.append(signupPasswordInput)
 
         const signupPasswordTwoHeader = document.createElement('h5')
