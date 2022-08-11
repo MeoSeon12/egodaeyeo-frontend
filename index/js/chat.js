@@ -4,11 +4,16 @@ class CreateElement {
         this.body = document.querySelector('body')
     }
 
-    // 채팅 모달 버튼, 등록 버튼 생성
+    // 모달 박스 생성
     modalBtnBox() {
         const modalBtnBox = document.createElement('div')
         modalBtnBox.setAttribute('class', 'modal-btn-box')
         this.body.append(modalBtnBox)
+    }
+
+    // 채팅 모달 버튼, 등록 버튼 생성
+    chatAndUploadBtn() {
+        const modalBtnBox = document.querySelector('.modal-btn-box')
         const chatBtn = document.createElement('button')
         chatBtn.setAttribute('class', 'chat-btn')
         chatBtn.setAttribute('onclick', 'openChatModal()')
@@ -825,13 +830,13 @@ class Websocket {
 var chatAlertSocket = ''
 // 페이지 로드 시 실행되는 기능
 document.addEventListener("DOMContentLoaded", async function () {
-
+    // 모달 버튼 생성
+    new CreateElement().modalBtnBox()
+    new CreateElement().chatAndUploadBtn()
     // 로그인 유저일 경우
     if (payload != null) {
         const userId = payload.user_id
-
         // 채팅 모달과 알림 모달 생성
-        new CreateElement().modalBtnBox()
         new CreateElement().chatModal()
         new CreateElement().alertModal()
 
@@ -862,11 +867,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // 채팅 모달 열기
 function openChatModal() {
-    const chatBody = document.getElementsByClassName('chat-modal-body')[0]
-    chatBody.style.animation = 'moveUp 0.5s'
-    chatBody.style.display = 'flex'
-    const chatBtn = document.getElementsByClassName('chat-btn')[0]
-    chatBtn.setAttribute('onclick', 'closeChatModal()')
+    if (payload == null) {
+        alert('로그인 후 이용 가능합니다')
+    }
+    else {
+        const chatBody = document.getElementsByClassName('chat-modal-body')[0]
+        chatBody.style.animation = 'moveUp 0.5s'
+        chatBody.style.display = 'flex'
+        const chatBtn = document.getElementsByClassName('chat-btn')[0]
+        chatBtn.setAttribute('onclick', 'closeChatModal()')
+    }
 }
 
 // 채팅 모달 닫기
