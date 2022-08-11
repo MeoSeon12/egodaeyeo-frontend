@@ -416,6 +416,7 @@ function goUploadPage() {
     // 비 로그인 유저일 경우
     if (localStorage.payload == undefined) {
         alert('로그인 후 이용 가능합니다')
+        new NavModalView().loginSignupModalView()
     }
 
     // 로그인 유저일 경우

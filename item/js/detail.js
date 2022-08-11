@@ -272,6 +272,7 @@ async function bookmark() {
     // 비로그인 유저일 경우
     if (payload == null) {
         alert('로그인 후 이용가능합니다')
+        new NavModalView().loginSignupModalView()
     }
 
     // 로그인 유저일 경우
@@ -301,6 +302,7 @@ async function inquiry() {
     // 비로그인 유저일 경우
     if (payload == null) {
         alert('로그인 후 이용가능합니다')
+        new NavModalView().loginSignupModalView()
     }
 
     // 로그인 유저일 경우
