@@ -79,14 +79,13 @@ async function myInfo() {
 myInfo()
 
 
-
 //각종 내역 불러오는 함수
 async function myPageTabInfo(tab) {
     let param = tab.id
     const data = await myPageApiView(param) //data 전부다
 
     mypageTapWrap.replaceChildren();
-    
+
     if (data == "") {
         const noContent = document.createElement('div')
         noContent.setAttribute('class', 'no-content')
