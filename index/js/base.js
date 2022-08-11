@@ -208,6 +208,7 @@ class CreateNavElement {
         const signupPasswordInput = document.createElement('input')
         signupPasswordInput.setAttribute('id', 'inputPassword')
         signupPasswordInput.setAttribute('type', 'password')
+        signupPasswordInput.setAttribute('placeholder', '최소 8자리 영문, 특수문자 포함')
         signupModalInputs.append(signupPasswordInput)
 
         const signupPasswordTwoHeader = document.createElement('h5')
@@ -416,6 +417,7 @@ function goUploadPage() {
     // 비 로그인 유저일 경우
     if (localStorage.payload == undefined) {
         alert('로그인 후 이용 가능합니다')
+        new NavModalView().loginSignupModalView()
     }
 
     // 로그인 유저일 경우

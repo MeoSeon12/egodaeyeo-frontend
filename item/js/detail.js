@@ -176,6 +176,15 @@ async function getDetailView() {
         // 문의하기 버튼
         communicationRightBtn.setAttribute('onclick', 'inquiry()')
         communicationRightBtn.innerText = '문의하기'
+
+        //신고하기 버튼
+        const itemBoxContact = document.querySelector('.item-box-contact')
+        const reportBtn = document.createElement('button')
+        reportBtn.setAttribute('class', 'report-btn')
+        reportBtn.setAttribute('onclick', `reportModalView(${itemId})`)
+        reportBtn.innerText = '신고하기'
+        itemBoxContact.append(reportBtn)
+
     }
     // 본인 게시글일 경우
     else {
@@ -263,6 +272,7 @@ async function bookmark() {
     // 비로그인 유저일 경우
     if (payload == null) {
         alert('로그인 후 이용가능합니다')
+        new NavModalView().loginSignupModalView()
     }
 
     // 로그인 유저일 경우
@@ -292,6 +302,7 @@ async function inquiry() {
     // 비로그인 유저일 경우
     if (payload == null) {
         alert('로그인 후 이용가능합니다')
+        new NavModalView().loginSignupModalView()
     }
 
     // 로그인 유저일 경우
@@ -416,4 +427,102 @@ function showDeleteCheckModal() {
             inquiryModalBody.style.display = 'none'
         }
     })
+}
+
+
+//신고 모달 생성과 동시에 모달 뷰
+function reportModalView(itemId) {
+     // 비로그인 유저일 경우
+    if (payload == null) {
+        alert('로그인 후 이용가능합니다')
+    }
+    else {
+        // 신고 모달 바디 추가
+        const body = document.querySelector('body');
+        body.style.overflow = 'hidden' // 스크롤 히든
+
+        const reportModalBody = document.createElement('div')
+        reportModalBody.setAttribute('class', 'report-modal-body')
+        body.append(reportModalBody)
+
+        // 신고 모달 컨테이너 추가
+        const reportModalContainer = document.createElement('div')
+        reportModalContainer.setAttribute('class', 'report-modal-container')
+        reportModalBody.append(reportModalContainer)
+
+        const reportModalHeader = document.createElement('h2');
+        reportModalHeader.setAttribute("class", "report-modal-header");
+        reportModalHeader.innerText = "신고하기"
+        reportModalContainer.append(reportModalHeader)
+
+        const reportCategory = document.createElement('select');
+        reportCategory.setAttribute("class", "report-category");
+        reportModalContainer.append(reportCategory)
+
+        const reportCategoryChoose = document.createElement('option');
+        reportCategoryChoose.setAttribute("value", "");
+        reportCategoryChoose.innerText = '--신고 사유--'
+        const reportCategoryOne = document.createElement('option');
+        reportCategoryOne.setAttribute("value", "판매 금지 물품이에요");
+        reportCategoryOne.innerText = '판매 금지 물품이에요'
+        const reportCategoryTwo = document.createElement('option');
+        reportCategoryTwo.setAttribute("value", "중고거래 게시글이 아니에요");
+        reportCategoryTwo.innerText = '중고거래 게시글이 아니에요'
+        const reportCategoryThree = document.createElement('option');
+        reportCategoryThree.setAttribute("value", "전문 판매업자 같아요");
+        reportCategoryThree.innerText = '전문 판매업자 같아요'
+        const reportCategoryFour = document.createElement('option');
+        reportCategoryFour.setAttribute("value", "사기 글이에요");
+        reportCategoryFour.innerText = '사기 글이에요'
+        const reportCategoryFive = document.createElement('option');
+        reportCategoryFive.setAttribute("value", "기타");
+        reportCategoryFive.innerText = '기타'
+        reportCategory.append(
+            reportCategoryChoose,
+            reportCategoryOne,
+            reportCategoryTwo, 
+            reportCategoryThree, 
+            reportCategoryFour, 
+            reportCategoryFive
+        )
+
+        const reportContent = document.createElement('textarea');
+        reportContent.setAttribute("id", "report");
+        reportContent.setAttribute("name", "report");
+        reportContent.setAttribute("rows", "5");
+        reportContent.setAttribute("cols", "33");
+        reportContent.setAttribute("placeholder", "내용");
+        reportModalContainer.append(reportContent)
+
+        const reportSubmitBtn = document.createElement('button');
+        reportSubmitBtn.setAttribute("class", "report-submit-btn");
+        reportSubmitBtn.innerText = "신고하기"
+        reportModalContainer.append(reportSubmitBtn)
+
+        reportSubmitBtn.addEventListener('click', (e) => {
+            onReportSubmit(itemId)
+        })
+
+        const askSign = document.createElement('div');
+        askSign.setAttribute("class", "ask-sign");
+        reportModalContainer.append(askSign)
+
+        const skipReport = document.createElement('a');
+        skipReport.setAttribute("class", "skip-report");
+        skipReport.innerText = '취소'
+        askSign.append(skipReport)
+
+        addEventListener('mousedown', (e) => {
+            if (e.target == reportModalBody | e.target == skipReport) {
+                reportModalUnview()
+            }
+        })
+    }
+}
+
+function reportModalUnview() {
+    const body = document.querySelector('body');
+    const reportModalBody = document.querySelector('.report-modal-body');
+    body.style.overflow = 'auto'
+    reportModalBody.remove()
 }
