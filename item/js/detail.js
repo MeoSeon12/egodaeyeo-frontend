@@ -262,8 +262,7 @@ async function getDetailView() {
             reviewContainer.append(period)
         }
     }
-}
-getDetailView()
+} getDetailView()
 
 
 // 찜 버튼 클릭
@@ -271,7 +270,6 @@ async function bookmark() {
 
     // 비로그인 유저일 경우
     if (payload == null) {
-        alert('로그인 후 이용가능합니다')
         new NavModalView().loginSignupModalView()
     }
 
@@ -301,7 +299,6 @@ async function inquiry() {
 
     // 비로그인 유저일 경우
     if (payload == null) {
-        alert('로그인 후 이용가능합니다')
         new NavModalView().loginSignupModalView()
     }
 
@@ -434,7 +431,7 @@ function showDeleteCheckModal() {
 function reportModalView(itemId) {
      // 비로그인 유저일 경우
     if (payload == null) {
-        alert('로그인 후 이용가능합니다')
+        new NavModalView().loginSignupModalView()
     }
     else {
         // 신고 모달 바디 추가

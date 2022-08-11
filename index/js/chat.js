@@ -868,7 +868,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 // 채팅 모달 열기
 function openChatModal() {
     if (payload == null) {
-        alert('로그인 후 이용 가능합니다')
+        new NavModalView().loginSignupModalView()
     }
     else {
         const chatBody = document.getElementsByClassName('chat-modal-body')[0]
