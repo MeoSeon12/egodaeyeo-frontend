@@ -95,10 +95,10 @@ h2 {
 .main-right-container {
     max-width: 750px;
     width: 100%;
-    margin: 0 15px 0 0;
+    /* margin: 0 0 0 -15px; */
     padding: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .mypage-tap-wrap {
@@ -114,10 +114,11 @@ h2 {
     height: 180px;
     display: flex;
     justify-content: center;
+    margin-left: -25px;
 }
 
 .tab-info-box {
-    max-width: 700px;
+    max-width: 580px;
     width: 95%;
     height: 165px;
     background-color: #74C5AC;
@@ -131,13 +132,13 @@ h2 {
 
 .tab-info-box:hover {
     background-color: #4cc59f;
-    cursor: pointer;
 }
 
 .tab-inner-box {
     display: flex;
     flex-direction: row;
     align-items: center;
+    cursor: pointer;
 }
 
 .tab-info-text {
@@ -164,13 +165,32 @@ h2 {
     white-space: nowrap;
 }
 
+.rental-end-btn {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ffe398;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.rental-end-btn:hover {
+    opacity: 0.8;
+}
+
 .info-data {
     width: 200px;
-    height: 30px;
+    height: 60px;
     line-height: 30px;
     font-size: 15px;
+    font-weight: bold;
     color: rgb(94, 94, 94);
     white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* 프로필 수정 */
@@ -337,6 +357,7 @@ h2 {
     width: 100%;
     height: 500px;
     margin-top: 20px;
+    margin-left: 20px;
 }
 
 .feedback-title {
@@ -457,8 +478,6 @@ h2 {
         width: 100%;
     }
     .main-wrap {
-        /* margin-left: 10px;
-        margin-right: 10px; */
         width: 90%;
         flex-direction: column;
         justify-content: flex-start;
@@ -468,8 +487,6 @@ h2 {
     .main-left-container {
         height: 500px;
         width: 90%;
-        /* margin-left: 10px;
-        margin-right: 10px; */
     }
 
     .main-right-container {
@@ -482,6 +499,10 @@ h2 {
 
     .profile-input {
         width: 90%;
+    }
+
+    .tab-info-container {
+        margin-left: 0;
     }
 }
 

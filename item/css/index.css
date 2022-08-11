@@ -212,7 +212,6 @@
 }
 
 .category-wrap {
-    min-height: 140px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

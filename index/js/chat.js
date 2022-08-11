@@ -181,7 +181,7 @@ class CreateElement {
 
             switch (contractStatus) {
                 case "대여 중":
-                    endContractBtn.innerText = "대여 종료"
+                    endContractBtn.innerText = "대여 종료하기"
                     contractBtnContainer.append(endContractBtn)
     
                     // 대여 종료 버튼 클릭
@@ -208,7 +208,7 @@ class CreateElement {
 
                 case "대여 종료":
                     // 대여 종료 상태면 다시 등록하기 활성화
-                    endContractBtn.innerText = "다시 등록 하기"
+                    endContractBtn.innerText = "다시 등록하기"
                     endContractBtn.style.backgroundColor = "#a7fcf7"
                     contractBtnContainer.append(endContractBtn)
                     // 다시 등록하기 버튼을 누르면 물품 등록 페이지로 이동
@@ -1189,7 +1189,7 @@ async function checkRentalDateModal(itemId, roomId) {
 
         const endContractBtn = document.createElement('button');
         endContractBtn.setAttribute("class", "end-contract-btn");
-        endContractBtn.innerText = "대여 종료"
+        endContractBtn.innerText = "대여 종료하기"
 
         // 대여 종료 버튼 클릭
         // 물품 상태를 대여 중 -> 대여 종료로 바꿈

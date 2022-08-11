@@ -213,6 +213,9 @@ async function reUploadItemApi(itemId, status) {
         alert(response_json.msg)
         location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
     }
+    else if (response.status == 208){
+        alert(response_json.msg)
+    }
     else if (response.status == 404){
         alert(response_json.msg)
     }
