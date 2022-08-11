@@ -304,7 +304,3 @@ window.addEventListener('wheel', function() {
 })
 
 showAllItems(selectedSection)
-
-
-
-

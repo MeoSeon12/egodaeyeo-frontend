@@ -4,11 +4,16 @@ class CreateElement {
         this.body = document.querySelector('body')
     }
 
-    // 채팅 모달 버튼, 등록 버튼 생성
+    // 모달 박스 생성
     modalBtnBox() {
         const modalBtnBox = document.createElement('div')
         modalBtnBox.setAttribute('class', 'modal-btn-box')
         this.body.append(modalBtnBox)
+    }
+
+    // 채팅 모달 버튼, 등록 버튼 생성
+    chatAndUploadBtn() {
+        const modalBtnBox = document.querySelector('.modal-btn-box')
         const chatBtn = document.createElement('button')
         chatBtn.setAttribute('class', 'chat-btn')
         chatBtn.setAttribute('onclick', 'openChatModal()')
@@ -176,7 +181,7 @@ class CreateElement {
 
             switch (contractStatus) {
                 case "대여 중":
-                    endContractBtn.innerText = "대여 종료"
+                    endContractBtn.innerText = "대여 종료하기"
                     contractBtnContainer.append(endContractBtn)
     
                     // 대여 종료 버튼 클릭
@@ -203,7 +208,7 @@ class CreateElement {
 
                 case "대여 종료":
                     // 대여 종료 상태면 다시 등록하기 활성화
-                    endContractBtn.innerText = "다시 등록 하기"
+                    endContractBtn.innerText = "다시 등록하기"
                     endContractBtn.style.backgroundColor = "#a7fcf7"
                     contractBtnContainer.append(endContractBtn)
                     // 다시 등록하기 버튼을 누르면 물품 등록 페이지로 이동
@@ -825,13 +830,13 @@ class Websocket {
 var chatAlertSocket = ''
 // 페이지 로드 시 실행되는 기능
 document.addEventListener("DOMContentLoaded", async function () {
-
+    // 모달 버튼 생성
+    new CreateElement().modalBtnBox()
+    new CreateElement().chatAndUploadBtn()
     // 로그인 유저일 경우
     if (payload != null) {
         const userId = payload.user_id
-
         // 채팅 모달과 알림 모달 생성
-        new CreateElement().modalBtnBox()
         new CreateElement().chatModal()
         new CreateElement().alertModal()
 
@@ -862,11 +867,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // 채팅 모달 열기
 function openChatModal() {
-    const chatBody = document.getElementsByClassName('chat-modal-body')[0]
-    chatBody.style.animation = 'moveUp 0.5s'
-    chatBody.style.display = 'flex'
-    const chatBtn = document.getElementsByClassName('chat-btn')[0]
-    chatBtn.setAttribute('onclick', 'closeChatModal()')
+    if (payload == null) {
+        alert('로그인 후 이용 가능합니다')
+    }
+    else {
+        const chatBody = document.getElementsByClassName('chat-modal-body')[0]
+        chatBody.style.animation = 'moveUp 0.5s'
+        chatBody.style.display = 'flex'
+        const chatBtn = document.getElementsByClassName('chat-btn')[0]
+        chatBtn.setAttribute('onclick', 'closeChatModal()')
+    }
 }
 
 // 채팅 모달 닫기
@@ -1179,7 +1189,7 @@ async function checkRentalDateModal(itemId, roomId) {
 
         const endContractBtn = document.createElement('button');
         endContractBtn.setAttribute("class", "end-contract-btn");
-        endContractBtn.innerText = "대여 종료"
+        endContractBtn.innerText = "대여 종료하기"
 
         // 대여 종료 버튼 클릭
         // 물품 상태를 대여 중 -> 대여 종료로 바꿈

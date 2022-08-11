@@ -22,7 +22,7 @@ async function getUnreadMessageApi(userId) {
 }
 
 
-// 채팅 모달 데이터 요청 API - ChatView
+// 채팅 모달 데이터 요청 API - chat/ChatView
 async function chatModalApi() {
     const token = await refreshToken(payload)
 
@@ -212,6 +212,9 @@ async function reUploadItemApi(itemId, status) {
     if (response.status == 200) {
         alert(response_json.msg)
         location.href = `${frontEndBaseUrl}/item/detail.html?${itemId}`
+    }
+    else if (response.status == 208){
+        alert(response_json.msg)
     }
     else if (response.status == 404){
         alert(response_json.msg)
