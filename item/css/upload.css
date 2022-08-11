@@ -28,16 +28,15 @@
 
 #pr-img {
     display: flex;
-    width: 100%;
-    min-height: 210px;
-    flex-wrap: wrap;
     justify-content: center;
-    border: 2px solid white;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    width: 100%;
+    border: 2px solid #58ce7b;
     border-radius: 10px;
 }
 
 #pr-img > img {
-    width: 200px;
+    width: 95%;
     height: 200px;
     object-fit: cover;
     margin: 5px;
@@ -52,8 +51,7 @@
 .file-input-custom {
     display: flex;
     cursor: pointer;
-    width: 200px;
-    height: 200px;
+    min-width: 200px;
     align-items: center;
     justify-content: center;
     margin: 5px;
@@ -103,7 +101,7 @@
 
 .text-cotainer {
     width: 100%;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #58ce7b;
     padding: 20px 0;
     display: flex;
     flex-direction: column;
@@ -111,59 +109,65 @@
     justify-content: center;
 }
 
+/* 섹션, 카테고리 */
 .dropdown-box {
-    width: 99%;
+    width: 100%;
     margin-bottom: 10px;
 }
-
-.dropdown-box > select {
+select {
     padding: 2px 5px;
     border-radius: 5px;
-    border: 1px solid white;
+    border: 1px solid #58ce7b;
+    margin-right: 1px;
+}
+select:focus-visible {
+    outline: none;
+}
+#section {
+    width: 100px;
+}
+#category {
+    width: 120px;
 }
 
-.dropdown-box > select:focus-visible {
+/* 기간, 가격 */
+.price-wrap {
+    width: 100%;
+    margin-bottom: 10px;
+}
+#time {
+    width: 78px;
+}
+#price {
+    width: 90px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 1px solid #58ce7b;
+    height: 22px;
     outline: none;
 }
 
-.dropdown-box > select:nth-child(2) {
-    margin-right: 10px;
-}
-
-.dropdown-box > select:nth-last-child(1) {
-    margin-left: 10px;
-}
-
+/* 제목 */
 #title {
-    width: 96%;
-    border: 1px solid white;
+    width: 96.5%;
+    border: 1px solid #58ce7b;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
 }
-
 #title:focus {
     outline: none;
 }
 
-#price {
-    padding: 2px 5px;
-    border-radius: 5px;
-    border: 1px solid white;
-    height: 22px;
-    outline: none;
-    width: 18%;
-}
-
+/* 내용 */
 #content {
-    width: 96%;
-    border: 1px solid white;
+    width: 96.5%;
+    border: 1px solid #58ce7b;
     border-radius: 5px;
     padding: 10px;
     resize: vertical;
     min-height: 200px;
 }
-
 #content:focus {
     outline: none;
 }
@@ -171,39 +175,14 @@
 #submit {
     cursor: pointer;
     border-radius: 20px;
-    border: 0;
+    border: 1px solid #58ce7b;
     padding: 10px 20px;
     font-size: 17px;
     font-weight: bold;
     margin: 20px;
-    background-color: white;
 }
 
 #submit:hover {
     transition: all 0.5s ease;
-    background-color: rgb(88, 206, 123);
-}
-
-@media screen and (max-width: 680px) {
-    #pr-img > img {
-        width: 47%;
-    }
-    .file-input-custom {
-        width: 47%;
-    }
-}
-@media screen and (max-width: 440px) {
-    #pr-img > img {
-        width: 100%;
-    }
-    .file-input-custom {
-        width: 100%;
-    }
-    .dropdown-box > * {
-        margin: 2px 0;
-        width: 100%;
-    }
-    #price {
-        width: 80%;
-    }
+    background-color: #58ce7b;
 }

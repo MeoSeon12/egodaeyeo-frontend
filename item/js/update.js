@@ -61,8 +61,7 @@ async function updatePageView() {
         }
         uploadButtonPosition()
     }
-}
-
+} updatePageView()
 
 // 이미지 첨부
 function imgUpload(obj) {
@@ -124,21 +123,19 @@ function deleteFile(num) {
     uploadButtonPosition()
 }
 
-
 // 미리보기 이미지 갯수에 따라 첨부 버튼 정렬
 function uploadButtonPosition() {
     let attFileCnt = document.querySelectorAll('.filebox').length
     const prImg = document.getElementById('pr-img')
 
-    // 총 첨부된 이미지가 0, 3개 있을 시
-    if (attFileCnt == 0 || attFileCnt == 3) {
-        prImg.style.justifyContent = 'center'
+    // 총 첨부된 이미지가 0개 있을 시
+    if (attFileCnt == 0) {
+        prImg.style.display = 'flex'
     }
     else {
-        prImg.style.justifyContent = 'normal'
+        prImg.style.display = 'grid'
     }
 }
-
 
 // 빌려요 선택한 경우
 function sectionValCheck(obj) {
@@ -150,5 +147,3 @@ function sectionValCheck(obj) {
         status.style.display = 'inline-block'
     }
 }
-
-updatePageView()

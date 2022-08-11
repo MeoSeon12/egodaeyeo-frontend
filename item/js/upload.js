@@ -12,7 +12,7 @@ async function uploadPageView() {
         category.innerText = `# ${data[i].name}`
         categorySelect.append(category)
     }
-}
+} uploadPageView()
 
 
 let fileNo = 0  // 이미지 마다 다른 id를 지정해주기 위함
@@ -36,13 +36,7 @@ function imgUpload(obj) {
     else {
         for (const file of obj.files) {
             const prImg = document.getElementById('pr-img')
-            // 총 첨부된 이미지가 0, 3개 있을 시
-            if (attFileCnt + curFileCnt == 0) {
-                prImg.style.justifyContent = 'center'
-            } 
-            else {
-                prImg.style.justifyContent = 'normal'
-            }
+            prImg.style.display = 'grid'
             
             // 파일 배열에 담기
             var blob = file.slice(0, file.size, 'image/png')
@@ -78,13 +72,11 @@ function deleteFile(num) {
     
     let attFileCnt = document.querySelectorAll('.filebox').length
     const prImg = document.getElementById('pr-img')
-        // 총 첨부된 이미지가 0, 3개 있을 시
+        // 총 첨부된 이미지가 0개 있을 시
         if (attFileCnt == 0) {
-            prImg.style.justifyContent = 'center'
+            prImg.style.display = 'flex'
         }
         else {
-            prImg.style.justifyContent = 'normal'
+            prImg.style.display = 'grid'
         }
 }
-
-uploadPageView()    // 페이지 뷰
