@@ -87,4 +87,4 @@ function deleteFile(num) {
         }
 }
 
-UploadPageView()    // 페이지 뷰
+uploadPageView()    // 페이지 뷰
