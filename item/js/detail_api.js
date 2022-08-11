@@ -99,7 +99,7 @@ async function onReportSubmit(itemId) {
         alert('기타 사유는 내용을 입력해 주세요.')
         return
     }
-    reportSubmitData = {
+    const reportSubmitData = {
         "category": category,
         "content": content
     }
