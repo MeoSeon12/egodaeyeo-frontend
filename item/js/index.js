@@ -11,7 +11,7 @@ let selectedSection = "빌려드려요"
 
 async function showAllItems(selectedSection) {
     // api에서 return한 json데이터
-    const items = await itemApiView();
+    const items = await itemApiView(selectedCategory, selectedSection);
     const categories = items['categories']
     const itemsInfo = items['items']['results']
     const userAddress = items['user_address']
@@ -101,7 +101,7 @@ sectionCheckbox.addEventListener('change', (event) => {
 })
 
 async function showSelectedItems() {
-    const items = await selectedItemApiView(selectedCategory, selectedSection)
+    const items = await itemApiView(selectedCategory, selectedSection)
     const itemsInfo = items['items']['results']
     pageUrl = items['items']['next']
 
@@ -283,7 +283,7 @@ window.onload = function() {
     const goTopBtn = document.createElement('button')
     goTopBtn.setAttribute('class', 'material-symbols-outlined')
     goTopBtn.setAttribute('id', 'go-top-btn')
-    goTopBtn.setAttribute('onclick', `moveToScroll('.item-section-container', 150)`)
+    goTopBtn.setAttribute('onclick', `moveToScroll('.main-body', 30)`)
     goTopBtn.innerText = 'expand_less'
     modalBtnBox.append(goTopBtn)
 }
