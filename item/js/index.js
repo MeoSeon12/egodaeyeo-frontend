@@ -7,7 +7,7 @@ const addressText = document.getElementsByClassName("list-address")[0];
 
 let pageUrl = ""
 let selectedCategory = ""
-let selectedSection = ""
+let selectedSection = "빌려드려요"
 
 async function showAllItems(selectedSection) {
     // api에서 return한 json데이터
@@ -26,10 +26,7 @@ async function showAllItems(selectedSection) {
         addressText.innerText = "#" + userAddress
     }
     
-    if (selectedSection == "undefined" || selectedSection == "") {
-        sectionText.innerText = "";
-    }
-    else if (selectedSection == "빌려드려요") {
+    if (selectedSection == "빌려드려요") {
         sectionText.innerText = "#" + selectedSection;
         sectionText.style.color = '#85ff8a';
     }
@@ -89,27 +86,18 @@ function selectedCategoryItems(e) {
     showSelectedItems()
 }
 
-function selectedSectionItems(e) {
-    // 변수에 빌려드려요, 빌려요 저장
-    selectedSection = e.innerText
-    showSelectedItems()
-
-    const borrowButton = document.getElementById('borrow-btn')
-    const lendButton = document.getElementById('lend-btn')
-    let borrowHover = 'borrow-btn:hover {background-color: #ffefc2}'
-    let lendHover = 'lend-btn:hover {background-color: rgb(191, 255, 194)}'
-
-    if (selectedSection == "빌려드려요") {
-        e.style.backgroundColor = "#bfffc2";
-        borrowButton.style.backgroundColor = "rgb(236, 236, 236)";
-        borrowButton.style.cssText = borrowHover
+// 섹션 스위치 체크여부 확인 후 selectedSection 변수 저장
+const sectionCheckbox = document.getElementById('section-checkbox')
+sectionCheckbox.addEventListener('change', (event) => {
+    if (event.currentTarget.checked) {
+        selectedSection = '빌려요'
+        showSelectedItems()
     }
-    else{
-        e.style.backgroundColor = "#ffefc2";
-        lendButton.style.backgroundColor = "rgb(236, 236, 236)";
-        lendButton.style.cssText = lendHover
+    else {
+        selectedSection = '빌려드려요'
+        showSelectedItems()
     }
-}
+})
 
 async function showSelectedItems() {
     const items = await selectedItemApiView(selectedCategory, selectedSection)
