@@ -22,6 +22,7 @@ class CreateNavElement {
         navContainer.append(logo)
 
         const mainPageLink = document.createElement('a')
+        mainPageLink.setAttribute('class', 'main-page-link')
         mainPageLink.setAttribute('href', `${frontEndBaseUrl}`)
         mainPageLink.innerText = "이거대여."
         logo.append(mainPageLink)
@@ -95,6 +96,42 @@ class CreateNavElement {
 
         loginLogoutBtn.setAttribute('onclick', 'onLogout()')
         loginLogoutBtn.style.color = 'red'
+
+        const darkModeSwitch = document.createElement('label')
+        darkModeSwitch.setAttribute('class', 'dark-mode-switch')
+        navContainer.append(darkModeSwitch)
+
+        const darkModeCheckBox = document.createElement('input')
+        darkModeCheckBox.setAttribute('type', 'checkbox')
+        darkModeCheckBox.setAttribute('id', 'dark-mode-checkbox')
+        darkModeSwitch.append(darkModeCheckBox)
+
+        const darkModeSlider = document.createElement('span')
+        darkModeSlider.setAttribute('class', 'dark-mode-slider')
+        darkModeSwitch.append(darkModeSlider)
+        
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode == 'true') {
+            document.getElementById("dark-mode-checkbox").checked = false
+            navWrap.classList.add('dark-mode')
+            mainPageLink.classList.add('dark-mode')
+            chatAlarmIcon.classList.add('dark-mode')
+            itemUploadBtn.classList.add('dark-mode')
+        }
+        else {
+            document.getElementById("dark-mode-checkbox").checked = true
+        }
+        // 다크 모드 스위치
+        darkModeCheckBox.addEventListener('change', (e) => {
+            if (isDarkMode == 'true') {
+                localStorage.removeItem('darkMode');
+                window.location.reload()
+            }
+            else {
+                localStorage.setItem('darkMode', 'true');
+                window.location.reload()
+            }
+        })
     }
 
     createLoginSignupModal() {

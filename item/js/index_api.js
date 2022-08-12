@@ -1,21 +1,5 @@
-async function itemApiView() {
-    var userId = ""
-    if (payload != null) {
-        userId = payload.user_id
-    }
-    const response = await fetch(`${backEndBaseUrl}/items?user=${userId}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'X-CSRFToken': csrftoken,
-        }
-    }
-    )
-    return apiResponse(response)
-}
-
 // Query parameter로 카테고리별 아이템정보 조회 - ItemListView
-async function selectedItemApiView(category, section) {
+async function itemApiView(category, section) {
     var userId = ""
     if (payload != null) {
         userId = payload.user_id

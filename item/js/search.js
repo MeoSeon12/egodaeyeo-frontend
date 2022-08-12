@@ -4,7 +4,7 @@ const sectionText = document.getElementsByClassName("list-section")[0];
 const addressText = document.getElementsByClassName("list-address")[0];
 const baseText = document.getElementsByClassName("list-base")[0];
 let pageUrl = ""
-let selectedSection = ""
+let selectedSection = "빌려드려요"
 
 async function showSearchedItems(searchValue) {
 
@@ -54,30 +54,19 @@ async function showSearchedItems(searchValue) {
     }
 }
 
-//섹션 파라미터 저장을 위한 함수
-function selectedSectionItems(e) {
+// 섹션 스위치 체크여부 확인 후 selectedSection 변수 저장
+const sectionCheckbox = document.getElementById('section-checkbox')
+sectionCheckbox.addEventListener('change', (event) => {
     const query = location.href.split('query=')[1]
-    
-    //변수에 빌려드려요, 빌려요 저장
-    selectedSection = e.innerText
-    showSearchedItems(decodeURI(query))
-    
-    const borrowButton = document.getElementById('borrow-btn')
-    const lendButton = document.getElementById('lend-btn')
-    let borrowHover = 'borrow-btn:hover {background-color: #ffefc2}'
-    let lendHover = 'lend-btn:hover {background-color: rgb(191, 255, 194)}'
-
-    if (selectedSection == "빌려드려요") {
-        e.style.backgroundColor = "#bfffc2";
-        borrowButton.style.backgroundColor = "rgb(236, 236, 236)";
-        borrowButton.style.cssText = borrowHover
+    if (event.currentTarget.checked) {
+        selectedSection = '빌려요'
+        showSearchedItems(decodeURI(query))
     }
-    else{
-        e.style.backgroundColor = "#ffefc2";
-        lendButton.style.backgroundColor = "rgb(236, 236, 236)";
-        lendButton.style.cssText = lendHover
+    else {
+        selectedSection = '빌려드려요'
+        showSearchedItems(decodeURI(query))
     }
-}
+})
 
 //스크롤 이벤트 함수
 window.onscroll = function () { 

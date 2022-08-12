@@ -1285,13 +1285,18 @@ function reviewModalView(itemId) {
         onReviewSubmit(itemId)
 
         
-        //리뷰 작성 하고, 리뷰 쓰기 버튼 -> 대여 종료된 물품으로 변경
+        // [채팅창] 리뷰 작성 하고, 리뷰 쓰기 버튼 -> 대여 종료된 물품으로 변경
         const requestContractBtn = document.querySelector('.request-contract-btn')
-        
         if (requestContractBtn != null) {
             requestContractBtn.innerText = "대여 종료된 물품"
             requestContractBtn.style.cssText = "background-color: #fac7aa; cursor: auto;"
             requestContractBtn.setAttribute("onclick", "");
+        }
+
+        // [마이페이지] 리뷰 작성 후 버튼 display none
+        const onReviewBtn = document.querySelector('.rental-end-btn')
+        if (onReviewBtn != null) {
+            onReviewBtn.style.display = "none"
         }
     })
 
