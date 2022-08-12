@@ -1284,11 +1284,15 @@ function reviewModalView(itemId) {
     reviewSubmitBtn.addEventListener('click', (e) => {
         onReviewSubmit(itemId)
 
+        
         //리뷰 작성 하고, 리뷰 쓰기 버튼 -> 대여 종료된 물품으로 변경
         const requestContractBtn = document.querySelector('.request-contract-btn')
-        requestContractBtn.innerText = "대여 종료된 물품"
-        requestContractBtn.style.cssText = "background-color: #fac7aa; cursor: auto;"
-        requestContractBtn.setAttribute("onclick", "");
+        
+        if (requestContractBtn != null) {
+            requestContractBtn.innerText = "대여 종료된 물품"
+            requestContractBtn.style.cssText = "background-color: #fac7aa; cursor: auto;"
+            requestContractBtn.setAttribute("onclick", "");
+        }
     })
 
     const askSign = document.createElement('div');
