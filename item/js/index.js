@@ -25,7 +25,7 @@ async function showAllItems(selectedSection) {
     else {
         addressText.innerText = "#" + userAddress
     }
-    
+
     if (selectedSection == "빌려드려요") {
         sectionText.innerText = "#" + selectedSection;
         sectionText.style.color = '#85ff8a';
@@ -37,15 +37,21 @@ async function showAllItems(selectedSection) {
 
     categoryWrap.replaceChildren();
     itemWrap.replaceChildren();
-    
+
     // 카테고리
     const categoryContainer = document.createElement("div")
     categoryContainer.setAttribute("class", "category-container")
     categoryContainer.setAttribute("onclick", "selectedAllItems()")
-    categoryContainer.style.backgroundColor = '#fdc8c8'
+    const isDark = localStorage.getItem('darkMode')
+    if (isDark == 'true') {
+        categoryContainer.style.backgroundColor = 'rgb(116 132 133 / 58%)'
+    }
+    else {
+        categoryContainer.style.backgroundColor = '#fdc8c8'
+    }
     categoryContainer.innerText = "전체"
     categoryWrap.append(categoryContainer)
-    
+
     // json category 데이터 뽑기
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i]['name']
@@ -62,12 +68,13 @@ async function showAllItems(selectedSection) {
         itemWrap.style.fontSize = "24px";
         itemWrap.style.marginTop = "100px";
     }
-    else{
+    else {
         itemWrap.style.justifyContent = "flex-start";
         itemWrap.style.marginTop = "20px";
         itemDataAppend(itemsInfo)
     }
-} 
+    darkMode()
+}
 showAllItems(selectedSection)
 
 // 파라미터 저장을 위한 함수들
@@ -80,10 +87,19 @@ function selectedCategoryItems(e) {
     // 변수에 카테고리 저장
     selectedCategory = e.innerText
     const categoryContainer = document.querySelectorAll('.category-container')
-    for (i = 0; i < categoryContainer.length; i++) {
-        categoryContainer[i].style.backgroundColor = 'rgb(236, 236, 236)'
+    const isDark = localStorage.getItem('darkMode')
+    if (isDark == 'true') {
+        for (let i = 0; i < categoryContainer.length; i++) {
+            categoryContainer[i].style.backgroundColor = '#092c3e'
+        }
+        e.style.backgroundColor = 'rgb(116 132 133 / 58%)'
     }
-    e.style.backgroundColor = '#fdc8c8'
+    else {
+        for (let i = 0; i < categoryContainer.length; i++) {
+            categoryContainer[i].style.backgroundColor = 'rgb(236, 236, 236)'
+        }
+        e.style.backgroundColor = '#fdc8c8'
+    }
     showSelectedItems()
 }
 
@@ -110,7 +126,7 @@ async function showSelectedItems() {
         sectionText.innerText = "#" + selectedSection
         sectionText.style.color = '#85ff8a';
     }
-    else if (selectedCategory == "" && selectedSection == "빌려요"){
+    else if (selectedCategory == "" && selectedSection == "빌려요") {
         categoryText.innerText = "#전체" + selectedCategory
         sectionText.innerText = "#" + selectedSection
         sectionText.style.color = '#ffe18a';
@@ -125,7 +141,7 @@ async function showSelectedItems() {
         sectionText.innerText = "#" + selectedSection;
         sectionText.style.color = '#ffe18a';
     }
-    else if (selectedSection == ""){
+    else if (selectedSection == "") {
         categoryText.innerText = "#" + selectedCategory
         sectionText.innerText = ""
     }
@@ -138,7 +154,7 @@ async function showSelectedItems() {
         itemWrap.style.fontSize = "24px";
         itemWrap.style.marginTop = "100px";
     }
-    else{
+    else {
         itemWrap.style.justifyContent = "flex-start";
         itemWrap.style.marginTop = "20px";
         itemDataAppend(itemsInfo)
@@ -146,7 +162,7 @@ async function showSelectedItems() {
 }
 
 // 스크롤 이벤트 함수
-window.onscroll = function () { 
+window.onscroll = function () {
     // 스크롤이 바닥에 닿았을때
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         showScrollItems(); // 컨텐츠를 추가하는 함수를 불러온다.
@@ -168,7 +184,7 @@ function itemDataAppend(itemsInfo) {
     for (let i = 0; i < itemsInfo.length; i++) {
         const item = itemsInfo[i]
         const itemId = item['id']
-        
+
         const newItemBox = document.createElement('div')
         newItemBox.setAttribute("class", "item-link-box")
         newItemBox.addEventListener('click', () => {
@@ -213,9 +229,9 @@ function itemDataAppend(itemsInfo) {
             newItemDesc.append(newItemPrice)
         }
         else {
-            newItemPrice.innerText = item['price'].toLocaleString()+ "원" + " / "
+            newItemPrice.innerText = item['price'].toLocaleString() + "원" + " / "
             newItemDesc.append(newItemPrice)
-            
+
             // 가격단위
             const newPriceUnit = document.createElement('span')
             newPriceUnit.setAttribute("class", "price-time-unit")
@@ -247,7 +263,6 @@ function itemDataAppend(itemsInfo) {
         newInquiryCount.innerText = item['item_inquiries']
         newItemInquiry.append(newInquiryCount)
     }
-    darkMode()
 }
 
 
@@ -265,8 +280,8 @@ window.addEventListener('wheel', function (event) {
 function checkVisible(elm, eval) {
     eval = eval || "object visible"
     var viewportHeight = $(window).height()
-        scrolltop = $(window).scrollTop()
-        y = $(elm).offset().top,
+    scrolltop = $(window).scrollTop()
+    y = $(elm).offset().top,
         elementHeight = $(elm).height() - 150
 
     if (eval == "object visible") return ((y < (viewportHeight + scrolltop)) && (y > (scrolltop - elementHeight)))
@@ -275,11 +290,11 @@ function checkVisible(elm, eval) {
 // 스크롤 자동 이동
 function moveToScroll(tagName, num) {
     var offset = $(`${tagName}`).offset()
-    $("html, body").animate({scrollTop: offset.top - num}, 750)
+    $("html, body").animate({ scrollTop: offset.top - num }, 750)
 }
 
 // 페이지 위로 버튼 생성
-window.onload = function() {
+window.onload = function () {
     const modalBtnBox = document.querySelector('.modal-btn-box')
     const goTopBtn = document.createElement('button')
     goTopBtn.setAttribute('class', 'material-symbols-outlined')
@@ -288,7 +303,7 @@ window.onload = function() {
     goTopBtn.innerText = 'expand_less'
     modalBtnBox.append(goTopBtn)
 }
-window.addEventListener('wheel', function() {
+window.addEventListener('wheel', function () {
     const goTopBtn = document.querySelector('#go-top-btn')
     if (checkVisible($('.welcome-wrap')) == false) {
         goTopBtn.style.display = 'block'
@@ -298,44 +313,27 @@ window.addEventListener('wheel', function() {
     }
 })
 
+// 다크모드
 function darkMode() {
-    const body = document.querySelector('body')
-    const navWrap = document.querySelector('.nav-wrap')
-    const welcomeWrap = document.querySelector('.welcome-wrap')
-    const mainPageLink = document.querySelector('.main-page-link')
-    const categoryContainers = document.getElementsByClassName('category-container')
-    const darkMode = localStorage.getItem('darkMode')
-    const alarmIcon = document.querySelector('#alarm-icon')
-    const itemUploadBtn = document.querySelector('#item-upload-btn')
-    const sectionSlider = document.querySelector('.section-slider')
-    const sectionSwitch = document.querySelector('.section-switch')
-    
-    if (darkMode) {
-        document.getElementById("dark-mode-checkbox").checked = true;
-        body.style.cssText = `color:gainsboro`
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode == 'true') {
+        const body = document.querySelector('body')
+        const welcomeWrap = document.querySelector('.welcome-wrap')
+        const sectionSwitch = document.querySelector('.section-switch')
+        const sectionSlider = document.querySelector('.section-slider')
+        const categoryContainers = document.getElementsByClassName('category-container')
+        body.style.color = 'gainsboro'
         body.style.backgroundColor = '#202124'
-        navWrap.style.backgroundColor = '#202124'
         welcomeWrap.style.backgroundColor = '#092c3e'
-        mainPageLink.style.animation = ''
-        alarmIcon.style.color = 'white'
-        itemUploadBtn.style.color = 'white'
+        welcomeWrap.style.color = 'gainsboro'
         sectionSlider.style.backgroundColor = '#092c3e'
-        for (let i = 0; i < categoryContainers.length; i++) {
+        sectionSlider.setAttribute('class', 'section-slider dark-mode')
+        sectionSwitch.style.backgroundColor = 'gainsboro'
+        for (let i=1; i < categoryContainers.length; i++) {
             categoryContainers[i].style.backgroundColor = '#092c3e'
         }
     }
     else {
-        document.getElementById("dark-mode-checkbox").checked = false;
-        body.style.cssText = `color:black`
-        body.style.backgroundColor = 'white'
-        navWrap.style.backgroundColor = 'white'
-        welcomeWrap.style.backgroundColor = 'rgb(191, 255, 194)'
-        mainPageLink.style.animation = 'flicker 3s infinite alternate'
-        alarmIcon.style.color = 'black'
-        itemUploadBtn.style.color = 'black'
-        sectionSlider.style.backgroundColor = 'rgb(236, 236, 236)'
-        for (let i = 0; i < categoryContainers.length; i++) {
-            categoryContainers[i].style.backgroundColor = 'rgb(236, 236, 236)'
-        }
+        document.getElementById("dark-mode-checkbox").checked = true
     }
 }
