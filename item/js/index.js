@@ -282,7 +282,7 @@ window.onload = function() {
     const goTopBtn = document.createElement('button')
     goTopBtn.setAttribute('class', 'material-symbols-outlined')
     goTopBtn.setAttribute('id', 'go-top-btn')
-    goTopBtn.setAttribute('onclick', `moveToScroll('.item-section-container', 150)`)
+    goTopBtn.setAttribute('onclick', `moveToScroll('.main-body', 30)`)
     goTopBtn.innerText = 'expand_less'
     modalBtnBox.append(goTopBtn)
 }
