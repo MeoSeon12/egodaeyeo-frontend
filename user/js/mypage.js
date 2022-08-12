@@ -83,26 +83,26 @@ myInfo()
 async function myPageTabInfo(tab) {
     let param = tab.id
     const data = await myPageApiView(param) //data 전부다
-
     mypageTapWrap.replaceChildren();
-
+    
     if (data == "") {
         const noContent = document.createElement('div')
         noContent.setAttribute('class', 'no-content')
         mypageTapWrap.append(noContent)
-
+        
         const noContentText = document.createElement('h2')
         noContentText.innerText = "해당하는 내역이 없습니다."
         noContent.append(noContentText)
     }
     else {
         for (let i = 0; i < data.length; i++) {
-            const item = data[i]['item']
-            const rentalDate = data[i]['rental_date']
-            const timeRemaining = data[i]['time_remaining']
-            const itemId = item['id']
-            const roomId = data[i]['room_id']
-            const authorId = item['user']
+            let item = data[i]['item']
+            let rentalDate = data[i]['rental_date']
+            let timeRemaining = data[i]['time_remaining']
+            let isReviewed = data[i]['is_reviewed']
+            let roomId = data[i]['room_id']
+            let itemId = item['id']
+            let authorId = item['user']
 
             const newTabContainer = document.createElement('div')
             newTabContainer.setAttribute('class', 'tab-info-container')
@@ -206,12 +206,14 @@ async function myPageTabInfo(tab) {
                 }
                 //빌린 글은 리뷰작성하기 버튼
                 else {
-                    const onReviewBtn = document.createElement('button')
-                    onReviewBtn.setAttribute('class', 'rental-end-btn')
-                    onReviewBtn.setAttribute('onclick', `reviewModalView(${itemId})`)
-                    onReviewBtn.style.backgroundColor = 'rgb(186, 225, 255)'
-                    onReviewBtn.innerText = "리뷰 작성하기"
-                    newInfoData.append(onReviewBtn)
+                    if (isReviewed == false) {
+                        const onReviewBtn = document.createElement('button')
+                        onReviewBtn.setAttribute('class', 'rental-end-btn')
+                        onReviewBtn.setAttribute('onclick', `reviewModalView(${itemId})`)
+                        onReviewBtn.style.backgroundColor = 'rgb(186, 225, 255)'
+                        onReviewBtn.innerText = "리뷰 작성하기"
+                        newInfoData.append(onReviewBtn)
+                    }
                 }
             }
             else {

@@ -67,7 +67,8 @@ async function showAllItems(selectedSection) {
         itemWrap.style.marginTop = "20px";
         itemDataAppend(itemsInfo)
     }
-} showAllItems(selectedSection)
+} 
+showAllItems(selectedSection)
 
 // 파라미터 저장을 위한 함수들
 function selectedAllItems() {
