@@ -28,7 +28,7 @@
                     <div>
                         <p>➕</p>
                         <p>이미지 첨부하기</p>
-                        <p>(최대 5장)</p>
+                        <p>(최대 5장, 50MB)</p>
                     </div>
                 </label>
             </div>
@@ -42,14 +42,18 @@
                     <select id="category">
                         <option>-- 카테고리 --</option>
                     </select>
+                </div>
+                <div class="price-wrap">
                     <select id="time">
                         <option>-- 기간 --</option>
                         <option value="시간">1시간</option>
                         <option value="일">1일</option>
                         <option value="월">1개월</option>
                     </select>
-                    <input id="price" type="number" min="0" step="100" placeholder="가격을 입력해주세요">
+                    <input id="price" type="number" min="0" step="100" placeholder="가격">
                     <span>원</span>
+                </div>
+                <div class="status-box">
                     <select id="status">
                         <option value="대여 가능">대여 가능</option>
                         <option value="대여 중">대여 중</option>

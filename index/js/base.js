@@ -41,7 +41,6 @@ class CreateNavElement {
         searchIcon.innerText = "search"
         searchContainer.append(searchIcon)
 
-
         // 검색창에서 엔터 누르면 검색 버튼 트리거
         $(".search").keyup(function (event) {
             if (event.keyCode === 13) {
@@ -79,6 +78,7 @@ class CreateNavElement {
 
         const itemUploadBtn = document.createElement('span')
         itemUploadBtn.setAttribute('class', 'material-symbols-outlined')
+        itemUploadBtn.setAttribute('id', 'item-upload-btn')
         itemUploadBtn.setAttribute('onclick', 'goUploadPage()')
         itemUploadBtn.setAttribute('title', '물품등록')
         itemUploadBtn.innerText = "add"
@@ -392,7 +392,6 @@ async function baseLoad() {
     }
 } baseLoad()
 
-
 // 로그인 여부에 따라 알림, 로그인, 로그아웃 display
 function displayLoginLogoutBtn(payload) {
     const loginLogoutBtn = document.querySelector('#login-logout-btn')
@@ -408,6 +407,8 @@ function displayLoginLogoutBtn(payload) {
         loginLogoutBtn.setAttribute('title', '로그인')
         loginLogoutBtn.style.color = 'green'
         alarmBtn.style.display = 'none'
+        const itemUploadBtn = document.querySelector('#item-upload-btn')
+        itemUploadBtn.style.display = 'none'
     }
 }
 
@@ -416,7 +417,6 @@ function goUploadPage() {
 
     // 비 로그인 유저일 경우
     if (localStorage.payload == undefined) {
-        alert('로그인 후 이용 가능합니다')
         new NavModalView().loginSignupModalView()
     }
 
