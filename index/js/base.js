@@ -22,6 +22,7 @@ class CreateNavElement {
         navContainer.append(logo)
 
         const mainPageLink = document.createElement('a')
+        mainPageLink.setAttribute('class', 'main-page-link')
         mainPageLink.setAttribute('href', `${frontEndBaseUrl}`)
         mainPageLink.innerText = "이거대여."
         logo.append(mainPageLink)
@@ -95,6 +96,30 @@ class CreateNavElement {
 
         loginLogoutBtn.setAttribute('onclick', 'onLogout()')
         loginLogoutBtn.style.color = 'red'
+
+        const darkModeSwitch = document.createElement('label')
+        darkModeSwitch.setAttribute('class', 'dark-mode-switch')
+        navContainer.append(darkModeSwitch)
+
+        const darkModeCheckBox = document.createElement('input')
+        darkModeCheckBox.setAttribute('type', 'checkbox')
+        darkModeCheckBox.setAttribute('id', 'dark-mode-checkbox')
+        darkModeSwitch.append(darkModeCheckBox)
+
+        const darkModeSlider = document.createElement('span')
+        darkModeSlider.setAttribute('class', 'dark-mode-slider')
+        darkModeSwitch.append(darkModeSlider)
+
+        darkModeCheckBox.addEventListener('change', (e) => {
+            if (e.currentTarget.checked) {
+                localStorage.setItem('darkMode', 'true');
+                window.location.reload()
+            }
+            else {
+                localStorage.removeItem('darkMode');
+                window.location.reload()
+            }
+        })
     }
 
     createLoginSignupModal() {

@@ -246,6 +246,7 @@ function itemDataAppend(itemsInfo) {
         newInquiryCount.innerText = item['item_inquiries']
         newItemInquiry.append(newInquiryCount)
     }
+    darkMode()
 }
 
 
@@ -295,3 +296,45 @@ window.addEventListener('wheel', function() {
         goTopBtn.style.display = 'none'
     }
 })
+
+function darkMode() {
+    const body = document.querySelector('body')
+    const navWrap = document.querySelector('.nav-wrap')
+    const welcomeWrap = document.querySelector('.welcome-wrap')
+    const mainPageLink = document.querySelector('.main-page-link')
+    const categoryContainers = document.getElementsByClassName('category-container')
+    const darkMode = localStorage.getItem('darkMode')
+    const alarmIcon = document.querySelector('#alarm-icon')
+    const itemUploadBtn = document.querySelector('#item-upload-btn')
+    const sectionSlider = document.querySelector('.section-slider')
+    const sectionSwitch = document.querySelector('.section-switch')
+    
+    if (darkMode) {
+        document.getElementById("dark-mode-checkbox").checked = true;
+        body.style.cssText = `color:gainsboro`
+        body.style.backgroundColor = '#202124'
+        navWrap.style.backgroundColor = '#202124'
+        welcomeWrap.style.backgroundColor = '#092c3e'
+        mainPageLink.style.animation = ''
+        alarmIcon.style.color = 'white'
+        itemUploadBtn.style.color = 'white'
+        sectionSlider.style.backgroundColor = '#092c3e'
+        for (let i = 0; i < categoryContainers.length; i++) {
+            categoryContainers[i].style.backgroundColor = '#092c3e'
+        }
+    }
+    else {
+        document.getElementById("dark-mode-checkbox").checked = false;
+        body.style.cssText = `color:black`
+        body.style.backgroundColor = 'white'
+        navWrap.style.backgroundColor = 'white'
+        welcomeWrap.style.backgroundColor = 'rgb(191, 255, 194)'
+        mainPageLink.style.animation = 'flicker 3s infinite alternate'
+        alarmIcon.style.color = 'black'
+        itemUploadBtn.style.color = 'black'
+        sectionSlider.style.backgroundColor = 'rgb(236, 236, 236)'
+        for (let i = 0; i < categoryContainers.length; i++) {
+            categoryContainers[i].style.backgroundColor = 'rgb(236, 236, 236)'
+        }
+    }
+}

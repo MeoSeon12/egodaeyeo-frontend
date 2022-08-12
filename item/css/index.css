@@ -1,5 +1,5 @@
 .welcome-wrap {
-    background-image: linear-gradient(to right top, #cfffb3, #d3ffb9, #d7ffbf, #daffc5, #deffcb);
+    /* background-image: linear-gradient(to right top, #cfffb3, #d3ffb9, #d7ffbf, #daffc5, #deffcb); */
     width: 100%;
     height: 92vh;
     display: flex;
