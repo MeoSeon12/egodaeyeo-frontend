@@ -322,15 +322,18 @@ function darkMode() {
         const sectionSwitch = document.querySelector('.section-switch')
         const sectionSlider = document.querySelector('.section-slider')
         const categoryContainers = document.getElementsByClassName('category-container')
+        const inputs = document.getElementsByTagName('input')
         body.style.color = 'gainsboro'
         body.style.backgroundColor = '#202124'
         welcomeWrap.style.backgroundColor = '#092c3e'
         welcomeWrap.style.color = 'gainsboro'
         sectionSlider.style.backgroundColor = '#092c3e'
         sectionSlider.setAttribute('class', 'section-slider dark-mode')
-        sectionSwitch.style.backgroundColor = 'gainsboro'
         for (let i=1; i < categoryContainers.length; i++) {
             categoryContainers[i].style.backgroundColor = '#092c3e'
+        }
+        for (let i=0; i < inputs.length; i++) {
+            inputs[i].style.color = 'gainsboro'
         }
     }
     else {

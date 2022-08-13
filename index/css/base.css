@@ -131,6 +131,7 @@ nav {
 }
 
 .search {
+    color: black;
     height: 30px;
     width: 100%;
     outline: none;
@@ -293,8 +294,7 @@ nav {
     overflow: hidden;
 }
 
-.address-modal-container,
-.rental-date-modal-container {
+.address-modal-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1091,9 +1091,15 @@ nav {
 #item-upload-btn.dark-mode {
     color: gainsboro;
 }
+
 .main-page-link.dark-mode {
     animation: none;
 }
+
+.search.dark-mode {
+    color: gainsboro;
+}
+
 
 #login-modal-container.dark-mode,
 #signup-modal-container.dark-mode,
@@ -1137,6 +1143,10 @@ nav {
 
 .chat-modal-body.dark-mode {
     background-color: rgba(4, 29, 66, 0.489);
+}
+
+.chat-modal-body.dark-mode:after {
+    left: 50%;
 }
 
 .chat-rooms-container.dark-mode {
@@ -1209,3 +1219,6 @@ nav {
     color: gainsboro
 }
 
+.rental-date-modal-container.dark-mode {
+    background-color: #092c3e;
+}

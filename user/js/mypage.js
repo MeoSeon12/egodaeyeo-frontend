@@ -74,6 +74,10 @@ async function myInfo() {
     
         //페이지 로딩시 유저정보
         Profilecheck(userData)
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            newMyNickname.classList.add('dark-mode')
+        }
     }
 }
 myInfo()
@@ -153,6 +157,18 @@ async function myPageTabInfo(tab) {
                     this.style.backgroundColor = "#FDE7C5"
                 }
                 newTextSection.style.backgroundColor = "#FDB288"
+            }
+
+            const isDarkMode = localStorage.getItem('darkMode')
+            if (isDarkMode) {
+                newTabBox.style.backgroundColor = "#092c3e"
+                newTabBox.onmouseover = function() {
+                    this.style.backgroundColor = "#4B0082"
+                }
+                newTabBox.onmouseout = function() {
+                    this.style.backgroundColor = "#092c3e"
+                }
+                newTextSection.style.backgroundColor = "gray"
             }
 
             //물품 제목
@@ -298,7 +314,6 @@ function Profilecheck(userData) {
     newNicknameInput.value = userData['nickname']
     newNicknameBox.append(newNicknameInput)
 
-
     const newPutAddress = document.createElement('div')
     newPutAddress.setAttribute('class', 'myprofile-address')
     newProfileInfoBox.append(newPutAddress)
@@ -324,7 +339,6 @@ function Profilecheck(userData) {
     newAddressInput.value = userData['address']
     newPutAddress.append(newAddressInput)
 
-
     const newPutPassword = document.createElement('div')
     newPutPassword.setAttribute('class', 'myprofile-password')
     newProfileInfoBox.append(newPutPassword)
@@ -345,7 +359,6 @@ function Profilecheck(userData) {
     newCurrentPw.setAttribute('id', 'current-pw')
     newPasswordBox.append(newCurrentPw)
 
-
     const newChangedPw = document.createElement('input')
     newChangedPw.setAttribute('class', 'profile-input')
     newChangedPw.setAttribute('placeholder', '새 비밀번호')
@@ -353,14 +366,12 @@ function Profilecheck(userData) {
     newChangedPw.setAttribute('id', 'new-pw')
     newPasswordBox.append(newChangedPw)
 
-
     const newCheckPw = document.createElement('input')
     newCheckPw.setAttribute('class', 'profile-input')
     newCheckPw.setAttribute('placeholder', '새 비밀번호 재입력')
     newCheckPw.setAttribute('type', 'password')
     newCheckPw.setAttribute('id', 'check-pw')
     newPasswordBox.append(newCheckPw)
-
 
     const newBottomBox = document.createElement('div')
     newBottomBox.setAttribute('class', 'myprofile-bottom-box')
@@ -385,6 +396,15 @@ function Profilecheck(userData) {
     })
     newDeleteBtn.innerText = "회원 탈퇴"
     newSubmitBox.append(newDeleteBtn)
+
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        newInputLabel.classList.add('dark-mode')
+        const inputs = document.getElementsByClassName('input')
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].style.color = 'gainsboro'
+        }
+    }
 }
 
 //피드백 탭
@@ -478,5 +498,27 @@ async function userDeleteModal() {
             deleteModalBody.style.display = 'none'
         }
     })
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        deleteModalContainer.classList.add('dark-mode')
+    }
 }
 
+// 다크모드
+function darkMode() {
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        const body = document.querySelector('body')
+        const myPageCategoryBox = document.querySelector('.mypage-category-box')
+        const thanksForFeedBack = document.querySelector('.thanks-for-feedback')
+        const inputs = document.getElementsByTagName('input')
+
+        body.style.color = 'gainsboro'
+        body.style.backgroundColor = '#202124'
+        myPageCategoryBox.classList.add('dark-mode')
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].style.color = 'gainsboro'
+        }
+    }
+}
+darkMode()

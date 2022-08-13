@@ -116,6 +116,7 @@ class CreateNavElement {
             document.getElementById("dark-mode-checkbox").checked = false
             navWrap.classList.add('dark-mode')
             mainPageLink.classList.add('dark-mode')
+            searchInput.classList.add('dark-mode')
             chatAlarmIcon.classList.add('dark-mode')
             itemUploadBtn.classList.add('dark-mode')
         }
@@ -310,9 +311,6 @@ class CreateNavElement {
             signupSubmitBtn.classList.add('dark-mode')
             loginModalAskSign.classList.add('dark-mode')
             signupModalAskSign.classList.add('dark-mode')
-        }
-        else {
-            document.getElementById("dark-mode-checkbox").checked = true
         }
     }
 

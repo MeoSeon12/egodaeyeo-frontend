@@ -1114,6 +1114,13 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
             rentalSubmitBtn.remove();
         }
     });
+
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        rentalDateContainer.classList.add('dark-mode')
+        rentalSubmitBtn.classList.add('dark-mode')
+        askSign.classList.add('dark-mode')
+    }
 }
 
 
@@ -1263,6 +1270,10 @@ async function checkRentalDateModal(itemId, roomId) {
         })
         contractBtnContainer.append(endContractBtn)
     })
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        rentalDateContainer.classList.add('dark-mode')
+    }
 }
 
 
@@ -1378,7 +1389,7 @@ function reviewModalView(itemId) {
 
     body.style.overflow = 'hidden'
     reviewModalBody.style.display = 'flex'
-    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'    
 }
 
 function reviewModalUnview() {

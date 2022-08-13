@@ -176,8 +176,5 @@ function darkMode() {
         content.classList.add('dark-mode')
         uploadBtn.classList.add('dark-mode')
     }
-    else {
-        document.getElementById("dark-mode-checkbox").checked = true
-    }
 }
 darkMode()

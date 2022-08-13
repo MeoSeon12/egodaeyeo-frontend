@@ -175,8 +175,25 @@ window.onload = function(){
     showSearchedItems(decodeURI(query))
 };
 
+// 다크모드
+function darkMode() {
+    const isDarkMode = localStorage.getItem('darkMode')
 
-
+    if (isDarkMode) {
+        const body = document.querySelector('body')
+        const sectionSwitch = document.querySelector('.section-switch')
+        const sectionSlider = document.querySelector('.section-slider')
+        body.style.color = 'gainsboro'
+        body.style.backgroundColor = '#202124'
+        sectionSlider.style.backgroundColor = '#092c3e'
+        sectionSlider.setAttribute('class', 'section-slider dark-mode')
+        sectionSwitch.style.backgroundColor = 'gainsboro'
+    }
+    else {
+        document.getElementById("dark-mode-checkbox").checked = true
+    }
+}
+darkMode()
 
 
 
