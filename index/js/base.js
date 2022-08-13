@@ -99,6 +99,7 @@ class CreateNavElement {
 
         const darkModeSwitch = document.createElement('label')
         darkModeSwitch.setAttribute('class', 'dark-mode-switch')
+        darkModeSwitch.setAttribute('title', '다크모드')
         navContainer.append(darkModeSwitch)
 
         const darkModeCheckBox = document.createElement('input')

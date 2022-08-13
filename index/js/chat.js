@@ -63,14 +63,10 @@ class CreateElement {
 
         const isDarkMode = localStorage.getItem('darkMode')
         if (isDarkMode) {
-            document.getElementById("dark-mode-checkbox").checked = false
+            chatBody.classList.add('dark-mode')
             chatContainer.classList.add('dark-mode')
             chatRoomsContainer.classList.add('dark-mode')
             chatAreaContainer.classList.add('dark-mode')
-            chatAreaBox.classList.add('dark-mode')
-        }
-        else {
-            document.getElementById("dark-mode-checkbox").checked = true
         }
     }
 
@@ -111,12 +107,8 @@ class CreateElement {
 
         const isDarkMode = localStorage.getItem('darkMode')
         if (isDarkMode) {
-            document.getElementById("dark-mode-checkbox").checked = false
             chatRoom.classList.add('dark-mode')
             spanNickname.classList.add('dark-mode')
-        }
-        else {
-            document.getElementById("dark-mode-checkbox").checked = true
         }
     }
 
@@ -152,11 +144,7 @@ class CreateElement {
 
         const isDarkMode = localStorage.getItem('darkMode')
         if (isDarkMode) {
-            document.getElementById("dark-mode-checkbox").checked = false
             contractBtnContainer.classList.add('dark-mode')
-        }
-        else {
-            document.getElementById("dark-mode-checkbox").checked = true
         }
 
         // 문의자 화면
@@ -354,6 +342,11 @@ class CreateElement {
                         myChat.setAttribute("class", "my-chat");
                         myChat.innerText = message
                         myChatWrap.append(myChat);
+
+                        const isDarkMode = localStorage.getItem('darkMode')
+                        if (isDarkMode) {
+                            myChat.classList.add('dark-mode')
+                        }
                     }
                     // 채팅 메시지 수신자
                     else {
@@ -372,6 +365,11 @@ class CreateElement {
                         chatTimeStamp.setAttribute("class", "chat-time-stamp");
                         chatTimeStamp.innerText = timeStamp
                         otherChatWrap.append(chatTimeStamp);
+
+                        const isDarkMode = localStorage.getItem('darkMode')
+                        if (isDarkMode) {
+                            otherChat.classList.add('dark-mode')
+                        }
                     }
             }
         }
@@ -421,6 +419,11 @@ class CreateElement {
                 $(".chat-send-btn").click()
             }
         })
+
+        if (isDarkMode) {
+            chatInput.style.backgroundColor = 'gainsboro'
+            chatInput.style.color = 'black'
+        }
     }
 
     // 채팅방 거래 상태 메시지
@@ -435,6 +438,12 @@ class CreateElement {
 
         contractLook.style.cssText = cssText
         contractLook.innerText = innerText
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            contractLook.style.backgroundColor = 'gainsboro'
+            contractLook.style.color = 'black'
+        }
 
         return contractLook
     }
@@ -955,14 +964,12 @@ async function openChatRoom(roomId) {
 
     const isDarkMode = localStorage.getItem('darkMode')
     if (isDarkMode) {
-        document.getElementById("dark-mode-checkbox").checked = false
         $('.lend-room.dark-mode').attr('style', 'background-color: gainsboro')
         $('.borrow-room.dark-mode').attr('style', 'background-color: gray')
         const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
         selectedChatRoom.style.boxShadow = '5px 5px 5px whitesmoke'
     }
     else {
-        document.getElementById("dark-mode-checkbox").checked = true
         $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
         $('.borrow-room').attr('style', 'background-color: rgb(191, 255, 194)')
         const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)

@@ -1042,7 +1042,7 @@ nav {
 
 .dark-mode-switch {
     position: relative;
-    width: 52px;
+    min-width: 52px;
     height: 20px;
     margin-left: 17px;
 }
@@ -1135,12 +1135,8 @@ nav {
     background-color: rgba(89, 89, 89, 0.489);
 }
 
-/* .chat-modal-container.dark-mode {
-    background-color: purple;
-} */
-
-.chat-area-box.dark-mode {
-    background-color: #092c3e;
+.chat-modal-body.dark-mode {
+    background-color: rgba(4, 29, 66, 0.489);
 }
 
 .chat-rooms-container.dark-mode {
@@ -1203,5 +1199,13 @@ nav {
     color: black
 }
 
+.my-chat.dark-mode {
+    background-color: gainsboro;
+    color: black
+}
 
+.other-chat.dark-mode {
+    background-color: gray;
+    color: gainsboro
+}
 

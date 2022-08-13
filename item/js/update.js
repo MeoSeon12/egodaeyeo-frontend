@@ -147,3 +147,37 @@ function sectionValCheck(obj) {
         status.style.display = 'inline-block'
     }
 }
+
+function darkMode() {
+    const isDarkMode = localStorage.getItem('darkMode')
+    const uploadForm = document.querySelector('#form')
+    const section = document.querySelector('#section')
+    const category = document.querySelector('#category')
+    const time = document.querySelector('#time')
+    const price = document.querySelector('#price')
+    const status = document.querySelector('#status')
+    const title = document.querySelector('#title')
+    const content = document.querySelector('#content')
+    const uploadBtn = document.querySelector('#submit')
+
+    const pageTitleSection = document.querySelector('.page-title-section')
+    if (isDarkMode) {
+        const body = document.querySelector('body')
+        body.style.color = 'gainsboro'
+        body.style.backgroundColor = '#202124'
+        pageTitleSection.classList.add('dark-mode')
+        uploadForm.classList.add('dark-mode')
+        section.classList.add('dark-mode')
+        category.classList.add('dark-mode')
+        time.classList.add('dark-mode')
+        price.classList.add('dark-mode')
+        status.classList.add('dark-mode')
+        title.classList.add('dark-mode')
+        content.classList.add('dark-mode')
+        uploadBtn.classList.add('dark-mode')
+    }
+    else {
+        document.getElementById("dark-mode-checkbox").checked = true
+    }
+}
+darkMode()
