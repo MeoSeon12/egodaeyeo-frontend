@@ -192,3 +192,56 @@ select:focus-visible {
     background-color: #ffae00;
     border: 1px solid transparent;
 }
+
+#form.dark-mode {
+    background-color: #092c3e;
+    color: gainsboro;
+}
+
+#section.dark-mode {
+    background-color: #0c3d56;
+    color: gainsboro;
+}
+
+#category.dark-mode {
+    background-color: #0c3d56;
+    color: gainsboro;
+}
+
+#time.dark-mode {
+    background-color: #0c3d56;
+    color: gainsboro;
+}
+
+#price.dark-mode {
+    background-color: #0c3d56;
+    color: gainsboro;
+}
+
+#status.dark-mode {
+    background-color: #0c3d56;
+    color: gainsboro;
+}
+
+#submit.dark-mode {
+    background-color: #0c3d56;
+    color: gainsboro;
+}
+
+#title.dark-mode {
+    background-color: #0c3d56;
+    color: gainsboro;
+}
+
+#content.dark-mode {
+    background-color: #0c3d56;
+    color: gainsboro;
+}
+
+#content.dark-mode:focus {
+    outline: none;
+}
+
+#submit.dark-mode:hover {
+    background-color: darkcyan;
+}

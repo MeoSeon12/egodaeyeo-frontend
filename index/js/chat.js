@@ -60,6 +60,14 @@ class CreateElement {
         selectSpan.setAttribute("class", "select-chat-room")
         selectSpan.innerText = "문의를 통해 채팅방을 생성해주세요"
         chatAreaBox.append(selectSpan)
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            chatBody.classList.add('dark-mode')
+            chatContainer.classList.add('dark-mode')
+            chatRoomsContainer.classList.add('dark-mode')
+            chatAreaContainer.classList.add('dark-mode')
+        }
     }
 
     // 채팅방 생성
@@ -88,15 +96,19 @@ class CreateElement {
 
         if (authorId == userId) {
             spanNickname.innerText = inquirerNickname
-            chatRoom.style.backgroundColor = "rgb(255, 239, 194)"
-            chatRoom.setAttribute("class", "chat-room lend-room")
+            chatRoom.classList.add('lend-room')
             chatRoom.append(spanNickname)
         }
         else {
             spanNickname.innerText = authorNickname
-            chatRoom.style.backgroundColor = "rgb(191, 255, 194)"
-            chatRoom.setAttribute("class", "chat-room borrow-room")
+            chatRoom.classList.add('borrow-room')
             chatRoom.append(spanNickname)
+        }
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            chatRoom.classList.add('dark-mode')
+            spanNickname.classList.add('dark-mode')
         }
     }
 
@@ -129,6 +141,11 @@ class CreateElement {
         const contractBtnContainer = document.createElement('div');
         contractBtnContainer.setAttribute("class", "contract-btn-container");
         chatAreaBox.append(contractBtnContainer)
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            contractBtnContainer.classList.add('dark-mode')
+        }
 
         // 문의자 화면
         if (inquirerId == userId) {
@@ -325,6 +342,11 @@ class CreateElement {
                         myChat.setAttribute("class", "my-chat");
                         myChat.innerText = message
                         myChatWrap.append(myChat);
+
+                        const isDarkMode = localStorage.getItem('darkMode')
+                        if (isDarkMode) {
+                            myChat.classList.add('dark-mode')
+                        }
                     }
                     // 채팅 메시지 수신자
                     else {
@@ -343,6 +365,11 @@ class CreateElement {
                         chatTimeStamp.setAttribute("class", "chat-time-stamp");
                         chatTimeStamp.innerText = timeStamp
                         otherChatWrap.append(chatTimeStamp);
+
+                        const isDarkMode = localStorage.getItem('darkMode')
+                        if (isDarkMode) {
+                            otherChat.classList.add('dark-mode')
+                        }
                     }
             }
         }
@@ -392,6 +419,11 @@ class CreateElement {
                 $(".chat-send-btn").click()
             }
         })
+
+        if (isDarkMode) {
+            chatInput.style.backgroundColor = 'gainsboro'
+            chatInput.style.color = 'black'
+        }
     }
 
     // 채팅방 거래 상태 메시지
@@ -406,6 +438,12 @@ class CreateElement {
 
         contractLook.style.cssText = cssText
         contractLook.innerText = innerText
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            contractLook.style.backgroundColor = 'gainsboro'
+            contractLook.style.color = 'black'
+        }
 
         return contractLook
     }
@@ -923,10 +961,22 @@ async function openChatRoom(roomId) {
         contractSocket = ''
     }
     // 선택한 채팅방 스타일 효과
-    $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
-    $('.borrow-room').attr('style', 'background-color: rgb(191, 255, 194)')
-    const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
-    selectedChatRoom.style.boxShadow = '5px 5px 5px yellowgreen'
+
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        $('.lend-room.dark-mode').attr('style', 'background-color: gainsboro')
+        $('.borrow-room.dark-mode').attr('style', 'background-color: gray')
+        const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
+        selectedChatRoom.style.boxShadow = '5px 5px 5px whitesmoke'
+    }
+    else {
+        $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
+        $('.borrow-room').attr('style', 'background-color: rgb(191, 255, 194)')
+        const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
+        selectedChatRoom.style.boxShadow = '5px 5px 5px yellowgreen'
+    }
+
+
     // 선택한 채팅방 알림 효과 끄기
     new Alert().offAlertEffect(roomId)
     // 채팅 웹소켓
@@ -1064,6 +1114,13 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
             rentalSubmitBtn.remove();
         }
     });
+
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        rentalDateContainer.classList.add('dark-mode')
+        rentalSubmitBtn.classList.add('dark-mode')
+        askSign.classList.add('dark-mode')
+    }
 }
 
 
@@ -1213,6 +1270,10 @@ async function checkRentalDateModal(itemId, roomId) {
         })
         contractBtnContainer.append(endContractBtn)
     })
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        rentalDateContainer.classList.add('dark-mode')
+    }
 }
 
 
@@ -1328,7 +1389,7 @@ function reviewModalView(itemId) {
 
     body.style.overflow = 'hidden'
     reviewModalBody.style.display = 'flex'
-    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'    
 }
 
 function reviewModalUnview() {
