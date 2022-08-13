@@ -316,7 +316,7 @@ window.addEventListener('wheel', function () {
 // 다크모드
 function darkMode() {
     const isDarkMode = localStorage.getItem('darkMode')
-    if (isDarkMode == 'true') {
+    if (isDarkMode) {
         const body = document.querySelector('body')
         const welcomeWrap = document.querySelector('.welcome-wrap')
         const sectionSwitch = document.querySelector('.section-switch')

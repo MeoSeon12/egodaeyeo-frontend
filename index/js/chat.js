@@ -60,6 +60,18 @@ class CreateElement {
         selectSpan.setAttribute("class", "select-chat-room")
         selectSpan.innerText = "문의를 통해 채팅방을 생성해주세요"
         chatAreaBox.append(selectSpan)
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            document.getElementById("dark-mode-checkbox").checked = false
+            chatContainer.classList.add('dark-mode')
+            chatRoomsContainer.classList.add('dark-mode')
+            chatAreaContainer.classList.add('dark-mode')
+            chatAreaBox.classList.add('dark-mode')
+        }
+        else {
+            document.getElementById("dark-mode-checkbox").checked = true
+        }
     }
 
     // 채팅방 생성
@@ -88,15 +100,23 @@ class CreateElement {
 
         if (authorId == userId) {
             spanNickname.innerText = inquirerNickname
-            chatRoom.style.backgroundColor = "rgb(255, 239, 194)"
-            chatRoom.setAttribute("class", "chat-room lend-room")
+            chatRoom.classList.add('lend-room')
             chatRoom.append(spanNickname)
         }
         else {
             spanNickname.innerText = authorNickname
-            chatRoom.style.backgroundColor = "rgb(191, 255, 194)"
-            chatRoom.setAttribute("class", "chat-room borrow-room")
+            chatRoom.classList.add('borrow-room')
             chatRoom.append(spanNickname)
+        }
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            document.getElementById("dark-mode-checkbox").checked = false
+            chatRoom.classList.add('dark-mode')
+            spanNickname.classList.add('dark-mode')
+        }
+        else {
+            document.getElementById("dark-mode-checkbox").checked = true
         }
     }
 
@@ -129,6 +149,15 @@ class CreateElement {
         const contractBtnContainer = document.createElement('div');
         contractBtnContainer.setAttribute("class", "contract-btn-container");
         chatAreaBox.append(contractBtnContainer)
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            document.getElementById("dark-mode-checkbox").checked = false
+            contractBtnContainer.classList.add('dark-mode')
+        }
+        else {
+            document.getElementById("dark-mode-checkbox").checked = true
+        }
 
         // 문의자 화면
         if (inquirerId == userId) {
@@ -923,10 +952,24 @@ async function openChatRoom(roomId) {
         contractSocket = ''
     }
     // 선택한 채팅방 스타일 효과
-    $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
-    $('.borrow-room').attr('style', 'background-color: rgb(191, 255, 194)')
-    const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
-    selectedChatRoom.style.boxShadow = '5px 5px 5px yellowgreen'
+
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        document.getElementById("dark-mode-checkbox").checked = false
+        $('.lend-room.dark-mode').attr('style', 'background-color: gainsboro')
+        $('.borrow-room.dark-mode').attr('style', 'background-color: gray')
+        const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
+        selectedChatRoom.style.boxShadow = '5px 5px 5px whitesmoke'
+    }
+    else {
+        document.getElementById("dark-mode-checkbox").checked = true
+        $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
+        $('.borrow-room').attr('style', 'background-color: rgb(191, 255, 194)')
+        const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
+        selectedChatRoom.style.boxShadow = '5px 5px 5px yellowgreen'
+    }
+
+
     // 선택한 채팅방 알림 효과 끄기
     new Alert().offAlertEffect(roomId)
     // 채팅 웹소켓

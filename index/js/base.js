@@ -111,7 +111,7 @@ class CreateNavElement {
         darkModeSwitch.append(darkModeSlider)
         
         const isDarkMode = localStorage.getItem('darkMode')
-        if (isDarkMode == 'true') {
+        if (isDarkMode) {
             document.getElementById("dark-mode-checkbox").checked = false
             navWrap.classList.add('dark-mode')
             mainPageLink.classList.add('dark-mode')
@@ -123,7 +123,7 @@ class CreateNavElement {
         }
         // 다크 모드 스위치
         darkModeCheckBox.addEventListener('change', (e) => {
-            if (isDarkMode == 'true') {
+            if (isDarkMode) {
                 localStorage.removeItem('darkMode');
                 window.location.reload()
             }
@@ -293,10 +293,26 @@ class CreateNavElement {
         signupContainer.append(signupModalAskSign)
 
         const goToLogin = document.createElement('a')
-        goToLogin.setAttribute('class', 'ask-sign')
+        goToLogin.setAttribute('class', 'go-to-login')
         goToLogin.setAttribute('onclick', 'new NavModalView().loginContainerView()')
         goToLogin.innerText = " 로그인"
         signupModalAskSign.append(goToLogin)
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            document.getElementById("dark-mode-checkbox").checked = false
+            loginContainer.classList.add('dark-mode')
+            signupContainer.classList.add('dark-mode')
+            loginModalInputs.classList.add('dark-mode')
+            signupModalInputs.classList.add('dark-mode')
+            loginSubmitBtn.classList.add('dark-mode')
+            signupSubmitBtn.classList.add('dark-mode')
+            loginModalAskSign.classList.add('dark-mode')
+            signupModalAskSign.classList.add('dark-mode')
+        }
+        else {
+            document.getElementById("dark-mode-checkbox").checked = true
+        }
     }
 
     // 소셜 유저 회원가입시 주소 등록하는 모달
@@ -349,7 +365,17 @@ class CreateNavElement {
         kakaoAddressSubmitBtn.addEventListener("click", (e) => {
             onAddressEnter();
         })
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            document.getElementById("dark-mode-checkbox").checked = false
+            addressContainer.classList.add('dark-mode')
+            addressModalInputs.classList.add('dark-mode')
+        }
+        else {
+            document.getElementById("dark-mode-checkbox").checked = true
+        }
     }
+
 }
 
 

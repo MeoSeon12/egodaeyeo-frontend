@@ -664,7 +664,6 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
     min-height: 65px;
     width: 65px;
     border-radius: 50%;
@@ -1095,3 +1094,114 @@ nav {
 .main-page-link.dark-mode {
     animation: none;
 }
+
+#login-modal-container.dark-mode,
+#signup-modal-container.dark-mode,
+#address-modal-container.dark-mode {
+    background-color: #092c3e;
+}
+
+#login-modal-container.dark-mode > h2,
+#signup-modal-container.dark-mode > h2,
+#address-modal-container.dark-mode > h2 {
+    color: rgb(106, 209, 137);
+}
+
+#login-modal-container.dark-mode > input,
+#signup-modal-container.dark-mode > input,
+#address-modal-container.dark-mode > input {
+    color: gainsboro
+}
+
+.modal-inputs.dark-mode {
+    color: rgb(106, 209, 137);
+}
+
+.ask-sign.dark-mode {
+    color: rgb(106, 209, 137);
+}
+
+.ask-sign.dark-mode > a{
+    color: gainsboro;
+}
+
+.login-submit-btn.dark-mode,
+.signup-submit-btn.dark-mode {
+    color: rgb(106, 209, 137);
+}
+
+.login-submit-btn.dark-mode:hover,
+.signup-submit-btn.dark-mode:hover {
+    background-color: rgba(89, 89, 89, 0.489);
+}
+
+/* .chat-modal-container.dark-mode {
+    background-color: purple;
+} */
+
+.chat-area-box.dark-mode {
+    background-color: #092c3e;
+}
+
+.chat-rooms-container.dark-mode {
+    display: flex;
+    width: 90px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #092c3e;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: 3px solid gainsboro;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.chat-area-container.dark-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #092c3e;
+    border-top-right-radius: 20px;
+}
+
+.chat-room.borrow-room {
+    background-color: rgb(191, 255, 194)
+}
+
+.chat-room.lend-room {
+    background-color: rgb(255, 239, 194);
+
+}
+.chat-area-box.dark-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 380px;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.contract-btn-container.dark-mode {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: solid 3px gainsboro;
+}
+
+.chat-room.borrow-room.dark-mode {
+    background-color: gray;
+}
+
+.chat-room.lend-room.dark-mode {
+    background-color: gainsboro;
+
+}
+.nickname.dark-mode {
+    color: black
+}
+
+
+
