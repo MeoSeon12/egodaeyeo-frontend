@@ -364,6 +364,11 @@ async function inquiry() {
                 inquiryModalBody.style.display = 'none'
             }
         })
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            inquiryModalContainer.classList.add('dark-mode')
+        }
     }
 }
 
@@ -424,6 +429,12 @@ function showDeleteCheckModal() {
             inquiryModalBody.style.display = 'none'
         }
     })
+
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        inquiryModalContainer.classList.add('dark-mode')
+    }
+
 }
 
 
@@ -514,6 +525,14 @@ function reportModalView(itemId) {
                 reportModalUnview()
             }
         })
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            reportModalContainer.classList.add('dark-mode')
+            reportContent.classList.add('dark-mode')
+            askSign.classList.add('dark-mode')
+            reportCategory.classList.add('dark-mode')
+        }
     }
 }
 
@@ -523,3 +542,17 @@ function reportModalUnview() {
     body.style.overflow = 'auto'
     reportModalBody.remove()
 }
+
+// 다크모드
+function darkMode() {
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        const body = document.querySelector('body')
+        const status = document.querySelector('#status')
+
+        body.style.color = 'gainsboro'
+        body.style.backgroundColor = '#202124'
+        status.classList.add('dark-mode')
+    }
+}
+darkMode()

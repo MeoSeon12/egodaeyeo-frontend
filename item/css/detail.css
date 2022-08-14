@@ -384,3 +384,27 @@
         height: 372px !important;
     }
 }
+
+.inquiry-modal-container.dark-mode {
+    background-color: #092c3e;
+}
+
+.report-modal-container.dark-mode {
+    background-color: #092c3e;
+}
+
+#report.dark-mode {
+    color: gainsboro;
+}
+
+.ask-sign.dark-mode {
+    color: gainsboro;
+}
+
+#status.dark-mode {
+    color: black;
+}
+
+.report-category.dark-mode {
+    background-color: gainsboro;
+}
