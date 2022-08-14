@@ -83,6 +83,7 @@ function deleteFile(num) {
 
 function darkMode() {
     const isDarkMode = localStorage.getItem('darkMode')
+    const pageTitleSection = document.querySelector('.page-title-section')
     const uploadForm = document.querySelector('#form')
     const section = document.querySelector('#section')
     const category = document.querySelector('#category')
@@ -92,7 +93,6 @@ function darkMode() {
     const content = document.querySelector('#content')
     const uploadBtn = document.querySelector('#submit')
 
-    const pageTitleSection = document.querySelector('.page-title-section')
     if (isDarkMode) {
         const body = document.querySelector('body')
         body.style.color = 'gainsboro'
@@ -106,9 +106,6 @@ function darkMode() {
         title.classList.add('dark-mode')
         content.classList.add('dark-mode')
         uploadBtn.classList.add('dark-mode')
-    }
-    else {
-        document.getElementById("dark-mode-checkbox").checked = true
     }
 }
 darkMode()

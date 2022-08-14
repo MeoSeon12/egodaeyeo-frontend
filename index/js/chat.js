@@ -979,8 +979,8 @@ async function openChatRoom(roomId) {
         chatSocket = ''
         contractSocket = ''
     }
-    // 선택한 채팅방 스타일 효과
 
+    // 선택한 채팅방 스타일 효과
     const isDarkMode = localStorage.getItem('darkMode')
     if (isDarkMode) {
         $('.lend-room.dark-mode').attr('style', 'background-color: gainsboro')
@@ -994,7 +994,6 @@ async function openChatRoom(roomId) {
         const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
         selectedChatRoom.style.boxShadow = '4px 4px 4px yellowgreen'
     }
-
 
     // 선택한 채팅방 알림 효과 끄기
     new Alert().offAlertEffect(roomId)
@@ -1366,7 +1365,6 @@ function reviewModalView(itemId) {
     reviewSubmitBtn.addEventListener('click', (e) => {
         onReviewSubmit(itemId)
 
-        
         // [채팅창] 리뷰 작성 하고, 리뷰 쓰기 버튼 -> 대여 종료된 물품으로 변경
         const requestContractBtn = document.querySelector('.request-contract-btn')
         if (requestContractBtn != null) {

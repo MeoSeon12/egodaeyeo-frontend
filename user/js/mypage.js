@@ -510,15 +510,10 @@ function darkMode() {
     if (isDarkMode) {
         const body = document.querySelector('body')
         const myPageCategoryBox = document.querySelector('.mypage-category-box')
-        const thanksForFeedBack = document.querySelector('.thanks-for-feedback')
-        const inputs = document.getElementsByTagName('input')
 
         body.style.color = 'gainsboro'
         body.style.backgroundColor = '#202124'
         myPageCategoryBox.classList.add('dark-mode')
-        for (let i = 0; i < inputs.length; i++) {
-            inputs[i].style.color = 'gainsboro'
-        }
     }
 }
 darkMode()
