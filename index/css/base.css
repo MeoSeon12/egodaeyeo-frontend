@@ -1222,3 +1222,12 @@ nav {
 .rental-date-modal-container.dark-mode {
     background-color: #092c3e;
 }
+
+#rental-start-time.dark-mode,
+#rental-end-time.dark-mode {
+    background-color: rgba(187, 187, 187, 0.3);
+}
+
+.rental-date-submit-btn.dark-mode:hover {
+    background-color: rgba(187, 187, 187, 0.3);
+}
