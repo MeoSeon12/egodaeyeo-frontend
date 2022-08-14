@@ -1118,6 +1118,8 @@ function rentalDateModalView(itemId, roomId, inquirerId, authorId) {
     const isDarkMode = localStorage.getItem('darkMode')
     if (isDarkMode) {
         rentalDateContainer.classList.add('dark-mode')
+        startTime.classList.add('dark-mode')
+        endTime.classList.add('dark-mode')
         rentalSubmitBtn.classList.add('dark-mode')
         askSign.classList.add('dark-mode')
     }
