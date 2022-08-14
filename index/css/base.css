@@ -1040,6 +1040,7 @@ nav {
     }
 }
 
+/* 다크 모드 */
 .dark-mode-switch {
     position: relative;
     min-width: 52px;
@@ -1245,3 +1246,17 @@ nav {
     background-color: rgba(187, 187, 187, 0.3);
 }
 
+.chat-btn.dark-mode{
+    background-color: #163849;
+    color: gainsboro
+}
+
+.chat-send-btn.dark-mode {
+    background-color: #0d4460;
+    color: gainsboro
+}
+
+#upload-btn.dark-mode {
+    background-color: #092c3e;
+    color: gainsboro
+}

@@ -531,6 +531,8 @@ h2 {
     }
 }
 
+
+/* 다크 모드 */
 .info-text-nickname.dark-mode {
     color: gainsboro
 }
