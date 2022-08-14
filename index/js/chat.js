@@ -31,6 +31,12 @@ class CreateElement {
         const uploadText = document.createElement('div')
         uploadText.innerText = '등록'
         uploadBtn.append(uploadText)
+
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            chatBtn.classList.add('dark-mode')
+            uploadBtn.classList.add('dark-mode')
+        }
     }
 
     // 채팅 모달 생성
@@ -423,6 +429,7 @@ class CreateElement {
         if (isDarkMode) {
             chatInput.style.backgroundColor = 'gainsboro'
             chatInput.style.color = 'black'
+            chatSendBtn.classList.add('dark-mode')
         }
     }
 
@@ -461,8 +468,12 @@ class CreateElement {
         chatAlertModalMessageNotting.setAttribute('class', 'chat-alert-modal-message-notting')
         chatAlertModalMessageNotting.innerText = '알림이 없습니다'
         chatAlertModalWrap.append(chatAlertModalMessageNotting)
-    }
 
+        const isDarkMode = localStorage.getItem('darkMode')
+        if (isDarkMode) {
+            chatAlertModalMessageNotting.style.backgroundColor = '#092c3e'
+        }
+    }
     // 알림 메시지 생성
     alertMessage(data) {
         if (document.getElementsByName(`chat-alert-modal-message-button-${data.room_id}`)[0] == null) {
@@ -733,7 +744,7 @@ class Websocket {
                 chatTimeStamp.setAttribute('class', 'chat-time-stamp');
                 chatTimeStamp.innerText = timeStamp
                 otherChatWrap.append(chatTimeStamp);
-                
+
                 if (isDarkMode) {
                     otherChat.classList.add('dark-mode')
                 }
@@ -975,13 +986,13 @@ async function openChatRoom(roomId) {
         $('.lend-room.dark-mode').attr('style', 'background-color: gainsboro')
         $('.borrow-room.dark-mode').attr('style', 'background-color: gray')
         const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
-        selectedChatRoom.style.boxShadow = '5px 5px 5px whitesmoke'
+        selectedChatRoom.style.boxShadow = '4px 4px 4px #606060'
     }
     else {
         $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
         $('.borrow-room').attr('style', 'background-color: rgb(191, 255, 194)')
         const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
-        selectedChatRoom.style.boxShadow = '5px 5px 5px yellowgreen'
+        selectedChatRoom.style.boxShadow = '4px 4px 4px yellowgreen'
     }
 
 
