@@ -1142,11 +1142,11 @@ nav {
 }
 
 .chat-modal-body.dark-mode {
-    background-color: rgba(4, 29, 66, 0.489);
+    background-color: #092c3e;
 }
 
 .chat-modal-body.dark-mode:after {
-    left: 50%;
+    border-top-color: #092c3e;
 }
 
 .chat-rooms-container.dark-mode {
@@ -1154,7 +1154,7 @@ nav {
     width: 90px;
     flex-direction: column;
     align-items: center;
-    background-color: #092c3e;
+    background-color: rgba(4, 29, 66, 0.489);
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-right: 3px solid gainsboro;
@@ -1167,7 +1167,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #092c3e;
+    background-color: rgba(4, 29, 66, 0.489);
     border-top-right-radius: 20px;
 }
 
@@ -1226,8 +1226,22 @@ nav {
 #rental-start-time.dark-mode,
 #rental-end-time.dark-mode {
     background-color: rgba(187, 187, 187, 0.3);
+    color: gainsboro
 }
 
 .rental-date-submit-btn.dark-mode:hover {
     background-color: rgba(187, 187, 187, 0.3);
 }
+
+.review-modal-container.dark-mode {
+    background-color: #092c3e;
+}
+
+.review-modal-container.dark-mode > h2 {
+    color: gainsboro
+}
+
+.review-submit-btn:hover {
+    background-color: rgba(187, 187, 187, 0.3);
+}
+

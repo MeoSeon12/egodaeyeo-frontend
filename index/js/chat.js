@@ -694,7 +694,7 @@ class Websocket {
             let chatSender = chatData.sender
             let message = chatData.message
             let timeStamp = chatData.time
-
+            const isDarkMode = localStorage.getItem('darkMode')
             // 채팅 발신자 화면
             if (chatSender == payload.user_id) {
                 const myChatWrap = document.createElement('div');
@@ -710,6 +710,10 @@ class Websocket {
                 myChat.setAttribute('class', 'my-chat');
                 myChat.innerText = message
                 myChatWrap.append(myChat);
+
+                if (isDarkMode) {
+                    myChat.classList.add('dark-mode')
+                }
             }
             // 채팅 수신자 화면
             else {
@@ -729,6 +733,10 @@ class Websocket {
                 chatTimeStamp.setAttribute('class', 'chat-time-stamp');
                 chatTimeStamp.innerText = timeStamp
                 otherChatWrap.append(chatTimeStamp);
+                
+                if (isDarkMode) {
+                    otherChat.classList.add('dark-mode')
+                }
 
             }
             // 스크롤 가장 아래로 내림
@@ -1391,7 +1399,15 @@ function reviewModalView(itemId) {
 
     body.style.overflow = 'hidden'
     reviewModalBody.style.display = 'flex'
-    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'    
+    reviewContainer.style.animation = 'scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+
+    const isDarkMode = localStorage.getItem('darkMode')
+    if (isDarkMode) {
+        reviewContainer.classList.add('dark-mode')
+        reviewContent.classList.add('dark-mode')
+        reviewSubmitBtn.classList.add('dark-mode')
+        askSign.classList.add('dark-mode')
+    }
 }
 
 function reviewModalUnview() {
