@@ -29,6 +29,8 @@
 .bx-wrapper {
     margin-bottom: 20px !important;
     box-shadow: none !important;
+    border: 5px solid transparent !important;
+    background-color: transparent !important;
 }
 
 .bx-prev {
@@ -408,3 +410,4 @@
 .report-category.dark-mode {
     background-color: gainsboro;
 }
+

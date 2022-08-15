@@ -485,6 +485,10 @@ class CreateElement {
             const chatAlertModalWrap = document.getElementsByClassName('chat-alert-modal-wrap')[0]
             chatAlertModalWrap.append(chatAlertModalMessageButton)
             new Alert().showAlarmModal()
+            const isDarkMode = localStorage.getItem('darkMode')
+            if (isDarkMode) {
+                chatAlertModalMessageButton.style.backgroundColor = '#092c3e'
+            }
         }
     }
 }
@@ -541,7 +545,12 @@ class Alert {
             const chatAlarmBtn = document.querySelector('#alarm-icon')
             chatAlertEffect.style.display = 'none'
             chatAlertModalMessageNotting.style.display = 'block'
-            chatAlarmBtn.style.color = 'black'
+            if (localStorage.getItem('darkMode') == 'true') {
+                chatAlarmBtn.style.color = 'white'
+            }
+            else {
+                chatAlarmBtn.style.color = 'black'
+            }
         }
         // 채팅 모달의 채팅방 알림 끄기
         const chatRoom = document.getElementById(`chat-room-${roomId}`)
@@ -957,9 +966,6 @@ function closeChatModal() {
     }
 }
 
-// 페이지 상단으로 보내기
-
-
 // 알림 메시지 및 문의하기 확인 버튼 클릭
 function openDirectChatRoom(roomId) {
     const chatBtn = document.querySelector('.chat-btn')
@@ -991,7 +997,7 @@ async function openChatRoom(roomId) {
         $('.lend-room.dark-mode').attr('style', 'background-color: gainsboro')
         $('.borrow-room.dark-mode').attr('style', 'background-color: gray')
         const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
-        selectedChatRoom.style.boxShadow = '4px 4px 4px #606060'
+        selectedChatRoom.style.boxShadow = '6px 6px 6px #606060'
     }
     else {
         $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
@@ -1298,6 +1304,7 @@ async function checkRentalDateModal(itemId, roomId) {
     const isDarkMode = localStorage.getItem('darkMode')
     if (isDarkMode) {
         rentalDateContainer.classList.add('dark-mode')
+        askSign.classList.add('dark-mode')
     }
 }
 
