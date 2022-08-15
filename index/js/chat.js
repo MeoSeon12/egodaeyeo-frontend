@@ -485,10 +485,10 @@ class CreateElement {
             const chatAlertModalWrap = document.getElementsByClassName('chat-alert-modal-wrap')[0]
             chatAlertModalWrap.append(chatAlertModalMessageButton)
             new Alert().showAlarmModal()
-        }
-        const isDarkMode = localStorage.getItem('darkMode')
-        if (isDarkMode) {
-            chatAlertModalMessageButton.style.backgroundColor = '#092c3e'
+            const isDarkMode = localStorage.getItem('darkMode')
+            if (isDarkMode) {
+                chatAlertModalMessageButton.style.backgroundColor = '#092c3e'
+            }
         }
     }
 }
@@ -992,7 +992,7 @@ async function openChatRoom(roomId) {
         $('.lend-room.dark-mode').attr('style', 'background-color: gainsboro')
         $('.borrow-room.dark-mode').attr('style', 'background-color: gray')
         const selectedChatRoom = document.getElementById(`chat-room-${roomId}`)
-        selectedChatRoom.style.boxShadow = '4px 4px 4px #606060'
+        selectedChatRoom.style.boxShadow = '6px 6px 6px #606060'
     }
     else {
         $('.lend-room').attr('style', 'background-color: rgb(255, 239, 194)')
