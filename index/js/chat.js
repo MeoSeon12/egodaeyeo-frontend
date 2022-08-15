@@ -741,11 +741,11 @@ class Websocket {
                 await liveReadApi(roomId)
 
                 const otherChatWrap = document.createElement('div');
-                otherChatWrap.setAttribute('class', 'my-chat-wrap');
+                otherChatWrap.setAttribute('class', 'other-chat-wrap');
                 messages.append(otherChatWrap);
 
                 const otherChat = document.createElement('div');
-                otherChat.setAttribute('class', 'my-chat');
+                otherChat.setAttribute('class', 'other-chat');
                 otherChat.innerText = message
                 otherChatWrap.append(otherChat);
 
