@@ -319,7 +319,6 @@ function darkMode() {
     if (isDarkMode) {
         const body = document.querySelector('body')
         const welcomeWrap = document.querySelector('.welcome-wrap')
-        const sectionSwitch = document.querySelector('.section-switch')
         const sectionSlider = document.querySelector('.section-slider')
         const categoryContainers = document.getElementsByClassName('category-container')
         const inputs = document.getElementsByTagName('input')
@@ -335,8 +334,5 @@ function darkMode() {
         for (let i=0; i < inputs.length; i++) {
             inputs[i].style.color = 'gainsboro'
         }
-    }
-    else {
-        document.getElementById("dark-mode-checkbox").checked = true
     }
 }

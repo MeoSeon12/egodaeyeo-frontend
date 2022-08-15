@@ -189,9 +189,6 @@ function darkMode() {
         sectionSlider.setAttribute('class', 'section-slider dark-mode')
         sectionSwitch.style.backgroundColor = 'gainsboro'
     }
-    else {
-        document.getElementById("dark-mode-checkbox").checked = true
-    }
 }
 darkMode()
 

@@ -113,15 +113,11 @@ class CreateNavElement {
         
         const isDarkMode = localStorage.getItem('darkMode')
         if (isDarkMode) {
-            document.getElementById("dark-mode-checkbox").checked = false
             navWrap.classList.add('dark-mode')
             mainPageLink.classList.add('dark-mode')
             searchInput.classList.add('dark-mode')
             chatAlarmIcon.classList.add('dark-mode')
             itemUploadBtn.classList.add('dark-mode')
-        }
-        else {
-            document.getElementById("dark-mode-checkbox").checked = true
         }
         // 다크 모드 스위치
         darkModeCheckBox.addEventListener('change', (e) => {
@@ -302,7 +298,6 @@ class CreateNavElement {
 
         const isDarkMode = localStorage.getItem('darkMode')
         if (isDarkMode) {
-            document.getElementById("dark-mode-checkbox").checked = false
             loginContainer.classList.add('dark-mode')
             signupContainer.classList.add('dark-mode')
             loginModalInputs.classList.add('dark-mode')
@@ -366,12 +361,8 @@ class CreateNavElement {
         })
         const isDarkMode = localStorage.getItem('darkMode')
         if (isDarkMode) {
-            document.getElementById("dark-mode-checkbox").checked = false
             addressContainer.classList.add('dark-mode')
             addressModalInputs.classList.add('dark-mode')
-        }
-        else {
-            document.getElementById("dark-mode-checkbox").checked = true
         }
     }
 
