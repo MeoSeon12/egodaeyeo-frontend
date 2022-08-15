@@ -488,7 +488,7 @@ class CreateElement {
         }
         const isDarkMode = localStorage.getItem('darkMode')
         if (isDarkMode) {
-            chatAlertModalWrap.style.backgroundColor = '#092c3e'
+            chatAlertModalMessageButton.style.backgroundColor = '#092c3e'
         }
     }
 }
