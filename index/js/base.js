@@ -361,8 +361,12 @@ class CreateNavElement {
         })
         const isDarkMode = localStorage.getItem('darkMode')
         if (isDarkMode) {
+            document.getElementById("dark-mode-checkbox").checked = false
             addressContainer.classList.add('dark-mode')
             addressModalInputs.classList.add('dark-mode')
+        }
+        else {
+            document.getElementById("dark-mode-checkbox").checked = true
         }
     }
 

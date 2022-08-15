@@ -1293,6 +1293,7 @@ async function checkRentalDateModal(itemId, roomId) {
     const isDarkMode = localStorage.getItem('darkMode')
     if (isDarkMode) {
         rentalDateContainer.classList.add('dark-mode')
+        askSign.classList.add('dark-mode')
     }
 }
 
