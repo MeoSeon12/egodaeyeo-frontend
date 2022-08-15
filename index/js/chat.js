@@ -862,7 +862,7 @@ class Websocket {
                 case "종료":
                     new CreateElement().contractMessage(messages, "대여가 종료되었습니다", cssText)
 
-                    if (contractSender != userId) {
+                    if (contractSender != userId && roomData.is_reviewed == false) {
                         requestContractBtn.innerText = "리뷰 쓰기"
                         requestContractBtn.style.cssText = "background-color: #bae1ff; cursor: pointer;"
                         contractBtnContainer.append(requestContractBtn)
@@ -873,6 +873,11 @@ class Websocket {
 
                         // 리뷰 모달 열리는 함수 실행
                         requestContractBtn.setAttribute("onclick", `reviewModalView(${itemId})`)
+                    }
+                    else if (contractSender != userId && roomData.is_reviewed == true) {
+                        requestContractBtn.innerText = "대여 종료된 물품"
+                        requestContractBtn.style.cssText = "background-color: #fac7aa; cursor: auto;"
+                        contractBtnContainer.append(requestContractBtn)
                     }
             }
 
