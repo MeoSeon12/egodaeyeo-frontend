@@ -541,7 +541,12 @@ class Alert {
             const chatAlarmBtn = document.querySelector('#alarm-icon')
             chatAlertEffect.style.display = 'none'
             chatAlertModalMessageNotting.style.display = 'block'
-            chatAlarmBtn.style.color = 'black'
+            if (localStorage.getItem('darkMode') == 'true') {
+                chatAlarmBtn.style.color = 'white'
+            }
+            else {
+                chatAlarmBtn.style.color = 'black'
+            }
         }
         // 채팅 모달의 채팅방 알림 끄기
         const chatRoom = document.getElementById(`chat-room-${roomId}`)
@@ -951,9 +956,6 @@ function closeChatModal() {
         chatSocket = ''
     }
 }
-
-// 페이지 상단으로 보내기
-
 
 // 알림 메시지 및 문의하기 확인 버튼 클릭
 function openDirectChatRoom(roomId) {
