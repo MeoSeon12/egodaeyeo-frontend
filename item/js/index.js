@@ -316,24 +316,23 @@ window.addEventListener('wheel', function () {
 // 다크모드
 function darkMode() {
     const isDarkMode = localStorage.getItem('darkMode')
-    if (isDarkMode == 'true') {
+    if (isDarkMode) {
         const body = document.querySelector('body')
         const welcomeWrap = document.querySelector('.welcome-wrap')
-        const sectionSwitch = document.querySelector('.section-switch')
         const sectionSlider = document.querySelector('.section-slider')
         const categoryContainers = document.getElementsByClassName('category-container')
+        const inputs = document.getElementsByTagName('input')
         body.style.color = 'gainsboro'
         body.style.backgroundColor = '#202124'
         welcomeWrap.style.backgroundColor = '#092c3e'
         welcomeWrap.style.color = 'gainsboro'
         sectionSlider.style.backgroundColor = '#092c3e'
         sectionSlider.setAttribute('class', 'section-slider dark-mode')
-        sectionSwitch.style.backgroundColor = 'gainsboro'
         for (let i=1; i < categoryContainers.length; i++) {
             categoryContainers[i].style.backgroundColor = '#092c3e'
         }
-    }
-    else {
-        document.getElementById("dark-mode-checkbox").checked = true
+        for (let i=0; i < inputs.length; i++) {
+            inputs[i].style.color = 'gainsboro'
+        }
     }
 }
