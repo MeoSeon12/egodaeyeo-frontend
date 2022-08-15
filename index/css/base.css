@@ -1260,3 +1260,7 @@ nav {
     background-color: #092c3e;
     color: gainsboro
 }
+
+#review.dark-mode {
+    color: gainsboro
+}
