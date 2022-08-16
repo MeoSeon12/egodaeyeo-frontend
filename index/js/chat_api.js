@@ -249,6 +249,7 @@ async function onReviewSubmit(itemId) {
     response_json = await response.json()
 
     if (response.status == 200) {
+        alert('리뷰가 작성되었습니다.')
         reviewModalUnview()
     }
     else {
