@@ -182,7 +182,6 @@ async function onLogin() {
     response_json = await response.json()
 
     if (response.status == 200) {
-        alert("로그인 성공!")
         setLocalStorageItems()
         window.location.reload()
     } else {
@@ -287,7 +286,6 @@ function onLogout() {
     localStorage.removeItem("access_token")
     localStorage.removeItem("refresh_token")
     localStorage.removeItem("payload")
-    alert("로그아웃 하셨습니다.")
     window.location.reload()
 }
 

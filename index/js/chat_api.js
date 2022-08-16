@@ -228,6 +228,11 @@ async function onReviewSubmit(itemId) {
     const starRating = document.querySelector('input[name="rating"]:checked').value
     const token = await refreshToken(payload)
 
+    if (starRating == 'null') {
+        alert('별점을 입력해주세요.')
+        return
+    }
+
     const reviewData = {
         content: reviewContent,
         rating: starRating
