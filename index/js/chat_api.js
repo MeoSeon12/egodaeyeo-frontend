@@ -225,17 +225,21 @@ async function reUploadItemApi(itemId, status) {
 //리뷰 작성 API
 async function onReviewSubmit(itemId) {
     const reviewContent = document.querySelector('#review').value
-    const starRating = document.querySelector('input[name="rating"]:checked').value
+    const starRating = document.querySelector('input[name="rating"]:checked')
     const token = await refreshToken(payload)
 
-    if (starRating == 'null') {
+    if (starRating == null) {
         alert('별점을 입력해주세요.')
+        return
+    }
+    else if (reviewContent == '') {
+        alert('내용을 입력해주세요.')
         return
     }
 
     const reviewData = {
         content: reviewContent,
-        rating: starRating
+        rating: starRating.value
     }
     const response = await fetch(`${backEndBaseUrl}/items/reviews/${itemId}`, {
         method: 'POST',
