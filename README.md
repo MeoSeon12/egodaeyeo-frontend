@@ -52,22 +52,37 @@
 <br>
 
 ## ✍🏻 개발 스택
+### 백엔드
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![DjangoREST](https://img.shields.io/badge/django%20rest-ff1709?style=for-the-badge&logo=django&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![Badge](https://img.shields.io/badge/DJANGO_CHANNELS-white.svg?style=for-the-badge&logo=django&logoColor=black)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)<br>
+<br>
+
+### 프론트엔드
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Badge](https://img.shields.io/badge/WEBSOCKET-yellow.svg?style=for-the-badge&logo=javascript&logoColor=white)
 ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)<br>
+<br>
 
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+### 배포
+* 백엔드<br>
+![AWS](https://img.shields.io/badge/AWS_EC2-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 ![Gunicorn](https://img.shields.io/badge/gunicorn-%298729.svg?style=for-the-badge&logo=gunicorn&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
+![DAPHNE](https://img.shields.io/badge/DAPHNE-white.svg?style=for-the-badge&logo=logoColor=white)<br>
 
+* 프론트엔드<br>
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+* DB<br>
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)<br>
+* 스토리지<br>
+![AWS](https://img.shields.io/badge/AWS_S3-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 <br>
 
 ## 🕘 프로젝트 일정
@@ -78,6 +93,22 @@
 ## ✔️ 아키텍쳐
 ![image](https://user-images.githubusercontent.com/102135145/185027631-738d072d-d2ff-4b60-a41e-8bb4f4fba405.png)
 
+<br>
+
+## ⚡ 버전
+### v1.0
+* 배포
+### v1.01
+* 401 에러
+* 채팅 알림 동기화
+* 재거래 시 에러 수정
+### v1.1
+* 물품 페이지와 사이트 소개 페이지 병합
+* 카테고리 & 섹션 필터 UI 변경
+* 마이페이지에 대여 상태 업데이트 버튼 추가
+### v1.2
+* 신고기능 추가
+* 다크모드 추가
 <br>
 
 ## 📂 Starting Assignment
