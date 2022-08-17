@@ -100,5 +100,8 @@
 
 <br>
 
-## 📢 발표 영상
+## 📢 발표 영상 및 PPT
 <a href="https://www.youtube.com/watch?v=hXkQHUCjkWM&ab_channel=%EB%A1%9C%EC%8A%88">YouTube 바로가기</a>
+<a href="https://docs.google.com/presentation/d/151z1B6_qrS7OdPhJJKruioRGog89LuFyoj5gdUyjYIM/edit?usp=sharing">구글 슬라이드 바로가기</a>
+
+<br>
