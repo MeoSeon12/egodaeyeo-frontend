@@ -41,7 +41,8 @@
 2022.07.07 ~ 2022.08.16
 <br><br><br>
 
-## 🐲 배포 사이트  
+## 🐲 배포 사이트
+[이거대여. 바로가기](https://www.egorental.com/){:target="_blank"}
 <a href="https://www.egorental.com/" target='_blank'>이거대여. 바로가기</a>  
 <br><br><br>
 
