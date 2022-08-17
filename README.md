@@ -12,20 +12,24 @@
 
 ## ✍🏻 개발 스택
 <p align="left"> 
+    ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
     <a href="https://www.python.org" target="_blank" rel="noreferrer"> 
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> 
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="50"/> 
     </a> 
     <a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"> 
-        <img src="https://images.velog.io/images/holawan/post/a6998da8-f1f8-4256-94cc-fcb77b2f08b7/django.png" alt="django" width="40" height="40"/> 
-    </a> 
+        <img src="https://images.velog.io/images/holawan/post/a6998da8-f1f8-4256-94cc-fcb77b2f08b7/django.png" alt="django" width="50"/> 
+    </a>
+    <a href="https://channels.readthedocs.io/en/stable/introduction.html" target="_blank" rel="noreferrer"> 
+        <img src="https://www.aurigait.com/resources/files/2021/04/channel-layers-ni-django.jpg" alt="django " width="50"/> 
+    </a>
     <a href="https://html.spec.whatwg.org/" target="_blank" rel="noreferrer"> 
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="html" width="40" height="40"/> 
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="html" width="50"/> 
     </a> 
     <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> 
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> 
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="50"/> 
     </a> 
     <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> 
-        <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> 
+        <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="50"/> 
     </a>
 </p>
 <br><br><br>
