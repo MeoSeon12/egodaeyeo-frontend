@@ -68,11 +68,10 @@
 <br>
 
 ## ⚙ DB 설계 ERD
-<a href="https://docs.google.com/spreadsheets/d/1ZLFdnhCmHF1gWQ0VjzHNtW1nglS0MMpMtOdWKkzBeQo/edit?usp=sharing">구글 시트 바로가기</a>  
 <br>
-![image](https://user-images.githubusercontent.com/104349901/182680927-f7adaca9-783c-4321-a533-a198ede6c8c8.png)
+<img src="https://user-images.githubusercontent.com/104349901/185032482-c6b7c6c8-a164-4b71-8318-ba74ef12a1d5.png">
 
 <br>
 
 ## 📢 발표 영상
-<a href="">YouTube 바로가기</a>
+<a href="https://www.youtube.com/watch?v=hXkQHUCjkWM&ab_channel=%EB%A1%9C%EC%8A%88">YouTube 바로가기</a>
