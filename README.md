@@ -42,7 +42,7 @@
 <br><br><br>
 
 ## 🐲 배포 사이트  
-<a href="https://www.egorental.com/" target="_blank">이거대여. 바로가기</a>  
+<a href="https://www.egorental.com/" target='_blank'>이거대여. 바로가기</a>  
 <br><br><br>
 
 ## 📂 Starting Assignment
