@@ -20,13 +20,13 @@ S.A 링크 : https://quixotic-wok-871.notion.site/S-A-3183ff7202e942099238af3eff
 <br>
 
 ## 2. 머선12조 팀원 및 역할
-* ### **김규민**<br>
+* ### **김규민** <a href="https://github.com/Roshu2">@Roshu2</a><br>
   물품 목록 페이지 / 마이페이지 / 소셜로그인 / 검색 기능 / Contract 기능 / 채팅 기능 / 백엔드 배포<br>
 
-* ### **김철현**<br>
+* ### **김철현** <a href="https://github.com/KimmyJay">@KimmyJay</a><br>
   회원가입 / 로그인 / 소셜로그인 / 리뷰 모달 / 채팅 모달 / 채팅 기능 / 다크모드 / 신고 기능 / 백엔드 배포<br>
   
-* ### **최재완**<br>
+* ### **최재완** <a href="https://github.com/Jaewan-Choi">@Jaewan-Choi</a><br>
   메인페이지 웰컴 박스 / 물품 상세페이지 / 물품 등록, 수정 페이지 / 알림 기능 / 채팅 기능 / 프론트 배포 / 다크모드<br>
 
 <br>
