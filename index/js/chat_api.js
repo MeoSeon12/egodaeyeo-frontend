@@ -39,7 +39,7 @@ async function chatModalApi() {
         return response_json
     }
     else if(response_json.code == "token_not_valid"){
-        window.location.reload()
+        onLogout()
     }
 }
 
@@ -62,7 +62,7 @@ async function chatRoomApi(room_id) {
         return response_json
     }
     else if (response_json.code == "token_not_valid") {
-        window.location.reload()
+        onLogout()
     }
     else {
         console.log(response_json["error"])
@@ -82,7 +82,7 @@ async function liveReadApi(room_id) {
         },
     })
     if (response_json.code == "token_not_valid") {
-        window.location.reload()
+        onLogout()
     }
 }
 

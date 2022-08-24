@@ -23,7 +23,7 @@ async function myPageApiView(param) {
             window.location.replace(`${frontEndBaseUrl}`)
         }
         else if(response_json.code == "token_not_valid"){
-            window.location.reload()
+            onLogout()
         }
         else {
             alert("페이지를 불러오는데 실패했습니다. 다시 접속 해주세요.")
