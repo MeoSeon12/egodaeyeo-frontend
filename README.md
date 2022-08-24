@@ -35,6 +35,7 @@ S.A 링크 : https://quixotic-wok-871.notion.site/S-A-3183ff7202e942099238af3eff
 ## 3. 프로젝트 기능
 * ### **물품 조회**
   * 사용자의 주소를 기반으로 같은 지역만 조회
+  > 
   * 다양한 물품 카테고리로 게시글 조회가 가능
   * 제목으로 검색 가능
 
@@ -64,6 +65,10 @@ S.A 링크 : https://quixotic-wok-871.notion.site/S-A-3183ff7202e942099238af3eff
   * Django Rest Framework 3.13
   * Django Rest Framework simple-jwt 5.2.0
   * Django Channels 3.0.5
+  * Docker 20.10.12
+  * Nginx 1.22.0
+  * Gunicorn 20.1.0
+  * Daphne 3.0.2
 
 * ### 프론트엔드
   * Websocket
@@ -71,21 +76,16 @@ S.A 링크 : https://quixotic-wok-871.notion.site/S-A-3183ff7202e942099238af3eff
   * Javascript
   * JQuery
   * CSS
+  
+* ### 데이터베이스
+  * AWS RDS PostgreSQL
+  * AWS S3
 
 * ### 배포
-  * ### 백엔드
-    * AWS EC2
-    * AWS S3
-    * AWS RDS PostgreSQL
-    * AWS Route 53
-    * Github actions
-    * Docker 20.10.12
-    * Nginx 1.22.0
-    * Gunicorn 20.1.0
-    * Daphne 3.0.2
-  
-  * ### 프론트엔드
-    * Netlify
+  * AWS EC2
+  * AWS Route 53
+  * Github Actions
+  * Netlify
 <br>
 
 ## 4-1. 기술 스택 선정 이유
