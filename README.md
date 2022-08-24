@@ -148,7 +148,47 @@ S.A 링크 : https://quixotic-wok-871.notion.site/S-A-3183ff7202e942099238af3eff
 
 <br>
 
-## 6. 버전
+## 6. 유저 피드백 반영
+* 피드백 기간 : 22.08.08 ~ 22.08.12
+* 피드백 응답 수 : 44개
+
+## 6-1. 401 에러
+* 원인 : 리프레시 토큰을 갱신하는 함수가 페이지 로드 시에만 작동하고, 비동기 기능을 실행 시에는 해당 함수가 동작하지 않음
+* 개선 : 토큰 갱신하는 함수를 기능마다 호출하도록 수정
+```js
+async function onAddressEnter() {
+  var payload = JSON.parse(localStorage.getItem('payload'))
+  const token = await refreshToken(payload)
+```
+<br>
+
+## 6-2. UI / UX 개선
+* 원인 : 버튼 아이콘들의 가시성과 대여 상태 업데이트 기능이 채팅창에만 존재함으로 인해 접근성 부족
+* 개선
+
+  * 카테고리 버튼들을 호버시 등장하는 모달이 아닌 페이지에서 바로 보고 선택할 수 있도록 개선
+  * 물품 등록 버튼을 fixed 된 박스안에도 추가하여 항상 눈에 보이고 접근할 수 있도록 추가
+  * 대여 상태 업데이트 기능들을 마이페이지에서도 접근 가능하도록 추가
+
+<details>
+  <summary>개선된 이미지 보기</summary>
+  <br>
+  <img src="https://user-images.githubusercontent.com/102135145/186374590-0f5bf958-2488-4c87-a3d4-88ce5e13a840.png">
+  <img src="https://user-images.githubusercontent.com/102135145/186375042-c7bf800a-3302-4bde-a85c-9d37d028606b.png">
+  <img height=174 src="https://user-images.githubusercontent.com/102135145/186374778-d684c339-67f1-4b09-9fd9-6e4a14b01856.png">
+</details>
+<br>
+
+## 6-3. 신고 기능
+* 원인 : 부적절한 게시글을 신고할 수 있는 기능 부재
+* 개선
+
+  * 신고 내용을 저장하는 DB 모델을 추가
+  * 사용자가 특정 게시글에 대해 신고 사유를 선택, 내용 작성 후 운영진에게 전달할 수 있는 시스템 구축
+
+<br>
+
+## 7. 버전
 * ### v1.0
   * 배포
 * ### v1.01
@@ -165,12 +205,12 @@ S.A 링크 : https://quixotic-wok-871.notion.site/S-A-3183ff7202e942099238af3eff
   
 <br>
 
-## 7. DB 설계 ERD
+## 8. DB 설계 ERD
 
 <img src="https://user-images.githubusercontent.com/104349901/185032482-c6b7c6c8-a164-4b71-8318-ba74ef12a1d5.png">
 
 <br>
 
-## 8. 발표 영상 및 PPT
+## 9. 발표 영상 및 PPT
 <a href="https://www.youtube.com/watch?v=hXkQHUCjkWM&ab_channel=%EB%A1%9C%EC%8A%88" target="blank" rel="noreferrer noopener">YouTube 바로가기</a><br>
 <a href="https://docs.google.com/presentation/d/151z1B6_qrS7OdPhJJKruioRGog89LuFyoj5gdUyjYIM/edit?usp=sharing">구글 슬라이드 바로가기</a>
