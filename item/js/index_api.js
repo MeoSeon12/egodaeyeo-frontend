@@ -33,6 +33,6 @@ async function apiResponse(response) {
         return items
     }
     else if(response_json.code == "token_not_valid"){
-        window.location.reload()
+        onLogout()
     }
 }
